@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Caracteristique from '././Caracteristique/Caracteristique';
 import DureeLocation from '././DureeLocation/DureeLocation';
+import TarifDeBase from './TarifDeBase/TarifDeBase'
 import Options from './Options/Options';
 import { NavLink } from 'react-router-dom';
 
@@ -30,7 +31,7 @@ export default class Editer extends Component {
                     <div>
                         <div>
 
-                            <div className="flex rounded-lg h-full bg-gray-800 p-5 flex-col">
+                            {/* <div className="flex rounded-lg h-full bg-gray-800 p-5 flex-col">
                                 <div className="flex">
                                     <button onClick={() => this.changerEtape(1)}>
                                         <div className="flex items-center mb-3">
@@ -43,7 +44,7 @@ export default class Editer extends Component {
                                 </div>
                                 {etape === 1 ? (<Caracteristique />) : null}
 
-                            </div><br />
+                            </div><br /> */}
                             <div className="flex rounded-lg h-full bg-gray-800 p-5 flex-col">
                                 <button onClick={() => this.changerEtape(2)}>
                                     <div className="flex items-center mb-3">
@@ -71,6 +72,19 @@ export default class Editer extends Component {
 
                                 {/* ids= id de la catégorie */}
                                 {etape === 3 ? (<Options ids={params} />) : null}
+                            </div><br />
+
+                            <div className="flex rounded-lg h-full bg-gray-800 p-5 flex-col">
+                                <button onClick={() => this.changerEtape(4)}>
+                                    <div className="flex items-center mb-3">
+                                        <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
+
+                                        </div>
+                                        <h2 className="text-white text-lg title-font font-medium">Gestion des tarifs de base</h2>
+                                    </div>
+
+                                </button>
+                                {etape === 4 ? (<TarifDeBase />) : null}
                             </div><br />
                         </div>
                     </div>
