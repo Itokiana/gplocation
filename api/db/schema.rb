@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_25_142807) do
+ActiveRecord::Schema.define(version: 2020_11_26_123215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,13 @@ ActiveRecord::Schema.define(version: 2020_11_25_142807) do
     t.string "email"
     t.string "telephone"
     t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "jours", force: :cascade do |t|
+    t.string "name"
+    t.integer "nombrejour"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -121,6 +128,18 @@ ActiveRecord::Schema.define(version: 2020_11_25_142807) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tarif_id"], name: "index_tarif_details_on_tarif_id"
+  end
+
+  create_table "tarif_personalises", force: :cascade do |t|
+    t.date "dateDebutPerso"
+    t.date "dateFinPerso"
+    t.integer "prix"
+    t.bigint "category_id"
+    t.bigint "jours_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_tarif_personalises_on_category_id"
+    t.index ["jours_id"], name: "index_tarif_personalises_on_jours_id"
   end
 
   create_table "tarif_supplementaires", force: :cascade do |t|

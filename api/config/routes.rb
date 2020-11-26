@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
 
+  resources :jours
+  resources :tarif_personalises
+  resources :tarif_personalisers
   resources :tarif_de_bases
   resources :admin_reservations
   #client sessio et registration

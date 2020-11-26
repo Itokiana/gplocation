@@ -3,10 +3,20 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios'
 
 export default class ListeCategory extends Component {
+    // constructor(props) {
+    //   super(props);
+    //   this.state = {value: ''};
+    //   this.handleChange = this.handleChange.bind(this);
+    // }
+    state = {value: ''};
 
     componentDidMount() {
         const { action } = this.props;
         action.getCategory();
+
+    }
+    handleChange(e) {
+      this.setState({value: e.target.value});
 
     }
 
@@ -39,7 +49,7 @@ export default class ListeCategory extends Component {
                                 <td class=" ">{category.id} </td>
                                 <td class=" ">{category.ref} <i class="success fa fa-long-arrow-up"></i></td>
                                 <td class=" ">{category.category}</td>
-                                <td class=" ">12</td>
+                                <td class=" "><input type="text" value={this.state.value} onChange={this.handleChange}/></td>
                                 <td>
                                     <span><input name="plan" type="checkbox" /></span>
                                 </td>
