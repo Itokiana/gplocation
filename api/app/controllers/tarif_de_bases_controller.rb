@@ -46,6 +46,6 @@ class TarifDeBasesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def tarif_de_basis_params
-      params.fetch(:tarif_de_basis, {})
+      params.fetch(:tarif_de_basis, {}).permit(:jourDebut, :jourFin, :prixBasseSaison, :prixMoyenSaison, :prixHauteSaison, :category_id)
     end
 end

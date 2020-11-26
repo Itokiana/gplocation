@@ -80,7 +80,7 @@ export default class Editer extends Component {
                                         <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
 
                                         </div>
-                                        <h2 className="text-white text-lg title-font font-medium">Gestion des tarifs de base</h2>
+                                        <h2 className="text-white text-lg title-font font-medium">Gestion des tarifs agence</h2>
                                     </div>
 
                                 </button>
