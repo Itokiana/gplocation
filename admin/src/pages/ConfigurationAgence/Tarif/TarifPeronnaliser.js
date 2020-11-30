@@ -29,7 +29,7 @@ export class TarifPeronnaliser extends Component {
         return (
             <div>
 
-                
+                Bonjour
             </div>
         )
     }

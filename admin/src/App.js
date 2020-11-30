@@ -20,9 +20,8 @@ import ConfigurationAgence from './pages/ConfigurationAgence/ConfigurationAgence
 import GestionSaison from './pages/ConfigurationAgence/GestionSaison/GestionSaison';
 import Editer from './pages/Category/Editer/Editer';
 import Dashbord from './pages/Dashbord/Dashbord';
-
+import Jours from './pages/ConfigurationAgence/Tarif/Jours/Jours';
 import GestionTemp from './pages/ConfigurationAgence/GestionOF/GestionTemp'
-
 import axios from './axios';
 import Reservation from './pages/Reservation/Reservation';
 import AddTarif from './pages/ConfigurationAgence/Tarif/AddTarif';
@@ -72,12 +71,15 @@ class App extends React.Component {
                     <Route exact path="/dashbord" component={Dashbord} />
                     <Route exact path="/categories" component={Categories} />
                     <Route exact path="/reservations" component={Reservation} />
+                    
+                    {/* <Route path="/tarifpersonel/:id" component={TarifPersonel} /> */}
                     <Route path="/ajouter_un_tarif/:id" component={AddTarif} />
                     <Route path="/tarif_de_base" component={TarifDeBase} />
 
                     <Route path="/tarif_list" component={TarifList} />
 
                     <Route exact path="/voitures" component={Voitures} />
+                    <Route exact path="/jours" component={Jours} />
                     <Route exact path="/categories/:id" component={Editer} />
 
                   </Switch>

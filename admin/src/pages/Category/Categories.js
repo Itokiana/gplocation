@@ -45,8 +45,9 @@ class Categories extends Component {
                 <h1 className="mb-2 text-center">Gestion des catégories</h1>
                 <button
                     className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded"
-                    onClick={() => this.action.toggleModal(true)}>Nouvelle catégorie</button> &nbsp;
-
+                    onClick={() => this.action.toggleModal(true)}>Nouvelle catégorie
+                </button> 
+                &nbsp;
                 <NavLink to={`/voitures`}>
                     <td className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">Liste des voitures</td>
                 </NavLink>

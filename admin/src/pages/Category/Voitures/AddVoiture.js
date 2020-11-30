@@ -114,7 +114,7 @@ class AddVoiture extends Component {
                                 <div className="mb-2 mr-4">
                                     <label className="block text-gray-700 font-bold mb-1 md:mb-0">
                                         Image
-                            </label>
+                                    </label>
                                     <Field
                                         type="file"
                                         onChange={this.onChange}
@@ -127,7 +127,7 @@ class AddVoiture extends Component {
                                     <div className="mb-2 mr-4">
                                         <label className="block text-gray-700 font-bold mb-1 md:mb-0">
                                             Marque
-                            </label>
+                                        </label>
                                         <Field
                                             name="marque"
                                             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
@@ -137,7 +137,7 @@ class AddVoiture extends Component {
                                     <div className="mb-2">
                                         <label className="block text-gray-700 font-bold mb-1 md:mb-0">
                                             Modèle
-                            </label>
+                                        </label>
                                         <Field
                                             name="model"
                                             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
@@ -148,7 +148,7 @@ class AddVoiture extends Component {
                                 <div className="mb-2">
                                     <label className="block text-gray-700 font-bold mb-1 md:mb-0">
                                         Places
-                            </label>
+                                    </label>
                                     <Field
                                         name="places"
                                         className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
@@ -159,17 +159,17 @@ class AddVoiture extends Component {
                                     <div className="mb-2 ">
                                         <label className="block text-gray-700 font-bold mb-1 md:mb-0">
                                             Type
-                                    </label>
+                                        </label>
 
                                         <div >
                                             <label>
                                                 <Field type="radio" name="mode" value="Essence" />
-              Essence
-            </label> &nbsp;
-                                    <label>
+                                                Essence
+                                            </label> &nbsp;
+                                            <label>
                                                 <Field type="radio" name="mode" value="Diesel" />
-              Diesel
-            </label>
+                                                Diesel
+                                            </label>
                                             <ErrorField errors={errors} touched={touched} row="mode" />
                                         </div>
                                     </div>
@@ -178,17 +178,17 @@ class AddVoiture extends Component {
                                     <div className="mb-2 ">
                                         <label className="block text-gray-700 font-bold mb-1 md:mb-0">
                                             Vitesse
-                                    </label>
+                                        </label>
 
                                         <div >
                                             <label>
                                                 <Field type="radio" name="vitesse" value="Manuelle" />
-              Manuelle
-            </label>&nbsp;
-                                    <label>
+                                                Manuelle
+                                            </label>&nbsp;
+                                            <label>
                                                 <Field type="radio" name="vitesse" value="Automatique" />
-              Automatique
-            </label>
+                                                Automatique
+                                            </label>
                                             <ErrorField errors={errors} touched={touched} row="vitesse" />
                                         </div>
                                     </div>
@@ -196,18 +196,20 @@ class AddVoiture extends Component {
                                     <div className="mb-2 ">
                                         <label className="block text-gray-700 font-bold mb-1 md:mb-0">
                                             Climatisation
-                                    </label>
+                                        </label>
 
                                         <div >
                                             <label>
                                                 <Field type="radio" name="climatisation" value="Oui" />
-              Oui
-            </label>&nbsp;
-                                    <label>
+                                                Oui
+                                            </label>
+                                            &nbsp;
+                                            <label>
                                                 <Field type="radio" name="climatisation" value="Non" />
-              Non
-            </label>&nbsp;
-                                    <ErrorField errors={errors} touched={touched} row="climatisation" />
+                                                Non
+                                            </label>
+                                            &nbsp;
+                                            <ErrorField errors={errors} touched={touched} row="climatisation" />
                                         </div>
                                     </div>
 
@@ -215,27 +217,27 @@ class AddVoiture extends Component {
                                     <div className="mb-2">
                                         <label className="block text-gray-700 font-bold mb-1 md:mb-0">
                                             Portes
-                                    </label>
+                                        </label>
 
                                         <div>
                                             <label>
                                                 <Field type="radio" name="portes" value="3" />
-              3
-            </label>&nbsp;
-                                    <label>
+                                                 3
+                                            </label>
+                                            &nbsp;
+                                            <label>
                                                 <Field type="radio" name="portes" value="4" />
-              4
-            </label>&nbsp;
-                                    <label>
+                                                4
+                                            </label>
+                                            &nbsp;
+                                            <label>
                                                 <Field type="radio" name="portes" value="5" />
-              5
-            </label>&nbsp;
-                                    <ErrorField errors={errors} touched={touched} row="portes" />
+                                                5
+                                            </label>&nbsp;
+                                            <ErrorField errors={errors} touched={touched} row="portes" />
                                         </div>
                                     </div>
                                 </center>
-
-
 
                                 <div className="inline-block relative w-64">
                                     <label className="block text-gray-700 font-bold mb-1 md:mb-0">
