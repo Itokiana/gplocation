@@ -1,47 +1,73 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import UnTarifDeBase from './UnTarifDeBase';
+import './TarifDeBase.css';
+import { Formik , Form } from 'formik';
+import axios from '../../../../axios';
 
 export default class TarifDeBase extends Component {
     state = {
+      nombreLigne: [1,2,3,4,5],
+      valeurs:[],
+      tableauData:[]
+      
     }
+    valideAndSave = () => {
+
+       
+    }
+ 
+    ajoutNewPeriod =() =>{
+        this.setState({
+            nombreLigne: [...this.state.nombreLigne,this.state.nombreLigne.pop() + 1]
+        })
+        
+    }
+   
+ 
+
     render() {
         return (
             <div>
                 <section className="text-gray-700 body-font">
                     <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
-                        <form>
+                    <Formik
+                        initialValues = {{}}
+                        onSubmit={(data,{setSubmitting})=>{
+                            setSubmitting(true);
+                                                  
+                            axios.post('/tarif_de_bases',{data, tableau:this.state.nombreLigne})
+                            console.log(data)
+                            setSubmitting(false)
+                        }}
+                    >{({values, isSubmitting}) => (
+                        <Form>
                             <table className="table table-dark">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Combinaison</th>
-                                        <th scope="col">Prix BS</th>
-                                        <th scope="col">Prix MS</th>
-                                        <th scope="col">Prix HS</th>
-                                        <th scope="col">Active</th>
+                                        <th scope="col" className="input-column">Combinaison</th>
+                                        <th scope="col" className="input-column">Prix BS</th>
+                                        <th scope="col" className="input-column">Prix MS</th>
+                                        <th scope="col" className="input-column">Prix HS</th>
+                                        <th scope="col" className="input-check">Active</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <div >
-                                                <input type="text" className="form-control" id="inputDJ"/>
-                                            </div>
-                                        </td>
-                                        <td><input type="text" className="form-control" id="inputBS"/></td>
-                                        <td><input type="text" className="form-control" id="inputMS"/></td>
-                                        <td><input type="text" className="form-control" id="inputHS"/></td>
-                                        <td >
-                                            <div className="ml-4 mb-4">
-                                                <input className="form-check-input " type="checkbox" value="" id="Check1"/>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                {
+                                     this.state.nombreLigne.map((ligne) => 
+                                        <UnTarifDeBase key={ligne} num={ligne} /> 
+                                     )
+                                }
                                 </tbody>
                             </table>
 
-                        </form>
-                    
-                      
+                            <div className="d-flex justify-content-end">
+                                <button type="button" className="btn btn-success" onClick={this.ajoutNewPeriod}>Ajout periode</button>
+                                <button type="submit" className="btn btn-primary">Valider</button>  
+                            </div>
+
+                        </Form>
+                    )}
+                    </Formik>
                     </div>
                 </section>
 

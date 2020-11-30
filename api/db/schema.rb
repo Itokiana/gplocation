@@ -135,11 +135,11 @@ ActiveRecord::Schema.define(version: 2020_11_26_123215) do
     t.date "dateFinPerso"
     t.integer "prix"
     t.bigint "category_id"
-    t.bigint "jours_id"
+    t.bigint "jour_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_tarif_personalises_on_category_id"
-    t.index ["jours_id"], name: "index_tarif_personalises_on_jours_id"
+    t.index ["jour_id"], name: "index_tarif_personalises_on_jour_id"
   end
 
   create_table "tarif_supplementaires", force: :cascade do |t|

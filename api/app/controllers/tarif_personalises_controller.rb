@@ -15,14 +15,49 @@ class TarifPersonalisesController < ApplicationController
 
   # POST /tarif_personalises
   def create
-    @tarif_personalise = TarifPersonalise.new(tarif_personalise_params)
+    data = params[:data]
+    tabLigne = params[:tabLigne]
+    fintab = tabLigne.last+1
+    tab = tabLigne.push(fintab)
 
-    if @tarif_personalise.save
-      render json: @tarif_personalise, status: :created, location: @tarif_personalise
-    else
-      render json: @tarif_personalise.errors, status: :unprocessable_entity
-    end
+    puts (tab)
+
+    # puts(data[:dateDebutPerso])
+    # puts(data[:category_id])
+    # puts(data[:dateFinPerso])
+    
+
+    tab.each do |value|
+      id=data[:category_id]
+      debut=data[:dateDebutPerso]
+      fin=data[:dateFinPerso]
+      prixT="prix#{value}"
+      nombreJour="nombreJour#{value}"
+      puts (" ty #{data[prixT]} : jours #{data[nombreJour]}")
+      puts (id )
+      puts (debut)
+      puts (fin)
+
+
+      @tarif_personalise = TarifPersonalise.create!(dateDebutPerso: debut, dateFinPerso: fin, prix: data[prixT], category_id: id, jour_id: data[nombreJour])
+      json_response(@tarif_personalise, :created)
+      # if @tarif_personalise.save
+      #   render json: @tarif_personalise, status: :created, location: @tarif_personalise
+      # else
+      #   render json: @tarif_personalise.errors, status: :unprocessable_entity
+      # end
+
+    end  
   end
+
+
+  # def create
+  #   data = params[:data]
+  #   tabLigne = params[:tabLigne]
+    
+  #   @tarif_personalise = TarifPersonalise.create!(dateDebutPerso: data[:dateDebutPerso], dateFinPerso: data[:dateFinPerso], prix: 234, category_id: 1, jours_id: 9)
+  #   json_response(@tarif_personalise, :created)
+  # end
 
   # PATCH/PUT /tarif_personalises/1
   def update
@@ -46,6 +81,6 @@ class TarifPersonalisesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def tarif_personalise_params
-      params.require(:tarif_personalise).permit(:dateDebutPerso, :dateFinPerso, :prix)
+      params.fetch(:tarif_personalise, {}).permit(:dateDebutPerso, :dateFinPerso, :prix, :category_id, jours_id)
     end
 end

@@ -2,16 +2,18 @@
 
 #place: rand(4..5), vitesse: "manuelle", types: Faker::Vehicle.fuel_type, climatiseur: true, status:"occupé", portes: Faker::Vehicle.door_count
 
-AdminUser.create(username: 'sambatra', email: 'natarabem@gmail.com', password: '123456789')
+# AdminUser.create(username: 'sambatra', email: 'natarabem@gmail.com', password: '123456789')
 # Category.create(ref:'R01', category: 'CatA' )
 # Category.create(ref:'R02', category: 'CatB' )
 # Category.create(ref:'R03', category: 'CatC' )
 
-    # Voiture.create(marque: "renault", model: "clio", category_id: 2)
-    # Voiture.create(marque: "renault", model: "megane", category_id: 3)
-    # Voiture.create(marque: "citroën", model: "C1", category_id: 1)
-    # Voiture.create(marque: "renault", model: "Duster", category_id: 2)
+#     Voiture.create(marque: "renault", model: "clio", category_id: 2)
+#     Voiture.create(marque: "renault", model: "megane", category_id: 3)
+#     Voiture.create(marque: "citroën", model: "C1", category_id: 1)
+#     Voiture.create(marque: "renault", model: "Duster", category_id: 2)
     
+#     Jour.create(name: "----")
+
     # Tarif.create(prix: 200, voiture_id: 1)
     # Tarif.create(prix: 250, voiture_id: 2)
     # Tarif.create(prix: 249, voiture_id: 3)

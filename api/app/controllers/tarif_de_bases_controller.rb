@@ -15,13 +15,29 @@ class TarifDeBasesController < ApplicationController
 
   # POST /tarif_de_bases
   def create
-    @tarif_de_basis = TarifDeBase.new(tarif_de_basis_params)
+    data=params[:data]
+    tableau = params[:tableau]
+    
+    tableau.each do |value| 
+      jourD="jourD#{value}"
+      jourF="jourF#{value}"
+      prixBS="prixBS#{value}"
+      prixMS="prixMS#{value}"
+      prixHS="prixHS#{value}"
+      check="check#{value}"
+      puts ("#{value} : #{jourD}: #{data[jourD]},#{jourF}: #{data[jourF]},#{prixBS}: #{data[prixBS]},#{prixMS}: #{data[prixMS]},#{prixHS}: #{data[prixHS]},#{check}: #{data[check]}")
+      
+    
+      @tarif_de_basis = TarifDeBase.new(jourDebut: data[jourD], jourFin: data[jourF], prixBasseSaison: data[prixBS], prixMoyenSaison: data[prixMS], prixHauteSaison: data[prixHS], category_id: 1)
 
-    if @tarif_de_basis.save
-      render json: @tarif_de_basis, status: :created, location: @tarif_de_basis
-    else
-      render json: @tarif_de_basis.errors, status: :unprocessable_entity
+      if @tarif_de_basis.save
+        render json: @tarif_de_basis, status: :created, location: @tarif_de_basis
+      else
+        render json: @tarif_de_basis.errors, status: :unprocessable_entity
+      end
+
     end
+    
   end
 
   # PATCH/PUT /tarif_de_bases/1
@@ -46,6 +62,6 @@ class TarifDeBasesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def tarif_de_basis_params
-      params.fetch(:tarif_de_basis, {})
+      params.fetch(:tarif_de_basis, {}).permit(:jourDebut, :jourFin, :prixBasseSaison, :prixMoyenSaison, :prixHauteSaison, :category_id)
     end
 end

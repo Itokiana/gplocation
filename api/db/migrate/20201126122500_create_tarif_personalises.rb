@@ -5,7 +5,7 @@ class CreateTarifPersonalises < ActiveRecord::Migration[6.0]
       t.date :dateFinPerso
       t.integer :prix
       t.belongs_to :category, index:true
-      t.belongs_to :jours, index:true
+      t.belongs_to :jour, index:true
 
       t.timestamps
     end
