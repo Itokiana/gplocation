@@ -8,6 +8,15 @@ class TarifDeBasesController < ApplicationController
     render json: @tarif_de_bases
   end
 
+  #Get /tarif_de_bases par categorie
+  def categories
+    @tarif_de_bases = Category.find(params[:id]).tarif_de_bases
+
+
+
+    render json: @tarif_de_bases
+  end
+
   # GET /tarif_de_bases/1
   def show
     render json: @tarif_de_basis
@@ -15,8 +24,16 @@ class TarifDeBasesController < ApplicationController
 
   # POST /tarif_de_bases
   def create
-    data=params[:data]
-    tableau = params[:tableau]
+    data=params[:tarif_de_basis][:data]
+    tableau = params[:tarif_de_basis][:tableau]
+    idCategorie = params[:tarif_de_basis][:ids]
+
+    puts "*"*20
+    puts data
+    puts "*"*20
+    puts tableau
+    puts "*"*20
+    puts idCategorie
     
     tableau.each do |value| 
       jourD="jourD#{value}"
@@ -25,16 +42,22 @@ class TarifDeBasesController < ApplicationController
       prixMS="prixMS#{value}"
       prixHS="prixHS#{value}"
       check="check#{value}"
-      puts ("#{value} : #{jourD}: #{data[jourD]},#{jourF}: #{data[jourF]},#{prixBS}: #{data[prixBS]},#{prixMS}: #{data[prixMS]},#{prixHS}: #{data[prixHS]},#{check}: #{data[check]}")
-      
-    
-      @tarif_de_basis = TarifDeBase.new(jourDebut: data[jourD], jourFin: data[jourF], prixBasseSaison: data[prixBS], prixMoyenSaison: data[prixMS], prixHauteSaison: data[prixHS], category_id: 1)
 
-      if @tarif_de_basis.save
-        render json: @tarif_de_basis, status: :created, location: @tarif_de_basis
-      else
-        render json: @tarif_de_basis.errors, status: :unprocessable_entity
+      # puts ("#{value} : #{jourD}: #{data[jourD]},#{jourF}: #{data[jourF]},#{prixBS}: #{data[prixBS]},#{prixMS}: #{data[prixMS]},#{prixHS}: #{data[prixHS]},#{check}: #{data[check]}")
+      
+      if data[check]==true
+        @tarif_de_basis = TarifDeBase.new(jourDebut: data[jourD], jourFin: data[jourF], prixBasseSaison: data[prixBS], prixMoyenSaison: data[prixMS], prixHauteSaison: data[prixHS], category_id: idCategorie[:id])
+
+        if @tarif_de_basis.save
+          puts "a"*50
+          # render json: @tarif_de_basis, status: :created, location: @tarif_de_basis
+        else
+          puts "="*50
+          # render json: @tarif_de_basis.errors, status: :unprocessable_entity
+        end
+
       end
+      
 
     end
     
