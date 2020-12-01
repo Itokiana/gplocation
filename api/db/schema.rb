@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_26_123215) do
+ActiveRecord::Schema.define(version: 2020_12_01_074612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,15 @@ ActiveRecord::Schema.define(version: 2020_11_26_123215) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "date_saisons", force: :cascade do |t|
+    t.date "dateDSaison"
+    t.date "dateFsaison"
+    t.bigint "saison_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["saison_id"], name: "index_date_saisons_on_saison_id"
+  end
+
   create_table "jours", force: :cascade do |t|
     t.string "name"
     t.integer "nombrejour"
@@ -107,6 +116,13 @@ ActiveRecord::Schema.define(version: 2020_11_26_123215) do
     t.bigint "tarif_id", null: false
     t.index ["reservation_id", "tarif_id"], name: "index_reservations_tarifs_on_reservation_id_and_tarif_id"
     t.index ["tarif_id", "reservation_id"], name: "index_reservations_tarifs_on_tarif_id_and_reservation_id"
+  end
+
+  create_table "saisons", force: :cascade do |t|
+    t.string "nomSaison"
+    t.string "couleur"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tarif_de_bases", force: :cascade do |t|

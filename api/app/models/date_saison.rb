@@ -1,0 +1,3 @@
+class DateSaison < ApplicationRecord
+    
+end

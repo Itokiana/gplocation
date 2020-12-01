@@ -18,7 +18,7 @@ class TarifDeBasesController < ApplicationController
     data=params[:data]
     tableau = params[:tableau]
     
-    tableau.each do |value| 
+    tableau.each do |value|
       jourD="jourD#{value}"
       jourF="jourF#{value}"
       prixBS="prixBS#{value}"

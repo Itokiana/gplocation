@@ -26,6 +26,7 @@ import axios from './axios';
 import Reservation from './pages/Reservation/Reservation';
 import AddTarif from './pages/ConfigurationAgence/Tarif/AddTarif';
 import TarifDeBase from './pages/ConfigurationAgence/Tarif/TrifDeBase';
+import AddSaison from './pages/ConfigurationAgence/GestionSaison/AddSaison';
 import TarifList from './pages/ConfigurationAgence/Tarif/TarifList';
 
 
@@ -74,6 +75,7 @@ class App extends React.Component {
                     
                     {/* <Route path="/tarifpersonel/:id" component={TarifPersonel} /> */}
                     <Route path="/ajouter_un_tarif/:id" component={AddTarif} />
+                    <Route path="/ajouterSaison/:id" component={AddSaison}/>
                     <Route path="/tarif_de_base" component={TarifDeBase} />
 
                     <Route path="/tarif_list" component={TarifList} />

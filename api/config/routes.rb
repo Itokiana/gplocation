@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :date_saisons
+  resources :saisons
   resources :jours
   resources :tarif_personalises
   resources :tarif_personalisers

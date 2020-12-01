@@ -54,3 +54,7 @@
 #  c=  Tarif.create(prix: '1000')
 
 # end
+
+# Saison.create(nomSaison: "Basse Saison", couleur: "bleu")
+# Saison.create(nomSaison: "Haute Saison", couleur: "rouge")
+# Saison.create(nomSaison: "Moyen Saison", couleur: "jaune")
