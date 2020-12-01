@@ -1,48 +1,19 @@
 import React from 'react';
 import moment, { weekdaysShort } from 'moment';
-// import Calendar from 'react-calendar';
-import { number } from 'prop-types';
-
+import Days from './Days'
+import Month from './Month'
 
 class Indexs extends React.Component {
-    
-   
-   
-    state = {
-        dateContext: moment(),
-        today: moment,
-        showMonthPopup: false,
-        showYearsPopup: false
+    state= {
+        date: moment()
     }
-    constructor (propos) {
-        super(propos);
-    }
-    weekdays = moment.weekdays();
+
     weekdaysShort = moment.weekdaysShort();
-    months  = moment.months();
-
     years = () => {
-        return this.state.dateContext.format("Y") // annee de la date aujourdhui
+        return this.state.date.format("Y") // annee de la date aujourdhui
 
     }
-    month = () => {
-        return this.state.dateContext.format("MMMM") // Moi de la date aujourdhui
 
-    }
-    daysInMonth = () => {
-        return this.state.dateContext.daysInMonth(); // nombre de jour dans un moi
-    }
-    currentDate = () => {
-        return this.state.dateContext.get("date");
-    }
-    currentDay = () => {
-        return this.state.dateContext.format("D");
-    }
-    firstDayOfMonth = () => {
-        let dateContext = this.state.dateContext;
-        let firstDay = moment(dateContext).startOf('month').format('d'); // iteration 0, 1, ...6
-        return firstDay;
-    }
 
     render() {
         let weekdays = this.weekdaysShort.map((day) => { 
@@ -55,72 +26,96 @@ class Indexs extends React.Component {
              
         );
         
-        
-        let months = this.months.map((month) => {
-            return (
-                <tr key={month} className= "week-day"> {console.log(month)}</tr>
-            )
-            
-        });
-        let blanks = [];
-        for (let i = 0; i < this.firstDayOfMonth(); i++) {
-            blanks.push(<td className="emptySlot">
-                {"  "}
-            </td>);
-        }
-        console.log("blanks :",);
-        let daysInMonth = [];
-        for (let d = 1; d <= this.daysInMonth(); d++) {
-            let className = (d == this.currentDay() ? "day current-day" : "day");
-            daysInMonth.push(
-                <td key={d} className={className} >
-                    <span>{d}</span>
-                </td>
-            );
-        }
-        var totalSlots = [...blanks, ...daysInMonth];
-        let trElement = totalSlots.map((jour, j) => {
-            return (
-                <td key={j*10} >
-                    {jour}
-                </td>
-            )
-
-        })
-
-        // totalSlots.forEach(())
-
-        console.log("days:", this.firstDayOfMonth() );
         return (
             <div>
-                <table className="w-100 text-white">
-                    <thead>
-                        <tr>
-                            <td>
-                                Mois\jour
-                            </td>
-                        {weekdays}
-                        {weekdays}
-                        {weekdays}
-                        {weekdays}
-                        {weekdays}
+                <center><h1><span className="calendar-label text-white">
+                {this.years()}</span>  </h1></center>
+                <div className="bg-white rounded ">
+                    <table className="overflow-x text-black" >
+                        <thead className="bg-dark">
+                            <tr>
                             
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr> 
-                            <td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Mois\jour
+                                </td>
+                            {weekdays}
+                            {weekdays}
+                            {weekdays}
+                            {weekdays}
+                            {weekdays}
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr> 
+                                <td>
 
-                            </td>
-                            {trElement}
-                        </tr>
-                       
-                    </tbody>
+                                </td>
+                                
+                            </tr>
+                        <Month/>
+                        
+                        </tbody>
 
-                </table>
+                    </table>
+                </div> 
+                
             </div>
+            
             
         )
     }
 }
-export default Indexs;
+ export default Indexs;
+
+
+
+// import React from "react";
+// import { DateRangePicker } from "materialui-daterange-picker";
+// import moment from 'moment'
+
+
+// class Indexs extends React.Component {
+//  CalendrierComponent = props => {
+//     // const [open, setOpen] = React.useState(true);
+//     const [dateRange, setDateRange] = React.useState();
+
+
+//     let date = (range) => {
+//         setDateRange({
+//         range
+//         })
+//         props.prom({
+//         range
+//         })
+//     }
+//     const toggle = () => setOpen(open);
+//     const today = new moment().subtract(1, 'days');
+
+//     return (
+
+//         <DateRangePicker
+//         disablePast={true}
+//         minDate={today}
+//         open={open}
+//         toggle={toggle}
+//         onChange={(range) => date(range)}
+//         format={"DD/YYYY/MM"}
+        
+//         />
+//     );
+//     }
+//     render() {
+//         return (
+
+//             <>
+//             {
+//              this.CalendrierComponent   
+//             }
+//             </>
+//         )
+//     }
+// }
+// export default Indexs;

@@ -4,10 +4,10 @@ import { Field } from 'formik';
 
 export default class DeuxJourFerier extends Component {
 
-    nameDDate= `dateD${this.props.num}`
-    nameDJour= `jourD${this.props.num}`
-    nameDPrix= `prixD${this.props.num}`
-    nameCheckD= `chexkD${this.props.num}`
+    nameDDate= `dateD${this.props.nbr}`
+    nameDJour= `jourD${this.props.nbr}`
+    nameDPrix= `prixD${this.props.nbr}`
+    nameCheckD= `checkD${this.props.nbr}`
 
     render () {
         return(
@@ -26,7 +26,7 @@ export default class DeuxJourFerier extends Component {
                 <td className="input-column">
                     
                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name="nameDPrix"/>
+                px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name={this.nameDPrix}/>
                     
                 </td>
                 <td className="input-check" >
