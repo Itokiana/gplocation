@@ -55,6 +55,7 @@ class JourferiersController < ApplicationController
        
       end
     else
+      
       tabUn.push(fintabUn)
       
       tabUn.each do |val|
@@ -62,7 +63,12 @@ class JourferiersController < ApplicationController
         jourUn = "jour#{val}"
         prix = "prix#{val}"
         checkU = "checkU#{val}"
-        id = idUn[val-1]  
+        id = idUn[val-1]
+        puts "EEEE"*20 
+
+        puts data[checkU] 
+        puts id
+        puts "DDD"*20
         if data[checkU]==true
           Jourferier.find(id).update(evenement: data[jourUn], dateferie: data[dateUn], surplus: data[prix], anne: data[:anneeU])
         end

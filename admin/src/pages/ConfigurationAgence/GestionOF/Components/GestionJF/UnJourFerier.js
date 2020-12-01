@@ -6,7 +6,7 @@ export default class UnJourFerier extends Component {
     nameUDate= `date${this.props.num}` 
     nameUJour= `jour${this.props.num}`
     nameUPrix= `prix${this.props.num}`
-    nameCheckU= `chexkU${this.props.num}`
+    nameCheckU= `checkU${this.props.num}`
 
     render () {
         return(
