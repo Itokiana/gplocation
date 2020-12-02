@@ -33,9 +33,21 @@ ActiveRecord::Schema.define(version: 2020_12_01_142533) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "base_tarifs", force: :cascade do |t|
+    t.integer "jourDebut"
+    t.integer "jourFin"
+    t.float "prixBasseSaison"
+    t.float "prixMoyenneSaison"
+    t.float "prixHauteSaison"
+    t.bigint "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_base_tarifs_on_category_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "ref"
-    t.string "category"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
