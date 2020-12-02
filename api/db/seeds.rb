@@ -55,6 +55,6 @@
 
 # end
 
-# Saison.create(nomSaison: "Basse Saison", couleur: "bleu")
-# Saison.create(nomSaison: "Haute Saison", couleur: "rouge")
-# Saison.create(nomSaison: "Moyen Saison", couleur: "jaune")
+# Saison.create(nomsaison: "Basse Saison", couleur: "bleu")
+# Saison.create(nomsaison: "Haute Saison", couleur: "rouge")
+# Saison.create(nomsaison: "Moyen Saison", couleur: "jaune")

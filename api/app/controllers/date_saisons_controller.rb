@@ -46,6 +46,6 @@ class DateSaisonsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def date_saison_params
-      params.require(:date_saison).permit(:dateDSaison, :dateFsaison)
+      params.require(:date_saison).permit(:debutsaison, :finsaison, :saison_id)
     end
 end

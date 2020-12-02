@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_01_074612) do
+ActiveRecord::Schema.define(version: 2020_12_01_142533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 2020_12_01_074612) do
   end
 
   create_table "date_saisons", force: :cascade do |t|
-    t.date "dateDSaison"
-    t.date "dateFsaison"
+    t.date "debutsaison"
+    t.date "finsaison"
     t.bigint "saison_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2020_12_01_074612) do
   end
 
   create_table "saisons", force: :cascade do |t|
-    t.string "nomSaison"
+    t.string "nomsaison"
     t.string "couleur"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -147,15 +147,15 @@ ActiveRecord::Schema.define(version: 2020_12_01_074612) do
   end
 
   create_table "tarif_personalises", force: :cascade do |t|
-    t.date "dateDebutPerso"
-    t.date "dateFinPerso"
+    t.date "datedebutperso"
+    t.date "datefinperso"
     t.integer "prix"
     t.bigint "category_id"
-    t.bigint "jour_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "jourdebut"
+    t.integer "jourfin"
     t.index ["category_id"], name: "index_tarif_personalises_on_category_id"
-    t.index ["jour_id"], name: "index_tarif_personalises_on_jour_id"
   end
 
   create_table "tarif_supplementaires", force: :cascade do |t|

@@ -27,7 +27,7 @@ class GestionSaison extends Component {
 		})
     }
     render() {
-        console.log("salut")
+        
         return (
             <>
 
@@ -43,7 +43,7 @@ class GestionSaison extends Component {
                                     className="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 
                                     transition duration-500 ease select-none hover:bg-blue-600 focus:outline-none focus:shadow-outline"
                                     >
-                                    {saison.nomSaison}
+                                    {saison.nomsaison}
                                     </Link>
                                 
                                 );

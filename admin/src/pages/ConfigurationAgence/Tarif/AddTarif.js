@@ -30,8 +30,8 @@ class AddTarif extends Component {
     }
     suprimerPeriode = () =>{
         this.setState({
-            
-            nombreLigne: this.state.nombreLigne.pop()
+           
+            nombreLigne: this.state.nombreLigne
         })
     }
     
@@ -58,9 +58,9 @@ class AddTarif extends Component {
                 <center>
                     <h1>Tarif personnaliser pour le categorie {category && category.category }, reference {category && category.ref}</h1>
                     <br/>
-                    <NavLink to={`/jours`}>
+                    {/* <NavLink to={`/jours`}>
                         <td className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">Ajouter Nombrejour euro/j</td>
-                    </NavLink>
+                    </NavLink> */}
                     <div>
                         {voitures && voitures.map(voiture => {
                             return (
@@ -118,14 +118,14 @@ class AddTarif extends Component {
                                     >
                                         Ajouter un ligne
                                     </button>
-                                    <button
+                                    {/* <button
                                         type="submit"
                                         className="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 
                                         transition duration-500 ease select-none hover:bg-blue-600 focus:outline-none focus:shadow-outline" 
                                         onClick={this.suprimerPeriode}
                                     >
                                         Supprimer un ligne
-                                    </button>
+                                    </button> */}
                                     <button
                                         type="submit"
                                         className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 

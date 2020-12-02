@@ -31,17 +31,17 @@ class TarifPersonalisesController < ApplicationController
       id=data[:category_id]
       debut=data[:dateDebutPerso]
       fin=data[:dateFinPerso]
+      jDe= "nombreJourD#{value}"
+      jFi= "nombreJourF#{value}"
       prixT="prix#{value}"
-      nombreJour="nombreJour#{value}"
-      puts (" ty #{data[prixT]} : jours #{data[nombreJour]}")
-      puts (id )
-      puts (debut)
-      puts (fin)
+      puts (jDe )
+      puts(jFi)
+      
 
 
-      @tarif_personalise = TarifPersonalise.create!(dateDebutPerso: debut, dateFinPerso: fin, prix: data[prixT], category_id: id, jour_id: data[nombreJour])
+      @tarif_personalise = TarifPersonalise.create!(datedebutperso: debut, datefinperso: fin, prix: data[prixT], category_id: id, jourdebut: data[jDe], jourfin: data[jFi])
       json_response(@tarif_personalise, :created)
-      # if @tarif_personalise.save
+      # # if @tarif_personalise.save
       #   render json: @tarif_personalise, status: :created, location: @tarif_personalise
       # else
       #   render json: @tarif_personalise.errors, status: :unprocessable_entity
