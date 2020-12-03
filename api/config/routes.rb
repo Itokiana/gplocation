@@ -24,9 +24,8 @@ Rails.application.routes.draw do
 
 
   
-  #resources :categories do  
-    resources :voitures 
-  #end 
+  resources :voitures 
+  get '/voitures/:dateDepart/:dateRetour/:jours', to: 'voitures#listevoiture'
 
   resources :tarifs
 
