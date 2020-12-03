@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_12_01_142533) do
-=======
-ActiveRecord::Schema.define(version: 2020_12_01_190644) do
->>>>>>> affichageTarifClient
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,11 +34,19 @@ ActiveRecord::Schema.define(version: 2020_12_01_190644) do
   end
 
   create_table "base_tarifs", force: :cascade do |t|
+<<<<<<< HEAD
     t.integer "jourdebut"
     t.integer "jourfin"
     t.float "prixbassesaison"
     t.float "prixmoyennesaison"
     t.float "prixhautesaison"
+=======
+    t.integer "jourDebut"
+    t.integer "jourFin"
+    t.float "prixBasseSaison"
+    t.float "prixMoyenneSaison"
+    t.float "prixHauteSaison"
+>>>>>>> 044b52df7c9dd5ae3df6ee2da514646926e8c0e0
     t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

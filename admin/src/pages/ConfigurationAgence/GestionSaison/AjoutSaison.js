@@ -24,14 +24,19 @@ class AjoutJour extends Component {
                     }}
                     validationSchema={SaisonSchema}
                     onSubmit={(values, { resetForm }) => {
-                        axios.post('/date_saisons', values).then(response => {
-                            const { action } = this.props
-                            if (response.status === 201) {
-                                resetForm();
-                                action.getSaison();
-                            }
+                        resetForm(true)
+
+                        axios.post('/date_saisons', values)
+                        // .then(response => {
+                            // const { action } = this.props
+                            // if (response.status === 201) {
+                            //     resetForm();
+                            //     action.getSaison();
+                            // }
                             
-                        })
+                        resetForm(false)
+                        // })
+                        console.log("ddddddd")
                     }}
                 >
                     {({ errors, touched}) => (

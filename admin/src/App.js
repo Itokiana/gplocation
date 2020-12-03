@@ -75,7 +75,7 @@ class App extends React.Component {
                     
                     {/* <Route path="/tarifpersonel/:id" component={TarifPersonel} /> */}
                     <Route path="/ajouter_un_tarif/:id" component={AddTarif} />
-                    <Route path="/ajouterSaison/:id" component={AddSaison}/>
+                    <Route path="/ajouterSaison/:id" component={AddSaison} />
                     <Route path="/tarif_de_base" component={TarifDeBase} />
 
                     <Route path="/tarif_list" component={TarifList} />
