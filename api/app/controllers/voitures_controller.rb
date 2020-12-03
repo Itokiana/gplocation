@@ -8,7 +8,34 @@ class VoituresController < ApplicationController
     # GET /voitures
     def index
         @voitures = Voiture.all
+
+        puts "index"*10
+        # @prix=[]
+        # @voitures.each { |voiture|
+        #    @prix.push(voiture.category.base_tarifs.select(:prixbasseSaison).where("jourdebut <= ? AND jourfin => ?",jours,jours))
+        # }
+        # puts "*"*50
+        # puts @prix
+        # render json: {voitures:@voiture}
         json_response(@voitures)
+    end
+
+    #GET /voitures/:dateDepart/:dateRetour/:jours
+    def listevoiture
+        @voitures = Voiture.all
+        @prix=[]
+        i = 0
+        @voitures.each do |voiture|
+           @prix.push(voiture.category.base_tarifs.select(:id,:prixbassesaison).where("jourdebut <= ? AND jourfin >= ?",params[:jours].to_i,params[:jours].to_i))
+           puts "*"*10
+            puts @prix[i].inspect
+            puts "="*10
+           i+=1
+        end
+       
+
+        
+        render json: {voitures:@voitures,prix:@prix}
     end
 
     # POST /categories/:category_id/voitures

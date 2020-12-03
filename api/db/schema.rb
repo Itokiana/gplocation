@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_142423) do
+ActiveRecord::Schema.define(version: 2020_12_01_190644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(version: 2020_11_30_142423) do
   end
 
   create_table "base_tarifs", force: :cascade do |t|
-    t.integer "jourDebut"
-    t.integer "jourFin"
-    t.float "prixBasseSaison"
-    t.float "prixMoyenneSaison"
-    t.float "prixHauteSaison"
+    t.integer "jourdebut"
+    t.integer "jourfin"
+    t.float "prixbassesaison"
+    t.float "prixmoyennesaison"
+    t.float "prixhautesaison"
     t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -130,7 +130,6 @@ ActiveRecord::Schema.define(version: 2020_11_30_142423) do
     t.index ["tarif_id", "reservation_id"], name: "index_reservations_tarifs_on_tarif_id_and_reservation_id"
   end
 
-<<<<<<< HEAD
   create_table "saisons", force: :cascade do |t|
     t.string "nomSaison"
     t.string "couleur"
@@ -138,20 +137,6 @@ ActiveRecord::Schema.define(version: 2020_11_30_142423) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "tarif_de_bases", force: :cascade do |t|
-    t.integer "jourDebut"
-    t.integer "jourFin"
-    t.float "prixBasseSaison"
-    t.float "prixMoyenSaison"
-    t.float "prixHauteSaison"
-    t.bigint "category_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_tarif_de_bases_on_category_id"
-  end
-
-=======
->>>>>>> test
   create_table "tarif_details", force: :cascade do |t|
     t.integer "prix"
     t.integer "duree"
