@@ -106,8 +106,8 @@ function Reserver(propos) {
                                         <h2>Prise en charge</h2>
                                         </div>
                                         <div className="paddingp">
-                                        <p><b>Départ :</b> Aéroport de la Réunion Roland-Garros<br /><b> le {propos.match.params.date_depart}</b></p>
-                                        <p><b>Retour :</b> Aéroport de la Réunion Roland-Garros<br /><b> le {propos.match.params.date_retour}</b></p>
+                                        <p><b>Départ :</b> Aéroport de la Réunion Roland-Garros<br /><b> le {propos.match.params.date_reservation.dateDepart}</b></p>
+                                        <p><b>Retour :</b> Aéroport de la Réunion Roland-Garros<br /><b> le {propos.match.params.date_reservation.dateRetour}</b></p>
 
                                         </div>
                                     </div>

@@ -54,7 +54,7 @@ export default class App extends Component {
             <Route exact path='/sainte-marie' component={Saint}/>
             <Route exact path='/condition' component={Condition}/>
             <Route exact path='/mentions-legales' component={Mentions}/>
-            <Route exact path='/reserver/:date_depart/:date_retour/:id/:prix' component={Reserver}/>
+            <Route exact path='/reserver/:date_reservation/:id/:prix' component={Reserver}/>
             <Route exact path='/profil' component={() => <Profil client={this.state.user}/>} />
             <Route component={NotFound}/>
           </Switch>
