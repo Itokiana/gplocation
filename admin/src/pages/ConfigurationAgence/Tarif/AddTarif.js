@@ -52,7 +52,7 @@ class AddTarif extends Component {
         const category = this.state.categories.category
         const voitures = this.state.categories.voitures
         const idcat = this.state.categories.id
-        
+        console.log(voitures)
         return (
             <>
                 <center>

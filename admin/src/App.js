@@ -28,6 +28,8 @@ import AddTarif from './pages/ConfigurationAgence/Tarif/AddTarif';
 import TarifDeBase from './pages/ConfigurationAgence/Tarif/TrifDeBase';
 import AddSaison from './pages/ConfigurationAgence/GestionSaison/AddSaison';
 import TarifList from './pages/ConfigurationAgence/Tarif/TarifList';
+import Indexs  from './pages/ConfigurationAgence/GestionSaison/calendrier/Indes';
+
 
 
 
@@ -83,6 +85,7 @@ class App extends React.Component {
                     <Route exact path="/voitures" component={Voitures} />
                     <Route exact path="/jours" component={Jours} />
                     <Route exact path="/categories/:id" component={Editer} />
+                    <Route path="/calendrier" component={Indexs} />
 
                   </Switch>
                 </div>

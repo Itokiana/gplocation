@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_01_142533) do
+ActiveRecord::Schema.define(version: 2020_12_04_083527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,19 +34,11 @@ ActiveRecord::Schema.define(version: 2020_12_01_142533) do
   end
 
   create_table "base_tarifs", force: :cascade do |t|
-<<<<<<< HEAD
     t.integer "jourdebut"
     t.integer "jourfin"
     t.float "prixbassesaison"
     t.float "prixmoyennesaison"
     t.float "prixhautesaison"
-=======
-    t.integer "jourDebut"
-    t.integer "jourFin"
-    t.float "prixBasseSaison"
-    t.float "prixMoyenneSaison"
-    t.float "prixHauteSaison"
->>>>>>> 044b52df7c9dd5ae3df6ee2da514646926e8c0e0
     t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -94,6 +86,30 @@ ActiveRecord::Schema.define(version: 2020_12_01_142533) do
     t.index ["saison_id"], name: "index_date_saisons_on_saison_id"
   end
 
+  create_table "fermexceptions", force: :cascade do |t|
+    t.date "jourfermedebut"
+    t.date "jourfermefin"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "horaire_jours", force: :cascade do |t|
+    t.string "nomjour"
+    t.time "heuredebut"
+    t.time "heurefin"
+    t.integer "prixsurplus"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "jourferiers", force: :cascade do |t|
+    t.string "evenement"
+    t.date "dateferie"
+    t.integer "anne"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "jours", force: :cascade do |t|
     t.string "name"
     t.integer "nombrejour"
@@ -116,6 +132,13 @@ ActiveRecord::Schema.define(version: 2020_12_01_142533) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_options_on_category_id"
+  end
+
+  create_table "ouvertexceptions", force: :cascade do |t|
+    t.date "jourouvertdebut"
+    t.date "jourouvertfin"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -143,6 +166,18 @@ ActiveRecord::Schema.define(version: 2020_12_01_142533) do
     t.string "couleur"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tarif_de_bases", force: :cascade do |t|
+    t.integer "jourDebut"
+    t.integer "jourFin"
+    t.float "prixBasseSaison"
+    t.float "prixMoyenSaison"
+    t.float "prixHauteSaison"
+    t.bigint "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_tarif_de_bases_on_category_id"
   end
 
   create_table "tarif_details", force: :cascade do |t|
