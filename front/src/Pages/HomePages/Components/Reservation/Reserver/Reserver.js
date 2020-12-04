@@ -60,7 +60,7 @@ function Reserver(propos) {
           });
     }, []);   
     console.log(voiture);    
-    console.log(propos.match.params.id)
+    console.log(propos.match.params)
     return (
         <div>
             <div className="b-breadCumbs s-shadow wow " >
@@ -87,7 +87,7 @@ function Reserver(propos) {
                                             </ul>
                                             <div id="prix_produit">
                                                 <p className="montant-acompte-selection">dont 100 € d'acompte</p>
-                                                <p className="confirm-tarifs">288.00 €</p>
+                                                <p className="confirm-tarifs">{propos.match.params.prix} €</p>
                                                 </div>
                                             </div>
                                             <p className="center mtop10">
@@ -106,8 +106,8 @@ function Reserver(propos) {
                                         <h2>Prise en charge</h2>
                                         </div>
                                         <div className="paddingp">
-                                        <p><b>Départ :</b> Aéroport de la Réunion Roland-Garros<br /><b> le 04 novembre à 10h00</b></p>
-                                        <p><b>Retour :</b> Aéroport de la Réunion Roland-Garros<br /><b> le 13 novembre à 10h00</b></p>
+                                        <p><b>Départ :</b> Aéroport de la Réunion Roland-Garros<br /><b> le {propos.match.params.date_depart}</b></p>
+                                        <p><b>Retour :</b> Aéroport de la Réunion Roland-Garros<br /><b> le {propos.match.params.date_retour}</b></p>
 
                                         </div>
                                     </div>

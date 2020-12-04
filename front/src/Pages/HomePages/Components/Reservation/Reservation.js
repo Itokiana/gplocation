@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Detail from './Detail/Detail';
 import Reserver from './Reserver/Reserver';
-import { MdRowing } from "react-icons/cg";
 import './Reservation.css';
 import axios from '../../../../axios';
 
 class Reservation extends Component {
     state = {
         etape: 1,
-        voitures: []
+        voitures: [],
+        data:{},
+        voiture_id:null,
+        prix:null,
     }
 
     changerEtape = (newEtape) => {
@@ -17,39 +19,33 @@ class Reservation extends Component {
             etape: newEtape
         });
     }
-
-   
-	componentDidMount() {
-		this.getVoiture();
-	}
-
-	getVoiture = () => {
-		axios.get('/voitures').then(response => {
-			if (response.status === 200) {
-				this.setState({
-					voitures: response.data
-
-				})
-				console.log(response.data)
-			}
-		})
-	}
+    
+    componentDidUpdate(){
+        console.log(this.state.voitures)
+    }
+    getKey(val,map) {
+        return Object.keys(map).find(key => map[key] === val);
+    }
+    
 
     render() {
         const etape = this.state.etape;
-        const { voitures } = this.state;
-        const { date_reservation } = this.props;
+        
+        
         return (
+           
             <div>   
-                {voitures.map(voiture =>
-                    (<div>
+                {
+                    this.props.voitures && this.props.date_reservation && this.props.prix?(
+                    this.props.voitures.map(voiture =>
+                    (<div key={voiture.id}>
                         <section className="b-items s-shadow" id="padingReserver">
                             <div className="container">
                                 <div className="row"><div><span className="spinner"></span></div>
                                     <div className="col-lg-12 col-sm-12 col-xs-12">
                                     <ul className="carac-prod">
                                         <li className="imagePading"><span className="imagePading"><img  src="media/blog/1.png" alt="nissan" /></span>Essence</li>
-                                        <li className="imagePading"><sapn className="imagePading"><img  src="media/blog/2.jpg" alt="nissan" /></sapn>{voiture.vitesse}</li>
+                                        <li className="imagePading"><span className="imagePading"><img  src="media/blog/2.jpg" alt="nissan" /></span>{voiture.vitesse}</li>
                                         <li className="imagePading"><span className="imagePading"><img  src="media/blog/3.jpg" alt="nissan" /></span>Climatisation: {voiture.climatisation}</li>
                                         <li className="imagePading"><span className="imagePading"><img  src="media/blog/4.jpg" alt="nissan" /></span>{voiture.places} places</li>
                                         <li className="imagePading"><span className="imagePading"><img  src="media/blog/5.png" alt="nissan" /></span>{voiture.portes} portes</li>
@@ -60,14 +56,16 @@ class Reservation extends Component {
                                                     <img className="img-responsive center-block" src={`http://localhost:4000/${voiture.image.url}`} alt="nissan" />
                                                     <br />
                                                     <p className="laststock">Dernier véhicule en stock</p> 
-                                                    <span className="confirm-tarif ">288.00 €</span>
+                                                    <span className="confirm-tarif ">{
+                                                        parseInt(this.props.jour,10) * this.props.prix[this.getKey(voiture,this.props.voitures)]
+                                                    }</span>
                                                     <p className="montant-acompte">dont 100 € d'acompte</p>
                                                 </div>
                                                 <div className="b-items__cars-one-info">
                                                     <header className="b-items__cars-one-info-header s-lineDownLeft">
                                                         <h2>{voiture.marque}</h2>
                                                         {/* <Link to="Reserver" className="locationVoiture" >Réserver</Link> */}
-                                                        <Link to={`/reserver/${date_reservation.dateDepart}/${date_reservation.dateRetour}/${voiture.id}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
+                                                        <Link to={`/reserver/${this.props.date_reservation.dateDepart}/${this.props.date_reservation.dateRetour}/${voiture.id}/${parseInt(this.props.jour,10) * this.props.prix[this.getKey(voiture,this.props.voitures)]}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
                                                     </header>
                                                     <div className="b-blog__posts-one-info">
                                                         <div className="row">
@@ -163,11 +161,11 @@ class Reservation extends Component {
                         </section>
                         { etape === 4 ? (<Reserver />) : null}
                     </div>)
-                )}
+                )):null}
                 <br/>
                 <div></div>     
                 </div>  
-                )
+             )
             }
         }
         export default Reservation;

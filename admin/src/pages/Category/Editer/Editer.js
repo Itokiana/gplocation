@@ -84,7 +84,7 @@ export default class Editer extends Component {
                                     </div>
 
                                 </button>
-                                {etape === 4 ? (<TarifDeBase />) : null}
+                                {etape === 4 ? (<TarifDeBase ids={params.id}/>) : null}
                             </div><br />
                         </div>
                     </div>
