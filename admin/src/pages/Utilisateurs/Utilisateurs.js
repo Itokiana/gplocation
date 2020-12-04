@@ -8,10 +8,10 @@ class Utilisateurs extends Component {
         utilisateurs: []
     }
 
-    action = {
+   action = {
         getUtilisateur: () => {
             axios.get('/admin_users').then(response => {
-                if (response.status === 200) {
+                 if (response.status === 200) {
                     this.setState({
                         utilisateurs: response.data
                     })

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from '../../../axios'
+import { NavLink } from 'react-router-dom';
 
 
 class GestionSaison extends Component {
@@ -33,6 +34,9 @@ class GestionSaison extends Component {
 
                 <div>
                     <br/>
+                    <NavLink to="/calendrier" >
+                        <button class="text-white bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">calendrier</button>
+                    </NavLink>
                     <center>
                         <h1>Gestion des Saison</h1>
                         <br/>
