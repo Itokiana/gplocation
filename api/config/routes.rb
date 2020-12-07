@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :carte_informations
   resources :date_saisons
   resources :saisons
   resources :jours
@@ -48,5 +49,6 @@ Rails.application.routes.draw do
 
   resources :tarif_supplementaires
   resources :tarifs
+  mount PayplugRails::Engine, at: "/ipn"
   
 end

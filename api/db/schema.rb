@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_12_01_142533) do
-=======
-ActiveRecord::Schema.define(version: 2020_12_01_190644) do
->>>>>>> affichageTarifClient
+ActiveRecord::Schema.define(version: 2020_12_07_163058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +43,16 @@ ActiveRecord::Schema.define(version: 2020_12_01_190644) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_base_tarifs_on_category_id"
+  end
+
+  create_table "carte_informations", force: :cascade do |t|
+    t.string "numero_carte"
+    t.integer "cvv"
+    t.string "date_expiration_carte"
+    t.bigint "client_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_carte_informations_on_client_id"
   end
 
   create_table "categories", force: :cascade do |t|

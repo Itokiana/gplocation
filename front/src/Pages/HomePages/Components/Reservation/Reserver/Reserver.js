@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import {Link} from 'react-router-dom';
 
 
 import PaimentEtape1 from './Paiment/PaimentEtape1';
@@ -9,7 +8,9 @@ import axios from '../../../../../axios';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import ErrorField from '../ErrorField';
-import { CgSlack } from 'react-icons/cg';
+import moment from 'moment';
+import 'moment/locale/fr' 
+moment.locale('fr');
 
 const ClientRegistrationSchema = Yup.object().shape({
     nom: Yup.string()
@@ -27,7 +28,10 @@ const ClientRegistrationSchema = Yup.object().shape({
 		.matches(/([0-9])/, 'Le numero de telephone ne doit contenir que des chiffres'),
 	email: Yup.string()
 		.email('Email invalide,merci de vouloire completé')
-		.required('l \' email ne doit pas être vide')
+        .required('l \' email ne doit pas être vide'),
+    password_digest: Yup.string()
+		.required('le mot de passe ne doit pas laisser à vide')
+    
 
 			
 });
@@ -59,8 +63,9 @@ function Reserver(propos) {
             console.log(data);
           });
     }, []);   
-    console.log(voiture);    
+    console.log(voiture);  
     console.log(propos.match.params)
+      
     return (
         <div>
             <div className="b-breadCumbs s-shadow wow " >
@@ -106,8 +111,8 @@ function Reserver(propos) {
                                         <h2>Prise en charge</h2>
                                         </div>
                                         <div className="paddingp">
-                                        <p><b>Départ :</b> Aéroport de la Réunion Roland-Garros<br /><b> le {propos.match.params.date_reservation.dateDepart}</b></p>
-                                        <p><b>Retour :</b> Aéroport de la Réunion Roland-Garros<br /><b> le {propos.match.params.date_reservation.dateRetour}</b></p>
+                                        <p><b>Départ :</b> {propos.match.params.lieu_depart}<br /><b> le {moment(`${propos.match.params.date_depart}`).format('dddd Do MMMM YYYY')} à {propos.match.params.heure_depart} </b></p>
+                                        <p><b>Retour :</b> {propos.match.params.lieu_retour}<br /><b> le {moment(`${propos.match.params.date_retour}`).format('dddd Do MMMM YYYY')} à {propos.match.params.heure_retour} </b></p>
 
                                         </div>
                                     </div>
@@ -134,7 +139,7 @@ function Reserver(propos) {
                                                 prenom: '',
                                                 email: '',
                                                 telephone: '',
-                                                password_digest: ''
+                                                password_digest: '',
                                                 
                                             }}
                                             validationSchema={ClientRegistrationSchema}
@@ -155,7 +160,7 @@ function Reserver(propos) {
                                             }}
                                             >
                                             {({ errors, touched, handleSubmit }) => (
-                                                <Form id="contactForm" className="contactForm" noValidate className="s-form wow zoomInUp" onSubmit={handleSubmit}>
+                                                <Form id="contactForm" className="contactForm s-form wow zoomInUp" noValidate onSubmit={handleSubmit}>
                                                     <div>
                                                         <Field type="text" placeholder="Nom*" name="nom"  />
                                                         <ErrorField errors={errors} touched={touched} row="nom"/>
@@ -173,8 +178,8 @@ function Reserver(propos) {
                                                         <ErrorField errors={errors} touched={touched} row="email"/>
                                                     </div>
                                                     <div>
-                                                        <Field type="password" placeholder="Mot de passe*" name="password_digest" />
-                                                        <ErrorField errors={errors} touched={touched} row="pasword_digest"/>
+                                                        <Field type="password" placeholder="password*" name="password_digest" />
+                                                        <ErrorField errors={errors} touched={touched} row="password_digest"/>
                                                     </div>
                                                     <p>* Champs obligatoires</p>
                                                     <center><button type="submit" className="btn m-btn" id="valider">Valider et payer<span className="fa fa-angle-right"></span></button></center>
@@ -231,7 +236,7 @@ function Reserver(propos) {
                                                 
                                                 >
                                                 {({ errors, touched, handleSubmit }) => (
-                                                    <Form id="contactForm" className="contactForm" noValidate className="s-form wow zoomInUp" onSubmit={handleSubmit}>
+                                                    <Form id="contactForm" className="contactForm s-form wow zoomInUp" noValidate onSubmit={handleSubmit}>
                                                         <div>
                                                             <Field type="text" placeholder="Email*" name="email" />
                                                             <ErrorField errors={errors} touched={touched} row="email"/>
