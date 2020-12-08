@@ -30,6 +30,7 @@ class Reservation extends Component {
 
     render() {
         const etape = this.state.etape;
+        console.log(this.props.date_reservation)
         
         
         return (
@@ -65,7 +66,7 @@ class Reservation extends Component {
                                                     <header className="b-items__cars-one-info-header s-lineDownLeft">
                                                         <h2>{voiture.marque}</h2>
                                                         {/* <Link to="Reserver" className="locationVoiture" >Réserver</Link> */}
-                                                        <Link to={`/reserver/${this.props.date_reservation}/${voiture.id}/${parseInt(this.props.jour,10) * this.props.prix[this.getKey(voiture,this.props.voitures)]}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
+                                                        <Link to={`/reserver/${this.props.date_reservation.dateDepart}/${this.props.date_reservation.dateRetour}/${this.props.date_reservation.heureDepart}/${this.props.date_reservation.heureRetour}/${this.props.date_reservation.lieuDepart}/${this.props.date_reservation.lieuRetour}/${voiture.id}/${parseInt(this.props.jour,10) * this.props.prix[this.getKey(voiture,this.props.voitures)]}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
                                                     </header>
                                                     <div className="b-blog__posts-one-info">
                                                         <div className="row">
