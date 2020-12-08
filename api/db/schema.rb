@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_07_163058) do
+ActiveRecord::Schema.define(version: 2020_12_08_083209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,14 @@ ActiveRecord::Schema.define(version: 2020_12_07_163058) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["saison_id"], name: "index_date_saisons_on_saison_id"
+  end
+
+  create_table "durreminimals", force: :cascade do |t|
+    t.integer "nombrejour"
+    t.bigint "saison_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["saison_id"], name: "index_durreminimals_on_saison_id"
   end
 
   create_table "fermexceptions", force: :cascade do |t|

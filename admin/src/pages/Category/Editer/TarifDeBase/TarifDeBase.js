@@ -6,7 +6,7 @@ import axios from '../../../../axios';
 
 export default class TarifDeBase extends Component {
     state = {
-      nombreLigne: [],
+      nombreLigne: [1,2,3],
       id:[],
       initValues:null,
       size:0
