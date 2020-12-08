@@ -50,7 +50,7 @@ class GestionFE extends Component {
                            axios.post('/jourferiers', {value, tableauUn:this.state.nombreLigneUn, tableauDeux:this.state.nombreLigneDeux})
                            console.log(value)
                             
-                            setSubmitting(false)
+                            setSubmitting(false);
                            
                         }
                      }
