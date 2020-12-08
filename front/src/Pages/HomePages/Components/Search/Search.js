@@ -26,7 +26,9 @@ export default class Search extends React.Component {
 		etape: 1,
 		voitures: [],
 		date_reservation: {},
-		message: null
+		message: null,
+		prix:[],
+		jour:null,
 	}
 
 	changerEtape = (newEtape) => {
@@ -34,6 +36,28 @@ export default class Search extends React.Component {
 			etape: newEtape
 		});
 	}
+	dateDiff (date1,date2){
+        let date11 = new Date(`${date1}`);
+        let date22 = new Date(`${date2}`);
+        let timeDiff = Math.abs(date22.getTime() - date11.getTime());
+        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+        return diffDays
+	}
+	
+	getVoiture = () =>{
+		let date1 = this.state.date_reservation.dateDepart;
+		let date2 = this.state.date_reservation.dateRetour;
+		let jours = this.dateDiff(date1,date2);
+		axios.get(`/voitures/${date1}/${date2}/${jours}`).then(response => {
+			if (response.status === 200) {
+				
+				this.setState({
+					voitures:response.data
+				});
+			} 
+		});
+	}
+    
 	
 	
 	render() {
@@ -65,15 +89,31 @@ export default class Search extends React.Component {
 									this.setState({
 										date_reservation: values
 									});
-
+									
 								} else if (response.status === 200) {
 									
 									this.setState({
 										message: response.data.message
 									})
 								}
-								console.log(this.state.message);
+							});
+							let date1 = values.dateDepart;
+							let date2 = values.dateRetour;
+							let jours = this.dateDiff(date1,date2);
+							this.setState({
+								jour: jours
 							})
+							axios.get(`/voitures/${date1}/${date2}/${jours}`).then(reponse => {
+								if (reponse.status === 200) {
+									console.log(reponse)
+									this.setState({
+										voitures:reponse.data.voitures,
+										prix:reponse.data.prix
+									});
+								} 
+							});
+
+							
 						}}
 						>
 							{({ errors, touched }) => (
@@ -137,7 +177,7 @@ export default class Search extends React.Component {
 						</Formik>
 						
 					</div>
-					{etape === 2 ? (<Reservation date_reservation={date_reservation} />) : null}
+					{etape === 2 ? (<Reservation jour={this.state.jour} date_reservation={this.state.date_reservation} voitures={this.state.voitures} prix={this.state.prix}/>) : null}
 					<div>{ message ? (<div className="alert_message"><h4>{message}</h4></div>) : null }</div>
 				</div>
 							

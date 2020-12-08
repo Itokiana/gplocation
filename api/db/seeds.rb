@@ -62,3 +62,7 @@
 # Saison.create(nomsaison: "Basse Saison", couleur: "bleu")
 # Saison.create(nomsaison: "Haute Saison", couleur: "rouge")
 # Saison.create(nomsaison: "Moyen Saison", couleur: "jaune")
+
+# DateSaison.create(debutsaison: Date.new(2020,1,4), finsaison: Date.new(2020,2,8),saison_id:1)
+# DateSaison.create(debutsaison: Date.new(2020,6,6), finsaison: Date.new(2020,7,4),saison_id:2)
+# DateSaison.create(debutsaison: Date.new(2020,5,2), finsaison: Date.new(2020,6,6),saison_id:3)

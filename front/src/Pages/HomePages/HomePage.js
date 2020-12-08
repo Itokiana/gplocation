@@ -15,7 +15,6 @@ class HomePage extends React.Component {
 			<>
 				<Slider />
 				<Search />
-				{/* <EtapeBlock /> */}
 				<World />
 				<HomeAuto />
 			</>

@@ -22,19 +22,21 @@ class VoituresController < ApplicationController
 
     #GET /voitures/:dateDepart/:dateRetour/:jours
     def listevoiture
+        @dateDepart = Date.strptime(params[:dateDepart], '%Y-%m-%d')
+        @dateRetour = Date.strptime(params[:dateRetour], '%Y-%m-%d')
+        puts "88888"*10
+        puts @nomsaison
+        puts "88888"*10
         @voitures = Voiture.all
         @prix=[]
-        i = 0
         @voitures.each do |voiture|
-           @prix.push(voiture.category.base_tarifs.select(:id,:prixbassesaison).where("jourdebut <= ? AND jourfin >= ?",params[:jours].to_i,params[:jours].to_i))
-           puts "*"*10
-            puts @prix[i].inspect
-            puts "="*10
-           i+=1
+            @ligne1 = voiture.category.tarif_personalises.select(:prix).find_by("datedebutperso <= ? AND datefinperso >= ? AND jourdebut <= ? AND jourfin >= ?",@dateDepart,@dateRetour,params[:jours].to_i,params[:jours].to_i)
+            if @ligne1.nil?
+                 @prix.push(voiture.getPrixBase(params[:jours],@dateDepart,@dateRetour))
+            else
+                @prix.push(@ligne1.prix)
+            end
         end
-       
-
-        
         render json: {voitures:@voitures,prix:@prix}
     end
 

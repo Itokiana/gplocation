@@ -65,3 +65,6 @@ gem 'carrierwave'
 
 #redimensionner une image
 gem 'mini_magick'
+
+# payplug
+gem 'payplug_rails'
