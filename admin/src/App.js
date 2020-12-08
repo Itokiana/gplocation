@@ -28,7 +28,7 @@ import AddTarif from './pages/ConfigurationAgence/Tarif/AddTarif';
 import TarifDeBase from './pages/ConfigurationAgence/Tarif/TrifDeBase';
 import AddSaison from './pages/ConfigurationAgence/GestionSaison/AddSaison';
 import TarifList from './pages/ConfigurationAgence/Tarif/TarifList';
-import Indexs  from './pages/ConfigurationAgence/GestionSaison/calendrier/Indes';
+import Indexs  from './pages/ConfigurationAgence/GestionSaison/calendrier/Indexs';
 
 
 

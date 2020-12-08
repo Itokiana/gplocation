@@ -1,14 +1,13 @@
 import React, { Component, setStat} from 'react'
 import axios from '../../../../../axios'
 import { Formik, Form, Field } from 'formik';
+import './gestionOF.css'
 
 class GestionOF extends Component {
     
     state = {
 
-        horaire : [],
-        datesaison : [],
-        date: ''
+        horaire : []
     }
     
     componentDidMount() {
@@ -29,7 +28,7 @@ class GestionOF extends Component {
         deleteSaison: (heure) => {
             axios.delete(`/horaire_jours/${heure.id}`).then(response => {
                 if (response.status === 204) {
-                    this.action.getDateSaison();
+                    this.action.getHoraire();
                 }
             })
         }
@@ -37,6 +36,16 @@ class GestionOF extends Component {
     render() {
         return (
             <>
+                <div className="page-title">
+                    <div className="title_left">
+                        <h2> SURPLUS HORAIRE PAR JOUR </h2>
+                    </div>
+                </div>
+
+                <h3>Ajouter autant de surplus horaire par jour que nécessaire . <em>Attention l'heure de départ de la tranche est inclue et l'heure de fin ne l'est pas</em></h3>
+
+                <br/>
+                <br/>
                 <div className="row">
                     <Formik
                         initialValues={{
@@ -47,39 +56,43 @@ class GestionOF extends Component {
                             
                         }}
                         
-                        onSubmit={(data,{setSubmitting})=>{
+                        onSubmit={(value,{setSubmitting})=>{
                             setSubmitting(true);
+                            
                                                 
-                            axios.post('/horaire_jours',data)
-                            console.log(data)
+                           axios.post('/horaire_jours', value)
+                           console.log(value)
+                            
                             setSubmitting(false)
+                           
                         }
-                    }
+                     }
+                    
                     >
                         <Form class="d-flex align-items-start">
                                     <div className="w-full md:w-1/4 px-3">
-                                        <label className="block red tracking-wide text-gray-700 text-xs font-bold mb-2" >
+                                        <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" >
                                             Le :
                                         </label>
                                         <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
                                         px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" name="nomjour"/>
                                     </div>
                                     <div className="w-full md:w-1/6 px-3">
-                                        <label className="block  tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
+                                        <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                                             Entre
                                         </label>
                                         <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
                                     px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="time" name="heuredebut"/>
                                     </div>
                                     <div className="w-full md:w-1/6 px-3">
-                                        <label className="block  tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
+                                        <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                                             et
                                         </label>
                                         <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
                                     px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="time" name="heurefin"/>
                                     </div>
                                     <div className="w-full md:w-1/2 px-3">
-                                        <label className="block tracking-wide text-gray-700 text-xs font-blue mb-2" htmlFor="grid-last-name">
+                                        <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                                             Surplus
                                         </label>
                                         <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
@@ -108,15 +121,26 @@ class GestionOF extends Component {
                 
                 
                 <div className="py-4">
-                    <h2>Periode</h2>
+                    
                     <div className="mt-2">
                         <table class="table table-condensed">
+                           <thead>
+                              <tr>
+                              <th>Jour semaine</th>
+                              <th>Tranche horaire</th>
+                              <th>Surplus</th>
+                              <th>Action</th>
+                              </tr>
+                           </thead>
                             <tbody>
                                 { this.state.horaire.map(heure => {
                                     return (
                                         <tr>
-                                            <td ><span className="text-blue-500">Du  { heure.heuredebut }   au   {heure.heurefin}</span></td>
-                                            <td ><span className="text-red-500 cursor-pointer" onClick={() => this.action.deleteSaison(heure)}>Supprimer</span></td>
+                                          <td className="text-blue-500"><span >{ heure.nomjour }</span></td>
+                                          <td className="text-blue-500"><span >Entre  { heure.heuredebut }   et   {heure.heurefin}</span></td>
+                                          <td className="text-blue-500"><span >{ heure.prixsurplus }</span></td>
+                                          <td ><span className="text-red-500 cursor-pointer" onClick={() => this.action.deleteSaison(heure)}>Supprimer</span></td>
+                                            
                                         </tr>
                                     )
                                 }) }

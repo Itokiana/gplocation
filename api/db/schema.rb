@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(version: 2020_12_04_083527) do
 
   create_table "horaire_jours", force: :cascade do |t|
     t.string "nomjour"
-    t.time "heuredebut"
-    t.time "heurefin"
+    t.string "heuredebut"
+    t.string "heurefin"
     t.integer "prixsurplus"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_083527) do
     t.string "evenement"
     t.date "dateferie"
     t.integer "anne"
+    t.integer "surplus"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -166,18 +167,6 @@ ActiveRecord::Schema.define(version: 2020_12_04_083527) do
     t.string "couleur"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "tarif_de_bases", force: :cascade do |t|
-    t.integer "jourDebut"
-    t.integer "jourFin"
-    t.float "prixBasseSaison"
-    t.float "prixMoyenSaison"
-    t.float "prixHauteSaison"
-    t.bigint "category_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_tarif_de_bases_on_category_id"
   end
 
   create_table "tarif_details", force: :cascade do |t|

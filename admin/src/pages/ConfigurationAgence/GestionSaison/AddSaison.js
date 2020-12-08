@@ -1,6 +1,7 @@
 import React, { Component, setStat} from 'react'
 import axios from '../../../axios'
 import { Formik, Form, Field } from 'formik';
+import moment from 'moment' ;
 
 class AddSaison extends Component {
     
@@ -118,7 +119,7 @@ class AddSaison extends Component {
                                 { fi.map(dtesaison => {
                                     return (
                                         <tr>
-                                            <td ><span className="text-blue-500">Du  { dtesaison.debutsaison }   au   {dtesaison.finsaison}</span></td>
+                                            <td ><span className="text-blue-500">Du  <strong>{moment(dtesaison.debutsaison).format('D MMMM Y')}</strong>   au   <strong>{moment(dtesaison.finsaison).format('D MMMM Y')}</strong></span></td>
                                             <td ><span className="text-red-500 cursor-pointer" onClick={() => this.action.deleteSaison(dtesaison)}>Supprimer</span></td>
                                         </tr>
                                     )

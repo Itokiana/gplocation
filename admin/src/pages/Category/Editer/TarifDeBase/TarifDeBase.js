@@ -39,7 +39,7 @@ export default class TarifDeBase extends Component {
                             console.log(data)
                             setSubmitting(false)
                         }}
-                    >{({values, isSubmitting}) => (
+                    >{({values, isSubmitting}) => ( 
                         <Form>
                             <table className="table table-dark">
                                 <thead>

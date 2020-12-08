@@ -15,13 +15,37 @@ class JourferiersController < ApplicationController
 
   # POST /jourferiers
   def create
-    @jourferier = Jourferier.new(jourferier_params)
+    # @jourferier = Jourferier.new(jourferier_params)
+    data= params[:value]
+    tabUn = params[:tableauUn]
+    fintabUn = tabUn.last+1
+    unTab = tabUn.push(fintabUn)
+    tabDeux = params[:tableauDeux]
+    idJ = params[:id]
+    puts"++"*20
+    puts data
+    puts "--"*20
+    puts idJ
+    puts "xx"*20
 
-    if @jourferier.save
-      render json: @jourferier, status: :created, location: @jourferier
-    else
-      render json: @jourferier.errors, status: :unprocessable_entity
-    end
+    
+
+    # unTab.each do |val|
+    #   dateUn = "date#{val}"
+    #   jourUn = "jour#{val}"
+    #   prix = "prix#{val}"
+    #   checkU = "chexkU#{val}"
+
+    #   if data[checkU]==true
+    #       if @jourferier.update(evenement: data[jourUn], dateferie: data[dateUn], surplus: data[prix], anne: data[:annee])
+    #         puts "a"*50
+    #         render json: @jourferier, status: :created, location: @jourferier
+    #       else
+    #         puts "="*50
+    #         render json: @jourferier.errors, status: :unprocessable_entity
+    #       end
+    #   end
+    # end
   end
 
   # PATCH/PUT /jourferiers/1
