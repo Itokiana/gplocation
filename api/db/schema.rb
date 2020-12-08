@@ -178,18 +178,6 @@ ActiveRecord::Schema.define(version: 2020_12_07_163058) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "tarif_de_bases", force: :cascade do |t|
-    t.integer "jourDebut"
-    t.integer "jourFin"
-    t.float "prixBasseSaison"
-    t.float "prixMoyenSaison"
-    t.float "prixHauteSaison"
-    t.bigint "category_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_tarif_de_bases_on_category_id"
-  end
-
   create_table "tarif_details", force: :cascade do |t|
     t.integer "prix"
     t.integer "duree"
