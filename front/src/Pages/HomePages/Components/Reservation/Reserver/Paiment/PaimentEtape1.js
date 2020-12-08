@@ -82,7 +82,7 @@ function PaimentEtape1(props) {
                                         </label>
                                     </fieldset>
                                 <h3 class="form-connec-h3">Total à payer : acompte de 100 €</h3>
-                                <p class="paddingp">Puis 188 € à régler à la remise des clés par carte bancaire, espèce ou chèque </p>
+                                <p class="paddingp">Puis {parseInt(props.prix)-100} € à régler à la remise des clés par carte bancaire, espèce ou chèque </p>
                                 <h3 class="paiementcarte cc_cursor">Paiement sécurisé par carte bancaire :</h3>
                                 
                                     <Formik
