@@ -105,8 +105,8 @@ ActiveRecord::Schema.define(version: 2020_12_07_163058) do
 
   create_table "horaire_jours", force: :cascade do |t|
     t.string "nomjour"
-    t.time "heuredebut"
-    t.time "heurefin"
+    t.string "heuredebut"
+    t.string "heurefin"
     t.integer "prixsurplus"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_163058) do
     t.string "evenement"
     t.date "dateferie"
     t.integer "anne"
+    t.integer "surplus"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

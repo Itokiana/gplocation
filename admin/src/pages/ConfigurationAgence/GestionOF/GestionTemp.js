@@ -8,7 +8,9 @@ class GestionTemp extends Component {
         return (
             <div>
             <GestionOF />
+            
             <GeastionOE />
+            
             <GestionFE />
             <GestionJF />
             </div>

@@ -1,68 +1,139 @@
-import React, { Component } from 'react';
-import './gestionFE.css';
+import React, { Component, setStat} from 'react'
+import axios from '../../../../../axios'
+import { Formik, Form, Field } from 'formik';
+import '../GestionOF/gestionOF.css'
 
 class GestionFE extends Component {
+    
+    state = {
+
+        dateF : []
+    }
+    
+    componentDidMount() {
+        this.action.getFerme();
+    }
+    action = {
+        getFerme: () => {
+            axios.get(`/fermexceptions`).then(response => {
+                if (response.status === 200) {
+                    this.setState({
+                        dateF: response.data
+                    });
+                    console.log(this.state.dateF);
+                }
+            });
+        },
+        
+        deleteFerme: (ferme) => {
+            axios.delete(`/fermexceptions/${ferme.id}`).then(response => {
+                if (response.status === 204) {
+                    this.action.getFerme();
+                }
+            })
+        }
+    } 
     render() {
         return (
-            <div>
-                <div className="right_col" role="main">
-                    <div className="">
-                        <div className="page-title">
-                            <div className="title_left">
-                                <h3>Gestion  des Fermetures <small>Exceptionnelles </small></h3>
-                            </div>
-                        </div>
-                            <div className="clearfix"></div>
-                        <div className="row">
-                            <div className="clearfix"></div>
-                        <div className="col-md-12 col-sm-12  ">
-                            <div className="footerPanel">
-                            <div className="x_title">
-                                <h2>Ajouter autant de <small> périodes de Fermetures exceptionneles que nécessaire</small></h2>
-                                <div className="clearfix"></div>
-                            </div>
-
-                            <div className="x_content">
-                                <p>Date(s):</p>
-                                <div className="tableResponsive">
-                                    <span className="textLe">Le</span>
-                                
-                                <span className="textLe">Du</span>
-                                <input type="text" className="formControl" name="table_records" /> 
-                                <span className="textLe">au</span>
-                                <input type="text" className="formControl" name="table_records" /> 
-                                
-                                <span className="textLe">
-                                <button className="btn-vailde">Ajouter</button>
-                                </span>
-                                </div>
-                           
-                                    <div className="footer-content">
-                                        <div className="col-md-8 col-sm-12">
-                                            <div className="title_left">
-                                                <h3>Périodes de fermetures exceptionnelles</h3>
-                                                <ul class="list-unstyled msg_list">
-                                                    <li>Lundi de pâque 2021</li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-4 col-sm-12">
-                                            <div className="title_left">
-                                                <center><h3>Actions</h3></center>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>
-                        </div>
+            <>
+                    <div className="page-title">
+                        <div>
+                            <h2>GESTION DES FERMETURES EXECEPTIONNEL </h2>
                         </div>
                     </div>
+                    <h3>Ajouter autant de periode fermeture nécessaire </h3>
+                    <br/><br/>
+                    <div className="row">
+                    <Formik
+                        initialValues={{
+                            jourfermedebut: '',
+                            jourfermefin:''
+                            
+                        }}
+                        
+                        onSubmit={(data,{resetForm})=>{
+                            resetForm(true);
+                            
+                                                
+                           axios.post('/fermexceptions', data)
+                           console.log(data)
+                            
+                            resetForm(false)
+                           
+                        }
+                     }
+                    
+                    >
+                        <Form className="d-flex align-items-start">
+                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" >
+                                    Du :
+                                </label>
+                                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
+                                px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="date" name="jourfermedebut"/>
+                            </div>
+                            <div className="w-full md:w-1/2 px-3">
+                                <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
+                                    Au
+                                </label>
+                                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
+                            px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date" name="jourfermefin"/>
+                            </div>
+
+                            <div className="w-full md:w-1/2 px-3">
+                                        
+                                <button
+                                    type="submit"
+                                    className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
+                                    transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                                >
+                                    Ajouter
+                                </button>
+                            </div>
+                            
+                            
+                        </Form>
+                        
+
+                    </Formik>
+                    
                 </div>
-            </div>
-        );
+
+                {/* Liste des jour exceptionel */}
+                
+                
+                <div className="py-4">
+                    
+                    <div className="mt-2">
+                        <table class="table table-condensed">
+                           <thead>
+                              <tr>
+                              <th>Periodes ferme exceptionel </th>
+                              <th>Action</th>
+                              
+                              </tr>
+                           </thead>
+                            <tbody>
+                                { this.state.dateF.map(nomdate => {
+                                    return (
+                                        <tr>
+                                          <td className="text-blue-500"><strong>{ nomdate.jourfermedebut }</strong>  jusqu'a  <strong>{ nomdate.jourfermefin }</strong></td>
+                                          <td ><span className="text-red-500 cursor-pointer" onClick={() => this.action.deleteFerme(nomdate)}>Supprimer</span></td>
+                                            
+                                        </tr>
+                                    )
+                                }) }
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    {/* { utilisateurs && utilisateurs.length === 0 ? (<>Aucun utilisateur disponible pour le moment.</>) : null } */}
+                    
+                    
+                </div>
+            </>
+        )
     }
 }
-
-export default GestionFE;
+export default GestionFE

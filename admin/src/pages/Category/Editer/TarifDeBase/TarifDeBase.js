@@ -6,10 +6,9 @@ import axios from '../../../../axios';
 
 export default class TarifDeBase extends Component {
     state = {
-      nombreLigne: [],
-      id:[],
-      initValues:null,
-      size:0
+      nombreLigne: [1,2,3,4,5],
+      valeurs:[],
+      tableauData:[]
       
     }
     valideAndSave = () => {
@@ -23,76 +22,47 @@ export default class TarifDeBase extends Component {
         })
         
     }
-    componentDidMount(){
-        
-        axios.get(`/base_tarifs/${this.props.ids}`).then(response => {
-            console.log(response)
-            for(var i=0 ; i< response.data.tarif_par_categorie.length ;i++){
-                var obj = { ...response.data.tarif_par_categorie[i] };
-                this.setState({
-                    nombreLigne: [...this.state.nombreLigne,i+1],
-                    id:[...this.state.id,obj.id],
-                    initValues:{
-                       ...this.state.initValues,
-                       [`jourD${i+1}`]: obj.jourdebut,
-                       [`jourF${i+1}`]: obj.jourfin,
-                       [`prixBS${i+1}`]: obj.prixbassesaison,
-                       [`prixMS${i+1}`]: obj.prixmoyennesaison,
-                       [`prixHS${i+1}`]: obj.prixhautesaison,
-                       [`check${i+1}`]: "",
-                    },
-                    size: this.state.size + i
-                })
-            }
-            console.log(this.state.initValues)
-            console.log(this.state.size)
-
-        })
-    }
-
    
+ 
+
     render() {
         return (
-            <>
-            {
-                this.state.size >=153?(
-
             <div>
                 <section className="text-gray-700 body-font">
                     <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
                     <Formik
-                        initialValues = {this.state.initValues}
+                        initialValues = {{}}
                         onSubmit={(data,{setSubmitting})=>{
                             setSubmitting(true);
                                                   
-                            axios.post('/base_tarifs',{data, tableau:this.state.nombreLigne,ids: this.props.ids,id:this.state.id})
-                            
+                            axios.post('/tarif_de_bases',{data, tableau:this.state.nombreLigne})
+                            console.log(data)
                             setSubmitting(false)
                         }}
-                    >{({values, isSubmitting}) => (
+                    >{({values, isSubmitting}) => ( 
                         <Form>
                             <table className="table table-dark">
                                 <thead>
                                     <tr>
                                         <th scope="col" className="input-column">Combinaison</th>
-                                        <th scope="col" className="input-column">Prix BS(€/jour)</th>
-                                        <th scope="col" className="input-column">Prix MS(€/jour)</th>
-                                        <th scope="col" className="input-column">Prix HS(€/jour)</th>
+                                        <th scope="col" className="input-column">Prix BS</th>
+                                        <th scope="col" className="input-column">Prix MS</th>
+                                        <th scope="col" className="input-column">Prix HS</th>
                                         <th scope="col" className="input-check">Active</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 {
                                      this.state.nombreLigne.map((ligne) => 
-                                        <UnTarifDeBase key={ligne} num={ligne}/>
+                                        <UnTarifDeBase key={ligne} num={ligne} /> 
                                      )
                                 }
                                 </tbody>
                             </table>
 
                             <div className="d-flex justify-content-end">
-                                <button type="button" className="btn btn-success" >Ajout periode</button>
-                                <input type="submit" className="btn btn-primary" value="Valider"/>
+                                <button type="button" className="btn btn-success" onClick={this.ajoutNewPeriod}>Ajout periode</button>
+                                <button type="submit" className="btn btn-primary">Valider</button>  
                             </div>
 
                         </Form>
@@ -102,42 +72,6 @@ export default class TarifDeBase extends Component {
                 </section>
 
             </div>
-        
-                ):null
-            }
-            </>
         )
     }
 }
-                                        // <tr key={ligne}>
-                                        //     <td className="input-column">
-                                        //         <div className="row">
-                                        //             <div className="input-nbjours mr-3 ml-3">
-                                        //                 <Field type="text" className="form-control"  id={[`jourD${ligne}`]} name={[`jourD${ligne}`]} />
-                                        //             </div>
-
-                                        //             <p>à</p>
-                                        //             <div className="input-nbjours ml-3 mr-3">
-                                        //                 <Field type="text" className="form-control"  id={[`jourF${ligne}`]} name={[`jourF${ligne}`]}  />
-                                        //             </div>
-                                        //             <p>jours</p>
-                                        //         </div>
-                                        //     </td>
-                                        //     <td className="input-column">
-                                        //         <Field type="text" className="form-control input-prix"  id={[`prixBS${ligne}`]} name={[`prixBS${ligne}`]} />
-                                                
-                                        //     </td>
-                                        //     <td className="input-column">
-                                        //         <Field type="text" className="form-control input-prix"   id={[`prixMS${ligne}`]} name={[`prixMS${ligne}`]} />
-                                                
-                                        //     </td>
-                                        //     <td className="input-column">
-                                        //         <Field type="text" className="form-control input-prix"   id={[`prixHS${ligne}`]} name={[`prixHS${ligne}`]}/>
-                                                
-                                        //     </td>
-                                        //     <td className="input-check">
-                                        //         <div className="ml-4 mb-4">
-                                        //             <Field className="form-check-input" type="checkbox"  id={[`check${ligne}`]} name={[`check${ligne}`]} />
-                                        //         </div>
-                                        //     </td>
-                                        // </tr> 
