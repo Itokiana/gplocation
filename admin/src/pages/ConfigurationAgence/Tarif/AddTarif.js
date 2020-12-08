@@ -52,7 +52,7 @@ class AddTarif extends Component {
         const category = this.state.categories.category
         const voitures = this.state.categories.voitures
         const idcat = this.state.categories.id
-        
+        console.log(voitures)
         return (
             <>
                 <center>
@@ -104,11 +104,13 @@ class AddTarif extends Component {
                                     <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
                                 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date" name="dateFinPerso"/>
                                 </div>
+                                <div className="row">
                                 {
                                     this.state.nombreLigne.map((ligne) => 
                                         <UnPrix key={ligne} num={ligne} />
                                         )
                                 }
+                                </div>
                                 <div className="d-flex justify-content-end">
                                     <button
                                         type="submit"

@@ -96,6 +96,31 @@ ActiveRecord::Schema.define(version: 2020_12_07_163058) do
     t.index ["saison_id"], name: "index_date_saisons_on_saison_id"
   end
 
+  create_table "fermexceptions", force: :cascade do |t|
+    t.date "jourfermedebut"
+    t.date "jourfermefin"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "horaire_jours", force: :cascade do |t|
+    t.string "nomjour"
+    t.string "heuredebut"
+    t.string "heurefin"
+    t.integer "prixsurplus"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "jourferiers", force: :cascade do |t|
+    t.string "evenement"
+    t.date "dateferie"
+    t.integer "anne"
+    t.integer "surplus"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "jours", force: :cascade do |t|
     t.string "name"
     t.integer "nombrejour"
@@ -118,6 +143,13 @@ ActiveRecord::Schema.define(version: 2020_12_07_163058) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_options_on_category_id"
+  end
+
+  create_table "ouvertexceptions", force: :cascade do |t|
+    t.date "jourouvertdebut"
+    t.date "jourouvertfin"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reservations", force: :cascade do |t|

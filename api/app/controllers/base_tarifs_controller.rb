@@ -47,9 +47,6 @@ class BaseTarifsController < ApplicationController
      
       @base_tarif = BaseTarif.find(id)
       if data[check]==true
-        # @base_tarif = BaseTarif.find(idTarif[value-1]).update(jourDebut: data[jourD], jourFin: data[jourF], prixBasseSaison: data[prixBS], prixMoyenneSaison: data[prixMS], prixHauteSaison: data[prixHS])
-        # @base_tarif = BaseTarif.new(jourDebut: data[jourD], jourFin: data[jourF], prixBasseSaison: data[prixBS], prixMoyenneSaison: data[prixMS], prixHauteSaison: data[prixHS], category_id: idCategorie[:id])
-
         if @base_tarif.update(jourdebut: data[jourD], jourfin: data[jourF], prixbassesaison: data[prixBS], prixmoyennesaison: data[prixMS], prixhautesaison: data[prixHS])
           puts "a"*50
           render json: @base_tarif

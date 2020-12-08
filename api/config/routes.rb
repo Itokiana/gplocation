@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
 
+  resources :jourferiers
+  resources :fermexceptions
+  resources :ouvertexceptions
+  resources :horaire_jours
   resources :carte_informations
   resources :date_saisons
   resources :saisons

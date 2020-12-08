@@ -1,263 +1,160 @@
-import React, { Component } from 'react';
+import React, { Component, setStat} from 'react'
+import axios from '../../../../../axios'
+import { Formik, Form, Field } from 'formik';
 import './gestionOF.css'
 
-
 class GestionOF extends Component {
+    
+    state = {
+
+        horaire : []
+    }
+    
+    componentDidMount() {
+        this.action.getHoraire();
+    }
+    action = {
+        getHoraire: () => {
+            axios.get(`/horaire_jours`).then(response => {
+                if (response.status === 200) {
+                    this.setState({
+                        horaire: response.data
+                    });
+                    console.log(this.state.horaire);
+                }
+            });
+        },
+        
+        deleteSaison: (heure) => {
+            axios.delete(`/horaire_jours/${heure.id}`).then(response => {
+                if (response.status === 204) {
+                    this.action.getHoraire();
+                }
+            })
+        }
+    } 
     render() {
         return (
-            <div>
-                <div className="right_col" role="main">
-                    <div className="">
-                        <div className="page-title">
-                        <div className="title_left">
-                            <h3>Gestion d'<small>Ouvertures et de Fermetures</small></h3>
-                        </div>
+            <>
+                <div className="page-title">
+                    <div className="title_left">
+                        <h2> SURPLUS HORAIRE PAR JOUR </h2>
+                    </div>
+                </div>
 
-                        </div>
+                <h3>Ajouter autant de surplus horaire par jour que nécessaire . <em>Attention l'heure de départ de la tranche est inclue et l'heure de fin ne l'est pas</em></h3>
 
-                        <div className="clearfix"></div>
+                <br/>
+                <br/>
+                <div className="row">
+                    <Formik
+                        initialValues={{
+                            nomjour: '',
+                            heuredebut:'',
+                            heurefin:'',
+                            prixsurplus:''
+                            
+                        }}
+                        
+                        onSubmit={(value,{setSubmitting})=>{
+                            setSubmitting(true);
+                            
+                                                
+                           axios.post('/horaire_jours', value)
+                           console.log(value)
+                            
+                            setSubmitting(false)
+                           
+                        }
+                     }
+                    
+                    >
+                        <Form class="d-flex align-items-start">
+                                    <div className="w-full md:w-1/4 px-3">
+                                        <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" >
+                                            Le :
+                                        </label>
+                                        <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
+                                        px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" name="nomjour"/>
+                                    </div>
+                                    <div className="w-full md:w-1/6 px-3">
+                                        <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
+                                            Entre
+                                        </label>
+                                        <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
+                                    px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="time" name="heuredebut"/>
+                                    </div>
+                                    <div className="w-full md:w-1/6 px-3">
+                                        <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
+                                            et
+                                        </label>
+                                        <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
+                                    px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="time" name="heurefin"/>
+                                    </div>
+                                    <div className="w-full md:w-1/2 px-3">
+                                        <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
+                                            Surplus
+                                        </label>
+                                        <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
+                                    px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" name="prixsurplus"/>
+                                    </div>
 
-                        <div className="row">
+                                    <div className="w-full md:w-1/2 px-3">
+                                        
+                                        <button
+                                            type="submit"
+                                            className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
+                                            transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                                        >
+                                            Ajouter
+                                        </button>
+                                    </div>
+                                    
+                            </Form>
                         
 
-                        <div className="clearfix"></div>
+                    </Formik>
+                    
+                </div>
 
-                        <div className="col-md-12 col-sm-12  ">
-                            <div className="panel">
-                                <div className="x_title">
-                                    <h2>Gestion <small>des Ouvertures</small></h2>
-                                    <div className="clearfix"></div>
-                                </div>
-
-                                <div className="x_content">
-
+                {/* Liste des jour par heure */}
+                
+                
+                <div className="py-4">
+                    
+                    <div className="mt-2">
+                        <table class="table table-condensed">
+                           <thead>
+                              <tr>
+                              <th>Jour semaine</th>
+                              <th>Tranche horaire</th>
+                              <th>Surplus</th>
+                              <th>Action</th>
+                              </tr>
+                           </thead>
+                            <tbody>
+                                { this.state.horaire.map(heure => {
+                                    return (
+                                        <tr>
+                                          <td className="text-blue-500"><span >{ heure.nomjour }</span></td>
+                                          <td className="text-blue-500"><span >Entre  { heure.heuredebut }   et   {heure.heurefin}</span></td>
+                                          <td className="text-blue-500"><span >{ heure.prixsurplus }</span></td>
+                                          <td ><span className="text-red-500 cursor-pointer" onClick={() => this.action.deleteSaison(heure)}>Supprimer</span></td>
+                                            
+                                        </tr>
+                                    )
+                                }) }
                                 
-                                    <div className="tableResponsive">
-                                    <h2>Definition des jours d'ouvertures</h2>
-                                    <table className="table table-striped jambo_table bulk_action">
-                    
-                                        
-
-
-                                        <tbody>
-                                        <tr className="even pointer">
-                                            <td className="a-center ">
-                                            <input type="checkbox" className="flat" name="table_records" /> <span className="jourText">Lundi</span>
-                                            </td>
-                                            <td className=" "><span className="plusEgale"> Surplus = </span> <input type="text" className="flat" name="table_records" placeholder="0"/></td>
-                                            
-                                        </tr>
-                                        <tr className="odd pointer">
-                                            <td className="a-center ">
-                                            <input type="checkbox" className="flat" name="table_records" /> <span className="jourText">Mardi</span>
-                                            </td>
-                                            <td className=" "><span className="plusEgale"> Surplus = </span> <input type="text" className="flat" name="table_records" placeholder="0"/></td>
-                                        
-                                        </tr>
-                                        <tr className="even pointer">
-                                            <td className="a-center ">
-                                            <input type="checkbox" className="flat" name="table_records" /> <span className="jourText">Mercredi</span>
-                                            </td>
-                                            <td className=" "><span className="plusEgale"> Surplus = </span> <input type="text" className="flat" name="table_records" placeholder="0"/></td>
-                                        
-                                        </tr>
-                                        <tr className="odd pointer">
-                                            <td className="a-center ">
-                                            <input type="checkbox" className="flat" name="table_records" /> <span className="jourText">Jeudi</span>
-                                            </td>
-                                            <td className=" "><span className="plusEgale"> Surplus = </span> <input type="text" className="flat" name="table_records" placeholder="0"/></td>
-                                        
-                                        </tr>
-                                        <tr className="even pointer">
-                                            <td className="a-center ">
-                                            <input type="checkbox" className="flat" name="table_records" /> <span className="jourText">Vendredi</span>
-                                            </td>
-                                            <td className=" "><span className="plusEgale"> <span className="plusEgale"> Surplus = </span> </span><input type="text" className="flat" name="table_records" placeholder="0"/></td>
-                                            
-                                        </tr>
-                                        <tr className="odd pointer">
-                                            <td className="a-center ">
-                                            <input type="checkbox" className="flat" name="table_records" /> <span className="jourText">Samedi</span>
-                                            </td>
-                                            <td className=" "><span className="plusEgale"> <span className="plusEgale"> Surplus = </span> </span> <input type="text" className="flat" name="table_records" placeholder="0"/></td>
-                                        
-                                        </tr>
-                                        <tr className="even pointer">
-                                            <td className="a-center ">
-                                            <input type="checkbox" className="flat" name="table_records" /> <span className="jourText">Dimanche</span>
-                                            </td>
-                                            <td className=" "><span className="plusEgale"> Surplus = </span> <input type="text" className="flat" name="table_records" placeholder="0"/></td>
-                                            
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <button className="btnValider">Valider</button>
-                                    </div>
-                                            
-                                        
-                                </div>
-                                </div>
-                            </div>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <div className="right_col" role="main">
-                    <div className="">
-                        <div className="page-title">
-                            <div className="title_left">
-                                <h3>Surplus d'<small>Horaires par jour</small></h3>
-                            </div>
-                        </div>
-                            <div className="clearfix"></div>
-                        <div className="row">
-                            <div className="clearfix"></div>
-                        <div className="col-md-12 col-sm-12  ">
-                            <div className="footerPanel">
-                            <div className="x_title">
-                                <h2>Ajouter autant de <small> surplus d'horaires par jour que nécessaire .</small></h2>
-                                <div className="clearfix"></div>
-                            </div>
-
-                            <div className="x_content">
-                                <div className="tableResponsive">
-                                    <span className="textLe">Le</span>
-                                <label><select name="datatable_length" aria-controls="datatable" class="form-control input-sm">
-                                            <option value="10">Lundi</option>
-                                            <option value="25">Mardi</option>
-                                            <option value="50">Mercredi</option>
-                                            <option value="100">Jeudi</option>
-                                            <option value="25">Vendredi</option>
-                                            <option value="50">Samedi</option>
-                                            <option value="100">Dimanche</option>
-                                          </select>
-                                </label>
-                                <span className="textLe">Entre</span>
-                                <label><select name="datatable_length" aria-controls="datatable" class="form-control input-sm">
-                                            <option value="10">00</option>
-                                            <option value="25">01</option>
-                                            <option value="50">02</option>
-                                            <option value="100">03</option>
-                                            <option value="25">04</option>
-                                            <option value="50">05</option>
-                                            <option value="100">06</option>
-                                            <option value="10">07</option>
-                                            <option value="25">08</option>
-                                            <option value="50">09</option>
-                                            <option value="100">10</option>
-                                            <option value="25">11</option>
-                                            <option value="50">12</option>
-                                          </select>
-                                </label>
-                                <span className="textLe">:</span>
-                                <label><select name="datatable_length" aria-controls="datatable" class="form-control input-sm">
-                                            <option value="10">00</option>
-                                            <option value="25">01</option>
-                                            <option value="50">02</option>
-                                            <option value="100">03</option>
-                                            <option value="25">04</option>
-                                            <option value="50">05</option>
-                                            <option value="100">06</option>
-                                            <option value="10">07</option>
-                                            <option value="25">08</option>
-                                            <option value="50">09</option>
-                                            <option value="100">10</option>
-                                            <option value="25">11</option>
-                                            <option value="50">12</option>
-                                          </select>
-                                </label>
-                                <span className="textLe">et</span>
-                                <label><select name="datatable_length" aria-controls="datatable" class="form-control input-sm">
-                                            <option value="10">00</option>
-                                            <option value="25">01</option>
-                                            <option value="50">02</option>
-                                            <option value="100">03</option>
-                                            <option value="25">04</option>
-                                            <option value="50">05</option>
-                                            <option value="100">06</option>
-                                            <option value="10">07</option>
-                                            <option value="25">08</option>
-                                            <option value="50">09</option>
-                                            <option value="100">10</option>
-                                            <option value="25">11</option>
-                                            <option value="50">12</option>
-                                          </select>
-                                </label>
-                                <span className="textLe">:</span>
-                                <label><select name="datatable_length" aria-controls="datatable" class="form-control input-sm">
-                                            <option value="10">00</option>
-                                            <option value="25">01</option>
-                                            <option value="50">02</option>
-                                            <option value="100">03</option>
-                                            <option value="25">04</option>
-                                            <option value="50">05</option>
-                                            <option value="100">06</option>
-                                            <option value="10">07</option>
-                                            <option value="25">08</option>
-                                            <option value="50">09</option>
-                                            <option value="100">10</option>
-                                            <option value="25">11</option>
-                                            <option value="50">12</option>
-                                          </select>
-                                </label>
-                                <span className="textLe">Surplus =</span>
-                                <input type="text" className="formControl" name="table_records" /> 
-                                <span className="textLe">
-                                <button className="btn-vailde">Valider</button>
-                                </span>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-              <div class="col-md-4">
-                <div class="x_pane">
-                  <div class="x_title">
-                    <h2>Jour de la  <small>Semaine</small></h2>
                     
-                    <div class="clearfix"></div>
-                  </div>
-                  <p>Lundi</p>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="x_pane">
-                  <div class="x_title">
-                    <h2>Tranche <small>Horraire</small></h2>
+                    {/* { utilisateurs && utilisateurs.length === 0 ? (<>Aucun utilisateur disponible pour le moment.</>) : null } */}
                     
-                    <div class="clearfix"></div>
-                  </div>
-                  <p>Entre 20h35 et 23h45 </p>
-                </div>
-              </div>
-
-              <div class="col-md-2">
-                <div class="x_pane">
-                  <div class="x_title">
-                    <h2>Sur plus</h2>
                     
-                    <div class="clearfix"></div>
-                  </div>
-                    20£
                 </div>
-              </div>
-              <div class="col-md-2">
-                <div class="x_pane">
-                  <div class="x_title">
-                    <h2>Actions</h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <span className="number-text">X</span>
-                </div>
-              </div>
-            </div>
-          
-            </div>
-        );
+            </>
+        )
     }
 }
-
-export default GestionOF;
+export default GestionOF

@@ -1,104 +1,12 @@
-.panel{
-    position: relative;
-    width: 70%;
-    margin-bottom: 10px;
-    padding: 10px 17px;
-    display: inline-block;
-    background: #fff;
-    border: 1px solid #E6E9ED;
-    -webkit-column-break-inside: avoid;
-    -moz-column-break-inside: avoid;
-    column-break-inside: avoid;
-    opacity: 1;
-    -webkit-transition: all .2s ease;
-    transition: all .2s ease;
-    overflow-x: hidden !important;
-    z-index: -1;
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 0px solid #dee2e6;
+    color: white;
 }
-.right_col{
-    overflow-x: hidden !important;
+h2,h3 {
+    color: white;
+
 }
-.table td, .table th {
-    padding: .75rem;
-    vertical-align: initial !important;
-    border-top: 1px solid #dee2e6;
-}
-.jourText{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    padding: 10px 5px;
-}
-.plusEgale{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    padding: 10px 5px;
-}
-.footerPanel{
-    position: relative;
-    width: 98%;
-    margin-bottom: 10px;
-    padding: 10px 17px;
-    display: inline-block;
-    background: #fff;
-    border: 1px solid #E6E9ED;
-    -webkit-column-break-inside: avoid;
-    -moz-column-break-inside: avoid;
-    column-break-inside: avoid;
-    opacity: 1;
-    -webkit-transition: all .2s ease;
-    transition: all .2s ease;
-}
-.textLe{
-    padding: 10px 5px;
-}
-.tableResponsive {
-    display: block;
-    width: 100%;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch
-}
-.btnValider{
-    border: 1px solid rgb(83, 82, 82);
-    background: rgb(54, 54, 54);
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: blanchedalmond;
-    cursor: pointer !important;
-}
-.formControl {
-    /* display: block;
-    width: 10%;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box; */
-    padding: .375rem .75rem;
-    height: calc(1.5em + .75rem + 2px);
-    background-color: #fff;
-    font-size: 1rem;
-    border: 1px solid #ced4da;
-    border-radius: 0;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-.btn-vailde{
-    border: 1px solid #ced4da;
-    height: calc(1.7em + .77rem + 2px);
-    padding: .375rem .75rem;
-}
-.x_pane {
-    position: relative;
-    width: 87%;
-    margin-bottom: 10px;
-    padding: 10px 17px;
-    display: inline-block;
-    background: #fff;
-    border: 1px solid #E6E9ED;
-    -webkit-column-break-inside: avoid;
-    -moz-column-break-inside: avoid;
-    column-break-inside: avoid;
-    opacity: 1;
-    -webkit-transition: all .2s ease;
-    transition: all .2s ease;
+em {
+    color: rgb(202, 149, 149);
 }
