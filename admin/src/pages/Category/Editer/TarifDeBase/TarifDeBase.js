@@ -10,7 +10,6 @@ export default class TarifDeBase extends Component {
       id:[],
       initValues:null,
       size:0
-      
     }
     valideAndSave = () => {
 
@@ -109,35 +108,3 @@ export default class TarifDeBase extends Component {
         )
     }
 }
-                                        // <tr key={ligne}>
-                                        //     <td className="input-column">
-                                        //         <div className="row">
-                                        //             <div className="input-nbjours mr-3 ml-3">
-                                        //                 <Field type="text" className="form-control"  id={[`jourD${ligne}`]} name={[`jourD${ligne}`]} />
-                                        //             </div>
-
-                                        //             <p>à</p>
-                                        //             <div className="input-nbjours ml-3 mr-3">
-                                        //                 <Field type="text" className="form-control"  id={[`jourF${ligne}`]} name={[`jourF${ligne}`]}  />
-                                        //             </div>
-                                        //             <p>jours</p>
-                                        //         </div>
-                                        //     </td>
-                                        //     <td className="input-column">
-                                        //         <Field type="text" className="form-control input-prix"  id={[`prixBS${ligne}`]} name={[`prixBS${ligne}`]} />
-                                                
-                                        //     </td>
-                                        //     <td className="input-column">
-                                        //         <Field type="text" className="form-control input-prix"   id={[`prixMS${ligne}`]} name={[`prixMS${ligne}`]} />
-                                                
-                                        //     </td>
-                                        //     <td className="input-column">
-                                        //         <Field type="text" className="form-control input-prix"   id={[`prixHS${ligne}`]} name={[`prixHS${ligne}`]}/>
-                                                
-                                        //     </td>
-                                        //     <td className="input-check">
-                                        //         <div className="ml-4 mb-4">
-                                        //             <Field className="form-check-input" type="checkbox"  id={[`check${ligne}`]} name={[`check${ligne}`]} />
-                                        //         </div>
-                                        //     </td>
-                                        // </tr> 
