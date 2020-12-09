@@ -17,17 +17,16 @@ class JourferiersController < ApplicationController
   def create
     # @jourferier = Jourferier.new(jourferier_params)
     data= params[:value]
+    jourget= params[:jourf]
     tabUn = params[:tableauUn]
     fintabUn = tabUn.last+1
     unTab = tabUn.push(fintabUn)
     tabDeux = params[:tableauDeux]
-    idJ = params[:id]
-    puts"++"*20
-    puts data
-    puts "--"*20
-    puts idJ
-    puts "xx"*20
+    fintabDeux = tabDeux.last+1
+    deuxTab = tabDeux.push(fintabDeux)
+    idJF = params[:id]
 
+    
     
 
     # unTab.each do |val|
@@ -35,7 +34,8 @@ class JourferiersController < ApplicationController
     #   jourUn = "jour#{val}"
     #   prix = "prix#{val}"
     #   checkU = "chexkU#{val}"
-
+      
+      
     #   if data[checkU]==true
     #       if @jourferier.update(evenement: data[jourUn], dateferie: data[dateUn], surplus: data[prix], anne: data[:annee])
     #         puts "a"*50

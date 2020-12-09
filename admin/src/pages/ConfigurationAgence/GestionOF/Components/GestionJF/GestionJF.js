@@ -10,8 +10,11 @@ class GestionFE extends Component {
 
     state = {
 
-        nombreLigneUn : [1],
-        nombreLigneDeux : [1]
+        nombreLigneUn : [],
+        nombreLigneDeux : [],
+        initValue1: {},
+        initValue2: {},
+        id:[]
     }
     ajoutNewUnJour =() =>{
         this.setState({
@@ -24,6 +27,58 @@ class GestionFE extends Component {
             nombreLigneDeux: [...this.state.nombreLigneDeux,this.state.nombreLigneDeux.pop() + 1]
         })
         
+    }
+    componentDidMount(){
+        axios.get('/jourferiers').then(response => {
+            console.log(response)
+            var objetData = response.data
+            var anneFirst = objetData[0].anne
+            var j=0
+            var k=0
+
+            
+            
+            for (var i= 0 ; i< response.data.length ; i++ ) {
+                var objResponse = { ...response.data[i] };
+                console.log(objResponse.anne== anneFirst)
+                if (objResponse.anne == anneFirst){
+                    j = j + 1
+                    this.setState({
+                        nombreLigneUn: [...this.state.nombreLigneUn,j],
+                        initValue1: {
+                            ...this.state.initValue1,
+                            [`date${i+1}`]: objResponse.dateferie,
+                            [`jour${i+1}`]: objResponse.evenement,
+                            [`prix${i+1}`]: objResponse.surplus,
+                            anneeU: objResponse.anne,
+                        },
+
+                    })
+                    console.log(this.state.initValue1)
+                }
+                else{
+                    k = k + 1
+                    this.setState({
+                        nombreLigneDeux: [...this.state.nombreLigneDeux,k],
+                        initValue2: {
+                            ...this.state.initValue2,
+                            [`dateD${i+1}`]: objetData.dateferier,
+                            [`jourD${i+1}`]: objetData.evenement,
+                            [`prixD${i+1}`]: objetData.surplus,
+                            anneeD: objetData.anne,
+                        },
+
+                    })
+
+                }
+                console.log(this.state.nombreLigneDeux)
+                this.setState({
+                    id:[...this.state.id,objetData.id]
+                })       
+               
+            }       
+
+        })
     }
     
     
@@ -40,14 +95,16 @@ class GestionFE extends Component {
 
                 <div className="row">
                     <Formik
-                        initialValues={{ 
-                        }}
+                        initialValues={
+                            this.state.initValue1,
+                            this.state.initValue2
+                        }
                         
                         onSubmit={(value,{setSubmitting})=>{
                             setSubmitting(true);
                             
                                                 
-                           axios.post('/jourferiers', {value, tableauUn:this.state.nombreLigneUn, tableauDeux:this.state.nombreLigneDeux})
+                           axios.post('/jourferiers', {value, tableauUn:this.state.nombreLigneUn, tableauDeux:this.state.nombreLigneDeux, id: this.state.id})
                            console.log(value)
                             
                             setSubmitting(false);
@@ -64,7 +121,7 @@ class GestionFE extends Component {
                               <div className="tableResponsive w-full">
                                   <div className="w-25">
                                       <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                                           px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name="annee"/>
+                                           px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name="anneeU"/>
   
                                   </div>
                               
