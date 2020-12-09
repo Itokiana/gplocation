@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import ConditionModal from '../../Detail/ConditionModal';
 
 import './paiment.css';
-import { Form, Formik, Field, ErrorMessage } from 'formik';
+import { Form, Formik, Field} from 'formik';
 import * as Yup from 'yup';
 import ErrorField from '../../ErrorField';
 import axios from 'axios';

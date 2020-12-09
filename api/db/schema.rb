@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_07_163058) do
+ActiveRecord::Schema.define(version: 2020_12_08_162420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,8 +105,8 @@ ActiveRecord::Schema.define(version: 2020_12_07_163058) do
 
   create_table "horaire_jours", force: :cascade do |t|
     t.string "nomjour"
-    t.string "heuredebut"
-    t.string "heurefin"
+    t.time "heuredebut"
+    t.time "heurefin"
     t.integer "prixsurplus"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -116,7 +116,6 @@ ActiveRecord::Schema.define(version: 2020_12_07_163058) do
     t.string "evenement"
     t.date "dateferie"
     t.integer "anne"
-    t.integer "surplus"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -177,6 +176,7 @@ ActiveRecord::Schema.define(version: 2020_12_07_163058) do
     t.string "couleur"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "duree_min"
   end
 
   create_table "tarif_details", force: :cascade do |t|
