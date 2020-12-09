@@ -104,7 +104,7 @@ export default class Search extends React.Component {
 								jour: jours
 							})
 							axios.get(`/voitures/${date1}/${date2}/${jours}`).then(reponse => {
-								if (reponse.status === 200) {
+								if (reponse.status === 200 && reponse.date.prix[0]>0) {
 									console.log(reponse)
 									this.setState({
 										voitures:reponse.data.voitures,

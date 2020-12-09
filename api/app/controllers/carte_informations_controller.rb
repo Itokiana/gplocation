@@ -16,14 +16,18 @@ class CarteInformationsController < ApplicationController
 
   # POST /carte_informations
   def create
-    puts carte_information_params
-    @carte_information = CarteInformation.new(carte_information_params)
+    ipn_url = request.base_url + payplug_rails_engine_path  # Create an ipn url relatives to the url used
+    puts ipn_url
+    redirect_to PayplugRails::Payplug.create_payment(1200, ipn_url) # Create a payment for 12€00
+    
+    # puts carte_information_params
+    # @carte_information = CarteInformation.new(carte_information_params)
 
-    if @carte_information.save
-      render json: @carte_information, status: :created, location: @carte_information
-    else
-      render json: @carte_information.errors, status: :unprocessable_entity
-    end
+    # if @carte_information.save
+    #   render json: @carte_information, status: :created, location: @carte_information
+    # else
+    #   render json: @carte_information.errors, status: :unprocessable_entity
+    # end
   end
 
   # PATCH/PUT /carte_informations/1
