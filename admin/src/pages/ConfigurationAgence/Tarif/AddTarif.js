@@ -2,6 +2,8 @@ import React, { Component, setSate } from 'react'
 import { Formik, Form, Field } from 'formik';
 import UnPrix from './UnPrix';
 import axios from '../../../axios';
+import moment from 'moment' ;
+
 
 import { NavLink } from 'react-router-dom';
 
@@ -11,9 +13,12 @@ class AddTarif extends Component {
     state = {
         categories: [],
         voiture: [],
-        nombreLigne: [1,2]
+        nombreLigne: [1,2,3],
+        tarifperso: [],
+        dateTarif: []
 
     };
+    
     
 
     componentDidMount() {
@@ -28,12 +33,7 @@ class AddTarif extends Component {
         })
         
     }
-    suprimerPeriode = () =>{
-        this.setState({
-           
-            nombreLigne: this.state.nombreLigne
-        })
-    }
+    
     
 	getCategories = () => {
 		axios.get(`/categories/${this.props.match.params.id}`).then(response => {
@@ -45,22 +45,19 @@ class AddTarif extends Component {
 			}
 		});
     };
+    
    
 
     render() {
        
         const category = this.state.categories.category
-        const voitures = this.state.categories.voitures
-        const idcat = this.state.categories.id
-        console.log(voitures)
+        const voitures = this.state.categories.voitures  
+        
         return (
             <>
                 <center>
                     <h1>Tarif personnaliser pour le categorie {category && category.category }, reference {category && category.ref}</h1>
                     <br/>
-                    {/* <NavLink to={`/jours`}>
-                        <td className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded">Ajouter Nombrejour euro/j</td>
-                    </NavLink> */}
                     <div>
                         {voitures && voitures.map(voiture => {
                             return (
@@ -84,7 +81,7 @@ class AddTarif extends Component {
                             onSubmit={(data,{setSubmitting})=>{
                                 setSubmitting(true);
                                                     
-                                axios.post('/tarif_personalises',{data, tabLigne:this.state.nombreLigne})
+                                axios.post('/tarifpersonels',{data, tabLigne:this.state.nombreLigne})
                                 console.log(data)
                                 setSubmitting(false)
                             }}>
@@ -113,21 +110,14 @@ class AddTarif extends Component {
                                 </div>
                                 <div className="d-flex justify-content-end">
                                     <button
-                                        type="submit"
+                                        type="button"
                                         className="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 
                                         transition duration-500 ease select-none hover:bg-blue-600 focus:outline-none focus:shadow-outline" 
                                         onClick={this.ajoutNewPeriod}
                                     >
                                         Ajouter un ligne
                                     </button>
-                                    {/* <button
-                                        type="submit"
-                                        className="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 
-                                        transition duration-500 ease select-none hover:bg-blue-600 focus:outline-none focus:shadow-outline" 
-                                        onClick={this.suprimerPeriode}
-                                    >
-                                        Supprimer un ligne
-                                    </button> */}
+                                   
                                     <button
                                         type="submit"
                                         className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
@@ -141,7 +131,13 @@ class AddTarif extends Component {
                         
                         </Formik>
                     </div>
+
                 </center>
+                 
+                
+                    
+                    {/* { utilisateurs && utilisateurs.length === 0 ? (<>Aucun utilisateur disponible pour le moment.</>) : null } */}    
+                
                 
             </>
         )
