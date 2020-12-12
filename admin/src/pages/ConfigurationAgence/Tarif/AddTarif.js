@@ -81,7 +81,7 @@ class AddTarif extends Component {
                             onSubmit={(data,{setSubmitting})=>{
                                 setSubmitting(true);
                                                     
-                                axios.post('/tarifpersonels',{data, tabLigne:this.state.nombreLigne})
+                                axios.post('/tarif_personalises',{data, tabLigne:this.state.nombreLigne})
                                 console.log(data)
                                 setSubmitting(false)
                             }}>
