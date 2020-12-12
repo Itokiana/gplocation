@@ -15,38 +15,30 @@ class TarifPersonalisesController < ApplicationController
 
   # POST /tarif_personalises
   def create
-    data = params[:data]
-    tabLigne = params[:tabLigne]
-    fintab = tabLigne.last+1
-    tab = tabLigne.push(fintab)
-
-    puts (tab)
-
-    # puts(data[:dateDebutPerso])
-    # puts(data[:category_id])
-    # puts(data[:dateFinPerso])
     
+    data=params[:data]
+    tab=params[:tabLigne]
+    finTab = tab.last+1
+    #tab.push(finTab)
+    puts tab
 
-    tab.each do |value|
-      id=data[:category_id]
-      debut=data[:dateDebutPerso]
-      fin=data[:dateFinPerso]
-      jDe= "nombreJourD#{value}"
-      jFi= "nombreJourF#{value}"
-      prixT="prix#{value}"
-      puts (jDe )
-      puts(jFi)
+    puts "voila #{data[:dateDebutPerso]} et le #{data[:dateFinPerso]}"
+
+    tab.each do |val|
+      surplus="prix#{val}"
+      jourD="nombreJourD#{val}"
+      jourF="nombreJourF#{val}"
+      puts data[surplus]
+      puts data[jourD]
+      puts data[jourF]
+
+      tarifperso = TarifPersonalise.create(datedebutperso: data[:dateDebutPerso], datefinperso: data[:dateFinPerso],jourdebut: data[jourD], jourfin: data[jourF], prix: data[surplus], category_id: data[:category_id])
       
-
-
-      @tarif_personalise = TarifPersonalise.create!(datedebutperso: debut, datefinperso: fin, prix: data[prixT], category_id: id, jourdebut: data[jDe], jourfin: data[jFi])
-      json_response(@tarif_personalise, :created)
-      # # if @tarif_personalise.save
-      #   render json: @tarif_personalise, status: :created, location: @tarif_personalise
+      # if tarifperso.save
+      #   render json: tarifperso, status: :created, location: tarifperso
       # else
-      #   render json: @tarif_personalise.errors, status: :unprocessable_entity
+      #   render json: tarifperso.errors, status: :unprocessable_entity
       # end
-
     end  
   end
 
@@ -70,7 +62,12 @@ class TarifPersonalisesController < ApplicationController
 
   # DELETE /tarif_personalises/1
   def destroy
-    @tarif_personalise.destroy
+    tarif = TarifPersonalise.where(category_id: @tarif_personalise.category_id, datedebutperso: @tarif_personalise.datedebutperso, datefinperso: @tarif_personalise.datefinperso)
+    tarif.each do |tari|
+      puts "##"*20
+      puts tari.id
+      TarifPersonalise.destroy(tari.id)
+    end
   end
 
   private
@@ -81,6 +78,6 @@ class TarifPersonalisesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def tarif_personalise_params
-      params.fetch(:tarif_personalise, {}).permit(:dateDebutPerso, :dateFinPerso, :prix, :category_id, jours_id)
+      params.fetch(:tarif_personalise, {}).permit(:datedebutPerso, :datefinPerso, :prix, :category_id, jours_id)
     end
 end
