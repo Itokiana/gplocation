@@ -19,7 +19,7 @@ class Indexs extends React.Component {
         let weekdays = this.weekdaysShort.map((day) => { 
                 return ( 
                 
-                    <td key={day} className= "text-white"> {day}</td>
+                    <td key={day} className= "week-day"> {day}</td>
                 )
 
             }
@@ -49,7 +49,12 @@ class Indexs extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
+                            <tr> 
+                                <td>
 
+                                </td>
+                                
+                            </tr>
                         <Month/>
                         
                         </tbody>
@@ -64,3 +69,53 @@ class Indexs extends React.Component {
     }
 }
  export default Indexs;
+
+
+
+// import React from "react";
+// import { DateRangePicker } from "materialui-daterange-picker";
+// import moment from 'moment'
+
+
+// class Indexs extends React.Component {
+//  CalendrierComponent = props => {
+//     // const [open, setOpen] = React.useState(true);
+//     const [dateRange, setDateRange] = React.useState();
+
+
+//     let date = (range) => {
+//         setDateRange({
+//         range
+//         })
+//         props.prom({
+//         range
+//         })
+//     }
+//     const toggle = () => setOpen(open);
+//     const today = new moment().subtract(1, 'days');
+
+//     return (
+
+//         <DateRangePicker
+//         disablePast={true}
+//         minDate={today}
+//         open={open}
+//         toggle={toggle}
+//         onChange={(range) => date(range)}
+//         format={"DD/YYYY/MM"}
+        
+//         />
+//     );
+//     }
+//     render() {
+//         return (
+
+//             <>
+//             {
+//              this.CalendrierComponent   
+//             }
+//             </>
+//         )
+//     }
+// }
+// export default Indexs;

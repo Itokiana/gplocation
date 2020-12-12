@@ -20,15 +20,15 @@ class GestionSaison extends Component {
     }
 
     getSaison = () => {
-		axios.get('/saisons').then(response => {
-			if (response.status === 200) {
-				this.setState({
-					saison: response.data
+        axios.get('/saisons').then(response => {
+            if (response.status === 200) {
+                this.setState({
+                    saison: response.data
 
-				})
-				console.log(response.data)
-			}
-		})
+                })
+                console.log(response.data)
+            }
+        })
     }
 
    

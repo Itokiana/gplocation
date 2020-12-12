@@ -35,11 +35,11 @@ class Month extends React.Component {
     render() {
        
         let months = this.months.map((mon) => {
-            
+            let className = (mon == "");
             return (
                 <>
                 
-                <tr key={mon}>
+                <tr key={mon} className= {className}>
                      <td> {mon} </td>
                      <Days month ={mon}/>
 
@@ -57,3 +57,4 @@ class Month extends React.Component {
     }
 }
  export default Month;
+
