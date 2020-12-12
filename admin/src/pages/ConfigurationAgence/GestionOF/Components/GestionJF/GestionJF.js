@@ -23,7 +23,7 @@ class GestionJF extends Component {
             nombreLigneUn: [...this.state.nombreLigneUn,this.state.nombreLigneUn.pop() + 1],
             //idUn: [...this.state.idUn, this.state.idGlobal.pop() +1]
         })
-        
+        console.log("tab1", this.state.nombreLigneUn)
     }
     ajoutNewDeuxJour =() =>{
         this.setState({
@@ -92,10 +92,7 @@ class GestionJF extends Component {
                 initVal: inValue  
             }) 
             console.log("objet tout", this.state.objetData)
-            console.log("id tout", this.state.idGlobal) 
-            console.log("Tab 1", this.state.nombreLigneDeux)
-            
-
+            console.log("id tout", this.state.idGlobal)    
         })
        
     
