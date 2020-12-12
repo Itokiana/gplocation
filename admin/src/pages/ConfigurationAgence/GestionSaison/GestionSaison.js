@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from '../../../axios'
+import Indexs from './calendrier/Indexs.js'
 import { NavLink } from 'react-router-dom';
 
 
@@ -9,11 +10,13 @@ class GestionSaison extends Component {
         super(props);
         this.state = {
             lire: false,
-            saison: []
+            saison: [],
+            
         }
     }
     componentDidMount() {
         this.getSaison();
+       
     }
 
     getSaison = () => {
@@ -27,16 +30,21 @@ class GestionSaison extends Component {
 			}
 		})
     }
+
+   
+
     render() {
+        
+
         
         return (
             <>
 
                 <div>
                     <br/>
-                    <NavLink to="/calendrier" >
+                    {/* <NavLink to="/calendrier" >
                         <button class="text-white bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">calendrier</button>
-                    </NavLink>
+                    </NavLink> */}
                     <center>
                         <h1>Gestion des Saison</h1>
                         <br/>
@@ -56,6 +64,10 @@ class GestionSaison extends Component {
                     </center> 
                 </div>
                 <br/>
+                <div>
+                    <Indexs/>
+                </div>
+                
 
             </>
         )
