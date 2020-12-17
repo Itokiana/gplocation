@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :prixjourpersos
+  resources :datetarifpersos
   resources :jourferiers
   resources :fermexceptions
   resources :ouvertexceptions
@@ -9,7 +11,6 @@ Rails.application.routes.draw do
   resources :date_saisons
   resources :saisons
   resources :jours
-  resources :tarif_personalises
   resources :tarif_personalisers
   resources :base_tarifs
   resources :tarif_de_bases
@@ -50,6 +51,8 @@ Rails.application.routes.draw do
   get '/reservations/:id', to: 'reservations#show'
   put '/reservations/:id', to: 'reservations#update'
   delete '/reservations/:id', to: 'reservations#destroy'
+
+  delete'/datetarifpersos/delete/:id', to: 'datetarifpersos#delete'
 
   resources :tarif_supplementaires
   resources :tarifs

@@ -15,12 +15,27 @@ class SaisonsController < ApplicationController
 
   # POST /saisons
   def create
-    @saison = Saison.new(saison_params)
+    data=params[:value]
+    # idDmin=params[:idD]
+    
 
-    if @saison.save
-      render json: @saison, status: :created, location: @saison
-    else
-      render json: @saison.errors, status: :unprocessable_entity
+    tab = [0,1,2,3]
+    idDmin = [0,1,2,3]
+
+    tab.each do |val|
+      durMin= "nombreS#{val}"
+      check= "check#{val}"
+      id = idDmin[val+1]
+      # puts "xx"*30
+      # puts id
+      # puts"##"*30
+      # puts durMin
+     
+
+      saison = Saison.find(id)
+      if data[check] == true
+        saison.update(duree_min: data[durMin])
+      end
     end
   end
 

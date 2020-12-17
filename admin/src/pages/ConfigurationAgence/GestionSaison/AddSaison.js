@@ -41,6 +41,7 @@ class AddSaison extends Component {
         
         deleteSaison: (date) => {
             axios.delete(`/date_saisons/${date.id}`).then(response => {
+                console.log(response)
                 if (response.status === 204) {
                     this.action.getDateSaison();
                 }

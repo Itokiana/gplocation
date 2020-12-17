@@ -2,15 +2,15 @@
 
 #place: rand(4..5), vitesse: "manuelle", types: Faker::Vehicle.fuel_type, climatiseur: true, status:"occupé", portes: Faker::Vehicle.door_count
 
-# AdminUser.create(username: 'sambatra', email: 'natarabem@gmail.com', password: '123456789')
-# Category.create(ref:'R01', name: 'CatA' )
-# Category.create(ref:'R02', name: 'CatB' )
-# Category.create(ref:'R03', name: 'CatC' )
+AdminUser.create(username: 'sambatra', email: 'natarabem@gmail.com', password: '123456789')
+Category.create(ref:'R01', name: 'CatA' )
+Category.create(ref:'R02', name: 'CatB' )
+Category.create(ref:'R03', name: 'CatC' )
 
-#     Voiture.create(marque: "renault", model: "clio", category_id: 2)
-#     Voiture.create(marque: "renault", model: "megane", category_id: 3)
-#     Voiture.create(marque: "citroën", model: "C1", category_id: 1)
-#     Voiture.create(marque: "renault", model: "Duster", category_id: 2)
+    Voiture.create(marque: "renault", model: "clio", category_id: 2)
+    Voiture.create(marque: "renault", model: "megane", category_id: 3)
+    Voiture.create(marque: "citroën", model: "C1", category_id: 1)
+    Voiture.create(marque: "renault", model: "Duster", category_id: 2)
     # i =1
     # while i <= 86 do
     #     # Instructions.
@@ -59,10 +59,10 @@
 
 # end
 
-# Saison.create(nomsaison: "Basse Saison", couleur: "bleu")
-# Saison.create(nomsaison: "Haute Saison", couleur: "rouge")
-# Saison.create(nomsaison: "Moyen Saison", couleur: "jaune")
+Saison.create(nomsaison: "Basse Saison", couleur: "bleu")
+Saison.create(nomsaison: "Haute Saison", couleur: "rouge")
+Saison.create(nomsaison: "Moyen Saison", couleur: "jaune")
 
-# DateSaison.create(debutsaison: Date.new(2020,1,4), finsaison: Date.new(2020,2,8),saison_id:1)
-# DateSaison.create(debutsaison: Date.new(2020,6,6), finsaison: Date.new(2020,7,4),saison_id:2)
-# DateSaison.create(debutsaison: Date.new(2020,5,2), finsaison: Date.new(2020,6,6),saison_id:3)
+DateSaison.create(debutsaison: Date.new(2020,1,4), finsaison: Date.new(2020,2,8),saison_id:1)
+DateSaison.create(debutsaison: Date.new(2020,6,6), finsaison: Date.new(2020,7,4),saison_id:2)
+DateSaison.create(debutsaison: Date.new(2020,5,2), finsaison: Date.new(2020,6,6),saison_id:3)

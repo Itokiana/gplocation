@@ -6,7 +6,7 @@ import DeuxJourFerier from './DeuxJourFerier';
 
 //import '../GestionOF/gestionOF.css'
 
-class GestionFE extends Component {
+class GestionJF extends Component {
 
     state = {
 
@@ -14,7 +14,9 @@ class GestionFE extends Component {
         nombreLigneDeux : [],
         initValue1: {},
         initValue2: {},
-        id:[]
+        initValue : {},
+        idU:[],
+        idD:[]
     }
     ajoutNewUnJour =() =>{
         this.setState({
@@ -40,21 +42,25 @@ class GestionFE extends Component {
             
             for (var i= 0 ; i< response.data.length ; i++ ) {
                 var objResponse = { ...response.data[i] };
-                console.log(objResponse.anne== anneFirst)
+                //console.log(objResponse.anne== anneFirst)
                 if (objResponse.anne == anneFirst){
                     j = j + 1
                     this.setState({
                         nombreLigneUn: [...this.state.nombreLigneUn,j],
                         initValue1: {
                             ...this.state.initValue1,
-                            [`date${i+1}`]: objResponse.dateferie,
-                            [`jour${i+1}`]: objResponse.evenement,
-                            [`prix${i+1}`]: objResponse.surplus,
+                            [`date${j}`]: objResponse.dateferie,
+                            [`jour${j}`]: objResponse.evenement,
+                            [`prix${j}`]: objResponse.surplus,
+                            [`checkU${j}`]: "",
+                            [`idTarifU${j}`]: objResponse.id,
                             anneeU: objResponse.anne,
+
                         },
+                        idU:[...this.state.idU,objResponse.id]
 
                     })
-                    console.log(this.state.initValue1)
+                    
                 }
                 else{
                     k = k + 1
@@ -62,27 +68,43 @@ class GestionFE extends Component {
                         nombreLigneDeux: [...this.state.nombreLigneDeux,k],
                         initValue2: {
                             ...this.state.initValue2,
-                            [`dateD${i+1}`]: objetData.dateferier,
-                            [`jourD${i+1}`]: objetData.evenement,
-                            [`prixD${i+1}`]: objetData.surplus,
-                            anneeD: objetData.anne,
+                            [`dateD${k}`]: objResponse.dateferie,
+                            [`jourD${k}`]: objResponse.evenement,
+                            [`prixD${k}`]: objResponse.surplus,
+                            [`checkD${k}`]: "",
+                            [`idTarifD${k}`]: objResponse.id,
+                            anneeD: objResponse.anne,
                         },
+                        idD:[...this.state.idD,objResponse.id]
 
                     })
 
                 }
                 console.log(this.state.nombreLigneDeux)
-                this.setState({
-                    id:[...this.state.id,objetData.id]
-                })       
+                      
                
-            }       
+            } 
+
+            // console.log(this.state.initValue1)
+            // console.log(this.state.initValue2)     
 
         })
     }
+    value=() =>{
+        // var intval= []
+        // console.log(intval)
+        
+        // this.state.initValue.map(ob=> {
+        //     intval.push(ob)
+        // })
+    }
+    
     
     
     render() {
+        let obj=Object.assign( {}, this.state.initValue1,this.state.initValue2)
+        console.log(obj)
+        
         return (
             <>
                 <div className="page-title">
@@ -96,15 +118,20 @@ class GestionFE extends Component {
                 <div className="row">
                     <Formik
                         initialValues={
-                            this.state.initValue1,
-                            this.state.initValue2
+                            obj
+                            
+                            
                         }
                         
                         onSubmit={(value,{setSubmitting})=>{
                             setSubmitting(true);
                             
-                                                
-                           axios.post('/jourferiers', {value, tableauUn:this.state.nombreLigneUn, tableauDeux:this.state.nombreLigneDeux, id: this.state.id})
+                           axios.post('/jourferiers', {
+                                value, tableauUn:this.state.nombreLigneUn,
+                                tableauDeux:this.state.nombreLigneDeux,
+                                idUn: this.state.idU,
+                                idDeux: this.state.idD
+                            })
                            console.log(value)
                             
                             setSubmitting(false);
@@ -113,7 +140,7 @@ class GestionFE extends Component {
                      }
                     
                     >
-                        {({values, isSubmitting}) => (
+                        { formik => (
                               <Form class="w-full">    
                         
                                 
@@ -197,8 +224,8 @@ class GestionFE extends Component {
                                       </thead>
                                       <tbody>
                                           {
-                                              this.state.nombreLigneDeux.map((un) => 
-                                                  <DeuxJourFerier key={un} num={un} />
+                                              this.state.nombreLigneDeux.map((deux) => 
+                                                  <DeuxJourFerier key={deux} nbr={deux} />
                                               )
                                               
                                           }
@@ -585,4 +612,4 @@ class GestionFE extends Component {
     }
 }
 
-export default GestionFE;
+export default GestionJF;

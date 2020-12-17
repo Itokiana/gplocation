@@ -5,13 +5,32 @@ import axios from '../../../../axios';
 
 
 export default class DureeLocation extends Component {
-    componentDidMount() {
-        axios.get('/durreminimals').then(respons => {
-            console.log(respons)
-        })
+    state = {
+        inValue: {},
+        saison: null
+
     }
+    componentDidMount(){
+        
+        axios.get(`/saisons`).then(response => {
+            var objValue = response.data
+       
+            for (var j = 0; j < objValue.length ; j++) {
+                this.setState({
+                    inValue: {
+                        ...this.state.inValue,
+                        [`nombreS${j}`]: objValue[j].duree_min,
+                        [`check${j}`]: ''
+                    },
+                })
+            }        
+        })    
+    }
+    
     render() {
+                
         return (
+        
             <>
                 <div className="page-title">
                     <div className="title_left">
@@ -19,25 +38,17 @@ export default class DureeLocation extends Component {
                     </div>
                 </div>
                 
-                <div className="row">
+            {
+                this.state.inValue ?(
+                    <div className="row">
                     <Formik
-                        initialValues={{
-                            // check1:'',
-                            // check2:'',
-                            // check3:'',
-                            // nombrS1:'',
-                            // nombrS2:'',
-                            // nombrS3:''
-                           
-                            
-                        }}
-                        
+                    
+                         
+                        initialValues={this.state.inValue}
                         onSubmit={(value,{setSubmitting})=>{
-                            setSubmitting(true);
-                            console.log(this.props.ids)
-                            
+                            setSubmitting(true)
                                                 
-                           axios.post('/durreminimal', value)
+                           axios.post('/saisons', value)
                            console.log(value)
                             
                             setSubmitting(false)
@@ -45,38 +56,38 @@ export default class DureeLocation extends Component {
                         }
                      }
                     
-                    >{({values, isSubmitting}) => (
+                    >{formik => (
                         
                         <Form class="d-flex align-items-start">
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" >
                                      Basse saison
                                      <div className="ml-4 mb-4">
-                                        <Field className="form-check-input" type="checkbox"  id="check1" name="check1" />
+                                        <Field className="form-check-input" type="checkbox"  id="check0" name={[`check0`]} />
                                     </div>
                                 </label>
                                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                                px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name="nombrS1"/>
+                                px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name={[`nombreS0`]} />
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                                     Moyen Saison
                                     <div className="ml-4 mb-4">
-                                        <Field className="form-check-input" type="checkbox"  id="check2" name="check2" />
+                                        <Field className="form-check-input" type="checkbox"  id="check1" name={[`check1`]} />
                                     </div>
                                 </label>
-                                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
-                            px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" name="nombrS2"/>
+                                <Field type="number" name={[`nombreS1`]} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
+                            px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                                     Haute Saison
                                     <div className="ml-4 mb-4">
-                                        <Field className="form-check-input" type="checkbox"  id="check3" name="check3" />
+                                        <Field className="form-check-input" type="checkbox"  id="check2" name={[`check2`]} />
                                     </div>
                                 </label>
                                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
-                            px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" name="nombreS3"/>
+                            px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" name={[`nombreS2`]}/>
                             </div>
 
                             <div className="w-full md:w-1/2 px-3">
@@ -97,6 +108,8 @@ export default class DureeLocation extends Component {
                     
                 </div>
 
+                ):<h1>Antendre</h1>
+            }
                 
                 
 

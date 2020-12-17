@@ -24,9 +24,6 @@ class VoituresController < ApplicationController
     def listevoiture
         @dateDepart = Date.strptime(params[:dateDepart], '%Y-%m-%d')
         @dateRetour = Date.strptime(params[:dateRetour], '%Y-%m-%d')
-        puts "88888"*10
-        puts @nomsaison
-        puts "88888"*10
         @voitures = Voiture.all
         @prix=[]
         @voitures.each do |voiture|

@@ -18,34 +18,70 @@ class JourferiersController < ApplicationController
     # @jourferier = Jourferier.new(jourferier_params)
     data= params[:value]
     jourget= params[:jourf]
+    idUn= params[:idUn]
+    idDeux= params[:idDeux]
+
     tabUn = params[:tableauUn]
     fintabUn = tabUn.last+1
-    unTab = tabUn.push(fintabUn)
+    tabUn.push(fintabUn)
+
     tabDeux = params[:tableauDeux]
     fintabDeux = tabDeux.last+1
-    deuxTab = tabDeux.push(fintabDeux)
-    idJF = params[:id]
+    tabDeux.push(fintabDeux)
+  
 
-    
-    
+    puts "#"*30
+    puts idUn
+    puts "+"*30
+    puts idDeux[1]
+    puts "+"*30
+    puts tabUn
+    puts "//"*30
+    puts tabDeux
+    puts "+"*30
+ 
 
-    # unTab.each do |val|
-    #   dateUn = "date#{val}"
-    #   jourUn = "jour#{val}"
-    #   prix = "prix#{val}"
-    #   checkU = "chexkU#{val}"
+    tabUn.each do |val|
+      dateUn = "date#{val}"
+      jourUn = "jour#{val}"
+      prix = "prix#{val}"
+      checkU = "chexkU#{val}"
+     
+      id = idUn[val-1]
+      puts "??"*40
+      puts id
+      jourferierUn = Jourferier.find(id)
       
+      if data[checkU]==true
+          if jourferierUn.update(evenement: data[jourUn], dateferie: data[dateUn], surplus: data[prix], anne: data[:anneeU])
+            puts "a"*50
+            render json: jourferierUn, status: :created, location: jourferierUn
+          else
+            puts "="*50
+            render json: jourferierUn.errors, status: :unprocessable_entity
+          end
+      end
+    end
+
+    tableauDeux.each do |val|
+      dateDeux = "dateD#{val}"
+      jourDeux = "jourD#{val}"
+      prixDeux = "prixD#{val}"
+      checkDeux = "chexkD#{val}"
+     
+      idD = idDeux[val-1]
+      jourferierD = Jourferier.find(id)
       
-    #   if data[checkU]==true
-    #       if @jourferier.update(evenement: data[jourUn], dateferie: data[dateUn], surplus: data[prix], anne: data[:annee])
-    #         puts "a"*50
-    #         render json: @jourferier, status: :created, location: @jourferier
-    #       else
-    #         puts "="*50
-    #         render json: @jourferier.errors, status: :unprocessable_entity
-    #       end
-    #   end
-    # end
+      if data[checkDeux]==true
+          if jourferierD.update(evenement: data[jourUn], dateferie: data[dateUn], surplus: data[prix], anne: data[:anneeU])
+            puts "a"*50
+            render json: jourferierD, status: :created, location: jourferierD
+          else
+            puts "="*50
+            render json: jourferierD.errors, status: :unprocessable_entity
+          end
+      end
+    end
   end
 
   # PATCH/PUT /jourferiers/1

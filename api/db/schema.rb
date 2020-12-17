@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_08_083209) do
+ActiveRecord::Schema.define(version: 2020_12_10_104243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,12 +96,11 @@ ActiveRecord::Schema.define(version: 2020_12_08_083209) do
     t.index ["saison_id"], name: "index_date_saisons_on_saison_id"
   end
 
-  create_table "durreminimals", force: :cascade do |t|
-    t.integer "nombrejour"
-    t.bigint "saison_id"
+  create_table "datetarifpersos", force: :cascade do |t|
+    t.date "datedebut"
+    t.date "datefin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["saison_id"], name: "index_durreminimals_on_saison_id"
   end
 
   create_table "fermexceptions", force: :cascade do |t|
@@ -160,6 +159,18 @@ ActiveRecord::Schema.define(version: 2020_12_08_083209) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "prixjourpersos", force: :cascade do |t|
+    t.integer "jourdebut"
+    t.integer "jourfin"
+    t.integer "prixperso"
+    t.bigint "category_id"
+    t.bigint "datetarifperso_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_prixjourpersos_on_category_id"
+    t.index ["datetarifperso_id"], name: "index_prixjourpersos_on_datetarifperso_id"
+  end
+
   create_table "reservations", force: :cascade do |t|
     t.string "lieuDepart"
     t.string "lieuRetour"
@@ -183,6 +194,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_083209) do
   create_table "saisons", force: :cascade do |t|
     t.string "nomsaison"
     t.string "couleur"
+    t.integer "duree_min"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -194,18 +206,6 @@ ActiveRecord::Schema.define(version: 2020_12_08_083209) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tarif_id"], name: "index_tarif_details_on_tarif_id"
-  end
-
-  create_table "tarif_personalises", force: :cascade do |t|
-    t.date "datedebutperso"
-    t.date "datefinperso"
-    t.integer "prix"
-    t.bigint "category_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "jourdebut"
-    t.integer "jourfin"
-    t.index ["category_id"], name: "index_tarif_personalises_on_category_id"
   end
 
   create_table "tarif_supplementaires", force: :cascade do |t|

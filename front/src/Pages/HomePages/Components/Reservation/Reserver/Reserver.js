@@ -263,7 +263,7 @@ function Reserver(propos) {
                                 </div>
                             ) : null } 
                             { etat === 3 ? (
-                                <PaimentEtape1 client={client}/>
+                                <PaimentEtape1 client={client} prix={propos.match.params.prix}/>
                             ) : null } 
                         </div>
                     </div>
