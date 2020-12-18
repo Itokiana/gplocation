@@ -12,11 +12,10 @@ class GestionJF extends Component {
 
         nombreLigneUn : [],
         nombreLigneDeux : [],
-        initValue1: {},
-        initValue2: {},
-        initValue : {},
         idU:[],
-        idD:[]
+        idD:[],
+        objetData: [],
+        initVal:null
     }
     ajoutNewUnJour =() =>{
         this.setState({
@@ -32,79 +31,78 @@ class GestionJF extends Component {
     }
     componentDidMount(){
         axios.get('/jourferiers').then(response => {
-            console.log(response)
-            var objetData = response.data
-            var anneFirst = objetData[0].anne
+            if (response.status === 200) {
+                this.setState({
+                    objetData: response.data
+                })
+            } 
             var j=0
             var k=0
-
-            
-            
-            for (var i= 0 ; i< response.data.length ; i++ ) {
-                var objResponse = { ...response.data[i] };
-                //console.log(objResponse.anne== anneFirst)
-                if (objResponse.anne == anneFirst){
+            var inValue= {}
+            var idtab=[]
+            var idtabD=[]
+            var dateFirst= this.state.objetData[0].anne
+    
+            this.state.objetData.map(val =>{
+                if (val.anne == dateFirst){
                     j = j + 1
-                    this.setState({
-                        nombreLigneUn: [...this.state.nombreLigneUn,j],
-                        initValue1: {
-                            ...this.state.initValue1,
-                            [`date${j}`]: objResponse.dateferie,
-                            [`jour${j}`]: objResponse.evenement,
-                            [`prix${j}`]: objResponse.surplus,
-                            [`checkU${j}`]: "",
-                            [`idTarifU${j}`]: objResponse.id,
-                            anneeU: objResponse.anne,
-
-                        },
-                        idU:[...this.state.idU,objResponse.id]
-
-                    })
+                    idtab.push(val.id)
+                    inValue[`date${j}`]=val.dateferie
+                    inValue[`jour${j}`]=val.evenement
+                    inValue[`prix${j}`]=val.surplus
+                    inValue[`checkU${j}`]=""
+                    inValue[`idTarifU${j}`]=val.id
+                    inValue['anneeU']= val.anne
                     
                 }
                 else{
                     k = k + 1
-                    this.setState({
-                        nombreLigneDeux: [...this.state.nombreLigneDeux,k],
-                        initValue2: {
-                            ...this.state.initValue2,
-                            [`dateD${k}`]: objResponse.dateferie,
-                            [`jourD${k}`]: objResponse.evenement,
-                            [`prixD${k}`]: objResponse.surplus,
-                            [`checkD${k}`]: "",
-                            [`idTarifD${k}`]: objResponse.id,
-                            anneeD: objResponse.anne,
-                        },
-                        idD:[...this.state.idD,objResponse.id]
-
-                    })
-
-                }
-                console.log(this.state.nombreLigneDeux)
-                      
+                    idtabD.push(val.id)
+                    inValue[`dateD${k}`]=val.dateferie
+                    inValue[`jourD${k}`]=val.evenement
+                    inValue[`prixD${k}`]=val.surplus
+                    inValue[`checkD${k}`]=""
+                    inValue[`idTarifD${k}`]=val.id
+                    inValue['anneeD']= val.anne
+                    
+                }      
                
-            } 
-
-            // console.log(this.state.initValue1)
-            // console.log(this.state.initValue2)     
-
+            })
+            for(let i=0; i< j; i++){
+                this.setState({
+                    nombreLigneUn: [...this.state.nombreLigneUn,i+1],
+                    idU:[...this.state.idU,idtab[i]]
+                })
+    
+            }
+            for(let l=0; l< k; l++){
+                this.setState({
+                    nombreLigneDeux: [...this.state.nombreLigneDeux,l+1],
+                    idD:[...this.state.idD,idtabD[l]]
+                })
+    
+            }
+            this.setState({
+                initVal: inValue  
+            }) 
+            console.log(this.state.initVal)    
         })
+       
+    
     }
+
     value=() =>{
-        // var intval= []
-        // console.log(intval)
-        
-        // this.state.initValue.map(ob=> {
-        //     intval.push(ob)
-        // })
-    }
+        var inValue = this.state.initVal
+       
+        return inValue  
+     }
     
     
     
     render() {
-        let obj=Object.assign( {}, this.state.initValue1,this.state.initValue2)
-        console.log(obj)
-        
+        //let obj=Object.assign( {}, this.state.initValue1,this.state.initValue2)
+        console.log(this.value())
+       
         return (
             <>
                 <div className="page-title">
@@ -113,153 +111,136 @@ class GestionJF extends Component {
                     </div>
                 </div>
 
-
-
-                <div className="row">
+                {this.state.initVal  ? 
+                 <div className="row">
                     <Formik
-                        initialValues={
-                            obj
-                            
-                            
-                        }
-                        
+                        initialValues={this.state.initVal}    
                         onSubmit={(value,{setSubmitting})=>{
                             setSubmitting(true);
-                            
-                           axios.post('/jourferiers', {
+                            axios.post('/jourferiers', {
                                 value, tableauUn:this.state.nombreLigneUn,
                                 tableauDeux:this.state.nombreLigneDeux,
                                 idUn: this.state.idU,
                                 idDeux: this.state.idD
                             })
-                           console.log(value)
-                            
-                            setSubmitting(false);
-                           
-                        }
-                     }
+                            console.log(value) 
+                            setSubmitting(false);  
+                        }}
                     
                     >
-                        { formik => (
-                              <Form class="w-full">    
-                        
-                                
-                        
-                              <div className="tableResponsive w-full">
-                                  <div className="w-25">
-                                      <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                                           px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name="anneeU"/>
-  
-                                  </div>
-                              
-                                  <table class="text-white w-200">
-                                      <thead>
-                                          <th>
-                                              <td> Dates </td>
-                                                                                              
-                                          </th>
-                                          <th>
-                                              <td> Jour ferier </td>
-                                                                                              
-                                          </th>
-                                          <th>
-                                              <td> Surplus </td>
-                                                                                              
-                                          </th>
-                                      </thead>
-                                      <tbody>
-                                          {
-                                              this.state.nombreLigneUn.map((un) => 
-                                                  <UnJourFerier key={un} num={un} />
-                                              )
-                                              
-                                          }
-                                          
-                                      </tbody>
-                                  </table>
-                                  <div className="d-flex justify-content-start">
-                                      <button
-                                          type="submit"
-                                          className="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 
-                                          transition duration-500 ease select-none hover:bg-blue-600 focus:outline-none focus:shadow-outline" 
-                                          onClick={this.ajoutNewUnJour}
-                                      >
-                                          Ajouter un ligne
-                                      </button>
-                                      
-                                      <button
-                                          type="submit"
-                                          className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
-                                          transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
-                                      >
-                                          Valider
-                                      </button>
-                                  </div>
-                          
-                              </div>
-  
-                              <hr style={{border: "2px", color:"white"}}/> <br/> <br/>
-                                 
-                              <div className="tableResponsive w-full">
-                                  <div className="w-25">
-                                      <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                                          px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name="anneeD"/>
-  
-                                  </div>
-                              
-                                  <table class="text-white w-200">
-                                      <thead>
-                                          <th>
-                                              <td> Dates </td>
-                                                                                              
-                                          </th>
-                                          <th>
-                                              <td> Jour ferier </td>
-                                                                                              
-                                          </th>
-                                          <th>
-                                              <td> Surplus </td>
-                                                                                              
-                                          </th>
-                                      </thead>
-                                      <tbody>
-                                          {
-                                              this.state.nombreLigneDeux.map((deux) => 
-                                                  <DeuxJourFerier key={deux} nbr={deux} />
-                                              )
-                                              
-                                          }
-                                          
-                                      </tbody>
-                                  </table>
-                                  <div className="d-flex justify-content-start">
-                                      <button
-                                          type="submit"
-                                          className="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 
-                                          transition duration-500 ease select-none hover:bg-blue-600 focus:outline-none focus:shadow-outline" 
-                                          onClick={this.ajoutNewDeuxJour}
-                                      >
-                                          Ajouter un ligne
-                                      </button>
-                                      
-                                      <button
-                                          type="submit"
-                                          className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
-                                          transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
-                                      >
-                                          Valider
-                                      </button>
-                                  </div>
-                          
-                              </div>
-                          
-                          </Form>     
+                        <Form class="w-full"> 
+                
+                            <div className="tableResponsive w-full">
+                                <div className="w-25">
+                                    <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
+                                        px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name="anneeU"/>
 
-                        )}
-                             
+                                </div>
+                            
+                                <table class="text-white w-200">
+                                    <thead>
+                                        <th>
+                                            <td> Dates </td>
+                                                                                            
+                                        </th>
+                                        <th>
+                                            <td> Jour ferier </td>
+                                                                                            
+                                        </th>
+                                        <th>
+                                            <td> Surplus </td>
+                                                                                            
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            this.state.nombreLigneUn.map((un) => 
+                                                <UnJourFerier key={un} num={un} />
+                                            )
+                                            
+                                        }
+                                        
+                                    </tbody>
+                                </table>
+                                <div className="d-flex justify-content-start">
+                                    <button
+                                        type="submit"
+                                        className="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 
+                                        transition duration-500 ease select-none hover:bg-blue-600 focus:outline-none focus:shadow-outline" 
+                                        onClick={this.ajoutNewUnJour}
+                                    >
+                                        Ajouter un ligne
+                                    </button>
+                                    
+                                    <button
+                                        type="submit"
+                                        className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
+                                        transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                                    >
+                                        Valider
+                                    </button>
+                                </div>
+                        
+                            </div>
+
+                            <hr style={{border: "2px", color:"white"}}/> <br/> <br/>
+                                
+                            <div className="tableResponsive w-full">
+                                <div className="w-25">
+                                    <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
+                                        px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name="anneeD"/>
+
+                                </div>
+                            
+                                <table class="text-white w-200">
+                                    <thead>
+                                        <th>
+                                            <td> Dates </td>
+                                                                                            
+                                        </th>
+                                        <th>
+                                            <td> Jour ferier </td>
+                                                                                            
+                                        </th>
+                                        <th>
+                                            <td> Surplus </td>
+                                                                                            
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            this.state.nombreLigneDeux.map((deux) => 
+                                                <DeuxJourFerier key={deux} nbr={deux} />
+                                            )
+                                            
+                                        }
+                                        
+                                    </tbody>
+                                </table>
+                                <div className="d-flex justify-content-start">
+                                    <button
+                                        type="submit"
+                                        className="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 
+                                        transition duration-500 ease select-none hover:bg-blue-600 focus:outline-none focus:shadow-outline" 
+                                        onClick={this.ajoutNewDeuxJour}
+                                    >
+                                        Ajouter un ligne
+                                    </button>
+                                    
+                                    <button
+                                        type="submit"
+                                        className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
+                                        transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                                    >
+                                        Valider
+                                    </button>
+                                </div>
+                        
+                            </div>
+                        </Form>             
                     </Formik>
                     
-                </div>
+                </div>:<h1>Chargement......</h1>}
 
             </>
 

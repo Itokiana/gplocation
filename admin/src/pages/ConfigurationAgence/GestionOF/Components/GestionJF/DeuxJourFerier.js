@@ -7,7 +7,7 @@ export default class DeuxJourFerier extends Component {
     nameDDate= `dateD${this.props.nbr}`
     nameDJour= `jourD${this.props.nbr}`
     nameDPrix= `prixD${this.props.nbr}`
-    nameCheckD= `chexkD${this.props.nbr}`
+    nameCheckD= `checkD${this.props.nbr}`
 
     render () {
         return(

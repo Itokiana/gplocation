@@ -197,18 +197,6 @@ class Days extends React.Component {
             
     };
     render(){
-        
-
-
-
-
-
-        // filtreSaison.map(val=>{
-        //     tab1.push(val.jour)
-
-        // })
-        // console.log(tab1)
-
         let blanks = [];
         for (let i = 0; i < this.firstDayOfMonth(); i++) {
         blanks.push(<td className="emptySlot">
