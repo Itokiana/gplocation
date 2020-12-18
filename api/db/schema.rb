@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_08_162420) do
+ActiveRecord::Schema.define(version: 2020_12_18_114235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,8 +105,8 @@ ActiveRecord::Schema.define(version: 2020_12_08_162420) do
 
   create_table "horaire_jours", force: :cascade do |t|
     t.string "nomjour"
-    t.time "heuredebut"
-    t.time "heurefin"
+    t.string "heuredebut"
+    t.string "heurefin"
     t.integer "prixsurplus"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_162420) do
     t.string "evenement"
     t.date "dateferie"
     t.integer "anne"
+    t.integer "surplus"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -152,16 +153,18 @@ ActiveRecord::Schema.define(version: 2020_12_08_162420) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.string "lieuDepart"
-    t.string "lieuRetour"
-    t.date "dateDepart"
-    t.date "dateRetour"
-    t.time "heureDepart"
-    t.time "heureRetour"
-    t.bigint "tarif_id"
+    t.date "date_depart"
+    t.date "date_retour"
+    t.string "heure_depart"
+    t.string "heure_retour"
+    t.float "prix"
+    t.bigint "client_id"
+    t.bigint "voiture_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["tarif_id"], name: "index_reservations_on_tarif_id"
+    t.string "numero_vol"
+    t.index ["client_id"], name: "index_reservations_on_client_id"
+    t.index ["voiture_id"], name: "index_reservations_on_voiture_id"
   end
 
   create_table "reservations_tarifs", id: false, force: :cascade do |t|

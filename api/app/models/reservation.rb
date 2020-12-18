@@ -1,3 +1,4 @@
 class Reservation < ApplicationRecord
-    # belongs_to :tarif
+    belongs_to :voiture
+    belongs_to :client
 end

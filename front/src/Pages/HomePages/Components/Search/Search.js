@@ -82,21 +82,7 @@ export default class Search extends React.Component {
 						}}
 						validationSchema={ReservationSchema}
 						onSubmit={(values, { resetForm }) => {
-							axios.post('/reservations', values).then(response => {
-								if (response.status === 201) {
-									this.setState({ etape: 2})
-									
-									this.setState({
-										date_reservation: values
-									});
-									
-								} else if (response.status === 200) {
-									
-									this.setState({
-										message: response.data.message
-									})
-								}
-							});
+							
 							let date1 = values.dateDepart;
 							let date2 = values.dateRetour;
 							let jours = this.dateDiff(date1,date2);
@@ -104,16 +90,16 @@ export default class Search extends React.Component {
 								jour: jours
 							})
 							axios.get(`/voitures/${date1}/${date2}/${jours}`).then(reponse => {
-								if (reponse.status === 200 && reponse.date.prix[0]>0) {
+								if (reponse.status === 200 && reponse.data.prix[0]>0) {
 									console.log(reponse)
 									this.setState({
 										voitures:reponse.data.voitures,
-										prix:reponse.data.prix
+										prix:reponse.data.prix,
+										etape: 2,
+										date_reservation: values
 									});
 								} 
 							});
-
-							
 						}}
 						>
 							{({ errors, touched }) => (

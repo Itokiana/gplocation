@@ -1,12 +1,22 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :update, :destroy]
-  before_action :tarif_id, only: [:create]
-  
+
   # GET /reservations
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.order("date_retour ASC")
+    @hash1= {}
+    @reservations.each do |reservation|
+      voiture = reservation.voiture
 
-    render json: @reservations
+      if @hash1[reservation.date_retour].present?
+        @hash1[reservation.date_retour] [reservation.id]= [reservation,voiture] 
+      else
+        @hash1[reservation.date_retour] = {}
+        @hash1[reservation.date_retour] [reservation.id]= [reservation,voiture]
+      end
+    end
+
+    render json: @hash1
   end
 
   # GET /reservations/1
@@ -14,40 +24,17 @@ class ReservationsController < ApplicationController
     render json: @reservation
   end
 
-  def tarif_id
-    @reservation = Reservation.create(reservation_params)
-    
-  end
-
   # POST /reservations
   def create
-                                                                                                                                                                                                              
+    @reservation = Reservation.new(reservation_params)
 
-    if @reservation.dateDepart === @reservation.dateRetour
-      # return @reservation.delete
-      return render json: {message: "Pour louer aujourd\'hui, merci de contacter directement Cargo Location 
-      Perpignan au 04 68 35 86 35 ."}
-    elsif filtre = (@reservation.dateDepart.to_date...@reservation.dateRetour.to_date).count
-      if filtre >= 90
-        return render json: {message: "Veuillez saisir 
-        de nouveau vos dates de location ou Contactez notre agence pour toute durée de location superieure à 90 jours 
-        Via notre formulaire de contact ."}
-      end
-    else compare  = @reservation.dateDepart.to_date > @reservation.dateRetour.to_date
-      if compare === true
-        return render json: {message: "veuiller valider une autre date"}
-      end
-    end
     if @reservation.save
-      render json: @reservation, location: @reservation, status: :created
-      session[:reservation] = @reservation.id
+      render json: @reservation, status: :created, location: @reservation
     else
       render json: @reservation.errors, status: :unprocessable_entity
     end
   end
 
-  
- 
   # PATCH/PUT /reservations/1
   def update
     if @reservation.update(reservation_params)
@@ -70,7 +57,6 @@ class ReservationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def reservation_params
-      params.fetch(:reservation, {}).permit(:lieuDepart, :lieuRetour, :dateDepart, :dateRetour, :heureDepart, :heureRetour)
-
+      params.fetch(:reservation, {}).permit(:date_depart,:date_retour,:heure_depart,:heure_retour,:voiture_id,:client_id,:prix,:numero_vol)
     end
 end

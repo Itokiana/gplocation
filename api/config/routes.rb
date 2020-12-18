@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :reservations
   resources :jourferiers
   resources :fermexceptions
   resources :ouvertexceptions
@@ -19,7 +20,6 @@ Rails.application.routes.draw do
   post "/client_login", to: "clients#login"
   get "/last_client", to: "clients#finder"
 
-  resources :reservations
 
   #routes categories
   resources :categories do
@@ -54,5 +54,7 @@ Rails.application.routes.draw do
   resources :tarif_supplementaires
   resources :tarifs
   mount PayplugRails::Engine, at: "/ipn"
+
+  resources :charges, only: [:new,:create]
   
 end

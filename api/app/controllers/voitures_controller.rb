@@ -25,6 +25,7 @@ class VoituresController < ApplicationController
         @dateDepart = Date.strptime(params[:dateDepart], '%Y-%m-%d')
         @dateRetour = Date.strptime(params[:dateRetour], '%Y-%m-%d')
         @voitures = Voiture.all
+        @donner = {}
         @prix=[]
         @voitures.each do |voiture|
             @ligne1 = voiture.category.tarif_personalises.select(:prix).find_by("datedebutperso <= ? AND datefinperso >= ? AND jourdebut <= ? AND jourfin >= ?",@dateDepart,@dateRetour,params[:jours].to_i,params[:jours].to_i)
@@ -43,6 +44,7 @@ class VoituresController < ApplicationController
         @category = Category.find(voiture_params[:category])
         @paramsmapped = voiture_params
         @paramsmapped[:category] = @category
+        puts @category
         @voiture = Voiture.create!(@paramsmapped)
         json_response(@voiture, :created)
     end
