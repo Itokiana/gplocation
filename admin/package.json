@@ -43,6 +43,7 @@
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "rsuite": "^4.8.4",
     "tailwindcss": "^1.9.2",
     "yup": "^0.29.3"
   },

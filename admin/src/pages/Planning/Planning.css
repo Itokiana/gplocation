@@ -1,0 +1,9 @@
+.modaltest{
+    padding:5px 20px;
+}
+.textMan{
+    height:55px;
+}
+.contenu{
+    overflow-x: hidden !important;
+}
