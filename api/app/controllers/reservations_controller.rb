@@ -7,12 +7,12 @@ class ReservationsController < ApplicationController
     @hash1= {}
     @reservations.each do |reservation|
       voiture = reservation.voiture
-
+      client = reservation.client
       if @hash1[reservation.date_retour].present?
-        @hash1[reservation.date_retour] [reservation.id]= [reservation,voiture] 
+        @hash1[reservation.date_retour] [reservation.id]= [reservation,voiture,client] 
       else
         @hash1[reservation.date_retour] = {}
-        @hash1[reservation.date_retour] [reservation.id]= [reservation,voiture]
+        @hash1[reservation.date_retour] [reservation.id]= [reservation,voiture,client]
       end
     end
 

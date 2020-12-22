@@ -12,6 +12,8 @@ Category.create(ref:'R03', name: 'CatC' )
     Voiture.create(marque: "bmw", model: "X1", category_id: 3 )
     Voiture.create(marque: "bmw", model: "X4", category_id: 1)
     Voiture.create(marque: "peugeot", model: "308", category_id: 2)
+    
+    
     i =1
     while i <= 86 do
         # Instructions.
