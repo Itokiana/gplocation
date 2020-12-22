@@ -62,13 +62,17 @@ export default function InjectedCheckoutForm(props) {
   );
 }
 async function stripeTokenHandler(token) {
-    const paymentData = {stripeToken: token.id};
-  
+  let data=JSON.parse(sessionStorage.getItem("data"))
+    const paymentData = {stripeToken: token.id,description: data.client.client.id};
+
     const response = await axios.post('/charges',paymentData)
     if (response.data===true){
       console.log("paiement reussi")
-      let data=JSON.parse(sessionStorage.getItem("data"))
-      console.log(data)
+      
+      let numero_vol = ''
+      if (sessionStorage.getItem("numero_vol")){
+        numero_vol=JSON.parse(sessionStorage.getItem("numero_vol"))
+      }
       let values = {
         date_depart: data.data.date_depart,
         date_retour: data.data.date_retour,
@@ -76,8 +80,11 @@ async function stripeTokenHandler(token) {
         heure_retour:data.data.heure_retour,
         prix:data.data.prix,
         voiture_id:data.data.id,
-        client_id:data.client.client.id
+        client_id:data.client.client.id,
+        numero_vol:numero_vol.numero_vol
       }
+      sessionStorage.setItem("data",'')
+      sessionStorage.setItem("numero_vol",'')
       await axios.post('/reservations',values).then(result => {
         if(result.status===201){
           history.push('/')

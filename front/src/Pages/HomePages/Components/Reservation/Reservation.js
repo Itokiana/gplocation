@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Detail from './Detail/Detail';
 import Reserver from './Reserver/Reserver';
 import './Reservation.css';
-import axios from '../../../../axios';
 
 class Reservation extends Component {
     state = {
@@ -54,7 +53,7 @@ class Reservation extends Component {
                                         <div className="b-items__cars">
                                             <div className="b-items__cars-one wow zoomInUp" data-wow-delay="0.5s">
                                                 <div className="b-items__cars-one-img">
-                                                    <img className="img-responsive center-block" src={`http://localhost:4000/${voiture.image.url}`} alt="nissan" />
+                                                    <img className="img-responsive" src={`http://localhost:4000/${voiture.image.url}`} alt={voiture.marque}/>
                                                     <br />
                                                     <p className="laststock">Dernier véhicule en stock</p> 
                                                     <span className="confirm-tarif ">{
@@ -63,9 +62,10 @@ class Reservation extends Component {
                                                     <p className="montant-acompte">dont 100 € d'acompte</p>
                                                 </div>
                                                 <div className="b-items__cars-one-info">
-                                                    <header className="b-items__cars-one-info-header s-lineDownLeft">
+                                                    <header className="b-items__cars-one-info-header s-lineDownLeft" id="head">
                                                         <h2>{voiture.marque}</h2>
                                                         <Link to={`/reserver/${this.props.date_reservation.dateDepart}/${this.props.date_reservation.dateRetour}/${this.props.date_reservation.heureDepart}/${this.props.date_reservation.heureRetour}/${this.props.date_reservation.lieuDepart}/${this.props.date_reservation.lieuRetour}/${voiture.id}/${parseInt(this.props.jour,10) * this.props.prix[this.getKey(voiture,this.props.voitures)]}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
+
                                                     </header>
                                                     <div className="b-blog__posts-one-info">
                                                         <div className="row">

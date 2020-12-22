@@ -82,7 +82,6 @@ import './HomeAuto.css';
 											<nav>
 												<ul className="b-blog__aside-categories-list">
 													<li><Link to="/Aeroport">Aéroport de la Réunion Roland-Garros</Link></li>
-													{/* <li><Link to="/Sainte-Marie">Sainte-Marie</Link></li> */}
 													<li className="m-active"><Link to="/">Accueil</Link></li>
 													<br></br><br></br>
 												</ul>

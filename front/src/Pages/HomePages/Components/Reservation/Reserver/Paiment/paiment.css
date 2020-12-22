@@ -23,7 +23,7 @@
     justify-content: center;
 }
 .card{
-        animation: animation 3s ;
+        animation: animation 2s ;
         background: rgb(38, 26, 151);
         width: 30%;
         height: 25%;
@@ -50,4 +50,7 @@
     background: rgb(236, 226, 83);
     padding: 15px;
     border-radius: 10px;
+}
+#numero_vol {
+    margin-right: 20px;
 }
