@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_18_114235) do
+ActiveRecord::Schema.define(version: 2020_12_22_110910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,10 @@ ActiveRecord::Schema.define(version: 2020_12_18_114235) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "stock"
+    t.integer "duree_min_bs"
+    t.integer "duree_min_ms"
+    t.integer "duree_min_hs"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -94,6 +98,13 @@ ActiveRecord::Schema.define(version: 2020_12_18_114235) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["saison_id"], name: "index_date_saisons_on_saison_id"
+  end
+
+  create_table "datetarifpersos", force: :cascade do |t|
+    t.date "datedebut"
+    t.date "datefin"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "fermexceptions", force: :cascade do |t|
@@ -150,6 +161,18 @@ ActiveRecord::Schema.define(version: 2020_12_18_114235) do
     t.date "jourouvertfin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "prixjourpersos", force: :cascade do |t|
+    t.integer "jourdebut"
+    t.integer "jourfin"
+    t.integer "prixperso"
+    t.bigint "category_id"
+    t.bigint "datetarifperso_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_prixjourpersos_on_category_id"
+    t.index ["datetarifperso_id"], name: "index_prixjourpersos_on_datetarifperso_id"
   end
 
   create_table "reservations", force: :cascade do |t|
