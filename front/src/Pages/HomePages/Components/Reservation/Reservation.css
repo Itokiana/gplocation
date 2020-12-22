@@ -97,6 +97,11 @@
     background: #555;
     font-weight: 700 !important;
 }
+#head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 #bgColor{
     background: #228dcb !important;
 }

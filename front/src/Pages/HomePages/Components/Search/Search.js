@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from '../../../../axios';
 import ErrorField from './ErrorField';
 import * as Yup from 'yup'; 
 import './Style.css';
-import { Field, Form, Formik, FormikProps } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import Reservation from '../Reservation/Reservation';
 
 
@@ -61,7 +61,7 @@ export default class Search extends React.Component {
 	
 	
 	render() {
-		const { etape, date_reservation } = this.state;
+		const { etape } = this.state;
 		const message = this.state.message;
 		return (
 			<>

@@ -66,57 +66,62 @@ export class Accueil extends Component {
                                         <span className="text-nbr">Nombre de retours :<span className="number-text">23</span></span>
                                     </p>
                                 </div>
-                                 {/* <span className="btn-depart">Départs/Retours</span> &nbsp;
-                                  <span className="btn-departs">Départs</span> &nbsp;
-                                  <span className="btn-departs">Retours</span> &nbsp;
-                                  <span>Nombre de départs :<span>7</span></span> &nbsp;
-                                  <span> - Nombre de retours :<span>23</span></span> */}
-                            {this.state.reservations?(
-                                <div>
-                                    <table className="table-accueil">
-                                        <thead>
-                                            <tr className="th-accueil">
-                                                <th>Véhicule</th>
-                                                <th>départ</th>
-                                                <th>Retour</th>
-                                                <th>Option</th>
-                                                <th>Total</th>
-                                                <th>Acompte</th>
-                                                <th>Nom</th>
-                                                <th>N° de Vol</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                    {Object.keys(this.state.reservations).map(reservation => (
-                                       <>
-                                        <div>      
-                                            <div className="date"><p>{moment(`${reservation.toString()}`).format('dddd Do MMMM YYYY')}</p></div>
-                                            {console.log(this.state.reservations[reservation])}
-                                            {Object.keys(this.state.reservations[reservation]).map(res =>(
-                                                <table className="table-data">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{this.state.reservations[reservation][res][1].marque}</td>
-                                                        <td>{moment(`${this.state.reservations[reservation][res][0].date_depart.toString()}`).format('dddd Do MMMM YYYY')}</td>
-                                                        <td>{moment(`${this.state.reservations[reservation][res][0].date_retour.toString()}`).format('dddd Do MMMM YYYY')}</td>
-                                                        <td>Option</td>
-                                                        <td>Total</td>
-                                                        <td>Acompte</td>
-                                                        <td>Nom</td>
-                                                        <td>{this.state.reservations[reservation][res][0].numero_vol}</td>
-                                                        <td>Actions</td>
-                                                    </tr>   
-                                                </tbody>
-                                            </table>
-                                            ))}
+                                {this.state.reservations?(
+                                    <div>
+                                        <table className="table-accueil">
+                                            <thead>
+                                                <tr className="th-accueil">
+                                                    <th>Véhicule</th>
+                                                    <th>départ</th>
+                                                    <th>Retour</th>
+                                                    <th>Option</th>
+                                                    <th>Total</th>
+                                                    <th>Acompte</th>
+                                                    <th>Nom</th>
+                                                    <th>N° de Vol</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {Object.keys(this.state.reservations).map(reservation => (
                                             
-                                        </div>
-                                        </>
-                                    ))}
-                                   
-                                </div>
-                            ):(<h3>Chargement</h3>)}
+                                            <>
+                                            <tr>
+                                                <td colspan="9">
+                                                    <div className="date"><p>{moment(`${reservation.toString()}`).format('dddd Do MMMM YYYY')}</p></div>
+                                                </td>
+                                            </tr>
+                                            
+                                            
+                                                {Object.keys(this.state.reservations[reservation]).map(res =>(
+                                                    
+                                                        <tr>
+                                                            <td>
+                                                                <img className="img-voiture" src={`http://localhost:4000/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/>
+                                                                {this.state.reservations[reservation][res][1].marque}
+                                                            </td>
+                                                            <td>
+                                                                <div>{moment(`${this.state.reservations[reservation][res][0].date_depart.toString()}`).format('dddd Do MMMM YYYY')}</div>
+                                                                <div>{this.state.reservations[reservation][res][0].heure_depart}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div>{moment(`${this.state.reservations[reservation][res][0].date_retour.toString()}`).format('dddd Do MMMM YYYY')}</div>
+                                                                <div>{this.state.reservations[reservation][res][0].heure_retour}</div>
+                                                            </td>
+                                                            <td></td>
+                                                            <td>{this.state.reservations[reservation][res][0].prix}€</td>
+                                                            <td>100€</td>
+                                                            <td>{this.state.reservations[reservation][res][2].nom}</td>
+                                                            <td>{this.state.reservations[reservation][res][0].numero_vol}</td>
+                                                            <td>Actions</td>
+                                                        </tr>   
+                                                ))}
+                                            </>
+                                        ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ):(<h3>Chargement</h3>)}
                             
                             </div>
                         </div>

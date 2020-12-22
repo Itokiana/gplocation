@@ -6,25 +6,17 @@ import ConditionModal from '../../Detail/ConditionModal';
 import './paiment.css';
 import * as Yup from 'yup';
 import Checkout from './Checkout';
+import { Formik, Form, Field } from 'formik';
+import ErrorField from '../../ErrorField';
+
 
 function PaimentEtape1(props) {
     const [status, setStatus] = useState(false)
+    const [messageNumeroVol, setMessageNumeroVol] = useState('')
     const [modalShow, setModalShow] = React.useState(false);
-    const CarteInformation = Yup.object().shape({
-        numero_carte: Yup.string()
-            .required('le numero de la carte ne doit pas être vide')
-            .min(16, 'Numero carte incomplet')
-		    .max(19, 'Numero de carte inconnue')
-		    .matches(/([0-9])/, 'Le numero de telephone ne doit contenir que des chiffres'),
-        cvv: Yup.string()
-            .required('le cvv ne doit pas être vide')
-            .min(3,'cvv incomplet')
-            .max(3,'cvv inconnue'),
-        date_expiration_carte: Yup.string()
-            .required('la date ne peut pas être vide')
-            .min(5,'date incomplet')
-            .max(5,'date inconnue'),
-
+    const NumeroVolValidation = Yup.object().shape({
+        numero_vol: Yup.string()
+            .required('le numero de vol ne doit pas être vide')
     });
     const Paiement = () => {
         setStatus(!status) 
@@ -35,20 +27,33 @@ function PaimentEtape1(props) {
                 <div className="b-contacts__address">
                     <div className="transaction text-justify">
                         <div className="login">
-                            <form id="formlivraison" action="" method="post">
-                                    <h3 class="form-connec-h3">Prise en charge du véhicule</h3>
-                                        <div class="ptop10 cc_cursor">
-                                                <input type="hidden" name="livraison" value="4" />
-                                                <input type="hidden" id="lieu-livraison" name="lieu-livraison" value="Aéroport de la Réunion Roland-Garros" />
-                                                    <p class=""><b>Nous vous attendrons dès votre sortie de l'avion, avec votre nom inscrit sur une pancarte.</b></p><br />
+                        <Formik
+                            initialValues={{numero_vol:''}}
+                            validationSchema={NumeroVolValidation}
+                            onSubmit={(values, { resetForm }) => {
+                                sessionStorage.setItem("numero_vol",JSON.stringify(values))
+                                resetForm()
+                                setMessageNumeroVol(`votre numero de vol à été bien enregistrer : ${values.numero_vol}`)
+                            }}
+                        >{({ errors, touched, handleSubmit }) => (
+                            <Form id="formlivraison" noValidate onSubmit={handleSubmit}>
+                                    <h3 className="form-connec-h3">Prise en charge du véhicule</h3>
+                                        <div className="ptop10 cc_cursor">
+                                            <p ><b>Nous vous attendrons dès votre sortie de l'avion, avec votre nom inscrit sur une pancarte.</b></p><br />
                                             <div id="livraison-infosup">
-                                        <label id="lab-livr-infosup" htmlFor="livr-infosup">
-                                            <p class="paddingp">Merci d'indiquer votre numéro de vol et la compagnie :
-                                        <input type="text" id="livr-infosup" name="livr-infosup" /></p><br />
-                                        </label>
-                                    </div>
-                                </div>
-                            </form>
+                                                <label id="lab-livr-infosup" htmlFor="livr-infosup">
+                                                    <p className="paddingp">Merci d'indiquer votre numéro de vol et la compagnie :
+                                                        <Field type="text" placeholder="Numero de vol" name="numero_vol" id="numero_vol"/>
+                                                        <button type="submit" className="btn btn-primary d-flex justify-content-center" >Envoyer</button>
+                                                        <ErrorField errors={errors} touched={touched} row="numero_vol"/>
+                                                    </p><br />
+                                                    <p>{messageNumeroVol}</p>
+                                                </label>
+                                            </div>
+                                        </div>
+                            </Form>
+                        )}
+                        </Formik>
                             <p class="petitp"><strong>Nom :</strong> {(props.client.client.nom)} {(props.client.client.prenom)}- <strong>Téléphone :</strong> {(props.client.client.telephone)}<br />
                                     <strong>Email de réception de la réservation :</strong>{(props.client.client.email)}</p>
                                     <fieldset id="fd_confirm">

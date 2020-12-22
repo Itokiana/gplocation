@@ -61,7 +61,7 @@ function Reserver(propos) {
           .then((data) => {
             setVoiture({voiture: data});
           });
-    }, []);  
+    },[]);  
       
     return (
         <div>
@@ -82,7 +82,7 @@ function Reserver(propos) {
                                             <div className="b-contacts__address-hours">
                                             <p className="conf_categ">{(voiture.voiture && voiture.voiture.marque)}</p>
                                            
-                                            <img className="img-responsive center-block" src={`http://localhost:4000/${(voiture.voiture && voiture.voiture.image.url)}`} alt="nissan" width="250px" height="220px"/>
+                                            <img className="img-responsive center-block" src={`http://localhost:4000/${(voiture.voiture && voiture.voiture.image.url)}`} alt={voiture.voiture.marque} width="250px" height="220px"/>
                                             <ul className="listeReserve">
                                                 <li className="prise"><span></span><b>Prise en charge à l'aéroport</b></li>
                                                 <li className="prise"><span className="carburant"></span>Carburant : Plein à rendre plein</li>
@@ -240,7 +240,7 @@ function Reserver(propos) {
                                                             <Field type="password" placeholder="Mot de passe*" name="password_digest" />
                                                             <ErrorField errors={errors} touched={touched} row="password_digest"/>
                                                         </div>
-                                                        <a>Mot de passe oublier</a>
+                                                        <a href="*">Mot de passe oublier</a>
                                                         <center><button type="submit" className="btn m-btn" id="valider">Valider et payer<span className="fa fa-angle-right"></span></button></center>
                                                     </Form>)}
                                                 </Formik>
