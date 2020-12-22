@@ -29,6 +29,9 @@ class Planning extends React.Component{
         return(
             <>
             <h1>Bbonjour</h1>
+            {
+                
+            }
             <ScheduleComponent>
                 <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
             </ScheduleComponent>
