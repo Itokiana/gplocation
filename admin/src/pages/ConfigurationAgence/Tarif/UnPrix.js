@@ -7,19 +7,6 @@ export default class UnPrix extends Component {
         jours: [],
     };
 
-    componentDidMount() {
-        this.getJours();
-    }
-    getJours = () => {
-		axios.get(`/jours`).then(response => {
-			if (response.status === 200) {
-				this.setState({
-					jours: response.data
-				});
-				console.log();
-			}
-		});
-    };
 
     namePrix=`prix${this.props.num}`
     nombreJourD=`nombreJourD${this.props.num}`

@@ -6,7 +6,7 @@ import axios from '../../../../axios';
 
 export default class DureeLocation extends Component {
     state = {
-        inValue: {},
+        inValue: null,
         saison: null
 
     }
@@ -14,21 +14,21 @@ export default class DureeLocation extends Component {
         
         axios.get(`/saisons`).then(response => {
             var objValue = response.data
+            var value ={}
        
             for (var j = 0; j < objValue.length ; j++) {
-                this.setState({
-                    inValue: {
-                        ...this.state.inValue,
-                        [`nombreS${j}`]: objValue[j].duree_min,
-                        [`check${j}`]: ''
-                    },
-                })
-            }        
+                value[`nombreS${j}`]= objValue[j].duree_min
+                value[`check${j}`]= ''
+            } 
+            this.setState({
+                inValue: value
+            })       
         })    
     }
     
     render() {
                 
+        
         return (
         
             <>
@@ -46,17 +46,14 @@ export default class DureeLocation extends Component {
                          
                         initialValues={this.state.inValue}
                         onSubmit={(value,{setSubmitting})=>{
-                            setSubmitting(true)
-                                                
-                           axios.post('/saisons', value)
-                           console.log(value)
-                            
-                            setSubmitting(false)
-                           
+                            setSubmitting(true)                    
+                            axios.post('/saisons', {value})
+                            console.log(value)
+                            setSubmitting(false) 
                         }
                      }
                     
-                    >{formik => (
+                    >
                         
                         <Form class="d-flex align-items-start">
                             <div className="w-full md:w-1/2 px-3">
@@ -76,8 +73,8 @@ export default class DureeLocation extends Component {
                                         <Field className="form-check-input" type="checkbox"  id="check1" name={[`check1`]} />
                                     </div>
                                 </label>
-                                <Field type="number" name={[`nombreS1`]} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
-                            px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+                                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
+                                px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name={[`nombreS1`]} />
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
@@ -86,8 +83,8 @@ export default class DureeLocation extends Component {
                                         <Field className="form-check-input" type="checkbox"  id="check2" name={[`check2`]} />
                                     </div>
                                 </label>
-                                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
-                            px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="number" name={[`nombreS2`]}/>
+                                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
+                                px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name={[`nombreS2`]} />
                             </div>
 
                             <div className="w-full md:w-1/2 px-3">
@@ -101,7 +98,7 @@ export default class DureeLocation extends Component {
                                 </button>
                             </div>
                                 
-                        </Form>)}
+                        </Form>
                         
 
                     </Formik>

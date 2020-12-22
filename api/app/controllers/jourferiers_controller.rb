@@ -17,18 +17,28 @@ class JourferiersController < ApplicationController
   def create
     # @jourferier = Jourferier.new(jourferier_params)
     data= params[:value]
-    jourget= params[:jourf]
     idUn= params[:idUn]
-    idDeux= params[:idDeux]
+    idD= params[:idDeux]
     tabDeux = params[:tableauDeux]
     tabUn = params[:tableauUn]
     fintabUn = tabUn.last+1
     fintabDeux = tabDeux.last+1
+    
+    
+    puts'+++'*40
+    puts tabUn
+    puts'+++'*40
+
+    puts idUn
+    puts'+++'*40
+   
 
     if (idUn.length()<tabUn.length())
-      $i=idUn.length()+1
-      $fin=tabUn.last
+      
+      $i=idUn.length()
+      $fin=tabUn.last-1
       until $i > $fin do
+        $i +=1
         dateUn = "date#$i"
         jourUn = "jour#$i"
         prix = "prix#$i"
@@ -42,61 +52,62 @@ class JourferiersController < ApplicationController
           puts "="*50
           render json: jourferierUn.errors, status: :unprocessable_entity
         end
-        $i +=1
+       
       end
     else
       tabUn.push(fintabUn)
+      
       tabUn.each do |val|
         dateUn = "date#{val}"
         jourUn = "jour#{val}"
         prix = "prix#{val}"
         checkU = "checkU#{val}"
-       
-       
-        jourferierUn = Jourferier.find(id)
-        
+        id = idUn[val-1]  
         if data[checkU]==true
-            if jourferierUn.update(evenement: data[jourUn], dateferie: data[dateUn], surplus: data[prix], anne: data[:anneeU])
-              puts "a"*50
-              render json: jourferierUn, status: :created, location: jourferierUn
-            else
-              puts "="*50
-              render json: jourferierUn.errors, status: :unprocessable_entity
-            end
+          Jourferier.find(id).update(evenement: data[jourUn], dateferie: data[dateUn], surplus: data[prix], anne: data[:anneeU])
         end
       end
 
     end
+    if(1==1)
+      puts("Vrai"*10)
+    end
+    puts'+++'*40
+    puts tabDeux.length
+    puts'+++'*40
 
-    if (idDeux.length()<tabDeux.length())
-      $j=idDeux.length()+1
-      $finD=tabDeux.last
+    puts idD.length
+    puts'+++'*40
+
+    if (idD.length()<tabDeux.length())
+      $j=idD.length()
+      $finD=tabDeux.last-1
       until $j > $finD do
-        datDeux = "dateD#$j"
+        $j +=1
+        dateDeux = "dateD#$j"
         jourDeux = "jourD#$j"
-        prixD = "prixD#$j"
-        checkD = "checkD#$j"
-        jourferierDeux= Jourferier.new(evenement: data[jourDeux], dateferie: data[dateDeux], surplus: data[prixD], anne: data[:anneeD])
+        prixDeux = "prixD#$j"
+        checkDeux = "checkD#$j"
+        jourferierDeux= Jourferier.new(evenement: data[jourDeux], dateferie: data[dateDeux], surplus: data[prixDeux], anne: data[:anneeD])
 
         if jourferierDeux.save
           puts "a"*50
           render json: jourferierDeux, status: :created, location: jourferierDeux
         else
           puts "="*50
-          render json: jourferierUn.errors, status: :unprocessable_entity
+          render json: jourferierDeux.errors, status: :unprocessable_entity
         end
-        $j +=1
       end
+
     else
-      tabDeux.push(fintabDeux)
       tabDeux.each do |val|
         dateDeux = "dateD#{val}"
         jourDeux = "jourD#{val}"
         prixDeux = "prixD#{val}"
         checkDeux = "checkD#{val}"
       
-        idD = idDeux[val-1]
-        jourferierD = Jourferier.find(idD)
+        idDe = idD[val-1]
+        jourferierD = Jourferier.find(idDe)
         
         if data[checkDeux]==true
             if jourferierD.update(evenement: data[jourDeux], dateferie: data[dateDeux], surplus: data[prixDeux], anne: data[:anneeD])

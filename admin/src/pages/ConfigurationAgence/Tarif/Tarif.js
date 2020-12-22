@@ -1,26 +1,41 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../../../axios'
-import AddTarif from './AddTarif'
-import TariList from './TarifList';
+import moment from 'moment'
 
 
 class Tarif extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lire: false,
             categories: [],
             category: [],
-            tarifs: []
+            tarifperso: []
         };
     }
 
 
     componentDidMount() {
         this.getCategories();
-        this.getTarif()
-	}
+        this.getTarifPerso();
+    }
+    getTarifPerso = () => {
+        axios.get(`/tarifpersonels`).then(response => {
+            if (response.status === 200) {
+                this.setState({
+                    tarifperso: response.data
+                });
+                console.log(this.state.tarifperso);
+            }
+        });
+    }
+    deleteDate = (date) => {
+        axios.delete(`/tarifpersonels/${date.id}`).then(response => {
+            if (response.status === 204) {
+                this.getTarifPerso();
+            }
+        })
+    }  
 
 	getCategories = () => {
 		axios.get('/categories').then(response => {
@@ -33,100 +48,117 @@ class Tarif extends Component {
 			}
 		})
     }
+    Liste = () => {
+        return(
+            <>
+            {
+            this.state.categories.map((category, key) => {
+                const trieCategorie$key = this.state.tarifperso.filter(cat => cat.category_id == category.id);
+                console.log("categorie",trieCategorie$key)
+                const trieDate$key = []
+                trieCategorie$key.map((date,keyDate) => {
+                    // const tab$keyDate = {}
+                    // tab$keyDate["debut"]=date.datedebut
+                    // tab$keyDate["fin"]=date.datefin
+                    trieDate$key.push(date.datedebut)
+                    trieDate$key.push(date.datefin)
 
-    
-   
-    getTarif = (props) => {
-        axios.get(`/tarifs`)
-        .then(res => {
-            const {tarifs} = res.data
-            this.setState({ tarifs });
-            console.log(this.state);
-        })
-    }
+                })
+                console.log("tab", trieDate$key)
+                const unique = trieDate$key.filter((v, i, a) => a.indexOf(v) === i);
 
-    deleteTarif = (tarif) => {
-        axios.delete(`/tarifs/${tarif.id}`).then(response => {
-            if (response.status === 204) {
-                this.getTarif();
-            }
-        })
-    }
-    
-    
+                console.log("unique", unique)
+                return(
+                    <>
+                        <Link to={`/ajouter_un_tarif/${(category.id)}`}
+                        className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
+                        transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                        >
+                        Ajouter un {category.name}
+                        </Link> 
+                        {
+
+                            unique.map((val1, keyval) => {
+                                const val$keyval = []    
+                                trieCategorie$key.map(val3 => {
+                                    unique.map(val2=> {
+                                        if(val3.datedebut===val1 && val3.datefin===val2){
+                                            val$keyval.push(val3)
+                                        }
+                                    })
+                                })
+                                console.log(`val${keyval}`, val$keyval)
+
+                                if (val$keyval.length === 0){
+                                    return(<>
+                                        <br/>
+                                        </>
+                                    )
+                                }
+                                else{ 
+                                    return(
+                                        <>
+                                                
+                                            <div className="py-4">
+                                                <div className="mt-2">
+                                                    <h3>
+                                                    Du <strong>{moment(val$keyval[0].datedebut).format('D MMMM Y')}</strong> au <strong>{moment(val$keyval[0].datefin).format('D MMMM Y')}. . . . . . . . . . . . . . . . . . . </strong> 
+                                                    <span className="text-red-500 cursor-pointer" onClick={() => this.deleteDate(val$keyval[0])}>
+                                                    Supprimer
+                                                    </span>
+                                                    </h3>
+                                                    <table class="table table-condensed">
+                                                        <thead>
+                                                        {val$keyval.map(val => {
+                                                            return(
+                                                                <>
+                                                                    <th>
+                                                                    <span className="text-blue-600">{val.jourdebut} au {val.jourfin} Jour</span>
+                                                                    </th>
+                                                                </>    
+                                                                )
+                                                        })}                    
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                            {val$keyval.map(cat=>{
+                                                                return(
+                                                                    <>
+                                                                    <td className="text-white">
+                                                                        <u>{cat.prixperso}</u> <br/>$/jours
+                                                                    </td>
+                                                                    </>
+                                                                )
+                                                            })}                                            
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </>
+                                    )
+                                }
+                            })
+                        
+                        }
+                    </>
+                )
+
+            })}
+        </>
+        )
+    }   
     render() {
-        console.log(this.state.tarifs);
-        
         return (
             <>
-                <div>
-                    <center>
-                        <h1>TARIF PERSONNALISER</h1>
-                        
-                    <br/>
-                    {this.state.categories.map(category => {
-                        return (
-                            
-                            <Link to={`/ajouter_un_tarif/${(category.id)}`}
-                            className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
-                            transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
-                            >
-                            {category.name}
-                            </Link>
-                        
-                        );
-                    })}
-                    </center>
+            <div>
+                <center>
+                    <h1 className="text-white">TARIF PERSONNALISER</h1>
+                </center>
                     
-                </div>
                 <br/>
-                <div>
-                { this.state.tarifs && this.state.tarifs.map(tarif => {
-                    return (
-                    <div>
-                        <p>Du: {tarif.date_debut} Au: {tarif.date_fin}</p>
-                        <table className="min-w-full">
-                            
-                            <tr>
-                                <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 
-                                text-blue-500 tracking-wider">1 jour</th>
-                                <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 
-                                text-blue-500 tracking-wider">3 jours</th>
-                                <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 
-                                text-blue-500 tracking-wider">5 jours</th>
-                                <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 
-                                text-blue-500 tracking-wider">6 jours</th>
-                                <th className="px-6 py-3 border-b-2 border-gray-300 text-left leading-4 
-                                text-blue-500 tracking-wider">categorie</th>
-                            </tr>
-                            
-                            
-                                <tr className="bg-white">
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">{tarif.prix1} £</td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">{tarif.prix3} £</td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">{tarif.prix5} £</td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">{tarif.prix6} £</td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">{
-                                      <TariList category={tarif.category_id}/>
-                                }</td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
-                                <button
-                                    type="button"
-                                    className="border border-yellow-500 bg-yellow-500 text-white rounded-md px-4 py-2 m-2 transition 
-                                    duration-500 ease select-none hover:bg-yellow-600 focus:outline-none focus:shadow-outline"
-                                    onClick={() => this.deleteTarif(tarif)} 
-                                >
-                                    delete
-                                </button>
-                                </td>
-                                </tr>
-                        
-                        </table>
-                    </div>
-                )})}
-                <br/><br/>
-                </div>
-            
+                {this.Liste()}
+            </div>
             </>
         )
     }

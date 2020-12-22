@@ -4,7 +4,7 @@ class CreateHoraireJours < ActiveRecord::Migration[6.0]
       t.string :nomjour
       t.string :heuredebut
       t.string :heurefin
-      t.integer :prixsurplus
+      t.float :prixsurplus
 
       t.timestamps
     end

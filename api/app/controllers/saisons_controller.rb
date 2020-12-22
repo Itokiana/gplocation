@@ -17,6 +17,9 @@ class SaisonsController < ApplicationController
   def create
     data=params[:value]
     # idDmin=params[:idD]
+    puts"+++"*30
+    puts data
+    puts"****"*30
     
 
     tab = [0,1,2,3]
@@ -32,9 +35,9 @@ class SaisonsController < ApplicationController
       # puts durMin
      
 
-      saison = Saison.find(id)
+      
       if data[check] == true
-        saison.update(duree_min: data[durMin])
+        Saison.find(id).update(duree_min: data[durMin])
       end
     end
   end

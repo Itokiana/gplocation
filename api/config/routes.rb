@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :tarifpersonels
   resources :prixjourpersos
   resources :datetarifpersos
   resources :jourferiers

@@ -49,7 +49,7 @@ export default class ListeCategory extends Component {
                                 <td class=" ">{category.id} </td>
                                 <td class=" ">{category.ref} <i class="success fa fa-long-arrow-up"></i></td>
                                 <td class=" ">{category.category}</td>
-                                <td class=" "><input type="text" value={this.state.value} onChange={this.handleChange}/></td>
+                                <td class=" "><input type="text" value={this.state.value} onChange={this.handleChange()}/></td>
                                 <td>
                                     <span><input name="plan" type="checkbox" /></span>
                                 </td>
