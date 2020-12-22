@@ -23,7 +23,7 @@ class GestionJF extends Component {
             nombreLigneUn: [...this.state.nombreLigneUn,this.state.nombreLigneUn.pop() + 1],
             //idUn: [...this.state.idUn, this.state.idGlobal.pop() +1]
         })
-        
+        console.log("tab1", this.state.nombreLigneUn)
     }
     ajoutNewDeuxJour =() =>{
         this.setState({
@@ -32,7 +32,7 @@ class GestionJF extends Component {
             // idD: [...this.state.idD, this.state.idGlobal.pop() +1]
 
         })
-        
+        console.log(this.state.nombreLigneDeux)
     }
     componentDidMount(){
         axios.get('/jourferiers').then(response => {

@@ -3,7 +3,7 @@ class JourferiersController < ApplicationController
 
   # GET /jourferiers
   def index
-    @jourferiers = Jourferier.all
+    @jourferiers = Jourferier.all.order('dateferie ASC')
 
     render json: @jourferiers
   end

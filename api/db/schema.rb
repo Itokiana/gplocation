@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_12_10_104244) do
-=======
 ActiveRecord::Schema.define(version: 2020_12_22_110910) do
->>>>>>> ac939dc0b18d230a07f2602909d710bb8bab294b
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,11 +118,7 @@ ActiveRecord::Schema.define(version: 2020_12_22_110910) do
     t.string "nomjour"
     t.string "heuredebut"
     t.string "heurefin"
-<<<<<<< HEAD
     t.float "prixsurplus"
-=======
-    t.integer "prixsurplus"
->>>>>>> ac939dc0b18d230a07f2602909d710bb8bab294b
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -135,11 +127,7 @@ ActiveRecord::Schema.define(version: 2020_12_22_110910) do
     t.string "evenement"
     t.date "dateferie"
     t.integer "anne"
-<<<<<<< HEAD
     t.float "surplus"
-=======
-    t.integer "surplus"
->>>>>>> ac939dc0b18d230a07f2602909d710bb8bab294b
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -188,18 +176,17 @@ ActiveRecord::Schema.define(version: 2020_12_22_110910) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.date "date_depart"
-    t.date "date_retour"
-    t.string "heure_depart"
-    t.string "heure_retour"
-    t.float "prix"
-    t.bigint "client_id"
-    t.bigint "voiture_id"
+    t.string "lieuDepart"
+    t.string "lieuRetour"
+    t.date "dateDepart"
+    t.date "dateRetour"
+    t.time "heureDepart"
+    t.time "heureRetour"
+    t.bigint "tarif_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "numero_vol"
-    t.index ["client_id"], name: "index_reservations_on_client_id"
-    t.index ["voiture_id"], name: "index_reservations_on_voiture_id"
+    t.index ["tarif_id"], name: "index_reservations_on_tarif_id"
   end
 
   create_table "reservations_tarifs", id: false, force: :cascade do |t|

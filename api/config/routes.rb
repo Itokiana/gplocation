@@ -1,13 +1,6 @@
 Rails.application.routes.draw do
 
 
-<<<<<<< HEAD
-  resources :tarifpersonels
-  resources :prixjourpersos
-  resources :datetarifpersos
-=======
-  resources :reservations
->>>>>>> ac939dc0b18d230a07f2602909d710bb8bab294b
   resources :jourferiers
   resources :fermexceptions
   resources :ouvertexceptions
