@@ -5,23 +5,29 @@ class Voiture < ApplicationRecord
     # validations
     #validates_presence_of :image, :marque, :model, :places, :type, :climatisation, :vitesse, :portes
     belongs_to :category
+    has_many :reservations
     def getPrixBase(jours,dateDepart,dateRetour)
-        ligne = self.category.base_tarifs.select(:id,:prixbassesaison,:prixhautesaison,:prixmoyennesaison).find_by("jourdebut <= ? AND jourfin >= ?",jours.to_i,jours.to_i)
+        category = self.category
         nom_saison = DateSaison.find_by("debutsaison <= ? and finsaison >= ?",dateDepart,dateRetour).saison.nomsaison
-        duree_min = DateSaison.find_by("debutsaison <= ? and finsaison >= ?",dateDepart,dateRetour).saison.duree_min
-        puts duree_min
-        puts jours
-        if jours.to_i >= duree_min 
-            case nom_saison 
+        ligne = self.category.base_tarifs.select(:id,:prixbassesaison,:prixhautesaison,:prixmoyennesaison).find_by("jourdebut <= ? AND jourfin >= ?",jours.to_i,jours.to_i)
+        
+        
+        case nom_saison 
             when "Basse Saison" 
-                return ligne.prixbassesaison
+                if category.duree_min_bs <= jours.to_i
+                    return ligne.prixbassesaison
+                end
+                
             when "Haute Saison"
-                return ligne.prixhautesaison
-            when "Moyen Saison"
-                return ligne.prixmoyennesaison
-            end
+                if category.duree_min_hs <= jours.to_i
+                    return ligne.prixhautesaison
+                end
+                
+            when "Moyenne Saison"
+                if category.duree_min_ms <= jours.to_i
+                    return ligne.prixmoyennesaison
+                end
         end
-        return -1
     end
     
 end

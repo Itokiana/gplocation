@@ -68,3 +68,9 @@ gem 'mini_magick'
 
 # payplug
 gem 'payplug_rails'
+
+#stripe
+gem 'stripe'
+
+#dotenv
+gem 'dotenv-rails'

@@ -1,8 +1,26 @@
 import React, { Component } from 'react'
+import axios from '../../axios';
 import './Accueil.css';
+import moment from 'moment';
+import 'moment/locale/fr' 
+moment.locale('fr');
 
 
 export class Accueil extends Component {
+    state =  {
+        reservations:null,
+    }
+    componentDidMount(){
+        axios.get('/reservations').then(response => {
+            if(response.status===200){
+                this.setState({
+                    reservations:response.data,
+                })
+                console.log(response.data)
+
+            }
+        })
+    }
     render() {
         return (
             <div>
@@ -53,38 +71,54 @@ export class Accueil extends Component {
                                   <span className="btn-departs">Retours</span> &nbsp;
                                   <span>Nombre de départs :<span>7</span></span> &nbsp;
                                   <span> - Nombre de retours :<span>23</span></span> */}
+                            {this.state.reservations?(
+                                <div>
+                                    <table className="table-accueil">
+                                        <thead>
+                                            <tr className="th-accueil">
+                                                <th>Véhicule</th>
+                                                <th>départ</th>
+                                                <th>Retour</th>
+                                                <th>Option</th>
+                                                <th>Total</th>
+                                                <th>Acompte</th>
+                                                <th>Nom</th>
+                                                <th>N° de Vol</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    {Object.keys(this.state.reservations).map(reservation => (
+                                       <>
+                                        <div>      
+                                            <div className="date"><p>{moment(`${reservation.toString()}`).format('dddd Do MMMM YYYY')}</p></div>
+                                            {console.log(this.state.reservations[reservation])}
+                                            {Object.keys(this.state.reservations[reservation]).map(res =>(
+                                                <table className="table-data">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{this.state.reservations[reservation][res][1].marque}</td>
+                                                        <td>{moment(`${this.state.reservations[reservation][res][0].date_depart.toString()}`).format('dddd Do MMMM YYYY')}</td>
+                                                        <td>{moment(`${this.state.reservations[reservation][res][0].date_retour.toString()}`).format('dddd Do MMMM YYYY')}</td>
+                                                        <td>Option</td>
+                                                        <td>Total</td>
+                                                        <td>Acompte</td>
+                                                        <td>Nom</td>
+                                                        <td>{this.state.reservations[reservation][res][0].numero_vol}</td>
+                                                        <td>Actions</td>
+                                                    </tr>   
+                                                </tbody>
+                                            </table>
+                                            ))}
+                                            
+                                        </div>
+                                        </>
+                                    ))}
+                                   
+                                </div>
+                            ):(<h3>Chargement</h3>)}
                             
-                            <table class="table table-striped projects">
-                            <thead>
-                                <tr>
-                                <th >Véhicule</th>
-                                <th >départ</th>
-                                <th>Retour</th>
-                                <th>Option</th>
-                                <th>Total</th>
-                                <th>Acompte</th>
-                                <th>Nom</th>
-                                <th>N° de Vol</th>
-                                <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                <td>text</td>
-                                <td>text</td>
-                                <td>text</td>
-                                <td>text</td>
-                                <td>text</td>
-                                <td>text</td>
-                                <td>text</td>
-                                <td>text</td>
-                                <td>text</td>
-                                </tr>
-                               
-                            </tbody>
-                            </table>
-
-                        </div>
+                            </div>
                         </div>
                         </div>
                     </div>

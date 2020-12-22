@@ -11,3 +11,43 @@
     background: #228dcb;
     padding: 5px 70px;
 }
+.example{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.253);
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card{
+        animation: animation 3s ;
+        background: rgb(38, 26, 151);
+        width: 30%;
+        height: 25%;
+        color: white;
+        text-align: center;
+        border-radius: 50px;
+}
+@keyframes animation{
+    0%{
+     transform: translateY(-200px); 
+     opacity: 0;  
+    }
+    50%{transform: translateY(-100px);
+        opacity: 0.5;
+    }
+    100%{transform: translateY(0px);
+    opacity: 1;}
+}
+.payer{
+    color: rgb(16, 14, 107);
+}
+.checkout{
+    margin: 50px;
+    background: rgb(236, 226, 83);
+    padding: 15px;
+    border-radius: 10px;
+}

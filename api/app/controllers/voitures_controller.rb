@@ -25,16 +25,22 @@ class VoituresController < ApplicationController
         @dateDepart = Date.strptime(params[:dateDepart], '%Y-%m-%d')
         @dateRetour = Date.strptime(params[:dateRetour], '%Y-%m-%d')
         @voitures = Voiture.all
+        @voiture_dispo = []
         @prix=[]
         @voitures.each do |voiture|
-            @ligne1 = voiture.category.tarif_personalises.select(:prix).find_by("datedebutperso <= ? AND datefinperso >= ? AND jourdebut <= ? AND jourfin >= ?",@dateDepart,@dateRetour,params[:jours].to_i,params[:jours].to_i)
-            if @ligne1.nil?
-                 @prix.push(voiture.getPrixBase(params[:jours],@dateDepart,@dateRetour))
-            else
-                @prix.push(@ligne1.prix)
+            puts voiture.category.stock
+            if voiture.category.stock >= 1
+                @voiture_dispo.push(voiture)
+                @ligne1 = voiture.category.tarif_personalises.select(:prix).find_by("datedebutperso <= ? AND datefinperso >= ? AND jourdebut <= ? AND jourfin >= ?",@dateDepart,@dateRetour,params[:jours].to_i,params[:jours].to_i)
+                if @ligne1.nil? || @ligne1.prix == -1
+                    @prix.push(voiture.getPrixBase(params[:jours],@dateDepart,@dateRetour))
+                else
+                    @prix.push(@ligne1.prix)
+                end
             end
         end
-        render json: {voitures:@voitures,prix:@prix}
+        
+        render json: {voitures:@voiture_dispo,prix:@prix}
     end
 
     # POST /categories/:category_id/voitures
@@ -43,6 +49,7 @@ class VoituresController < ApplicationController
         @category = Category.find(voiture_params[:category])
         @paramsmapped = voiture_params
         @paramsmapped[:category] = @category
+        puts @category
         @voiture = Voiture.create!(@paramsmapped)
         json_response(@voiture, :created)
     end

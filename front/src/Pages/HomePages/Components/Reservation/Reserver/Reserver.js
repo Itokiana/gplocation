@@ -60,11 +60,8 @@ function Reserver(propos) {
           .then((res) => res.json())
           .then((data) => {
             setVoiture({voiture: data});
-            console.log(data);
           });
-    }, []);   
-    console.log(voiture);  
-    console.log(propos.match.params)
+    }, []);  
       
     return (
         <div>
@@ -144,13 +141,11 @@ function Reserver(propos) {
                                             }}
                                             validationSchema={ClientRegistrationSchema}
                                             onSubmit={(values, { resetForm }) => {
-                                                console.log("Test");
                                                 axios.post('/clients', values).then(response => {
                                                     if (response.status === 200) {
                                                         setClient({
-                                                            client: values
+                                                            client: response.data.client
                                                         })
-                                                        console.log(values);
                                                         setEtat(3)
                                                         
                                                     } else if (response.status === 202) {
@@ -263,7 +258,7 @@ function Reserver(propos) {
                                 </div>
                             ) : null } 
                             { etat === 3 ? (
-                                <PaimentEtape1 client={client} prix={propos.match.params.prix}/>
+                                <PaimentEtape1 client={client}  data={propos.match.params}/>
                             ) : null } 
                         </div>
                     </div>
