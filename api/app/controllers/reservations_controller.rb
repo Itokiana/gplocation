@@ -3,8 +3,10 @@ class ReservationsController < ApplicationController
 
   # GET /reservations
   def index
-    @reservations = Reservation.order("date_retour ASC")
+    @reservations = Reservation.where('date_retour >= ?',DateTime.now).order("date_retour ASC")
     @hash1= {}
+    @nombredepart = Reservation.where('date_depart >= ?',DateTime.now).count()
+    @nombreretour = Reservation.where('date_retour >= ?',DateTime.now).count()
     @reservations.each do |reservation|
       voiture = reservation.voiture
       client = reservation.client
@@ -16,7 +18,7 @@ class ReservationsController < ApplicationController
       end
     end
 
-    render json: @hash1
+    render json:{reservation: @hash1 , depart: @nombredepart, retour: @nombreretour} 
   end
 
   # GET /reservations/1

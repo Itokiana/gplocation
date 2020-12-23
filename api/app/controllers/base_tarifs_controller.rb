@@ -10,7 +10,7 @@ class BaseTarifsController < ApplicationController
 
   # GET /base_tarifs/1
   def show
-    @base_tarifs = Category.find(params[:id]).base_tarifs.order('base_tarifs ASC')
+    @base_tarifs = Category.find(params[:id]).base_tarifs.order('jourdebut ASC')
 
     render json: {tarif_par_categorie: @base_tarifs}
   end
@@ -21,53 +21,32 @@ class BaseTarifsController < ApplicationController
   def create
 
     data=params[:data]
-    tableau = params[:tableau]
     idTarif= params[:id]
-
-    puts "*"*20
-    puts data
-    puts "*"*20
-    puts tableau
-    puts "*"*20
-    puts idTarif
-
     
-    tableau.each do |value| 
-      puts "*"*30
-      puts value
+    idTarif.each do |value| 
       jourD="jourD#{value}"
       jourF="jourF#{value}"
       prixBS="prixBS#{value}"
       prixMS="prixMS#{value}"
       prixHS="prixHS#{value}"
       check="check#{value}"
-
-      id = idTarif[value-1]
-
-     
-      @base_tarif = BaseTarif.find(id)
+      @base_tarif = BaseTarif.find(value)
       if data[check]==true
         if @base_tarif.update(jourdebut: data[jourD], jourfin: data[jourF], prixbassesaison: data[prixBS], prixmoyennesaison: data[prixMS], prixhautesaison: data[prixHS])
-          puts "a"*50
           render json: @base_tarif
         else
-          puts "="*50
           render json: @base_tarif.errors, status: :unprocessable_entity
         end
 
       end
-      puts "*"*30
 
     end
   end
 
   # PATCH/PUT /base_tarifs/1
   def update
-    if @base_tarif.update(base_tarif_params)
-      render json: @base_tarif
-    else
-      render json: @base_tarif.errors, status: :unprocessable_entity
-    end
+    @base_tarif = BaseTarif.create!(jourdebut: 0,jourfin:0,prixbassesaison: 0, prixmoyennesaison: 0, prixhautesaison: 0, category_id: params[:id])
+    json_response(@base_tarif, :created)
   end
 
   # DELETE /base_tarifs/1
@@ -83,6 +62,6 @@ class BaseTarifsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def base_tarif_params
-      params.require(:base_tarif).permit(:jourDebut, :jourFin, :prixBasseSaison, :prixMoyenneSaison, :prixHauteSaison)
+      params.require(:base_tarif).permit(:jourDebut, :jourFin, :prixBasseSaison, :prixMoyenneSaison, :prixHauteSaison,:category_id)
     end
 end
