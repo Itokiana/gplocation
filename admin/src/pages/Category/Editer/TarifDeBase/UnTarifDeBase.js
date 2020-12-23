@@ -5,11 +5,6 @@ import {  Field } from 'formik'
 export default class UnTarifDeBase extends Component {
 
     
-    
-
-    componentDidMount(){
-    }
-
 
     render(){
         
@@ -47,6 +42,9 @@ export default class UnTarifDeBase extends Component {
                         <div className="ml-4 mb-4">
                             <Field className="form-check-input" type="checkbox"  id={[`check${this.props.num}`]} name={[`check${this.props.num}`]} />
                         </div>
+                    </td>
+                    <td className="input-column">
+                        <button type="button" className="btn btn-danger" onClick={e => this.props.suppression(this.props.num)}>suppr</button>
                     </td>
                 </tr>
            

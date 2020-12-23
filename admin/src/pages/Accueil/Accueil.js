@@ -9,14 +9,17 @@ moment.locale('fr');
 export class Accueil extends Component {
     state =  {
         reservations:null,
+        depart:null,
+        retour:null
     }
     componentDidMount(){
         axios.get('/reservations').then(response => {
             if(response.status===200){
                 this.setState({
-                    reservations:response.data,
+                    reservations:response.data.reservation,
+                    depart: response.data.depart,
+                    retour: response.data.retour
                 })
-                console.log(response.data)
 
             }
         })
@@ -61,9 +64,9 @@ export class Accueil extends Component {
                                       
                                     </ul>
                                     <p className="nbr-depart">
-                                        <span className="text-nbr">Nombre de départs :<span className="number-text">7</span></span>
+                                        <span className="text-nbr">Nombre de départs :<span className="number-text">{this.state.depart}</span></span>
                                         <span className="text-nbr">-</span>
-                                        <span className="text-nbr">Nombre de retours :<span className="number-text">23</span></span>
+                                        <span className="text-nbr">Nombre de retours :<span className="number-text">{this.state.retour}</span></span>
                                     </p>
                                 </div>
                                 {this.state.reservations?(

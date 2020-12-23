@@ -5,27 +5,47 @@ import { Formik , Form } from 'formik';
 import axios from '../../../../axios';
 
 export default class TarifDeBase extends Component {
-    state = {
-      nombreLigne: [],
-      id:[],
-      initValues:null,
-      size:0
+    constructor(props) {
+        super(props);
+        this.suppression = this.suppression.bind(this);
+        this.state = {
+            nombreLigne: [],
+            id:[],
+            initValues:null,
+            size:0
+        }
     }
-    valideAndSave = () => {
-
-       
-    }
- 
-    ajoutNewPeriod =() =>{
-        this.setState({
-            nombreLigne: [...this.state.nombreLigne,this.state.nombreLigne.pop() + 1]
+    
+    async suppression (id)  {
+        await axios.delete(`/base_tarifs/${id}`).then(response => {
+            this.setState({
+                nombreLigne: [],
+                id:[],
+                initValues:null,
+                size:0
+            })
+           this.gettarifdebase()
         })
         
     }
-    componentDidMount(){
-        
-        axios.get(`/base_tarifs/${this.props.ids}`).then(response => {
-            console.log(response)
+    async ajoutNewPeriod (){
+        await axios.patch(`/base_tarifs/${this.props.ids}`).then(response => {
+            if(response.status===201){
+                this.setState({
+                    nombreLigne: [],
+                    id:[],
+                    initValues:null,
+                    size:0
+                })
+               this.gettarifdebase()
+            }
+        })
+    }
+    async gettarifdebase () {
+       await axios.get(`/base_tarifs/${this.props.ids}`).then(response => {
+           this.setState({
+               size: response.data.tarif_par_categorie.length
+           })
             for(var i=0 ; i< response.data.tarif_par_categorie.length ;i++){
                 var obj = { ...response.data.tarif_par_categorie[i] };
                 this.setState({
@@ -33,20 +53,19 @@ export default class TarifDeBase extends Component {
                     id:[...this.state.id,obj.id],
                     initValues:{
                        ...this.state.initValues,
-                       [`jourD${i+1}`]: obj.jourdebut,
-                       [`jourF${i+1}`]: obj.jourfin,
-                       [`prixBS${i+1}`]: obj.prixbassesaison,
-                       [`prixMS${i+1}`]: obj.prixmoyennesaison,
-                       [`prixHS${i+1}`]: obj.prixhautesaison,
-                       [`check${i+1}`]: "",
+                       [`jourD${obj.id}`]: obj.jourdebut,
+                       [`jourF${obj.id}`]: obj.jourfin,
+                       [`prixBS${obj.id}`]: obj.prixbassesaison,
+                       [`prixMS${obj.id}`]: obj.prixmoyennesaison,
+                       [`prixHS${obj.id}`]: obj.prixhautesaison,
+                       [`check${obj.id}`]: "",
                     },
-                    size: this.state.size + i
                 })
             }
-            console.log(this.state.initValues)
-            console.log(this.state.size)
-
         })
+    }
+    async componentDidMount(){
+        await this.gettarifdebase()
     }
 
    
@@ -54,7 +73,7 @@ export default class TarifDeBase extends Component {
         return (
             <>
             {
-                this.state.size >=153?(
+                this.state.size === this.state.id.length?(
 
             <div>
                 <section className="text-gray-700 body-font">
@@ -64,8 +83,14 @@ export default class TarifDeBase extends Component {
                         onSubmit={(data,{setSubmitting})=>{
                             setSubmitting(true);
                                                   
-                            axios.post('/base_tarifs',{data, tableau:this.state.nombreLigne,ids: this.props.ids,id:this.state.id})
-                            
+                            axios.post('/base_tarifs',{data,ids: this.props.ids,id:this.state.id})
+                            this.setState({
+                                nombreLigne: [],
+                                id:[],
+                                initValues:null,
+                                size:0
+                            })
+                            this.gettarifdebase()
                             setSubmitting(false)
                         }}
                     >{({values, isSubmitting}) => (
@@ -82,15 +107,15 @@ export default class TarifDeBase extends Component {
                                 </thead>
                                 <tbody>
                                 {
-                                     this.state.nombreLigne.map((ligne) => 
-                                        <UnTarifDeBase key={ligne} num={ligne}/>
+                                     this.state.id.map((ligne) => 
+                                        <UnTarifDeBase key={ligne} num={ligne} suppression={this.suppression}/>
                                      )
                                 }
                                 </tbody>
                             </table>
 
                             <div className="d-flex justify-content-end">
-                                <button type="button" className="btn btn-success" >Ajout periode</button>
+                                <button type="button" className="btn btn-success" onClick={e => this.ajoutNewPeriod()}>Ajout periode</button>
                                 <input type="submit" className="btn btn-primary" value="Valider"/>
                             </div>
 

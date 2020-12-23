@@ -82,7 +82,7 @@ function Reserver(propos) {
                                             <div className="b-contacts__address-hours">
                                             <p className="conf_categ">{(voiture.voiture && voiture.voiture.marque)}</p>
                                            
-                                            <img className="img-responsive center-block" src={`http://localhost:4000/${(voiture.voiture && voiture.voiture.image.url)}`} alt={voiture.voiture.marque} width="250px" height="220px"/>
+                                            <img className="img-responsive center-block" src={`http://localhost:4000/${(voiture.voiture && voiture.voiture.image.url)}`} alt="" width="250px" height="220px"/>
                                             <ul className="listeReserve">
                                                 <li className="prise"><span></span><b>Prise en charge à l'aéroport</b></li>
                                                 <li className="prise"><span className="carburant"></span>Carburant : Plein à rendre plein</li>
@@ -152,6 +152,7 @@ function Reserver(propos) {
                                                         console.log(response);
                                                     } 
                                                 })
+                                                resetForm()
                                             }}
                                             >
                                             {({ errors, touched, handleSubmit }) => (
