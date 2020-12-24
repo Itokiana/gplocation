@@ -57,14 +57,14 @@ class Reservation extends Component {
                                                     <br />
                                                     <p className="laststock">Dernier véhicule en stock</p> 
                                                     <span className="confirm-tarif ">{
-                                                        parseInt(this.props.jour,10) * this.props.prix[this.getKey(voiture,this.props.voitures)]
+                                                        this.props.prix[this.getKey(voiture,this.props.voitures)]
                                                     }</span>
                                                     <p className="montant-acompte">dont 100 € d'acompte</p>
                                                 </div>
                                                 <div className="b-items__cars-one-info">
                                                     <header className="b-items__cars-one-info-header s-lineDownLeft" id="head">
                                                         <h2>{voiture.marque}</h2>
-                                                        <Link to={`/reserver/${this.props.date_reservation.dateDepart}/${this.props.date_reservation.dateRetour}/${this.props.date_reservation.heureDepart}/${this.props.date_reservation.heureRetour}/${this.props.date_reservation.lieuDepart}/${this.props.date_reservation.lieuRetour}/${voiture.id}/${parseInt(this.props.jour,10) * this.props.prix[this.getKey(voiture,this.props.voitures)]}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
+                                                        <Link to={`/reserver/${this.props.date_reservation.dateDepart}/${this.props.date_reservation.dateRetour}/${this.props.date_reservation.heureDepart}/${this.props.date_reservation.heureRetour}/${this.props.date_reservation.lieuDepart}/${this.props.date_reservation.lieuRetour}/${voiture.id}/${this.props.prix[this.getKey(voiture,this.props.voitures)]}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
 
                                                     </header>
                                                     <div className="b-blog__posts-one-info">

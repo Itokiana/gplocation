@@ -3,7 +3,7 @@ class ReservationsController < ApplicationController
 
   # GET /reservations
   def index
-    @reservations = Reservation.where('date_retour >= ?',DateTime.now).order("date_retour ASC")
+    @reservations = Reservation.order("date_retour ASC")
     @hash1= {}
     @nombredepart = Reservation.where('date_depart >= ?',DateTime.now).count()
     @nombreretour = Reservation.where('date_retour >= ?',DateTime.now).count()
@@ -24,6 +24,34 @@ class ReservationsController < ApplicationController
   # GET /reservations/1
   def show
     render json: @reservation
+  end
+  
+  #GET /reservations/recherche/:datedepart/:dateretour
+  def recherche
+    @reservations = Reservation.where('date_retour >= ? AND date_retour <= ?',params[:datedepart],params[:dateretour]).order("date_retour ASC")
+    message = ''
+    @hash1= {}
+    @nombredepart = Reservation.where('date_depart >= ?',DateTime.now).count()
+    @nombreretour = Reservation.where('date_retour >= ?',DateTime.now).count()
+
+    if @reservations.empty?
+      @message = "aucune resultat"
+      render json:{reservation: @hash1 , depart: @nombredepart, retour: @nombreretour,message: @message}
+    else
+      @reservations.each do |reservation|
+        voiture = reservation.voiture
+        client = reservation.client
+        if @hash1[reservation.date_retour].present?
+          @hash1[reservation.date_retour] [reservation.id]= [reservation,voiture,client] 
+        else
+          @hash1[reservation.date_retour] = {}
+          @hash1[reservation.date_retour] [reservation.id]= [reservation,voiture,client]
+        end
+      end
+  
+      render json:{reservation: @hash1 , depart: @nombredepart, retour: @nombreretour,message: @message}
+    end
+    
   end
 
   # POST /reservations

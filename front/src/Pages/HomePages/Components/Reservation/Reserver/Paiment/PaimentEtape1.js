@@ -80,9 +80,9 @@ function PaimentEtape1(props) {
                                 <p class="paddingp">Puis {parseInt(props.data.prix)-100} € à régler à la remise des clés par carte bancaire, espèce ou chèque </p>
                                 <h3 class="paiementcarte cc_cursor">Paiement sécurisé par carte bancaire :</h3>
 
-                                <center><button onClick={Paiement} className="btn btn-primary d-flex justify-content-center" >Payer</button></center>
+                                <button onClick={Paiement} className="btn btn-success btn-lg btn-block" >Payer</button>
 
-                                {status? (<Checkout data={props}/>):null}
+                                {status? (<Checkout data={props} Paiement={Paiement}/>):null}
 
                                 <h2>Sécurité de paiement</h2>
                                 <p class="petitp">Les transactions PayPlug sont effectuées sur un lien HTTPS établi entre le client et le serveur de paiement. Les données sensibles, telles que le numéro de carte bancaire du client et sa date d'expiration, sont entièrement cryptées et protégées grâce à un protocole SSL afin d'empêcher que les informations échangées puissent être interceptées en clair par un tiers au cours de la transaction.</p>

@@ -23,7 +23,7 @@
     justify-content: center;
 }
 .card{
-        animation: animation 2s ;
+        animation: animation 1s ;
         background: rgb(38, 26, 151);
         width: 30%;
         height: 25%;
@@ -53,4 +53,8 @@
 }
 #numero_vol {
     margin-right: 20px;
+}
+.bt-annuler{
+    color: rgb(196, 34, 47);
+    margin-top: 5px;
 }
