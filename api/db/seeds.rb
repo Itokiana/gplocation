@@ -77,7 +77,6 @@
 # DateSaison.create(debutsaison: Date.new(2020,9,1), finsaison: Date.new(2020,12,31),saison_id:3)
 
 
- Client.create(nom: "Adam", prenom: "Hacian", telephone: "034671230", email: "Adam@gmail.com")
 # Client.create(nom: "Piere", prenom: "bollard", telephone: "03612890", email: "Boular@gmail.com")
 # Client.create(nom: "Paul", prenom: "Bary", telephone: "467671230", email: "Paul@gmail.com")
 # Client.create(nom: "Bertran", prenom: "Christophe", telephone: "1221030", email: "Christoph@gmail.com")

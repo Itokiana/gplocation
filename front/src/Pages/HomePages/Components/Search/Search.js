@@ -26,7 +26,7 @@ export default class Search extends React.Component {
 		etape: 1,
 		voitures: [],
 		date_reservation: {},
-		message: null,
+		message: '',
 		prix:[],
 		jour:null,
 	}
@@ -43,26 +43,11 @@ export default class Search extends React.Component {
         let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
         return diffDays
 	}
-	
-	getVoiture = () =>{
-		let date1 = this.state.date_reservation.dateDepart;
-		let date2 = this.state.date_reservation.dateRetour;
-		let jours = this.dateDiff(date1,date2);
-		axios.get(`/voitures/${date1}/${date2}/${jours}`).then(response => {
-			if (response.status === 200) {
-				
-				this.setState({
-					voitures:response.data
-				});
-			} 
-		});
-	}
-    
+
 	
 	
 	render() {
 		const { etape } = this.state;
-		const message = this.state.message;
 		return (
 			<>
 				
@@ -90,11 +75,11 @@ export default class Search extends React.Component {
 								jour: jours
 							})
 							axios.get(`/voitures/${date1}/${date2}/${jours}`).then(reponse => {
-								if (reponse.status === 200 && reponse.data.prix[0]>0) {
-									console.log(reponse)
+								if (reponse.status === 200) {
 									this.setState({
 										voitures:reponse.data.voitures,
 										prix:reponse.data.prix,
+										message:reponse.data.message,
 										etape: 2,
 										date_reservation: values
 									});
@@ -163,11 +148,9 @@ export default class Search extends React.Component {
 						</Formik>
 						
 					</div>
-					{etape === 2 ? (<Reservation jour={this.state.jour} date_reservation={this.state.date_reservation} voitures={this.state.voitures} prix={this.state.prix}/>) : null}
-					<div>{ message ? (<div className="alert_message"><h4>{message}</h4></div>) : null }</div>
-				</div>
-							
-							
+					{etape === 2 && this.state.message === ''? (<Reservation jour={this.state.jour} date_reservation={this.state.date_reservation} voitures={this.state.voitures} prix={this.state.prix}/>) : null}
+					<div>{ this.state.message!=='' ? (<div className="alert_message"><h4>{this.state.message}</h4></div>) : null }</div>
+				</div>	
 
 			</>
 		);

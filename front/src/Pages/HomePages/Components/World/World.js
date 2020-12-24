@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from '../../../../axios';
+import './World.css'
 
 class World extends React.Component {
 	state = {
@@ -36,7 +37,7 @@ class World extends React.Component {
 										{voitures.map(voiture =>
 											(<div className="col-sm-4 col-xs-12">
 												<div className="b-world__item wow zoomInUp" data-wow-delay="0.3s">
-													<img className="img-responsive" src={`http://localhost:4000/${voiture.image.url}`} alt={voiture.marque}/>
+													<img className="img-voiture" src={`http://localhost:4000/${voiture.image.url}`} alt={voiture.marque}/>
 													<div className="b-world__item-val">
 														<span className="b-world__item-val-title">{voiture.marque}</span>
 													</div>

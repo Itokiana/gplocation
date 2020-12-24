@@ -16,16 +16,22 @@ class Voiture < ApplicationRecord
             when "Basse Saison" 
                 if category.duree_min_bs <= jours.to_i
                     return ligne.prixbassesaison
+                else
+                    return 0
                 end
                 
             when "Haute Saison"
                 if category.duree_min_hs <= jours.to_i
                     return ligne.prixhautesaison
-                end
+                else
+                    return 0
+                end 
                 
             when "Moyenne Saison"
                 if category.duree_min_ms <= jours.to_i
                     return ligne.prixmoyennesaison
+                else
+                    return 0
                 end
         end
     end
