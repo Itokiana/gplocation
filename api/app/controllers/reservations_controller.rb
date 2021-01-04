@@ -25,6 +25,7 @@ class ReservationsController < ApplicationController
   def show
     render json: @reservation
   end
+
   
   #GET /reservations/recherche/:datedepart/:dateretour
   def recherche
@@ -52,6 +53,13 @@ class ReservationsController < ApplicationController
       render json:{reservation: @hash1 , depart: @nombredepart, retour: @nombreretour,message: @message}
     end
     
+
+  # GEt /reservation/liste
+  def liste
+    @res = Reservation.all
+
+    render json: @res
+
   end
 
   # POST /reservations

@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories
   def index
-      @categories = Category.all
+      @categories = Category.all.order('id ASC')
       json_response(@categories)
   end
 
@@ -12,6 +12,14 @@ class CategoriesController < ApplicationController
   def create
       @category = Category.create!(category_params)
       json_response(@category, :created)
+  end
+  # GET /categories/dureemin/:id
+  def showdureemin
+    
+
+    @dureemin = Category.find(params[:id])
+    json_response(@dureemin) 
+
   end
 
   # GET /categories/:id
@@ -22,8 +30,10 @@ class CategoriesController < ApplicationController
 
   # PUT /categories/:id
   def update
-      @category.update(category_params)
-      head :no_content
+    
+    id = params[:id]
+    Category.find(id).update(duree_min_bs: params[:BS_Min], duree_min_ms: params[:MS_Min], duree_min_hs: params[:HS_Min])
+    head :no_content
   end
 
   # DELETE /categories/:id

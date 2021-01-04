@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../../../axios'
 import moment from 'moment'
+import './tarif.css'
 
 
 class Tarif extends Component {
@@ -60,8 +61,8 @@ class Tarif extends Component {
                     // const tab$keyDate = {}
                     // tab$keyDate["debut"]=date.datedebut
                     // tab$keyDate["fin"]=date.datefin
-                    trieDate$key.push(date.datedebut)
-                    trieDate$key.push(date.datefin)
+                    trieDate$key.push(date.datedebutperso)
+                    trieDate$key.push(date.datefinperso)
 
                 })
                 console.log("tab", trieDate$key)
@@ -70,6 +71,12 @@ class Tarif extends Component {
                 console.log("unique", unique)
                 return(
                     <>
+                        <div className="w-full h-10 bg-blue rounded p-2">
+                            <strong>{category.name}
+                            <span style= {{float:"right"}}> Duree min Bs:{category.duree_min_bs} jours- Dureé min MS: {category.duree_min_ms} jours - Dureé min: {category.duree_min_hs} jours
+                            </span></strong>
+                        </div>
+                        <br/><br/>
                         <Link to={`/ajouter_un_tarif/${(category.id)}`}
                         className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
                         transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
@@ -82,7 +89,7 @@ class Tarif extends Component {
                                 const val$keyval = []    
                                 trieCategorie$key.map(val3 => {
                                     unique.map(val2=> {
-                                        if(val3.datedebut===val1 && val3.datefin===val2){
+                                        if(val3.datedebutperso===val1 && val3.datefinperso===val2){
                                             val$keyval.push(val3)
                                         }
                                     })
@@ -102,12 +109,14 @@ class Tarif extends Component {
                                             <div className="py-4">
                                                 <div className="mt-2">
                                                     <h3>
-                                                    Du <strong>{moment(val$keyval[0].datedebut).format('D MMMM Y')}</strong> au <strong>{moment(val$keyval[0].datefin).format('D MMMM Y')}. . . . . . . . . . . . . . . . . . . </strong> 
+                                                    Du <strong>{moment(val$keyval[0].datedebutperso).format('D MMMM Y')}</strong>
+                                                     au <strong>{moment(val$keyval[0].datefinperso).format('D MMMM Y') }
+                                                     . . . . . . . . . . . . . . . . . . . . .. .. . . . . . . . . . . . . . . . . . . . .. .. . . . . . . . . . . . . . . . . . . . .. . </strong> 
                                                     <span className="text-red-500 cursor-pointer" onClick={() => this.deleteDate(val$keyval[0])}>
                                                     Supprimer
                                                     </span>
                                                     </h3>
-                                                    <table class="table table-condensed">
+                                                    <table class="table table-striped">
                                                         <thead>
                                                         {val$keyval.map(val => {
                                                             return(
@@ -125,7 +134,7 @@ class Tarif extends Component {
                                                                 return(
                                                                     <>
                                                                     <td className="text-white">
-                                                                        <u>{cat.prix}</u> <br/>$/jours
+                                                                        <u>{cat.prix}</u> <br/>€/jours
                                                                     </td>
                                                                     </>
                                                                 )

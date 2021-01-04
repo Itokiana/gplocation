@@ -46,51 +46,59 @@ class GestionJF extends Component {
             var inValue= {}
             var idtab=[]
             var idtabD=[]
-            var dateFirst= this.state.objetData[0].anne
+
+
+            if (this.state.objetData.length===0){
+                console.log("n'y pas data")
+            }else{
+                var dateFirst= this.state.objetData[0].anne
     
-            this.state.objetData.map(val =>{
-                if (val.anne == dateFirst){
-                    j = j + 1
-                    idtab.push(val.id)
-                    inValue[`date${j}`]=val.dateferie
-                    inValue[`jour${j}`]=val.evenement
-                    inValue[`prix${j}`]=val.surplus
-                    inValue[`checkU${j}`]=""
-                    inValue[`idTarifU${j}`]=val.id
-                    inValue['anneeU']= val.anne
+                this.state.objetData.map(val =>{
+                    if (val.anne == dateFirst){
+                        j = j + 1
+                        idtab.push(val.id)
+                        inValue[`date${j}`]=val.dateferie
+                        inValue[`jour${j}`]=val.evenement
+                        inValue[`prix${j}`]=val.surplus
+                        inValue[`checkU${j}`]=""
+                        inValue[`idTarifU${j}`]=val.id
+                        inValue['anneeU']= val.anne
+                        
+                    }
+                    else{
+                        k = k + 1
+                        idtabD.push(val.id)
+                        inValue[`dateD${k}`]=val.dateferie
+                        inValue[`jourD${k}`]=val.evenement
+                        inValue[`prixD${k}`]=val.surplus
+                        inValue[`checkD${k}`]=""
+                        inValue[`idTarifD${k}`]=val.id
+                        inValue['anneeD']= val.anne
+                        
+                    } 
                     
+                
+                })
+                for(let i=0; i< j; i++){
+                    this.setState({
+                        nombreLigneUn: [...this.state.nombreLigneUn,i+1],
+                        idU:[...this.state.idU,idtab[i]]
+                    })
+        
                 }
-                else{
-                    k = k + 1
-                    idtabD.push(val.id)
-                    inValue[`dateD${k}`]=val.dateferie
-                    inValue[`jourD${k}`]=val.evenement
-                    inValue[`prixD${k}`]=val.surplus
-                    inValue[`checkD${k}`]=""
-                    inValue[`idTarifD${k}`]=val.id
-                    inValue['anneeD']= val.anne
-                    
-                } 
-                   
-               
-            })
-            for(let i=0; i< j; i++){
+                for(let l=0; l< k; l++){
+                    this.setState({
+                        nombreLigneDeux: [...this.state.nombreLigneDeux,l+1],
+                        idD:[...this.state.idD,idtabD[l]]
+                    })
+        
+                }
                 this.setState({
-                    nombreLigneUn: [...this.state.nombreLigneUn,i+1],
-                    idU:[...this.state.idU,idtab[i]]
-                })
-    
+                    initVal: inValue  
+                }) 
+
             }
-            for(let l=0; l< k; l++){
-                this.setState({
-                    nombreLigneDeux: [...this.state.nombreLigneDeux,l+1],
-                    idD:[...this.state.idD,idtabD[l]]
-                })
-    
-            }
-            this.setState({
-                initVal: inValue  
-            }) 
+            
             console.log("objet tout", this.state.objetData)
             console.log("id tout", this.state.idGlobal) 
                

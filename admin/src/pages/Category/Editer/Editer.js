@@ -54,7 +54,7 @@ export default class Editer extends Component {
                                     </div>
 
                                 </button>
-                                {etape === 2 ? (<DureeLocation />) : null}
+                                {etape === 2 ? (<DureeLocation ids={params} />) : null}
                             </div><br />
 
 

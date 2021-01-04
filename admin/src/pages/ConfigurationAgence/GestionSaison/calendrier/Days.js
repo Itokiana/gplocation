@@ -174,14 +174,14 @@ class Days extends React.Component {
         console.log('saison2', tab2)
         console.log('saison3', tab3)
 
-        if (tab1.includes(jourMoi) == true){
-            return "bg-danger rounded "
+        if (tab2.includes(jourMoi) === true && tab3.includes(jourMoi) === true){
+            return "bg-green rounded"
         }else if (tab2.includes(jourMoi) === true){
-            return "bg-primary rounded"
-        }else if (tab3.includes(jourMoi) === true){
-            return "bg-success rounded"
-        }else{
+            return "bg-danger rounded"
+        }else if (tab3.includes(jourMoi) === true ){
             return "bg-warning rounded"
+        }else{
+            return "bg-primary rounded"
         }
 
 

@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
 
   resources :contacts
+  resources :categories
+  get '/categories/dureemin/:id', to: 'categories#showdureemin'
   
   
   resources :contacts
@@ -51,6 +53,8 @@ Rails.application.routes.draw do
   put '/reservations/:id', to: 'reservations#update'
   delete '/reservations/:id', to: 'reservations#destroy'
   get '/reservations/recherche/:datedepart/:dateretour', to: 'reservations#recherche'
+  get '/reservation/liste', to: 'reservations#liste'
+
 
   resources :tarif_supplementaires
   resources :tarifs

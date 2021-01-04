@@ -2,6 +2,8 @@ import React, { Component, setStat} from 'react'
 import axios from '../../../../../axios'
 import { Formik, Form, Field } from 'formik';
 import '../GestionOF/gestionOF.css'
+import moment from 'moment' ;
+
 
 class GestionOE extends Component {
     
@@ -117,7 +119,7 @@ class GestionOE extends Component {
                                 { this.state.date.map(nomdate => {
                                     return (
                                         <tr>
-                                          <td className="text-blue-500"><strong>{ nomdate.jourouvertdebut }</strong>  jusqu'a  <strong>{ nomdate.jourouvertfin }</strong></td>
+                                          <td className="text-blue-500"><strong>{moment(nomdate.jourouvertdebut).format('D MMMM Y')  }</strong>  jusqu'a  <strong>{ moment(nomdate.jourouvertfin).format('D MMMM Y') }</strong></td>
                                           <td ><span className="text-red-500 cursor-pointer" onClick={() => this.action.deleteOuvert(nomdate)}>Supprimer</span></td>
                                             
                                         </tr>
