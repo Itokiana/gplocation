@@ -25,6 +25,12 @@ class ReservationsController < ApplicationController
   def show
     render json: @reservation
   end
+  # GEt /reservation/liste
+  def liste
+    @res = Reservation.all
+
+    render json: @res
+  end
 
   # POST /reservations
   def create

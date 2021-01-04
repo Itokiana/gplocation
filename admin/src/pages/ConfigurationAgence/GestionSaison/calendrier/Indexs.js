@@ -32,7 +32,7 @@ class Indexs extends React.Component {
                 {this.years()}</span>  </h1></center>
                 <div className="bg-white rounded ">
                     <table className="overflow-x text-black" >
-                        <thead className="bg-dark">
+                        <thead className="bg-dark text-white">
                             <tr>
                             
                             </tr>

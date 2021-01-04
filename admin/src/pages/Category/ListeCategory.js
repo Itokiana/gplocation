@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios'
+import { Formik, Field} from 'formik';
+
 
 export default class ListeCategory extends Component {
-    // constructor(props) {
-    //   super(props);
-    //   this.state = {value: ''};
-    //   this.handleChange = this.handleChange.bind(this);
-    // }
-    state = {value: ''};
+    constructor(props) {
+      super(props);
+      this.state = {value: ''};
+      // this.handleChange = this.handleChange.bind(this);
+    }
 
     componentDidMount() {
         const { action } = this.props;
         action.getCategory();
 
     }
-    handleChange(e) {
-      this.setState({value: e.target.value});
+    // handleChange(e) {
+    //   this.setState({value: e.target.value});
 
-    }
+    // }
 
     render() {
         const { categories, action } = this.props;
-        return (
+        return (<>
+          <Formik
+            initialValues={{}}    
+            onSubmit={(value,{setSubmitting})=>{
+                setSubmitting(true);
+                axios.post('/categories', {
+                    
+                })
+                console.log(value) 
+                setSubmitting(false);  
+            }}
+          >
             <div className="py-4">
                 <div class="col-md-12 col-sm-12  ">
                 <div class="x_panel">
@@ -49,9 +61,14 @@ export default class ListeCategory extends Component {
                                 <td class=" ">{category.id} </td>
                                 <td class=" ">{category.ref} <i class="success fa fa-long-arrow-up"></i></td>
                                 <td class=" ">{category.category}</td>
-                                <td class=" "><input type="text" value={this.state.value} onChange={this.handleChange}/></td>
+                                {/* <td class=" "><input type="text" value={this.state.value} onChange={this.handleChange}/></td> */}
+                                <td class=" ">
+                                <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-1 
+                px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number"  name={category.stock}/>
+                                </td>
+
                                 <td>
-                                    <span><input name="plan" type="checkbox" /></span>
+                                    <span><input className="w-50" name="plan" type="checkbox" /></span>
                                 </td>
                                 <td > 
                                     <NavLink to={`/categories/${category.id}`}>
@@ -77,6 +94,7 @@ export default class ListeCategory extends Component {
                 </div>
               </div>
             </div>
-        )
+          </Formik>
+        </>)
     }
 }
