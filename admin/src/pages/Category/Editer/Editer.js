@@ -59,7 +59,7 @@ export default class Editer extends Component {
 
 
 
-                            <div className="flex rounded-lg h-full bg-gray-800 p-5 flex-col">
+                            {/* <div className="flex rounded-lg h-full bg-gray-800 p-5 flex-col">
                                 <button onClick={() => this.changerEtape(3)}>
                                     <div className="flex items-center mb-3">
                                         <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
@@ -68,11 +68,11 @@ export default class Editer extends Component {
                                         <h2 className="text-white text-lg title-font font-medium">Gestion des options</h2>
                                     </div>
 
-                                </button>
+                                </button> */}
 
                                 {/* ids= id de la catégorie */}
-                                {etape === 3 ? (<Options ids={params} />) : null}
-                            </div><br />
+                                {/* {etape === 3 ? (<Options ids={params} />) : null}
+                            </div><br /> */}
 
                             <div className="flex rounded-lg h-full bg-gray-800 p-5 flex-col">
                                 <button onClick={() => this.changerEtape(4)}>

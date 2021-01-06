@@ -29,12 +29,29 @@ class CategoriesController < ApplicationController
   end
 
   # PUT /categories/:id
-  def update
+  def updateStock
     
     id = params[:id]
     Category.find(id).update(duree_min_bs: params[:BS_Min], duree_min_ms: params[:MS_Min], duree_min_hs: params[:HS_Min])
     head :no_content
   end
+  
+  def stock
+    data = params[:value]
+    id = params[:stocId]
+    puts("id"*10)
+    puts data
+    
+    id.each do |value|
+      puts value
+      
+      stok="val#{value}"
+      puts stok  
+      Category.find(value).update(stock: data[stok])
+      head :no_content
+    end
+  end
+
 
   # DELETE /categories/:id
   def destroy

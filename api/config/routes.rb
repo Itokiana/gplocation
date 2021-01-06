@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   resources :contacts
   resources :categories
   get '/categories/dureemin/:id', to: 'categories#showdureemin'
+  put '/stock/:id', to: 'categories#updateStock'
+  post '/categorie/stock', to: 'categories#stock'
   
   
   resources :contacts
