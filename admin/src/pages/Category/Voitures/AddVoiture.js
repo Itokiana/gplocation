@@ -23,10 +23,15 @@ const VoitureSchema = Yup.object().shape({
     climatisation: Yup.string()
         .required('La climatisation ne doit pas être vide'),
     portes: Yup.string()
-        .required('Le nombre de portes ne doit pas être vide')
+        .required('Le nombre de portes ne doit pas être vide'),
+    category: Yup.string()
+        .min(1,'Vous devez selectionner une categorie')
 });
 
 class AddVoiture extends Component {
+    state = {
+        categories:''
+    }
     componentDidMount() {
         axios.get('/categories').then(response => {
             if (response.status === 200) {
@@ -59,10 +64,10 @@ class AddVoiture extends Component {
         console.log(event.target.files[0])
     }
     render() {
-        const { categories } = this.state;
-        console.log(this.props, categories)
         return (
-            <div>
+            <>
+            {this.state.categories !== ''? (
+                <div>
                 <Formik
                     initialValues={{
                         image: null,
@@ -96,14 +101,6 @@ class AddVoiture extends Component {
                                 action.getVoiture();
                             }
                         })
-
-                        // axios.get('/categories').then(response => {
-                        //     if (response.status === 200) {
-                        //         this.setState({
-                        //             categories: response.data
-                        //         })
-                        //     }
-                        // })
                     }
                     }
                 >
@@ -222,7 +219,7 @@ class AddVoiture extends Component {
                                         <div>
                                             <label>
                                                 <Field type="radio" name="portes" value="3" />
-                                                 3
+                                                3
                                             </label>
                                             &nbsp;
                                             <label>
@@ -243,12 +240,17 @@ class AddVoiture extends Component {
                                     <label className="block text-gray-700 font-bold mb-1 md:mb-0">
                                         Catégorie
                                     </label>
+                                    
                                     <Field as="select" name="category" className="block appearance-none w-full bg-white 
                                     border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight 
                                     focus:outline-none focus:shadow-outline">
-                                        {categories && categories.map(category => {
-                                            return <option value={category.id}>{category.category}</option>
-                                        })}
+
+                                        <option value="">selectionner une categorie</option>
+                                        {this.state.categories.map(category => (
+                                            <>
+                                                <option value={category.id} key={category.id}>{category.name}</option>
+                                            </>
+                                        ))}
                                     </Field>
                                     
                                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -262,18 +264,14 @@ class AddVoiture extends Component {
                             <div className="flex justify-end">
                                 <button type="submit" className="text-white px-4 py-2 bg-blue-500 hover:bg-blue-400">Sauvegarder</button>
                             </div>
-                            {/* <div className="mb-2 mr-4">
-                                <label className="block text-gray-700 font-bold mb-1 md:mb-0">
-                                    Category :
-                        </label>
-                                <Field
-                                    name="Categorie"
-                                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
-                            </div> */}
                         </Form>
                     )}
                 </Formik>
-            </div >)
+            </div >
+            ):null}
+            
+            </>
+        )
     }
 }
 
