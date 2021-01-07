@@ -42,7 +42,9 @@ class VoituresController < ApplicationController
                 @voitures = Voiture.all
 
                 @voitures.each do |voiture|
-                    if voiture.category.stock >= 1
+                    @disponibility = Reservation.find_by('voiture_id = ? AND ((date_depart <= ? AND date_retour >= ?) OR (date_depart <= ? AND date_retour >= ?))',voiture.id, @dateDepart,@dateDepart,@dateRetour,@dateRetour)
+                   
+                    if @disponibility.nil? && voiture.category.stock >= 1 
                         @voiture_dispo.push(voiture)
                         @ligne1 = voiture.category.tarif_personalises.select(:prix).find_by("datedebutperso <= ? AND datefinperso >= ? AND jourdebut <= ? AND jourfin >= ?",@dateDepart,@dateRetour,params[:jours].to_i,params[:jours].to_i)
                         if @ligne1.nil? || @ligne1.prix == -1

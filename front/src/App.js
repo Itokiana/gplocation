@@ -25,7 +25,11 @@ export default class App extends Component {
   state = [
     
   ];
-
+  // initializeAnalytics(){
+  //   ReactGa.initialize('G-2N9KD7XPZD')
+  //   ReactGa.pageview(window.location.pathname + window.location.search)
+  // }
+  
   componentDidMount = () => {
     axios.put(`/clients/${sessionStorage.id}`).then(response => {
       if (response.status === 200) {
@@ -36,11 +40,12 @@ export default class App extends Component {
 
         console.log(response.data)
       }
-      {console.log(this.state.user.nom)}
+      
     })
   };
   
   render() {
+    // this.initializeAnalytics()
     return (
       
       <BrowserRouter>

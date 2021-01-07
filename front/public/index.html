@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <meta name="google-signin-client_id" content="934613638000-kfde3s919uanqkkbuc097uar9f1r4bgo.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KK9GHSRPEK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-KK9GHSRPEK');
+    </script>
     <meta charset="utf-8" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,6 +21,8 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -37,7 +51,7 @@
     <link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color5.css" title="color5" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/color6.css" title="color6" media="all" />
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
+   
   </head>
   <body class="m-home" data-scrolling-animations="true" data-equal-height=".b-auto__main-item">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -84,5 +98,47 @@
     <script type="text/javascript" src="https://api.payplug.com/js/1/payplug.latest.js"></script>
     <!--stripe-->
     <script src="https://js.stripe.com/v3/"></script>
+    <!--google analytics api-->
+    <script>
+      // Replace with your view ID.
+      var VIEW_ID = '258016242';
+    
+      // Query the API and print the results to the page.
+      function queryReports() {
+        gapi.client.request({
+          path: '/v4/reports:batchGet',
+          root: 'https://analyticsreporting.googleapis.com/',
+          method: 'POST',
+          body: {
+            reportRequests: [
+              {
+                viewId: VIEW_ID,
+                dateRanges: [
+                  {
+                    startDate: '7daysAgo',
+                    endDate: 'today'
+                  }
+                ],
+                metrics: [
+                  {
+                    expression: 'ga:sessions'
+                  }
+                ]
+              }
+            ]
+          }
+        }).then(displayResults, console.error.bind(console));
+      }
+    
+      function displayResults(response) {
+        var formattedJson = JSON.stringify(response.result, null, 2);
+        document.getElementById('query-output').value = formattedJson;
+      }
+    </script>
+    
+    <!-- Load the JavaScript API client and Sign-in library. -->
+    <script src="https://apis.google.com/js/client:platform.js"></script>
+    
+    
   </body>
 </html>
