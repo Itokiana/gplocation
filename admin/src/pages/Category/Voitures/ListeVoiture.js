@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import './Voiture.css'
 
 
 
@@ -38,7 +39,7 @@ export default class ListeVoiture extends Component {
                             {voitures && voitures.map(voiture => {
                                 return (
                                     <tr>
-                                        <td className="border px-4 py-2"><img src={`http://localhost:4000/${voiture.image.url}`} /></td>
+                                        <td className="border px-4 py-2"><img className="dimension-voiture" src={`http://localhost:4000/${voiture.image.url}`} alt ={voiture.marque}/></td>
                                         <td className="border px-4 py-2">{voiture.marque}</td>
                                         <td className="border px-4 py-2">{voiture.model}</td>
                                         <td className="border px-4 py-2">{voiture.places}</td>
