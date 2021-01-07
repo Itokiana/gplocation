@@ -47,13 +47,11 @@ export default class DureeLocation extends Component {
             {
                 this.state.inValue ?(
                     <div className="row">
-                    <Formik
-                    
-                         
+                    <Formik   
                         initialValues={this.state.inValue}
                         onSubmit={(value,{setSubmitting})=>{
                             setSubmitting(true)                    
-                            axios.put(`/categories/${this.props.ids.id}` ,value)
+                            axios.put(`/stock/${this.props.ids.id}` ,value)
                             console.log(value)
                             setSubmitting(false) 
                         }

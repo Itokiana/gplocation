@@ -55,17 +55,19 @@ class AddTarif extends Component {
         
         return (
             <>
-                <center>
+                <center className="text-white">
                     <h1>Tarif personnaliser pour le categorie {category && category.category }, reference {category && category.ref}</h1>
                     <br/>
-                    <div>
+                    <div className="d-flex p-0 justify-content-center align-items-center">
                         {voitures && voitures.map(voiture => {
                             return (
                                 <>
-                                    <fieldset>
-                                        <img src={`http://localhost:4000/${voiture.image.url}`} /><br/>
-                                    </fieldset>
-                                    <p>{voiture.model}</p>
+                                    <div className="m-1">
+                                        <fieldset>
+                                            <img src={`http://localhost:4000/${voiture.image.url}`} /><br/>
+                                        </fieldset>
+                                        <p>{voiture.model}</p>
+                                    </div>
                                 </>
                             )
                         })}

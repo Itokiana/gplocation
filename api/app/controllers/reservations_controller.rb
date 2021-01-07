@@ -52,7 +52,7 @@ class ReservationsController < ApplicationController
   
       render json:{reservation: @hash1 , depart: @nombredepart, retour: @nombreretour,message: @message}
     end
-    
+  end 
 
   # GEt /reservation/liste
   def liste

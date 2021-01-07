@@ -78,10 +78,10 @@ class Tarif extends Component {
                         </div>
                         <br/><br/>
                         <Link to={`/ajouter_un_tarif/${(category.id)}`}
-                        className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
+                        className="border border-green-100 bg-green-500 text-white rounded-md px-4 py-2 m-2 
                         transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
                         >
-                        Ajouter un {category.name}
+                        Ajouter Tarif pour {category.name}
                         </Link> 
                         {
 
@@ -108,16 +108,19 @@ class Tarif extends Component {
                                                 
                                             <div className="py-4">
                                                 <div className="mt-2">
-                                                    <h3>
-                                                    Du <strong>{moment(val$keyval[0].datedebutperso).format('D MMMM Y')}</strong>
-                                                     au <strong>{moment(val$keyval[0].datefinperso).format('D MMMM Y') }
-                                                     . . . . . . . . . . . . . . . . . . . . .. .. . . . . . . . . . . . . . . . . . . . .. .. . . . . . . . . . . . . . . . . . . . .. . </strong> 
-                                                    <span className="text-red-500 cursor-pointer" onClick={() => this.deleteDate(val$keyval[0])}>
-                                                    Supprimer
-                                                    </span>
-                                                    </h3>
-                                                    <table class="table table-striped">
-                                                        <thead>
+                                                    <div>
+                                                        <h3>
+                                                        Du <strong>{moment(val$keyval[0].datedebutperso).format('D MMMM Y')}</strong> 
+                                                        au <strong>{moment(val$keyval[0].datefinperso).format('D MMMM Y') }
+                                                        </strong> 
+                                                        <button className="text-white rounded bg-red" style= {{float:"right"}} onClick={() => this.deleteDate(val$keyval[0])}>
+                                                        Supprimer
+                                                        </button>
+                                                        </h3>
+                                                        <br/>
+                                                    </div>
+                                                    <table className="table table-striped jambo_table bulk_action">
+                                                        <thead className="bg-white">
                                                         {val$keyval.map(val => {
                                                             return(
                                                                 <>

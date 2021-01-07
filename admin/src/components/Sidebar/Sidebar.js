@@ -17,7 +17,7 @@ export default class Sidebar extends Component {
                         <div className="menu-item">Tableau de bord</div>
                     </NavLink>
 
-                    <NavLink to="/reservations" className="hover:text-white">
+                    <NavLink to="/git " className="hover:text-white">
                         <div className="menu-item">Réservations</div>
                     </NavLink>
 
@@ -31,9 +31,9 @@ export default class Sidebar extends Component {
                     <NavLink to="/utilisateurs" className="hover:text-white">
                         <div className="menu-item">Utilisateurs</div>
                     </NavLink>
-                    <NavLink to="/clientMessage" className="hover:text-white">
+                    {/* <NavLink to="/clientMessage" className="hover:text-white">
                         <div className="menu-item">Message </div>
-                    </NavLink>
+                    </NavLink> */}
                     <NavLink to="/planning" className="hover:text-white">
                         <div className="menu-item">Planning </div>
                     </NavLink>
