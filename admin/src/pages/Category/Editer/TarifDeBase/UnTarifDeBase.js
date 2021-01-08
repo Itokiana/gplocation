@@ -14,7 +14,7 @@ export default class UnTarifDeBase extends Component {
             
                 <tr>
                     <td className="input-column">
-                        <div className="row">
+                        <div className="row inputjours">
                             <div className="input-nbjours mr-3 ml-3">
                                 <Field type="text" className="form-control"  id={[`jourD${this.props.num}`]} name={[`jourD${this.props.num}`]} />
                             </div>
