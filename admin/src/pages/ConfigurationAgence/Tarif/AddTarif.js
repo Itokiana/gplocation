@@ -55,8 +55,12 @@ class AddTarif extends Component {
         
         return (
             <>
+                <NavLink to="/tarif" >
+                    <button style= {{float:"left" ,margin:"10px"}} class="text-white bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Retour</button>
+                </NavLink>
                 <center className="text-white">
                     <h1>Tarif personnaliser pour le categorie {category && category.category }, reference {category && category.ref}</h1>
+                    <br/>
                     <br/>
                     <div className="d-flex p-0 justify-content-center align-items-center">
                         {voitures && voitures.map(voiture => {

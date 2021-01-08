@@ -29,8 +29,7 @@ import TarifDeBase from './pages/ConfigurationAgence/Tarif/TrifDeBase';
 import AddSaison from './pages/ConfigurationAgence/GestionSaison/AddSaison';
 import TarifList from './pages/ConfigurationAgence/Tarif/TarifList';
 import Indexs  from './pages/ConfigurationAgence/GestionSaison/calendrier/Indexs';
-
-
+import Partiel from './pages/ConfigurationAgence/Paiment/Partiel';
 
 
 // import Table from './pages/Tableau/Table';
@@ -78,6 +77,7 @@ class App extends React.Component {
                     {/* <Route path="/tarifpersonel/:id" component={TarifPersonel} /> */}
                     <Route path="/ajouter_un_tarif/:id" component={AddTarif} />
                     <Route path="/ajouterSaison/:id" component={AddSaison} />
+                    <Route path="/paimentpartiel" component={Partiel} />
                     <Route path="/tarif_de_base" component={TarifDeBase} />
 
                     <Route path="/tarif_list" component={TarifList} />
