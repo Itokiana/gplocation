@@ -63,7 +63,7 @@ class CategoriesController < ApplicationController
 
   def category_params
       # whitelist params
-      params.permit(:ref, :category)
+      params.permit(:ref, :name,:stock,:duree_min_bs,:duree_min_ms,:duree_min_hs)
   end
 
   def set_category

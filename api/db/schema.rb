@@ -163,6 +163,15 @@ ActiveRecord::Schema.define(version: 2021_01_07_130958) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "paimentpartiels", force: :cascade do |t|
+    t.string "description"
+    t.float "typ"
+    t.float "montant"
+    t.float "minimal"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "prixjourpersos", force: :cascade do |t|
     t.integer "jourdebut"
     t.integer "jourfin"
@@ -173,13 +182,6 @@ ActiveRecord::Schema.define(version: 2021_01_07_130958) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_prixjourpersos_on_category_id"
     t.index ["datetarifperso_id"], name: "index_prixjourpersos_on_datetarifperso_id"
-  create_table "paimentpartiels", force: :cascade do |t|
-    t.string "description"
-    t.float "typ"
-    t.float "montant"
-    t.float "minimal"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reservations", force: :cascade do |t|

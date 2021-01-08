@@ -9,8 +9,8 @@ const CategorySchema = Yup.object().shape({
     //     .required('L\'image ne doit pas être vide'),
     ref: Yup.string()
         .required('Veuillez mettre la référence'),
-    category: Yup.string()
-        .required('Veuillez entrer la catégorie')
+    name: Yup.string()
+        .required('Veuillez entrer le nom de la catégorie')
 });
 
 class AddCategory extends Component {
@@ -21,7 +21,7 @@ class AddCategory extends Component {
                 <Formik
                     initialValues={{
                         ref: '',
-                        category: ''
+                        name: ''
 
                     }}
                     validationSchema={CategorySchema}
@@ -54,12 +54,12 @@ class AddCategory extends Component {
 
                                     <div className="mb-2">
                                         <label className="block text-gray-700 font-bold mb-1 md:mb-0">
-                                            Catégorie:
+                                            nom de la Catégorie:
                             </label>
                                         <Field
-                                            name="category"
+                                            name="name"
                                             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
-                                        <ErrorField errors={errors} touched={touched} row="category" />
+                                        <ErrorField errors={errors} touched={touched} row="name" />
                                     </div>
                                 </div>
 
