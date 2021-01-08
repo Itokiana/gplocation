@@ -1,5 +1,5 @@
 .input-nbjours{
-    width: 45px;
+    width: 55px;
 }
 .input-column{
     width: 250px;
@@ -9,4 +9,7 @@
 }
 .input-check{
     width: 100px;
+}
+.inputjours{
+    width: 250px;
 }
