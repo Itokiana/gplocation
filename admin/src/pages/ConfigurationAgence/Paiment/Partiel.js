@@ -55,9 +55,9 @@ export default class Partiel extends Component {
                             <label className="block text-white tracking-wide text-gray-700 text-xs font-bold w-25" >
                                 Description paiment partiel
                             </label>
-                            <textarea className="form-control rounded mb-3 px-5 w-50" name="description"></textarea>
-                            {/* <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                            px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name= "BS_Min" /> */}
+                            {/* <textarea className="form-control rounded mb-3 px-5 w-50" name="description"></textarea> */}
+                            <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
+                            px-3 mb-3 leading-tight focus:outline-none focus:bg-white" component="textarea" name= "description" />
                         </div>
                         <div className="d-flex align-items-start">
                             <label className="block text-white tracking-wide text-gray-700 text-xs font-bold w-25" htmlFor="grid-last-name">

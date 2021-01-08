@@ -7,55 +7,35 @@ import DeuxJourFerier from './DeuxJourFerier';
 //import '../GestionOF/gestionOF.css'
 
 class GestionJF extends Component {
-    constructor(props) {
-        super(props);
-        this.deleteJour = this.deleteJour.bind(this);
-        this.state = {
 
-            nombreLigneUn : [],
-            nombreLigneDeux : [],
-            idU:[],
-            idD:[],
-            idGlobal:[],
-            objetData: [],
-            initVal:null
-        }
+    state = {
+
+        nombreLigneUn : [],
+        nombreLigneDeux : [],
+        idU:[],
+        idD:[],
+        idGlobal:[],
+        objetData: [],
+        initVal:null
     }
-    
-
-    // state = {
-
-    //     nombreLigneUn : [],
-    //     nombreLigneDeux : [],
-    //     idU:[],
-    //     idD:[],
-    //     idGlobal:[],
-    //     objetData: [],
-    //     initVal:null
-    // }
     ajoutNewUnJour =() =>{
         this.setState({
             nombreLigneUn: [...this.state.nombreLigneUn,this.state.nombreLigneUn.pop() + 1],
-            idUn: [...this.state.idUn, this.state.idGlobal.pop() +1]
+            //idUn: [...this.state.idUn, this.state.idGlobal.pop() +1]
         })
-        
         //console.log("tab1", this.state.nombreLigneUn)
     }
     ajoutNewDeuxJour =() =>{
         this.setState({
-            nombreLigneDeux: [...this.state.nombreLigneDeux,this.state.nombreLigneDeux.pop() + 1],
+            nombreLigneDeux: [...this.state.nombreLigneDeux,this.state.nombreLigneDeux.pop() + 1]
             // idGlobal: [...this.state.idGlobal, this.state.idGlobal.pop() +1],
-            idD: [...this.state.idD, this.state.idGlobal.pop() +1]
+            // idD: [...this.state.idD, this.state.idGlobal.pop() +1]
 
         })
-        
-        console.log(this.state.nombreLigneDeux)
+        //console.log(this.state.nombreLigneDeux)
     }
-    async componentDidMount(){
-        await this.getJour() 
-    }
-    async getJour () {
-        await axios.get('/jourferiers').then(response => {
+    componentDidMount(){
+        axios.get('/jourferiers').then(response => {
             if (response.status === 200) {
                 this.setState({
                     objetData: response.data
@@ -102,33 +82,19 @@ class GestionJF extends Component {
                 for(let i=0; i< j; i++){
                     this.setState({
                         nombreLigneUn: [...this.state.nombreLigneUn,i+1],
-                        idU:[...this.state.idU,idtab[i]],
-                        idGlobal:[...this.state.idGlobal,idtab[i]]
-
+                        idU:[...this.state.idU,idtab[i]]
                     })
         
                 }
-                if (k===0){
+                for(let l=0; l< k; l++){
                     this.setState({
-                        nombreLigneDeux: [...this.state.nombreLigneDeux,1],
-                        idD:[...this.state.idD,this.state.idU.pop()+1]
-                        
+                        nombreLigneDeux: [...this.state.nombreLigneDeux,l+1],
+                        idD:[...this.state.idD,idtabD[l]]
                     })
+        
                 }
-                else{
-                    for(let l=0; l< k; l++){
-                        this.setState({
-                            nombreLigneDeux: [...this.state.nombreLigneDeux,l+1],
-                            idD:[...this.state.idD,idtabD[l]],
-                            idGlobal:[...this.state.idGlobal,idtab[l]]
-                        })
-            
-                    }
-                }
-                
                 this.setState({
-                    initVal: inValue,
-                    idGlobal: this.state.idGlobal.sort((a, b) => a - b)
+                    initVal: inValue  
                 }) 
 
             }
@@ -137,62 +103,10 @@ class GestionJF extends Component {
             console.log("id tout", this.state.idGlobal) 
                
         })
-
+       
+    
     }
-    async deleteJour (id)  {
-        await axios.delete(`/jourferiers/${id}`).then(response => {
-            this.setState({
-                nombreLigneUn : [],
-                nombreLigneDeux : [],
-                idU:[],
-                idD:[],
-                idGlobal:[],
-                objetData: [],
-                initVal:null
-            })
-           this.getJour()
-        })
-        
-    }
-    Un () {
-        // this.state.nombreLigneUn.map((un) => {
-        //     return (
-        //         <>
-        //             {this.state.idU.map((id, valsU) => {
-        //                 if(un===valsU+1){
-        //                     return(
-        //                         <>
-        //                             <UnJourFerier key={un} num={un} nums={id}/>
-        //                         </>
-        //                     )
-                            
-        //                 }
-        //             })}
-                      
-                    
-        //         </>
-        //     )
-        // })
-    }
-    Deux () {
-        // this.state.nombreLigneDeux.map((deu) => {
-        //     return (
-        //         <>
-        //             {this.state.idD.map((id, valsD) => {
-        //                 if(deu===valsD+1){
-        //                     return(
-        //                         <>
-        //                             <DeuxJourFerier key={deu} nbr={deu} nbrs={id}/> 
-        //                         </>
-        //                     )
-        //                 }
-        //             })}
-                     
-                    
-        //         </>
-        //     )
-        // })
-    }
+    
     
     
     render() {
@@ -247,31 +161,13 @@ class GestionJF extends Component {
                                             <td> Surplus </td>
                                                                                             
                                         </th>
-                                        <th>
-                                            <td> Active pour modifier </td>
-                                                                                            
-                                        </th>
                                     </thead>
                                     <tbody>
                                         {
-                                          this.state.nombreLigneUn.map((un) => {
-                                            return (
-                                                <>
-                                                    {this.state.idU.map((id, valsU) => {
-                                                        if(un===valsU+1){
-                                                            return(
-                                                                <>
-                                                                    <UnJourFerier key={un} num={un} nums={id} deleteJour={this.deleteJour}/>
-                                                                </>
-                                                            )
-                                                            
-                                                        }
-                                                    })}
-                                                      
-                                                    
-                                                </>
+                                            this.state.nombreLigneUn.map((un) => 
+                                                <UnJourFerier key={un} num={un} />
                                             )
-                                        })
+                                            
                                         }
                                         
                                     </tbody>
@@ -320,33 +216,12 @@ class GestionJF extends Component {
                                             <td> Surplus </td>
                                                                                             
                                         </th>
-                                        <th>
-                                            <td> Active pour modifier </td>
-                                                                                            
-                                        </th>
                                     </thead>
                                     <tbody>
                                         {
-                                           this.state.nombreLigneDeux.map((deu) => {
-                                            return (
-                                                <>
-                                                    {this.state.idD.map((id, valsD) => {
-                                                        if(deu===valsD+1){
-                                                            return(
-                                                                <>
-                                                                    <DeuxJourFerier key={deu} nbr={deu} nbrs={id} deleteJour={this.deleteJour}/> 
-                                                                </>
-                                                            )
-                                                        }
-                                                    })}
-                                                     
-                                                    
-                                                </>
+                                            this.state.nombreLigneDeux.map((deux) => 
+                                                <DeuxJourFerier key={deux} nbr={deux} />
                                             )
-                                        })
-                                            // this.state.nombreLigneDeux.map((deux) => 
-                                            //     <DeuxJourFerier key={deux} nbr={deux} />
-                                            // )
                                             
                                         }
                                         

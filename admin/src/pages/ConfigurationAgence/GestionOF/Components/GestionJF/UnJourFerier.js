@@ -32,12 +32,9 @@ export default class UnJourFerier extends Component {
                     </div>
                 </td>
                 <td className="input-check" >
-                    <div className="ml-10 mb-10" >
+                    <div className="ml-4 mb-4">
                         <Field className="form-check-input" type="checkbox"  id={this.nameCheckU} name={this.nameCheckU} />
                     </div>
-                </td>
-                <td>
-                <button type="button" className="btn btn-danger" onClick={e => this.props.deleteJour(this.props.nums)}>suppr</button>
                 </td>
 
             </tr>    
