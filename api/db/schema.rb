@@ -100,6 +100,13 @@ ActiveRecord::Schema.define(version: 2020_12_23_150344) do
     t.index ["saison_id"], name: "index_date_saisons_on_saison_id"
   end
 
+  create_table "datetarifpersos", force: :cascade do |t|
+    t.date "datedebut"
+    t.date "datefin"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "fermexceptions", force: :cascade do |t|
     t.date "jourfermedebut"
     t.date "jourfermefin"
@@ -154,6 +161,18 @@ ActiveRecord::Schema.define(version: 2020_12_23_150344) do
     t.date "jourouvertfin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "prixjourpersos", force: :cascade do |t|
+    t.integer "jourdebut"
+    t.integer "jourfin"
+    t.integer "prixperso"
+    t.bigint "category_id"
+    t.bigint "datetarifperso_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_prixjourpersos_on_category_id"
+    t.index ["datetarifperso_id"], name: "index_prixjourpersos_on_datetarifperso_id"
   end
 
   create_table "reservations", force: :cascade do |t|

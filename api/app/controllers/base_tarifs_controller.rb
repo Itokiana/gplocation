@@ -32,15 +32,10 @@ class BaseTarifsController < ApplicationController
       check="check#{value}"
       @base_tarif = BaseTarif.find(value)
       if data[check]==true
-        if @base_tarif.update(jourdebut: data[jourD], jourfin: data[jourF], prixbassesaison: data[prixBS], prixmoyennesaison: data[prixMS], prixhautesaison: data[prixHS])
-          render json: @base_tarif
-        else
-          render json: @base_tarif.errors, status: :unprocessable_entity
-        end
-
+        @base_tarif.update(jourdebut: data[jourD], jourfin: data[jourF], prixbassesaison: data[prixBS], prixmoyennesaison: data[prixMS], prixhautesaison: data[prixHS])
       end
-
     end
+    render json: @base_tarif
   end
 
   # PATCH/PUT /base_tarifs/1

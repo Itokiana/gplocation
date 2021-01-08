@@ -80,18 +80,18 @@ export default class TarifDeBase extends Component {
                     <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
                     <Formik
                         initialValues = {this.state.initValues}
-                        onSubmit={(data,{setSubmitting})=>{
-                            setSubmitting(true);
-                                                  
-                            axios.post('/base_tarifs',{data,ids: this.props.ids,id:this.state.id})
-                            this.setState({
-                                nombreLigne: [],
-                                id:[],
-                                initValues:null,
-                                size:0
+                        onSubmit={(data)=>{
+                            axios.post('/base_tarifs',{data,ids: this.props.ids,id:this.state.id}).then(response => {
+                                if (response.status===200){
+                                    this.setState({
+                                        nombreLigne: [],
+                                        id:[],
+                                        initValues:null,
+                                        size:0
+                                    })
+                                    this.gettarifdebase()
+                                }
                             })
-                            this.gettarifdebase()
-                            setSubmitting(false)
                         }}
                     >{({values, isSubmitting}) => (
                         <Form>
