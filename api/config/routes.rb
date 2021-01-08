@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :paimentpartiels
   resources :reservations
   resources :jourferiers
   resources :fermexceptions

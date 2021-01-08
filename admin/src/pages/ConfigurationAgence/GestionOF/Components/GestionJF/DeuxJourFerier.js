@@ -30,9 +30,12 @@ export default class DeuxJourFerier extends Component {
                     
                 </td>
                 <td className="input-check" >
-                    <div className="ml-4 mb-4">
+                    <div className="ml-10 mb-10">
                         <Field className="form-check-input" type="checkbox"  id={this.nameCheckD} name={this.nameCheckD} />
                     </div>
+                </td>
+                <td>
+                <button type="button" className="btn btn-danger" onClick={e => this.props.deleteJour(this.props.nbrs)}>suppr</button>
                 </td>
             </tr>    
 

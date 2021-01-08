@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_23_150344) do
+ActiveRecord::Schema.define(version: 2021_01_07_130958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,15 @@ ActiveRecord::Schema.define(version: 2020_12_23_150344) do
   create_table "ouvertexceptions", force: :cascade do |t|
     t.date "jourouvertdebut"
     t.date "jourouvertfin"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "paimentpartiels", force: :cascade do |t|
+    t.string "description"
+    t.float "typ"
+    t.float "montant"
+    t.float "minimal"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from '../../../axios'
 import moment from 'moment'
 import './tarif.css'
+import { NavLink } from 'react-router-dom';
+
 
 
 class Tarif extends Component {
@@ -71,14 +73,15 @@ class Tarif extends Component {
                 console.log("unique", unique)
                 return(
                     <>
+                        <div className=""style= {{background:"DarkSlateGray"}}>
                         <div className="w-full h-10 bg-blue rounded p-2">
                             <strong>{category.name}
                             <span style= {{float:"right"}}> Duree min Bs:{category.duree_min_bs} jours- Dureé min MS: {category.duree_min_ms} jours - Dureé min: {category.duree_min_hs} jours
                             </span></strong>
                         </div>
-                        <br/><br/>
+                        <br/>
                         <Link to={`/ajouter_un_tarif/${(category.id)}`}
-                        className="border border-green-100 bg-green-500 text-white rounded-md px-4 py-2 m-2 
+                        className="border border-green-100 bg-green-500 text-white rounded-md px-3 m-1 py-2 
                         transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
                         >
                         Ajouter Tarif pour {category.name}
@@ -113,30 +116,30 @@ class Tarif extends Component {
                                                         Du <strong>{moment(val$keyval[0].datedebutperso).format('D MMMM Y')}</strong> 
                                                         au <strong>{moment(val$keyval[0].datefinperso).format('D MMMM Y') }
                                                         </strong> 
-                                                        <button className="text-white rounded bg-red" style= {{float:"right"}} onClick={() => this.deleteDate(val$keyval[0])}>
+                                                        <button className="text-white rounded m-2 bg-red" style= {{float:"right"}} onClick={() => this.deleteDate(val$keyval[0])}>
                                                         Supprimer
                                                         </button>
                                                         </h3>
                                                         <br/>
                                                     </div>
-                                                    <table className="table table-striped jambo_table bulk_action">
+                                                    <table className="table text-white table-striped jambo_table bulk_action border-black">
                                                         <thead className="bg-white">
                                                         {val$keyval.map(val => {
                                                             return(
                                                                 <>
                                                                     <th>
-                                                                    <span className="text-blue-600">{val.jourdebut} au {val.jourfin} Jour</span>
+                                                                    <span className="text-black">{val.jourdebut} au {val.jourfin} Jour</span>
                                                                     </th>
                                                                 </>    
                                                                 )
                                                         })}                    
                                                         </thead>
-                                                        <tbody>
+                                                        <tbody className="">
                                                             <tr>
                                                             {val$keyval.map(cat=>{
                                                                 return(
                                                                     <>
-                                                                    <td className="text-white">
+                                                                    <td className="">
                                                                         <u>{cat.prix}</u> <br/>€/jours
                                                                     </td>
                                                                     </>
@@ -153,6 +156,10 @@ class Tarif extends Component {
                             })
                         
                         }
+                        </div>
+                        <br/>
+                        <br/>
+                        
                     </>
                 )
 
@@ -164,8 +171,13 @@ class Tarif extends Component {
         return (
             <>
             <div>
+                <NavLink to="/configuration_agence" >
+                    <button style= {{float:"left" ,margin:"10px"}} class="text-white bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Retour</button>
+                </NavLink>
                 <center>
+                    <br/>
                     <h1 className="text-white">TARIF PERSONNALISER</h1>
+                    <br/><br/>
                 </center>
                     
                 <br/>

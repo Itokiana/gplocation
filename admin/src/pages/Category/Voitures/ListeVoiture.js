@@ -17,14 +17,14 @@ export default class ListeVoiture extends Component {
         console.log(categories)
 
         return (
-            <div className="py-4">
+            <div className="py-4 text-white">
                 <h2>Liste des voitures</h2>
                 <div className="mt-2">
                     <table className="table-auto">
                         {console.log(voitures)}
                         <thead>
                             <tr>
-                                <th className="border px-4 py-2">  </th>
+                                <th className="">  </th>
                                 <th className="border px-4 py-2">Marque</th>
                                 <th className="border px-4 py-2">Modèle</th>
                                 <th className="border px-4 py-2">Places</th>
@@ -39,7 +39,7 @@ export default class ListeVoiture extends Component {
                             {voitures && voitures.map(voiture => {
                                 return (
                                     <tr>
-                                        <td className="border px-4 py-2"><img className="dimension-voiture" src={`http://localhost:4000/${voiture.image.url}`} alt ={voiture.marque}/></td>
+                                        <td className="border"><img src={`http://localhost:4000/${voiture.image.url}`} alt ={voiture.marque}/></td>
                                         <td className="border px-4 py-2">{voiture.marque}</td>
                                         <td className="border px-4 py-2">{voiture.model}</td>
                                         <td className="border px-4 py-2">{voiture.places}</td>

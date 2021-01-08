@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-// import {ElementsConsumer, CardElement} from '@stripe/react-stripe-js';
+import {ElementsConsumer, CardElement} from '@stripe/react-stripe-js';
 
 import CardSection from './CardSection';
 import axios from '../../../../../../axios';
@@ -27,7 +27,7 @@ class CheckoutForm extends React.Component {
       return;
     }
 
-    // const card = elements.getElement(CardElement);
+    const card = elements.getElement(CardElement);
     const result = await stripe.createToken(card);
     if (result.error) {
       // Show error to your customer.
