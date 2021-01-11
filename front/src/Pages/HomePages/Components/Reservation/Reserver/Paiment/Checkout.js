@@ -9,7 +9,6 @@ const stripePromise = loadStripe('pk_test_51HytmbEe9DUC1ZdoZKhQfbK82voTI18SF1rgf
 
 function Checkout (props) {
     sessionStorage.setItem("data",JSON.stringify(props.data))
-    console.log(props)
         return(
                 <div className="example">
                     <div className="card">

@@ -42,4 +42,5 @@ class Voiture < ApplicationRecord
         end
     end
     
+    
 end

@@ -12,9 +12,10 @@ class ChargesController < ApplicationController
       # Token is created using Stripe Checkout or Elements!
       # Get the payment token ID submitted by the form:
       token = params[:stripeToken]
+      amount = Paimentpartiel.first.montant * 100
       description = "client_id: #{params[:description]}"
       charge = Stripe::Charge.create({
-        amount: 10000,
+        amount: amount.to_i,
         currency: 'eur',
         description: description,
         source: token,

@@ -9,7 +9,8 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import ErrorField from '../ErrorField';
 import moment from 'moment';
-import 'moment/locale/fr' 
+import 'moment/locale/fr' ;
+import Button from 'react-bootstrap/esm/Button';
 moment.locale('fr');
 
 const ClientRegistrationSchema = Yup.object().shape({
@@ -50,10 +51,17 @@ function Reserver(propos) {
     const [modalShow, setModalShow] = React.useState(false); 
     const [etat, setEtat] = useState(1);
     const [voiture, setVoiture] = React.useState([]);
-    const [client, setClient] = React.useState([])
-
+    const [client, setClient] = React.useState([]);
+    const [account,setAccount] = React.useState();
+    function getAccount  () {
+		axios.get('/paimentpartiels/1').then(response => {
+            if (response.status===200){
+				setAccount(response.data.montant)
+			}
+        })
+    }
     useEffect(() => {
-        
+        getAccount();
         setVoiture({loading: true});
         const apiVoiture = (`http://localhost:4000/voitures/${propos.match.params.id}`)
         fetch(apiVoiture)
@@ -62,6 +70,7 @@ function Reserver(propos) {
             setVoiture({voiture: data});
           });
     },[]);  
+    
       
     return (
         <div>
@@ -88,17 +97,17 @@ function Reserver(propos) {
                                                 <li className="prise"><span className="carburant"></span>Carburant : Plein à rendre plein</li>
                                             </ul>
                                             <div id="prix_produit">
-                                                <p className="montant-acompte-selection">dont 100 € d'acompte</p>
+                                                <p className="montant-acompte-selection">dont {account} € d'acompte</p>
                                                 <p className="confirm-tarifs">{propos.match.params.prix} €</p>
                                                 </div>
                                             </div>
-                                            <p className="center mtop10">
-                                                <button type="submit" onClick={() => setModalShow(true)} className="btn m-btn" >Détails<span className="fa fa-angle-right"></span></button>
+                                            <div className="center mtop10">
+                                                <Button  onClick={() => setModalShow(true)} className="btn m-btn" >Détails<span className="fa fa-angle-right"></span></Button>
                                                 <DetailReserver
                                                     show={modalShow}
                                                     onHide={() => setModalShow(false)}
                                                 />
-                                            </p>
+                                            </div>
                                         </form>            
                                     </div>
                                 </div>
@@ -108,8 +117,8 @@ function Reserver(propos) {
                                         <h2>Prise en charge</h2>
                                         </div>
                                         <div className="paddingp">
-                                        <p><b>Départ :</b> {propos.match.params.lieu_depart}<br /><b> le {moment(`${propos.match.params.date_depart}`).format('dddd Do MMMM YYYY')} à {propos.match.params.heure_depart} </b></p>
-                                        <p><b>Retour :</b> {propos.match.params.lieu_retour}<br /><b> le {moment(`${propos.match.params.date_retour}`).format('dddd Do MMMM YYYY')} à {propos.match.params.heure_retour} </b></p>
+                                        <p><b>Départ :</b> {sessionStorage.getItem("lieu_depart")}<br /><b> le {moment(`${JSON.parse(sessionStorage.getItem("date_depart"))}`).format('dddd Do MMMM YYYY')} à {JSON.parse(sessionStorage.getItem("heure_depart"))} </b></p>
+                                        <p><b>Retour :</b> {sessionStorage.getItem("lieu_retour")}<br /><b> le {moment(`${JSON.parse(sessionStorage.getItem("date_retour"))}`).format('dddd Do MMMM YYYY')} à {JSON.parse(sessionStorage.getItem("heure_retour"))} </b></p>
 
                                         </div>
                                     </div>
@@ -122,12 +131,12 @@ function Reserver(propos) {
                                         <div className="login">
                                             <div className="row">
                                                                                                                             
-                                                <p className="pbig">
+                                                <div className="pbig">
                                                     <b className="textRempli">Remplissez vos coordonnées et<br/> accédez au paiement de votre <br/>réservation.</b>
                                                     <div className="bouttonDeja">
                                                     <button onClick={() => setEtat(2)}  className="btn m-btn" style={{background:'#228dcb', color:'white'}}>Déjà client !<span className="fa fa-angle-right"></span></button>
                                                     </div>
-                                                </p>
+                                                </div>
                                                 
                                             </div>
                                             <Formik
@@ -152,7 +161,7 @@ function Reserver(propos) {
                                                         console.log(response);
                                                     } 
                                                 })
-                                                resetForm()
+                                                resetForm({})
                                             }}
                                             >
                                             {({ errors, touched, handleSubmit }) => (

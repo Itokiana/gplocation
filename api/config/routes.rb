@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   
   resources :voitures 
-  get '/voitures/:dateDepart/:dateRetour/:jours', to: 'voitures#listevoiture'
+  get '/voitures/:values/:jours', to: 'voitures#listevoiture'
 
   resources :tarifs
 

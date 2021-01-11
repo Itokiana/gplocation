@@ -41,6 +41,7 @@ class BaseTarifsController < ApplicationController
   # PATCH/PUT /base_tarifs/1
   def update
     @base_tarif = BaseTarif.create!(jourdebut: 0,jourfin:0,prixbassesaison: 0, prixmoyennesaison: 0, prixhautesaison: 0, category_id: params[:id])
+    
     json_response(@base_tarif, :created)
   end
 

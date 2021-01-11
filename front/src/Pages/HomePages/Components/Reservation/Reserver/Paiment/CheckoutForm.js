@@ -43,7 +43,7 @@ class CheckoutForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <CardSection />
-        <button disabled={!this.props.stripe} className="payer">Payer 100€</button>
+        <button disabled={!this.props.stripe} className="payer">Payer</button>
       </form>
     );
   }
@@ -90,7 +90,7 @@ async function stripeTokenHandler(token) {
         }
       })
     }else{
-      console.log("paaiement non reussi")
+      console.log("paiement non reussi")
     }
     // Return and display the result of the charge.
 }

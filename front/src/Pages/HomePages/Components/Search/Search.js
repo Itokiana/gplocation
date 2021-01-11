@@ -71,10 +71,11 @@ export default class Search extends React.Component {
 							let date1 = values.dateDepart;
 							let date2 = values.dateRetour;
 							let jours = this.dateDiff(date1,date2);
+							let data = JSON.stringify(values)
 							this.setState({
 								jour: jours
 							})
-							axios.get(`/voitures/${date1}/${date2}/${jours}`).then(reponse => {
+							axios.get(`/voitures/${data}/${jours}`).then(reponse => {
 								if (reponse.status === 200) {
 									this.setState({
 										voitures:reponse.data.voitures,
@@ -85,6 +86,7 @@ export default class Search extends React.Component {
 									});
 								} 
 							});
+							
 						}}
 						>
 							{({ errors, touched }) => (
@@ -94,16 +96,16 @@ export default class Search extends React.Component {
 										<div className="m-firstSelects">
 											<div className="col-xs-5">
 												<p>Lieu de départ</p>
-												<select >
-													<option selected value="0" >Aéroport Roland-Garros</option>
+												<select  defaultValue={'DEFAULT'} onChange={this.props.onChange}>
+													<option  value="0" >Aéroport Roland-Garros</option>
 												</select>
 												
 
 											</div>
-											<div class="m-secondSelects">
+											<div className="m-secondSelects">
 												<div className="col-xs-4">
 													<p>Date de départ</p>
-													<Field type="date" className="select_field" name="dateDepart" defaultValue={Date.now}/>
+													<Field type="date" className="select_field" name="dateDepart" />
 													<ErrorField errors={errors} touched={touched} row="dateDepart"/>
 												</div>
 											</div>

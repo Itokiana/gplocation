@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState,useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 
 import ConditionModal from '../../Detail/ConditionModal';
@@ -8,11 +8,13 @@ import * as Yup from 'yup';
 import Checkout from './Checkout';
 import { Formik, Form, Field } from 'formik';
 import ErrorField from '../../ErrorField';
+import axios from 'axios';
 
 
 function PaimentEtape1(props) {
-    const [status, setStatus] = useState(false)
-    const [messageNumeroVol, setMessageNumeroVol] = useState('')
+    const [status, setStatus] = useState(false);
+    const [montant,setMontant] = useState();
+    const [messageNumeroVol, setMessageNumeroVol] = useState('');
     const [modalShow, setModalShow] = React.useState(false);
     const NumeroVolValidation = Yup.object().shape({
         numero_vol: Yup.string()
@@ -20,7 +22,14 @@ function PaimentEtape1(props) {
     });
     const Paiement = () => {
         setStatus(!status) 
-    }
+    };
+    useEffect(()=>{
+        axios.get('/paimentpartiels/1').then(response => {
+            if (response.status===200){
+                setMontant(response.data.montant)
+            }
+        })
+    });
     return (
         <div>
             <div className="col-xs-6">
@@ -76,11 +85,11 @@ function PaimentEtape1(props) {
                                         </p>
                                         </label>
                                     </fieldset>
-                                <h3 class="form-connec-h3">Total à payer : acompte de 100 €</h3>
-                                <p class="paddingp">Puis {parseInt(props.data.prix)-100} € à régler à la remise des clés par carte bancaire, espèce ou chèque </p>
+                                <h3 class="form-connec-h3">Total à payer : acompte de {montant} €</h3>
+                                <p class="paddingp">Puis {parseInt(props.data.prix)-montant} € à régler à la remise des clés par carte bancaire, espèce ou chèque </p>
                                 <h3 class="paiementcarte cc_cursor">Paiement sécurisé par carte bancaire :</h3>
 
-                                <button onClick={Paiement} className="btn btn-success btn-lg btn-block" >Payer</button>
+                                <button onClick={Paiement} className="btn btn-success btn-lg btn-block" >Payer {montant} €</button>
 
                                 {status? (<Checkout data={props} Paiement={Paiement}/>):null}
 

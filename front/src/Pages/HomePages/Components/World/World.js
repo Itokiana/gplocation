@@ -4,7 +4,7 @@ import './World.css'
 
 class World extends React.Component {
 	state = {
-		voitures: []
+		voitures: [],
 	}
 
 	componentDidMount() {
@@ -22,34 +22,35 @@ class World extends React.Component {
 			}
 		})
 	}
+	
 
 	render() {
 		const { voitures } = this.state;
 		return (
 			<>
 				<section id="voitures" className="b-world">
-				<section class="b-slider"> 
-					<div id="carousel" class="slide carousel carousel-fade">
-						<div class="carousel-inner">
-							<div class="item active">
+				<section className="b-slider"> 
+					<div id="carousel" className="slide carousel carousel-fade">
+						<div className="carousel-inner">
+							<div className="item active">
 								<div className="container">
 									<div className="row">
 										{voitures.map(voiture =>
-											(<div className="col-sm-4 col-xs-12">
+											(<div className="col-sm-4 col-xs-12" key={voiture.id}>
 												<div className="b-world__item wow zoomInUp" data-wow-delay="0.3s">
 													<img className="img-voiture" src={`http://localhost:4000/${voiture.image.url}`} alt={voiture.marque}/>
 													<div className="b-world__item-val">
 														<span className="b-world__item-val-title">{voiture.marque}</span>
 													</div>
 													<h2>{voiture.model}</h2>
-													<p>
+													
 														<ul>
 															<li>{voiture.places} places</li>
 															<li>Boîte {voiture.vitesse}</li>
 															<li>{voiture.mode}</li>
 															<li>Climatisation : {voiture.climatisation}</li>
 														</ul>
-													</p>
+													
 												</div>
 											</div>)
 										)

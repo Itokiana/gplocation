@@ -31,6 +31,7 @@ class AddUtilisateur extends Component {
                     const { action } = this.props;
                     if (response.status === 201) {
                         resetForm();
+                        
                         action.getUtilisateur();
                     }
                 })

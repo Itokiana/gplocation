@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Detail from './Detail/Detail';
 import Reserver from './Reserver/Reserver';
 import './Reservation.css';
+import axios from 'axios';
 
 class Reservation extends Component {
     state = {
@@ -11,6 +12,7 @@ class Reservation extends Component {
         data:{},
         voiture_id:null,
         prix:null,
+        account:null
     }
 
     changerEtape = (newEtape) => {
@@ -19,19 +21,28 @@ class Reservation extends Component {
         });
     }
     
-    componentDidUpdate(){
-        console.log(this.state.voitures)
-    }
     getKey(val,map) {
         return Object.keys(map).find(key => map[key] === val);
     }
-    
+    getAccount = ()=>{
+		axios.get('/paimentpartiels/1').then(response => {
+            if (response.status===200){
+				this.setState({account:response.data.montant})
+			}
+        })
+    }
+    componentDidMount(){
+        this.getAccount()
+    }
 
     render() {
         const etape = this.state.etape;
-        console.log(this.props.date_reservation)
-        
-        
+        sessionStorage.setItem("date_depart",JSON.stringify(this.props.date_reservation.dateDepart))
+        sessionStorage.setItem("date_retour",JSON.stringify(this.props.date_reservation.dateRetour))
+        sessionStorage.setItem("heure_depart",JSON.stringify(this.props.date_reservation.heureDepart))
+        sessionStorage.setItem("heure_retour",JSON.stringify(this.props.date_reservation.heureRetour))
+        sessionStorage.setItem("lieu_depart",JSON.stringify(this.props.date_reservation.lieuDepart))
+        sessionStorage.setItem("lieu_retour",JSON.stringify(this.props.date_reservation.lieuRetour))
         return (
            
             <div>   
@@ -59,12 +70,12 @@ class Reservation extends Component {
                                                     <span className="confirm-tarif ">{
                                                         this.props.prix[this.getKey(voiture,this.props.voitures)]
                                                     }</span>
-                                                    <p className="montant-acompte">dont 100 € d'acompte</p>
+                                                    <p className="montant-acompte">dont {this.state.account} € d'acompte</p>
                                                 </div>
                                                 <div className="b-items__cars-one-info">
                                                     <header className="b-items__cars-one-info-header s-lineDownLeft" id="head">
                                                         <h2>{voiture.marque}</h2>
-                                                        <Link to={`/reserver/${this.props.date_reservation.dateDepart}/${this.props.date_reservation.dateRetour}/${this.props.date_reservation.heureDepart}/${this.props.date_reservation.heureRetour}/${this.props.date_reservation.lieuDepart}/${this.props.date_reservation.lieuRetour}/${voiture.id}/${this.props.prix[this.getKey(voiture,this.props.voitures)]}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
+                                                        <Link to={`/reserver/${voiture.id}/${this.props.prix[this.getKey(voiture,this.props.voitures)]}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
 
                                                     </header>
                                                     <div className="b-blog__posts-one-info">
@@ -78,7 +89,7 @@ class Reservation extends Component {
                                                                 </div>       
                                                                 <div className="contenue-1">
                                                             
-                                                                    <select  name="" type="checkbox" tabindex="-1">
+                                                                    <select  name="" type="checkbox" tabIndex="-1">
                                                                         <option>0</option>
                                                                         <option>1</option>
                                                                         <option>2</option>
@@ -88,7 +99,7 @@ class Reservation extends Component {
                                                                     <span className="conducteur">Conducteur additionnel  :</span><span className="gratuit">Gratuit</span>
                                                                 
                                                                 <div className="ddOutOfVision" id="2-produit_61_msddHolder" >
-                                                                    <select  name="" type="checkbox" tabindex="-1">
+                                                                    <select  name="" type="checkbox" tabIndex="-1">
                                                                         <option>0</option>
                                                                         <option>1</option>
                                                                         <option>2</option>
@@ -98,7 +109,7 @@ class Reservation extends Component {
                                                                     <span className="cout-1">9.00 €</span>
                                                                 </div>
                                                                 <div className="ddOutOfVision" id="3-produit_61_msddHolder" >
-                                                                    <select  name="" type="checkbox" tabindex="-1">
+                                                                    <select  name="" type="checkbox" tabIndex="-1">
                                                                             <option>0</option>
                                                                             <option>1</option>
                                                                             <option>2</option>
@@ -117,25 +128,25 @@ class Reservation extends Component {
                                                                     <ul className="option ">
                                                                         <li className="liste">
                                                                             <svg width="2em" height="1em" viewBox="0 0 16 16" className="bi bi-arrow-right-circle-fill" fill="#228dcb " xmlns="http://www.w3.org/2000/svg">
-                                                                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
+                                                                            <path fillRule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
                                                                             </svg>
                                                                             <span className="Prise">Prise en charge à l'aéroport</span>
                                                                         </li>
                                                                         <li className="liste">
                                                                             <svg width="2em" height="1em" viewBox="0 0 16 16" className="bi bi-arrow-right-circle-fill" fill="#228dcb " xmlns="http://www.w3.org/2000/svg">
-                                                                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
+                                                                            <path fillRule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
                                                                             </svg>
                                                                         <span className="option">Kilométrage illimité</span>
                                                                         </li>
                                                                         <li className="liste">
                                                                             <svg width="2em" height="1em" viewBox="0 0 16 16" className="bi bi-arrow-right-circle-fill" fill="#228dcb " xmlns="http://www.w3.org/2000/svg">
-                                                                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
+                                                                            <path fillRule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
                                                                             </svg>
                                                                             <span className="option">Assurance tous risques avec franchise</span>
                                                                         </li>
                                                                         <li className="liste">
                                                                         <svg width="2em" height="1em" viewBox="0 0 16 16" className="bi bi-arrow-right-circle-fill" fill="#228dcb " xmlns="http://www.w3.org/2000/svg">
-                                                                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
+                                                                        <path fillRule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
                                                                         </svg>
                                                                         <span className="option"> Carburant : plein à rendre plein</span>
                                                                         </li>
