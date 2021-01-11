@@ -19,11 +19,12 @@ class AddTarif extends Component {
 
     };
     
-    
+    listeTarif =() => {
+        window.location.href ="/tarif"
+     }
 
     componentDidMount() {
-        this.getCategories();
-        
+        this.getCategories();  
     }
     ajoutNewPeriod =() =>{
         this.setState({
@@ -84,7 +85,7 @@ class AddTarif extends Component {
                                 dateFinPerso:'',
                                 
                             }}
-                            onSubmit={(data,{setSubmitting})=>{
+                            onSubmit={(data, {setSubmitting})=>{
                                 setSubmitting(true);
                                                     
                                 axios.post('/tarif_personalises',{data, tabLigne:this.state.nombreLigne})
@@ -125,7 +126,7 @@ class AddTarif extends Component {
                                     </button>
                                    
                                     <button
-                                        type="submit"
+                                        type="submit" onClick={this.listeTarif}
                                         className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
                                         transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
                                     >

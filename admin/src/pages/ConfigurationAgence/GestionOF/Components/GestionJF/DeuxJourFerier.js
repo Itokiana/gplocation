@@ -14,25 +14,35 @@ export default class DeuxJourFerier extends Component {
             <tr>
                 <td className="input-column">
                 
-                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="date" name={this.nameDDate}/>
+                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-1 
+                px-2 mb-0 leading-tight focus:outline-none focus:bg-white" type="date" name={this.nameDDate}/>
                 </td>   
                 <td className="input-column">
                 
-                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" name={this.nameDJour}/>
+                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-1 
+                px-2 mb-0 leading-tight focus:outline-none focus:bg-white" type="text" name={this.nameDJour}/>
                     
                 </td>
                 <td className="input-column">
                     
-                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name={this.nameDPrix}/>
+                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-1 
+                px-2 mb-0 leading-tight focus:outline-none focus:bg-white" type="number" name={this.nameDPrix}/>
                     
                 </td>
                 <td className="input-check" >
                     <div className="ml-4 mb-4">
                         <Field className="form-check-input" type="checkbox"  id={this.nameCheckD} name={this.nameCheckD} />
                     </div>
+                </td>
+                <td>
+                <button
+                    type="button"
+                    className="border border-red-500 bg-red-500 text-white rounded-md px-1 py-1 m-0 
+                    transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline"
+                    onClick={e => this.props.deletejour(this.props.nbr)}
+                >
+                    X
+                </button>
                 </td>
             </tr>    
 

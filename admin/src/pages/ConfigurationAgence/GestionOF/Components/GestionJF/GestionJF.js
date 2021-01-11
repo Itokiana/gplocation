@@ -1,118 +1,76 @@
 import React, { Component, setStat} from 'react'
 import axios from '../../../../../axios'
+import { NavLink } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
-import UnJourFerier from './UnJourFerier';
 import DeuxJourFerier from './DeuxJourFerier';
+import moment from 'moment'
 
 //import '../GestionOF/gestionOF.css'
 
 class GestionJF extends Component {
-
-    state = {
-
-        nombreLigneUn : [],
-        nombreLigneDeux : [],
-        idU:[],
-        idD:[],
-        idGlobal:[],
-        objetData: [],
-        initVal:null
+    constructor(props) {
+        super(props);
+        this.deletejour = this.deletejour.bind(this);
+        this.state = {
+            ligne: [],
+            anneUnique : [],
+            objetData: [],
+            initVal:null
+        }
     }
-    ajoutNewUnJour =() =>{
-        this.setState({
-            nombreLigneUn: [...this.state.nombreLigneUn,this.state.nombreLigneUn.pop() + 1],
-            //idUn: [...this.state.idUn, this.state.idGlobal.pop() +1]
-        })
-        //console.log("tab1", this.state.nombreLigneUn)
+    async componentDidMount(){
+        await this.getJourferier()
     }
-    ajoutNewDeuxJour =() =>{
-        this.setState({
-            nombreLigneDeux: [...this.state.nombreLigneDeux,this.state.nombreLigneDeux.pop() + 1]
-            // idGlobal: [...this.state.idGlobal, this.state.idGlobal.pop() +1],
-            // idD: [...this.state.idD, this.state.idGlobal.pop() +1]
-
-        })
-        //console.log(this.state.nombreLigneDeux)
-    }
-    componentDidMount(){
-        axios.get('/jourferiers').then(response => {
-            if (response.status === 200) {
+    async getJourferier(){
+        await axios.get('/jourferiers').then(res=>{
+            if(res.status===200) {
                 this.setState({
-                    objetData: response.data
+                    objetData: res.data
                 })
-            } 
-            var j=0
-            var k=0
-            var inValue= {}
-            var idtab=[]
-            var idtabD=[]
-
-
-            if (this.state.objetData.length===0){
-                console.log("n'y pas data")
-            }else{
-                var dateFirst= this.state.objetData[0].anne
-    
-                this.state.objetData.map(val =>{
-                    if (val.anne == dateFirst){
-                        j = j + 1
-                        idtab.push(val.id)
-                        inValue[`date${j}`]=val.dateferie
-                        inValue[`jour${j}`]=val.evenement
-                        inValue[`prix${j}`]=val.surplus
-                        inValue[`checkU${j}`]=""
-                        inValue[`idTarifU${j}`]=val.id
-                        inValue['anneeU']= val.anne
-                        
-                    }
-                    else{
-                        k = k + 1
-                        idtabD.push(val.id)
-                        inValue[`dateD${k}`]=val.dateferie
-                        inValue[`jourD${k}`]=val.evenement
-                        inValue[`prixD${k}`]=val.surplus
-                        inValue[`checkD${k}`]=""
-                        inValue[`idTarifD${k}`]=val.id
-                        inValue['anneeD']= val.anne
-                        
-                    } 
-                    
-                
-                })
-                for(let i=0; i< j; i++){
-                    this.setState({
-                        nombreLigneUn: [...this.state.nombreLigneUn,i+1],
-                        idU:[...this.state.idU,idtab[i]]
-                    })
-        
-                }
-                for(let l=0; l< k; l++){
-                    this.setState({
-                        nombreLigneDeux: [...this.state.nombreLigneDeux,l+1],
-                        idD:[...this.state.idD,idtabD[l]]
-                    })
-        
-                }
-                this.setState({
-                    initVal: inValue  
-                }) 
-
+                console.log(this.state.objetData)
             }
-            
-            console.log("objet tout", this.state.objetData)
-            console.log("id tout", this.state.idGlobal) 
-               
+            const anne = []
+            const id = []
+            const inValue = {}
+            this.state.objetData.map(val => {
+                anne.push(moment(val.dateferie).format("Y"))
+                inValue[`dateD${val.id}`]=val.dateferie
+                inValue[`jourD${val.id}`]=val.evenement
+                inValue[`prixD${val.id}`]=val.surplus
+                inValue[`checkD${val.id}`]=""
+                id.push(val.id)
+            })
+            const unique = anne.filter((v, i, a) => a.indexOf(v) === i);
+            //console.log("uni", unique)
+            const tab =[]
+            unique.map((val, key) => {
+                const obj = []
+                this.state.objetData.map(anne =>{
+                    if(val===moment(anne.dateferie).format("Y")){
+                        obj.push(anne)
+                    }
+                })
+                tab.push(obj)
+            })
+            console.log("unique", tab)
+            this.setState({
+                anneUnique: tab,
+                initVal: inValue,
+                ligne: id
+            })
+                
         })
-       
-    
     }
-    
-    
-    
+    async deletejour (id)  {
+        await axios.delete(`/jourferiers/${id}`).then(response => {
+           this.getJourferier()
+        })
+        
+    } 
     render() {
         //let obj=Object.assign( {}, this.state.initValue1,this.state.initValue2)
         //console.log(this.state.objetData.pop())
-       
+        const ligne = this.state.ligne
         return (
             <>
                 <div className="page-title">
@@ -120,142 +78,83 @@ class GestionJF extends Component {
                         <h2> GESTION DES JOUR FERIES </h2>
                     </div>
                 </div>
+                <div >
+                    <NavLink to="/ajoutjourferier" >
+                        <button style= {{float:"right" ,margin:"10px"}} class="text-white bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Ajouter Nouveau jourferier</button>
+                    </NavLink>
 
+                </div>
                 {this.state.initVal  ? 
                  <div className="row">
                     <Formik
                         initialValues={this.state.initVal}    
-                        onSubmit={(value,{setSubmitting})=>{
-                            setSubmitting(true);
-                            axios.post('/jourferiers', {
-                                value, tableauUn:this.state.nombreLigneUn,
-                                tableauDeux:this.state.nombreLigneDeux,
-                                idUn: this.state.idU,
-                                idDeux: this.state.idD
+                        onSubmit={(value)=>{
+                            axios.post('/updatejours', {value, ligne}).then(response => {
+                                this.setState({
+                                    anneUnique : [],
+                                    objetData: [],
+                                    initVal:null   
+                                })
+                               this.getJourferier()
                             })
-                            console.log(value) 
-                            setSubmitting(false);  
+                              
                         }}
                     
                     >
-                        <Form class="w-full"> 
-                
-                            <div className="tableResponsive w-full">
-                                <div className="w-25">
-                                    <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                                        px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name="anneeU"/>
+                        <Form class="w-full text-white">
+                            {this.state.anneUnique.length === 0 ?
+                            <h1>Ajouter un jour  ferier</h1> : this.state.anneUnique.map(jour =>{
+                                return(
+                                    <>
+                                    <h1>{moment(jour[0].dateferie).format('Y')}</h1>
+                                    <br/>
 
-                                </div>
+                                    <table class="text-white w-200">
+                                        <thead>
+                                            <th>
+                                                <td> Dates </td>
+                                                                                                
+                                            </th>
+                                            <th>
+                                                <td> Jour ferier </td>
+                                                                                                
+                                            </th>
+                                            <th>
+                                                <td> Surplus </td>
+                                                                                                
+                                            </th>
+                                             <th>
+                                                <td> Activer pour modifier </td>
+                                                                                                
+                                            </th>
+                                            <th>
+                                                <td> Suppression </td>
+                                                                                                
+                                            </th>
+                                        </thead>
+                                        {jour.map(anne =>
+
+                                            <DeuxJourFerier key={anne.id} nbr={anne.id} deletejour={this.deletejour}/>
+
+                                        )}
+                                    </table>
+                                    </>
+                                )  
+                            })}
+                             <button
+                                type="submit"
+                                className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
+                                transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                            >
+                                Valider la modification
+                            </button>
                             
-                                <table class="text-white w-200">
-                                    <thead>
-                                        <th>
-                                            <td> Dates </td>
-                                                                                            
-                                        </th>
-                                        <th>
-                                            <td> Jour ferier </td>
-                                                                                            
-                                        </th>
-                                        <th>
-                                            <td> Surplus </td>
-                                                                                            
-                                        </th>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            this.state.nombreLigneUn.map((un) => 
-                                                <UnJourFerier key={un} num={un} />
-                                            )
-                                            
-                                        }
-                                        
-                                    </tbody>
-                                </table>
-                                <div className="d-flex justify-content-start">
-                                    <button
-                                        type="button"
-                                        className="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 
-                                        transition duration-500 ease select-none hover:bg-blue-600 focus:outline-none focus:shadow-outline" 
-                                        onClick={this.ajoutNewUnJour}
-                                    >
-                                        Ajouter un ligne
-                                    </button>
-                                    
-                                    <button
-                                        type="submit"
-                                        className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
-                                        transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
-                                    >
-                                        Valider
-                                    </button>
-                                </div>
-                        
-                            </div>
-
-                            <hr style={{border: "2px", color:"white"}}/> <br/> <br/>
-                                
-                            <div className="tableResponsive w-full">
-                                <div className="w-25">
-                                    <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                                        px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name="anneeD"/>
-
-                                </div>
-                            
-                                <table class="text-white w-200">
-                                    <thead>
-                                        <th>
-                                            <td> Dates </td>
-                                                                                            
-                                        </th>
-                                        <th>
-                                            <td> Jour ferier </td>
-                                                                                            
-                                        </th>
-                                        <th>
-                                            <td> Surplus </td>
-                                                                                            
-                                        </th>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            this.state.nombreLigneDeux.map((deux) => 
-                                                <DeuxJourFerier key={deux} nbr={deux} />
-                                            )
-                                            
-                                        }
-                                        
-                                    </tbody>
-                                </table>
-                                <div className="d-flex justify-content-start">
-                                    <button
-                                        type="button"
-                                        className="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 
-                                        transition duration-500 ease select-none hover:bg-blue-600 focus:outline-none focus:shadow-outline" 
-                                        onClick={this.ajoutNewDeuxJour}
-                                    >
-                                        Ajouter un ligne
-                                    </button>
-                                    
-                                    <button
-                                        type="submit"
-                                        className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
-                                        transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
-                                    >
-                                        Valider
-                                    </button>
-                                </div>
-                        
-                            </div>
                         </Form>             
                     </Formik>
                     
                 </div>:<h1>Chargement......</h1>}
 
             </>
-
-
-
         );
     }
 }

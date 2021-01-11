@@ -29,11 +29,11 @@ class AddUtilisateur extends Component {
             onSubmit={(values, { resetForm }) => {
                 axios.post('/admin_users', values).then(response => {
                     const { action } = this.props;
-                    if (response.status === 201) {
-                        resetForm();
-                        action.getUtilisateur();
+                    if (response.status === 201) {   
+                        action.getUtilisateur();  
                     }
                 })
+                resetForm({});
             }}
             >
             {({ errors, touched }) => (

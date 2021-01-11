@@ -55,7 +55,7 @@ class Voitures extends Component {
                 <NavLink to="/categories" >
                     <button class="text-white bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Retour</button>
                 </NavLink>
-                <h1 className="mb-2 text-center">Gestion des voitures</h1>
+                <h1 className="mb-2 text-center text-white">Gestion des voitures</h1>
 
                 <button
                     className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded"

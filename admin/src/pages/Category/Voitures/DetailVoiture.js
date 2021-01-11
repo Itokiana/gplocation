@@ -50,50 +50,50 @@ export default class DetailVoiture extends Component {
                         <button class="text-white bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Retour</button>
                     </NavLink>
                     <div className="p-5">
-                        <h1>Détail de la voiture</h1>
-                        <div className="flex">
+                        <h1 className="text-white">Détail de la voiture</h1>
+                        <div className="flex text-white">
                             Marque : &nbsp;
                         <InlineEdit
                                 onSave={(value) => this.updateVoiture('marque', value)}
                                 style={{ flex: 'auto' }}
                                 value={voiture.marque} />
                         </div>
-                        <div className="flex">
+                        <div className="flex text-white">
                             Modèle : &nbsp;
                         <InlineEdit
                                 onSave={(value) => this.updateVoiture('model', value)}
                                 style={{ flex: 'auto' }}
                                 value={voiture.model} />
                         </div>
-                        <div className="flex">
+                        <div className="flex text-white">
                             Places : &nbsp;
                         <InlineEdit
                                 onSave={(value) => this.updateVoiture('places', value)}
                                 style={{ flex: 'auto' }}
                                 value={voiture.places} />
                         </div>
-                        <div className="flex">
+                        <div className="flex text-white">
                             Type : &nbsp;
                         <InlineEdit
                                 onSave={(value) => this.updateVoiture('mode', value)}
                                 style={{ flex: 'auto' }}
                                 value={voiture.mode} />
                         </div>
-                        <div className="flex">
+                        <div className="flex text-white">
                             Climatisation : &nbsp;
                         <InlineEdit
                                 onSave={(value) => this.updateVoiture('climatisation', value)}
                                 style={{ flex: 'auto' }}
                                 value={voiture.climatisation} />
                         </div>
-                        <div className="flex">
+                        <div className="flex text-white">
                             Vitesse : &nbsp;
                         <InlineEdit
                                 onSave={(value) => this.updateVoiture('vitesse', value)}
                                 style={{ flex: 'auto' }}
                                 value={voiture.vitesse} />
                         </div>
-                        <div className="flex">
+                        <div className="flex text-white">
                             Portes : &nbsp;
                         <InlineEdit
                                 onSave={(value) => this.updateVoiture('portes', value)}

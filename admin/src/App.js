@@ -30,6 +30,7 @@ import AddSaison from './pages/ConfigurationAgence/GestionSaison/AddSaison';
 import TarifList from './pages/ConfigurationAgence/Tarif/TarifList';
 import Indexs  from './pages/ConfigurationAgence/GestionSaison/calendrier/Indexs';
 import Partiel from './pages/ConfigurationAgence/Paiment/Partiel';
+import Ajoutjour from './pages/ConfigurationAgence/GestionOF/Components/GestionJF/AjoutJour';
 
 
 // import Table from './pages/Tableau/Table';
@@ -73,6 +74,7 @@ class App extends React.Component {
                     <Route exact path="/dashbord" component={Dashbord} />
                     <Route exact path="/categories" component={Categories} />
                     <Route exact path="/reservations" component={Reservation} />
+                    <Route exact path="/ajoutjourferier" component={Ajoutjour} />
                     
                     {/* <Route path="/tarifpersonel/:id" component={TarifPersonel} /> */}
                     <Route path="/ajouter_un_tarif/:id" component={AddTarif} />
