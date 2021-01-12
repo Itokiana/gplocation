@@ -29,9 +29,9 @@ export default class DeuxJourFerier extends Component {
                 px-2 mb-0 leading-tight focus:outline-none focus:bg-white" type="number" name={this.nameDPrix}/>
                     
                 </td>
-                <td className="input-check" >
-                    <div className="ml-4 mb-4">
-                        <Field className="form-check-input" type="checkbox"  id={this.nameCheckD} name={this.nameCheckD} />
+                <td className="" >
+                    <div className="ml-4 mb-1 mt-2 ">
+                        <Field className="ft" type="checkbox"  id={this.nameCheckD} name={this.nameCheckD} />
                     </div>
                 </td>
                 <td>

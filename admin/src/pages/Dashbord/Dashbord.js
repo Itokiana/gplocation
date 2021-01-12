@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import './Dashdord.css';
+import axios from 'axios'
 
 
 export class Dashbord extends Component {
+  componentDidMount(){
+    axios.get('/analytics')
+  }
   render() {
     return (
       <div>

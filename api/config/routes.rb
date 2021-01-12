@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  get 'analytics/show'
   resources :paimentpartiels
   resources :reservations
   resources :jourferiers
@@ -58,6 +59,7 @@ Rails.application.routes.draw do
   get '/reservations/recherche/:datedepart/:dateretour', to: 'reservations#recherche'
   get '/reservation/liste', to: 'reservations#liste'
 
+  get '/analytics', to:'analytics#show'
 
   resources :tarif_supplementaires
   resources :tarifs

@@ -1,7 +1,7 @@
-import React, { Component, setStat} from 'react'
+import React, { Component} from 'react'
 import axios from '../../../../../axios'
 import { NavLink } from 'react-router-dom';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form} from 'formik';
 import DeuxJourFerier from './DeuxJourFerier';
 import moment from 'moment'
 
@@ -73,19 +73,20 @@ class GestionJF extends Component {
         const ligne = this.state.ligne
         return (
             <>
-                <div className="page-title">
-                    <div className="title_left">
-                        <h2> GESTION DES JOUR FERIES </h2>
+                <div className="m-4">
+                    <div className="page-title">
+                        <div className="title_left">
+                            <h2> GESTION DES JOUR FERIES </h2>
+                        </div>
                     </div>
-                </div>
-                <div >
-                    <NavLink to="/ajoutjourferier" >
-                        <button style= {{float:"right" ,margin:"10px"}} class="text-white bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Ajouter Nouveau jourferier</button>
-                    </NavLink>
+                    <div >
+                        <NavLink to="/ajoutjourferier" >
+                            <button style= {{float:"right" ,margin:"10px"}} class="text-white bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Ajouter Nouveau jourferier</button>
+                        </NavLink>
 
-                </div>
-                {this.state.initVal  ? 
-                 <div className="row">
+                    </div>
+                    {this.state.initVal  ? 
+                    <div className="row">
                     <Formik
                         initialValues={this.state.initVal}    
                         onSubmit={(value)=>{
@@ -153,7 +154,7 @@ class GestionJF extends Component {
                     </Formik>
                     
                 </div>:<h1>Chargement......</h1>}
-
+                </div>
             </>
         );
     }

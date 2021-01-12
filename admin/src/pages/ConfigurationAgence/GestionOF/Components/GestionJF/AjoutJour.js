@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Formik, Form, Field } from 'formik';
 import axios from '../../../../../axios'
 import { NavLink } from 'react-router-dom';
+import './gestionJF.css';
 
 export default class Ajoutjour extends Component {
 
@@ -21,6 +22,7 @@ export default class Ajoutjour extends Component {
         const ligne = this.state.nombreLigne
         return(
             <>
+            <div className="m-4">
             <NavLink to="ouverture" >
                 <button style= {{float:"left"}} class="text-white m-4 bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Retour</button>
             </NavLink>
@@ -43,6 +45,7 @@ export default class Ajoutjour extends Component {
                 
                 >
                     <Form class="w-full text-white">
+                    <div>
                     <table class="text-white w-200">
                         <thead>
                             <th>
@@ -86,7 +89,7 @@ export default class Ajoutjour extends Component {
                             )}   
                         </tbody>
                     </table>
-                    <div className="d-flex justify-content-end">
+                    <div >
                         <button
                             type="button"
                             className="border border-blue-500 bg-blue-500 text-white rounded-md px-4 py-2 m-2 
@@ -105,9 +108,11 @@ export default class Ajoutjour extends Component {
                             </button>
                         
                     </div>
+                    </div>
                     </Form>
                 </Formik>
             </center>
+            </div>
         </>
 
         )

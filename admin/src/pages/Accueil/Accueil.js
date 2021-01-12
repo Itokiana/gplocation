@@ -153,7 +153,8 @@ export class Accueil extends Component {
                                                 {Object.keys(this.state.reservations).map(reservation => (
                                                 
                                                 <>
-                                                {this.state.statusRetour ? (
+                                                {this.state.statusRetour && this.state.statusDepart? (
+                                                    <>
                                                     <tr>
                                                         <td colSpan="9">
                                                             <div className="date"><p>
@@ -162,44 +163,119 @@ export class Accueil extends Component {
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                    
+                                                    </>
                                                 ):null}
                                                 
                                                     {Object.keys(this.state.reservations[reservation]).map(res =>(
                                                             <>
-                                                            {this.state.statusRetour ? null:(
+                                                            {this.state.statusDepart && this.state.statusRetour === false && new Date(this.state.reservations[reservation][res][0].date_depart) >= new Date()?
+                                                            <>
                                                                 <tr>
                                                                     <td colSpan="9">
                                                                         <div className="date"><p>
-                                                                            {moment(`${this.state.reservations[reservation][res][0].date_depart.toString()}`).format('dddd Do MMMM YYYY')}
+                                                                           
+                                                                                {moment(`${this.state.reservations[reservation][res][0].date_depart.toString()}`).format('dddd Do MMMM YYYY')}
+                                                                           
                                                                             </p>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                            )}
-                                                            <tr key={res}>
-                                                                <td>
-                                                                    <img className="img-voiture" src={`http://localhost:4000/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/>
-                                                                    {this.state.reservations[reservation][res][1].marque}
-                                                                </td>
-                                                                {this.state.statusDepart ? (
+                                                                <tr key={res}>
                                                                     <td>
-                                                                        <div>{moment(`${this.state.reservations[reservation][res][0].date_depart.toString()}`).format('dddd Do MMMM YYYY')}</div>
-                                                                        <div>{this.state.reservations[reservation][res][0].heure_depart}</div>
+                                                                        <img className="img-voiture" src={`http://localhost:4000/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/>
+                                                                        {this.state.reservations[reservation][res][1].marque}
                                                                     </td>
-                                                                ):null}
-                                                                {this.state.statusRetour ? (
+                                                                    {this.state.statusDepart ? (
+                                                                        <td>
+                                                                            <div>{moment(`${this.state.reservations[reservation][res][0].date_depart.toString()}`).format('dddd Do MMMM YYYY')}</div>
+                                                                            <div>{this.state.reservations[reservation][res][0].heure_depart}</div>
+                                                                        </td>
+                                                                    ):null}
+                                                                    {this.state.statusRetour ? (
+                                                                        <td>
+                                                                            <div>{moment(`${this.state.reservations[reservation][res][0].date_retour.toString()}`).format('dddd Do MMMM YYYY')}</div>
+                                                                            <div>{this.state.reservations[reservation][res][0].heure_retour}</div>
+                                                                        </td>
+                                                                    ):null}
+                                                                    <td>Options</td>
+                                                                    <td>{this.state.reservations[reservation][res][0].prix}€</td>
+                                                                    <td>100€</td>
+                                                                    <td>{this.state.reservations[reservation][res][2].nom}</td>
+                                                                    <td>{this.state.reservations[reservation][res][0].numero_vol}</td>
+                                                                    <td>Actions</td>
+                                                                    </tr>
+                                                            </>    
+                                                            :(
+                                                                this.state.statusDepart ===false && this.state.statusRetour && new Date(this.state.reservations[reservation][res][0].date_retour) >= new Date()?
+                                                                (
+                                                                    <>
+                                                                    <tr>
+                                                                        <td colSpan="9">
+                                                                            <div className="date"><p>
+                                                                            
+                                                                                    {moment(`${this.state.reservations[reservation][res][0].date_retour.toString()}`).format('dddd Do MMMM YYYY')}
+                                                                            
+                                                                                </p>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr> 
+                                                                    <tr key={res}>
                                                                     <td>
-                                                                        <div>{moment(`${this.state.reservations[reservation][res][0].date_retour.toString()}`).format('dddd Do MMMM YYYY')}</div>
-                                                                        <div>{this.state.reservations[reservation][res][0].heure_retour}</div>
+                                                                        <img className="img-voiture" src={`http://localhost:4000/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/>
+                                                                        {this.state.reservations[reservation][res][1].marque}
                                                                     </td>
-                                                                ):null}
-                                                                <td>Options</td>
-                                                                <td>{this.state.reservations[reservation][res][0].prix}€</td>
-                                                                <td>100€</td>
-                                                                <td>{this.state.reservations[reservation][res][2].nom}</td>
-                                                                <td>{this.state.reservations[reservation][res][0].numero_vol}</td>
-                                                                <td>Actions</td>
-                                                            </tr>   
+                                                                    {this.state.statusDepart ? (
+                                                                        <td>
+                                                                            <div>{moment(`${this.state.reservations[reservation][res][0].date_depart.toString()}`).format('dddd Do MMMM YYYY')}</div>
+                                                                            <div>{this.state.reservations[reservation][res][0].heure_depart}</div>
+                                                                        </td>
+                                                                    ):null}
+                                                                    {this.state.statusRetour ? (
+                                                                        <td>
+                                                                            <div>{moment(`${this.state.reservations[reservation][res][0].date_retour.toString()}`).format('dddd Do MMMM YYYY')}</div>
+                                                                            <div>{this.state.reservations[reservation][res][0].heure_retour}</div>
+                                                                        </td>
+                                                                    ):null}
+                                                                    <td>Options</td>
+                                                                    <td>{this.state.reservations[reservation][res][0].prix}€</td>
+                                                                    <td>100€</td>
+                                                                    <td>{this.state.reservations[reservation][res][2].nom}</td>
+                                                                    <td>{this.state.reservations[reservation][res][0].numero_vol}</td>
+                                                                    <td>Actions</td>
+                                                                    </tr>
+                                                                </>
+                                                                ):(
+                                                                    this.state.statusDepart && this.state.statusRetour ?(
+                                                                        <tr key={res}>
+                                                                    <td>
+                                                                        <img className="img-voiture" src={`http://localhost:4000/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/>
+                                                                        {this.state.reservations[reservation][res][1].marque}
+                                                                    </td>
+                                                                    {this.state.statusDepart ? (
+                                                                        <td>
+                                                                            <div>{moment(`${this.state.reservations[reservation][res][0].date_depart.toString()}`).format('dddd Do MMMM YYYY')}</div>
+                                                                            <div>{this.state.reservations[reservation][res][0].heure_depart}</div>
+                                                                        </td>
+                                                                    ):null}
+                                                                    {this.state.statusRetour ? (
+                                                                        <td>
+                                                                            <div>{moment(`${this.state.reservations[reservation][res][0].date_retour.toString()}`).format('dddd Do MMMM YYYY')}</div>
+                                                                            <div>{this.state.reservations[reservation][res][0].heure_retour}</div>
+                                                                        </td>
+                                                                    ):null}
+                                                                    <td>Options</td>
+                                                                    <td>{this.state.reservations[reservation][res][0].prix}€</td>
+                                                                    <td>100€</td>
+                                                                    <td>{this.state.reservations[reservation][res][2].nom}</td>
+                                                                    <td>{this.state.reservations[reservation][res][0].numero_vol}</td>
+                                                                    <td>Actions</td>
+                                                                    </tr>
+                                                                    ):null
+                                                                )
+                                                                
+                                                            )}    
+                                                              
                                                             </>
                                                     ))}
                                                 </>
