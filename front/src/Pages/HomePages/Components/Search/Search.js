@@ -5,14 +5,30 @@ import * as Yup from 'yup';
 import './Style.css';
 import { Field, Form, Formik } from 'formik';
 import Reservation from '../Reservation/Reservation';
+import { parse, isDate } from "date-fns";
+
+function parseDateString(value, originalValue) {
+  const parsedDate = isDate(originalValue)
+    ? originalValue
+    : parse(originalValue, "yyyy-MM-dd", new Date());
+
+  return parsedDate;
+}
 
 
+const today = new Date();
+const yesterday = new Date(today);
+yesterday.setDate(yesterday.getDate() - 1);
 
 const ReservationSchema = Yup.object().shape({
-    dateDepart: Yup.string()
-        .required('vous devez indiquer votre date de départ'),
-    dateRetour: Yup.string()
-		.required('vous devez indiquer votre date de retour'),
+	dateDepart: Yup.date()
+		.required('vous devez indiquer votre date de départ')
+		.transform(parseDateString).min(yesterday,"la date de depart doit être supérieur à aujourd'hui"),
+    dateRetour: Yup.date()
+		.required('vous devez indiquer votre date de retour')
+		.when('dateDepart',(dateDepart,schema) =>{
+			return schema.min(dateDepart)
+		}),
 	heureDepart: Yup.string()
 		.required('information important'),
 	heureRetour: Yup.string()

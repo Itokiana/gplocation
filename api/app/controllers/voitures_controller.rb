@@ -44,18 +44,25 @@ class VoituresController < ApplicationController
                     # si c'est disponnible et le stock n'est pas vide donc recuperer les prix et ajouter la voiture dans la liste des voiture dispo
                     if @disponibility.nil? && voiture.category.stock >= 1 
                         # ajout voiture dans la liste des voitures disponible
-                        @voiture_dispo.push(voiture)
+                       
                         # verifier s'il y a un tarif perso sur cette periode
                         @ligne1 = voiture.category.tarif_personalises.select(:prix).find_by("datedebutperso <= ? AND datefinperso >= ? AND jourdebut <= ? AND jourfin >= ?",@dateDepart,@dateRetour,params[:jours].to_i,params[:jours].to_i)
                         
                         # s'il n y pas donc recuper la tarif de base pour la categorie de cette voiture
                         if @ligne1.nil? || @ligne1.prix == -1
-                            @prix.push(voiture.getPrixBase(params[:jours],@dateDepart,@dateRetour)*(params[:jours]).to_f)
+                            if voiture.getPrixBase(params[:jours],@dateDepart,@dateRetour)*(params[:jours]).to_f != 0
+                                @prix.push(voiture.getPrixBase(params[:jours],@dateDepart,@dateRetour)*(params[:jours]).to_f)
+                                @voiture_dispo.push(voiture)
+                            end
                         # s' il y a donc recuper la tarif personnaliser
                         else
                             @prix.push((@ligne1.prix) * (params[:jours]).to_f)
+                            @voiture_dispo.push(voiture)
                         end
                     end
+                end
+                if @prix == []
+                    @message = "Le nombre de jours de votre location est inférieur à la minimale"
                 end
 
                 # check dans la base si l'horraire entrer par l'utisisateur et non ouvrable donc il y a du surplus
@@ -92,8 +99,7 @@ class VoituresController < ApplicationController
                 end
             end
 
-            if @prix[0]== 0
-                @message = "Le nombre de jours de votre location est inférieur à la minimale"
+            if @message!=""
                 render json: {voitures:{},prix:[],message:@message}
             else
                 render json: {voitures:@voiture_dispo,prix:@prix,message:@message}

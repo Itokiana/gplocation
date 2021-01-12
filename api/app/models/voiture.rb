@@ -12,20 +12,15 @@ class Voiture < ApplicationRecord
         nom_saison = DateSaison.find_by("debutsaison <= ? and finsaison >= ?",dateDepart,dateRetour)
         if nom_saison.nil?
             if category.duree_min_bs <= jours.to_i
+                puts "basse saison"*10
                 return ligne.prixbassesaison
             else
                 return 0
             end 
         else
             case nom_saison.saison.nomsaison
-                # when "Basse Saison" 
-                #     if category.duree_min_bs <= jours.to_i
-                #         return ligne.prixbassesaison
-                #     else
-                #         return 0
-                #     end
-                    
                 when "Haute Saison"
+                    puts "haute saison"*10
                     if category.duree_min_hs <= jours.to_i
                         return ligne.prixhautesaison
                     else
@@ -33,9 +28,14 @@ class Voiture < ApplicationRecord
                     end 
                     
                 when "Moyenne Saison"
+                    puts "moyenne saison"*10
+                    puts category.duree_min_ms
+                    puts jours.to_i
                     if category.duree_min_ms <= jours.to_i
+                        puts "ici"*5
                         return ligne.prixmoyennesaison
                     else
+                        puts "eto"*5
                         return 0
                     end
             end

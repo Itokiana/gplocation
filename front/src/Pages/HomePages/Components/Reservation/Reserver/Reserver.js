@@ -59,8 +59,8 @@ function Reserver(propos) {
 				setAccount(response.data.montant)
 			}
         })
-    }
-    useEffect(() => {
+    };
+    useEffect(()=>{
         getAccount();
         setVoiture({loading: true});
         const apiVoiture = (`http://localhost:4000/voitures/${propos.match.params.id}`)
@@ -68,9 +68,8 @@ function Reserver(propos) {
           .then((res) => res.json())
           .then((data) => {
             setVoiture({voiture: data});
-          });
-    },[]);  
-    
+        });
+    });  
       
     return (
         <div>
