@@ -45,7 +45,7 @@ export default class DetailCategory extends Component {
         const { category } = this.state;
         return (
             <>
-                <div className="p-5">
+                <div className="p-5 text-white">
                     <h1>Détail de la catégorie</h1>
                     <div className="flex">
                         Marque : &nbsp;

@@ -12,7 +12,9 @@ export default class Partiel extends Component {
 
     }
     componentDidMount(){
-        
+        this.getPaiment()
+        }
+    getPaiment(){
         axios.get(`/paimentpartiels`).then(response => {
             var objValue = response.data[0]
             var value ={}
@@ -28,7 +30,7 @@ export default class Partiel extends Component {
                 inValue: value
             })
             console.log(this.state.inValue)       
-        })  
+        })
     }
     
     render() { 
@@ -46,39 +48,51 @@ export default class Partiel extends Component {
                         setSubmitting(true)                    
                         axios.post(`/paimentpartiels` ,value)
                         console.log(value)
+                        this.getPaiment()
                         setSubmitting(false) 
                     }}
                 >
                     
-                    <Form class="">
+                    <Form class="text-white">
                         <div className="d-flex align-items-start">
                             <label className="block text-white tracking-wide text-gray-700 text-xs font-bold w-25" >
                                 Description paiment partiel
                             </label>
-                            {/* <textarea className="form-control rounded mb-3 px-5 w-50" name="description"></textarea> */}
-                            <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                            px-3 mb-3 leading-tight focus:outline-none focus:bg-white" component="textarea" name= "description" />
+                            <div className="w-50">
+                                <Field className="appearance-none block w-full bg-gray-200 input-lg h6 text-gray-700 border border-red-500 rounded py-3 
+                                px-3 mb-3 leading-tight focus:outline-none focus:bg-white" component="textarea" name= "description" />
+                                <p>ex: à régler à la remise des clés par cart bancaire, éspéces,chéque ou chéque vacances</p>
+                            </div>
                         </div>
                         <div className="d-flex align-items-start">
                             <label className="block text-white tracking-wide text-gray-700 text-xs font-bold w-25" htmlFor="grid-last-name">
                                 Type de l'acompte
                             </label>
-                            <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                            px-3 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name= "typ" />
+                            <div className="w-50">
+                                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
+                                px-3 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name= "typ" />
+                                <p>ex:0= pourcentage/1 = montant fixe</p>
+                            </div>
                         </div>
                         <div className="d-flex align-items-start">
                             <label className="block text-white tracking-wide text-gray-700 text-xs font-bold w-25" htmlFor="grid-last-name">
                                 Montant
                             </label>
-                            <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
-                            px-3 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name= "montant" />
+                            <div className="w-50">
+                                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
+                                px-3 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name= "montant" />
+                                <p>ex:100 si type montant fixe/ ou 30 si type pourcentage</p>
+                            </div>
                         </div>
                         <div className="d-flex align-items-start">
                             <label className="block text-white tracking-wide text-gray-700 text-xs font-bold w-25" htmlFor="grid-last-name">
                                 Montant minimal pour le declenchement du paiment partiel
                             </label>
-                            <Field className="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
+                            <div className="w-50">
+                                <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
                             px-3 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name= "minimal" />
+                                <p>ex:150</p>
+                            </div>
                         </div>
 
                         <div className="w-full md:w-1/2 px-3">   
@@ -97,21 +111,3 @@ export default class Partiel extends Component {
         )
     }
 }
-{/* <Form>
-<div class="form-group row">
-    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-</div>
-<div class="form-group row">
-    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-10">
-    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-    </div>
-</div>
-<div class="form-group row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-    <div class="col-sm-10">
-    <input type="password" class="form-control" id="inputPassword">
-    </div>
-</div>
-</Form> */}

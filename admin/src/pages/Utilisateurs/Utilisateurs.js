@@ -10,6 +10,7 @@ class Utilisateurs extends Component {
 
    action = {
         getUtilisateur: () => {
+            
             axios.get('/admin_users').then(response => {
                  if (response.status === 200) {
                     this.setState({

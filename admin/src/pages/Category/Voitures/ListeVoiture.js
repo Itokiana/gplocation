@@ -62,7 +62,8 @@ export default class ListeVoiture extends Component {
                     </table>
                 </div>
 
-                <center>{voitures && voitures.length === 0 ? (<>Aucune voiture disponible pour le moment.</>) : null}</center>
+                <center>
+                {voitures && voitures.length === 0 ? (<>Aucune voiture disponible pour le moment.</>) : null}</center>
 
             </div>
 

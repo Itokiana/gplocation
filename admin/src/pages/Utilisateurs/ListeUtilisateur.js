@@ -3,7 +3,13 @@ import React, { Component } from 'react';
 export default class ListeUtilisateur extends Component {
     componentDidMount() {
         const { action } = this.props;
-        action.getUtilisateur();
+        this.interval = setInterval(() =>
+            action.getUtilisateur()
+            , 1000)
+        
+    }
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     render() {

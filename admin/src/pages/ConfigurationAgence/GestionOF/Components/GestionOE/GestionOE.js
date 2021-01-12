@@ -1,22 +1,39 @@
 import React, { Component, setStat} from 'react'
 import axios from '../../../../../axios'
 import { Formik, Form, Field } from 'formik';
-import '../GestionOF/gestionOF.css'
 import moment from 'moment' ;
+
+import '../GestionOF/gestionOF.css'
+// import ListeOE from './ListeOE'
 
 
 class GestionOE extends Component {
+    // constuctor(props) {
+    //     super(props)
+    //     this.routeChange = this.routeChange.bind(this);
+    // }
     
     state = {
-
         date : []
     }
     
-    componentDidMount() {
-        this.action.getOuvert();
+    componentDidMount() { 
+        this.interval = setInterval(() =>
+            this.action.getOuvert()
+            , 1000)
     }
+    refreshPage() {
+        // window.location.reload(false);
+        this.setState({date: []})
+    }
+
+    // routeChange() {
+    //     let path = `/ouverture`;
+    //     this.props.history.push(path);
+    //   }
     action = {
         getOuvert: () => {
+            
             axios.get(`/ouvertexceptions`).then(response => {
                 if (response.status === 200) {
                     this.setState({
@@ -24,7 +41,8 @@ class GestionOE extends Component {
                     });
                     console.log(this.state.date);
                 }
-            });
+            })
+                
         },
         
         deleteOuvert: (ouvert) => {
@@ -34,8 +52,12 @@ class GestionOE extends Component {
                 }
             })
         }
-    } 
+    }
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
     render() {
+        const  { date } = this.state;
         return (
             <>
                     <div className="page-title">
@@ -53,17 +75,18 @@ class GestionOE extends Component {
                             
                         }}
                         
-                        onSubmit={(data,{resetForm})=>{
-                            resetForm(true);
-                            
-                                                
-                           axios.post('/ouvertexceptions', data)
-                           console.log(data)
-                            
-                            resetForm(false)
-                           
-                        }
-                     }
+                        onSubmit={(data, { resetForm }) => {        
+                            axios.post('/ouvertexceptions', data).then(response => {
+                                if (response.status === 204) {
+                                    this.setstate({
+                                        date : []
+                                    })
+                                    this.action.getOuvert();
+                                }
+                            })
+                            resetForm({}); 
+                        }}
+                       
                     
                     >
                         <Form className="d-flex align-items-start">
@@ -91,15 +114,14 @@ class GestionOE extends Component {
                                 >
                                     Ajouter
                                 </button>
-                            </div>
-                            
-                            
+                            </div>   
                         </Form>
-                        
-
                     </Formik>
                     
                 </div>
+                {/* <ListeOE
+                    action={{...this.action}}
+                    date={date}/> */}
 
                 {/* Liste des jour exceptionel */}
                 
@@ -116,10 +138,10 @@ class GestionOE extends Component {
                               </tr>
                            </thead>
                             <tbody>
-                                { this.state.date.map(nomdate => {
+                                { this.state.date && this.state.date.length === 0 ? <h1>Chargement</h1> : this.state.date.map(nomdate => {
                                     return (
                                         <tr>
-                                          <td className="text-blue-500"><strong>{moment(nomdate.jourouvertdebut).format('D MMMM Y')  }</strong>  jusqu'a  <strong>{ moment(nomdate.jourouvertfin).format('D MMMM Y') }</strong></td>
+                                          <td className="text-white"><strong>{moment(nomdate.jourouvertdebut).format('D MMMM Y')  }</strong>  jusqu'a  <strong>{ moment(nomdate.jourouvertfin).format('D MMMM Y') }</strong></td>
                                           <td ><span className="text-red-500 cursor-pointer" onClick={() => this.action.deleteOuvert(nomdate)}>Supprimer</span></td>
                                             
                                         </tr>
