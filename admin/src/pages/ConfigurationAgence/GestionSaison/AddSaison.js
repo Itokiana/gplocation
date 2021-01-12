@@ -77,7 +77,18 @@ class AddSaison extends Component {
                                 finsaison:''
                                 
                             }}
-                            
+                            onSubmit={(data, { resetForm }) => {        
+                                axios.post('/ouvertexceptions', data).then(response => {
+                                    if (response.status === 204) {
+                                        this.setstate({
+                                            date : []
+                                        })
+                                        this.action.getOuvert();
+                                    }
+                                })
+                                resetForm({}); 
+                            }}
+   
                             onSubmit={(data)=>{
                                 axios.post('/date_saisons',data).then(response => {
                                     if (response.status === 204) {
