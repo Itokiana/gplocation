@@ -13,7 +13,13 @@ class GestionOF extends Component {
     }
     
     componentDidMount() {
-        this.action.getHoraire();
+        this.interval = setInterval(() =>
+            this.action.getHoraire()
+            , 1000)
+        
+    }
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
     action = {
         getHoraire: () => {
@@ -57,19 +63,15 @@ class GestionOF extends Component {
                             prixsurplus:''
                             
                         }}
-                        
-                        onSubmit={(value,{setSubmitting})=>{
-                            setSubmitting(true);
-                            
-                                                
-                           axios.post('/horaire_jours', value)
-                           console.log(value)
-                            
-                            setSubmitting(false)
-                           
-                        }
-                     }
-                    
+                        onSubmit={(values, { resetForm }) => {
+                            axios.post('/horaire_jours', values).then(response => {
+                                
+                                if (response.status === 201) {   
+                                    this.action.getHoraire();  
+                                }
+                            })
+                            resetForm({});
+                        }}
                     >
                         <Form class="d-flex align-items-start">
                             <div className="w-full md:w-1/2 px-3">

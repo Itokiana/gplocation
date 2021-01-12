@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   post "/client_login", to: "clients#login"
   get "/last_client", to: "clients#finder"
 
-
+  post "/updatejours", to: "jourferiers#updatejour"
   #routes categories
   resources :categories do
     #routes options

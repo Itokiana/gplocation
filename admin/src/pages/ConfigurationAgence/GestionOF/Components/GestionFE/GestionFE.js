@@ -13,7 +13,12 @@ class GestionFE extends Component {
     }
     
     componentDidMount() {
-        this.action.getFerme();
+        this.interval = setInterval(() =>
+            this.action.getFerme()
+            ,1000)
+    }
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
     action = {
         getFerme: () => {
@@ -53,17 +58,14 @@ class GestionFE extends Component {
                             
                         }}
                         
-                        onSubmit={(data,{resetForm})=>{
-                            resetForm(true);
-                            
-                                                
-                           axios.post('/fermexceptions', data)
-                           console.log(data)
-                            
-                            resetForm(false)
-                           
-                        }
-                     }
+                        onSubmit={(data, { resetForm })=> {                  
+                            axios.post('/fermexceptions', data).then(response => {
+                                if (response.status === 201) {   
+                                    this.action.getFerme();  
+                                }
+                            })   
+                            resetForm({});
+                        }}
                     
                     >
                         <Form className="d-flex align-items-start">
@@ -119,7 +121,7 @@ class GestionFE extends Component {
                                 { this.state.dateF.map(nomdate => {
                                     return (
                                         <tr>
-                                          <td className="text-blue-500"><strong>{moment(nomdate.jourfermedebut).format('D MMMM Y')  }</strong>  jusqu'a  <strong>{ moment(nomdate.jourfermefin).format('D MMMM Y') }</strong></td>
+                                          <td className="text-white"><strong>{moment(nomdate.jourfermedebut).format('D MMMM Y')  }</strong>  jusqu'a  <strong>{ moment(nomdate.jourfermefin).format('D MMMM Y') }</strong></td>
                                           <td ><span className="text-red-500 cursor-pointer" onClick={() => this.action.deleteFerme(nomdate)}>Supprimer</span></td>
                                             
                                         </tr>

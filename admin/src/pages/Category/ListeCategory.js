@@ -139,7 +139,7 @@ export default class ListeCategory extends Component {
               </div>
             </div>
             </Form>
-            </Formik>: <h1>Charger</h1>}
+            </Formik>: <h1 className="text-white">Charger</h1>}
        </>)
     }
 }

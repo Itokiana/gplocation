@@ -44,6 +44,9 @@ class Days extends React.Component {
         let hash = []
     
         date.map((date, key) =>{
+            // if((moment(date.debutsaison).format('Y') && moment(date.finsaison).format('Y')) = mmoment().format('Y')){
+
+            // }
             let debut = moment(date.debutsaison)
             let fin = moment(date.finsaison)
             let saison = date.saison_id
