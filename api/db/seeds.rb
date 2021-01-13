@@ -3,6 +3,7 @@
 #place: rand(4..5), vitesse: "manuelle", types: Faker::Vehicle.fuel_type, climatiseur: true, status:"occupé", portes: Faker::Vehicle.door_count
 
 # AdminUser.create(username: 'admin', email: 'admin@gmail.com', password: 'admin')
+
 # Category.create(ref:'R01', name: 'CatA' )
 # Category.create(ref:'R02', name: 'CatB' )
 # Category.create(ref:'R03', name: 'CatC' )

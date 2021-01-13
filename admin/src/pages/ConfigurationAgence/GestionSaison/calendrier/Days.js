@@ -10,10 +10,10 @@ class Days extends React.Component {
         datesaison: []
     }
     months  = moment.months();
-    componentDidMount(){
+    async componentDidMount(){
         //console.log(this.props.month)
-        this.setMonth(this.props.month)
-        this.getDateSaison();
+        await this.setMonth(this.props.month)
+        await this.getDateSaison();
         // console.log(this.state.dateContext)
     }
     
@@ -28,8 +28,8 @@ class Days extends React.Component {
     currentDay = () => {
         return this.state.dateContext.format("D");
     }
-    getDateSaison = () => {
-        axios.get(`/date_saisons`).then(response => {
+    async getDateSaison () {
+        await axios.get(`/date_saisons`).then(response => {
             if (response.status === 200) {
                 this.setState({
                     datesaison: response.data,

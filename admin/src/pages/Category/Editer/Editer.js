@@ -23,7 +23,14 @@ export default class Editer extends Component {
 
         const etape = this.state.etape
         return (
-            <div><section className="text-gray-500 ">
+            <>
+            
+            <div>
+                
+                <section className="text-gray-500 ">
+                <NavLink to="categories" >
+                    <button  class="text-white bg-indigo-500 m-4 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Retour</button>
+                </NavLink>
                 <div className="container mx-auto flex-wrap">
                     <div className="relative flex-col text-center w-full">
                         <h1 className="sm:text-3xl text-2xl font-medium title-font text-black">Editer</h1>
@@ -90,11 +97,8 @@ export default class Editer extends Component {
                     </div>
                 </div>
             </section>
-
-
-
-
-            </div >
+        </div>
+        </>
         )
     }
 }
