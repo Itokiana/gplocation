@@ -15,8 +15,6 @@ class CategoriesController < ApplicationController
   end
   # GET /categories/dureemin/:id
   def showdureemin
-    
-
     @dureemin = Category.find(params[:id])
     json_response(@dureemin) 
 

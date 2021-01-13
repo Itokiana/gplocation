@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { Formik , Form, Field } from 'formik';
 import axios from '../../../axios';
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -16,6 +17,7 @@ export default class Partiel extends Component {
         }
     getPaiment(){
         axios.get(`/paimentpartiels`).then(response => {
+            
             var objValue = response.data[0]
             var value ={}
             console.log(objValue)
@@ -36,11 +38,13 @@ export default class Partiel extends Component {
     render() { 
         return (
             <>
-                <div className="page-title">
-                    <div className="title_left">
-                        <h2>Configuration</h2>
+                <center>
+                    <div className="page-title">
+                        <div className="title_left">
+                            <h2>Configuration</h2>
+                        </div>
                     </div>
-                </div>
+                </center>
                 {this.state.inValue ?(
                 <Formik   
                     initialValues={this.state.inValue}
@@ -54,6 +58,9 @@ export default class Partiel extends Component {
                 >
                     
                     <Form class="text-white">
+                        <NavLink to="/configuration_agence" >
+                            <button class="text-white m-2 bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Retour</button>
+                        </NavLink>
                         <div className="d-flex align-items-start">
                             <label className="block text-white tracking-wide text-gray-700 text-xs font-bold w-25" >
                                 Description paiment partiel

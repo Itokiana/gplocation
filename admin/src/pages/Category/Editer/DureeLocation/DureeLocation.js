@@ -6,13 +6,21 @@ import axios from '../../../../axios';
 
 export default class DureeLocation extends Component {
     state = {
-        inValue: null,
-        saison: null
-
+        inValue: null
     }
-    componentDidMount(){
-        
-        axios.get(`/categories/dureemin/${this.props.ids.id}`).then(response => {
+    // componentDidMount() {
+    //     this.interval = setInterval(() =>
+    //         this.getDuree()
+    //         , 1000)
+    // }
+    // componentWillUnmount() {
+    //     clearInterval(this.interval);
+    // }
+    async componentDidMount(){
+        await this.getDuree()     
+    }
+    async getDuree(){
+        await axios.get(`/categories/dureemin/${this.props.ids.id}`).then(response => {
             var objValue = response.data
             var value ={}
             console.log(objValue)
@@ -20,16 +28,16 @@ export default class DureeLocation extends Component {
             value[`BS_Min`]= objValue.duree_min_bs
             value[`MS_Min`]= objValue.duree_min_ms
             value[`HS_Min`]= objValue.duree_min_hs
-            // value[`check0`]= ''
-            // value[`check1`]= ''
-            // value[`check2`]= ''
+            // value[`check0`]= false
+            // value[`check1`]= false
+            // value[`check2`]= false
             
 
             this.setState({
                 inValue: value
             })       
         }) 
-        console.log(this.props.ids)   
+        console.log(this.props.ids)
     }
     
     render() {
@@ -49,13 +57,17 @@ export default class DureeLocation extends Component {
                     <div className="row">
                     <Formik   
                         initialValues={this.state.inValue}
-                        onSubmit={(value,{setSubmitting})=>{
-                            setSubmitting(true)                    
-                            axios.put(`/stock/${this.props.ids.id}` ,value)
-                            console.log(value)
-                            setSubmitting(false) 
+                        onSubmit={(value)=>                    
+                            axios.put(`/stock/${this.props.ids.id}` ,value).then(response => {
+                                if (response.status===200){
+                                    this.setState({
+                                        inValue: null
+                                    })
+                                    this.getDuree()
+
+                                }
+                            })
                         }
-                     }
                     
                     >
                         
@@ -63,9 +75,9 @@ export default class DureeLocation extends Component {
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" >
                                      Basse saison
-                                     <div className="ml-4 mb-4">
+                                     {/* <div className="ml-4 mb-4">
                                         <Field className="form-check-input" type="checkbox"  id="check0" name="check0" />
-                                    </div>
+                                    </div> */}
                                 </label>
                                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
                                 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name= "BS_Min" />
@@ -73,9 +85,9 @@ export default class DureeLocation extends Component {
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                                     Moyen Saison
-                                    <div className="ml-4 mb-4">
+                                    {/* <div className="ml-4 mb-4">
                                         <Field className="form-check-input" type="checkbox"  id="check1" name="check1" />
-                                    </div>
+                                    </div> */}
                                 </label>
                                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
                                 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name= "MS_Min" />
@@ -83,9 +95,9 @@ export default class DureeLocation extends Component {
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
                                     Haute Saison
-                                    <div className="ml-4 mb-4">
+                                    {/* <div className="ml-4 mb-4">
                                         <Field className="form-check-input" type="checkbox"  id="check2" name= "check2" />
-                                    </div>
+                                    </div> */}
                                 </label>
                                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
                                 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name= "HS_Min" />
