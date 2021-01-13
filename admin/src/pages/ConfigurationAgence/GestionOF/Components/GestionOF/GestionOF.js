@@ -82,6 +82,7 @@ class GestionOF extends Component {
                                 name="nomjour"
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
                                 px-3 mb-3 leading-tight focus:outline-none focus:bg-white"> 
+                                    <option value="Choisir">Choisir un jour</option>
                                     <option value="Lundi">Lundi</option>
                                     <option value="Mardi">Mardi</option>
                                     <option value="Mercredi">Mercredi</option>
