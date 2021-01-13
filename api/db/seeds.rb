@@ -82,11 +82,11 @@
 # Client.create(nom: "Paul", prenom: "Bary", telephone: "467671230", email: "Paul@gmail.com", password_digest: "3456")
 # Client.create(nom: "Bertran", prenom: "Christophe", telephone: "1221030", email: "Christoph@gmail.com", password_digest: "2345")
 
-Reservation.create(date_depart: Date.new(2021,1,4), date_retour: Date.new(2021,12,4), heure_depart: "7:00", heure_retour: "19:10", prix: 201, 
-voiture_id: 5,  numero_vol: "430AF", client_id: 1)
-Reservation.create(date_depart: Date.new(2021,2,3), date_retour: Date.new(2021,5,3), heure_depart: "7:00", heure_retour: "19:10", prix: 201, 
-voiture_id: 5,  numero_vol: "430AF", client_id: 2)
-Reservation.create(date_depart: Date.new(2021,5,1), date_retour: Date.new(2021,10,5), heure_depart: "7:00", heure_retour: "19:10", prix: 201, 
-voiture_id: 6,  numero_vol: "430AF", client_id: 3)
-Reservation.create(date_depart: Date.new(2021,7,4), date_retour: Date.new(2021,12,4), heure_depart: "7:00", heure_retour: "19:10", prix: 201, 
-voiture_id: 7,  numero_vol: "430AF", client_id: 4)
+# Reservation.create(date_depart: Date.new(2021,1,4), date_retour: Date.new(2021,12,4), heure_depart: "7:00", heure_retour: "19:10", prix: 201, 
+# voiture_id: 5,  numero_vol: "430AF", client_id: 1)
+# Reservation.create(date_depart: Date.new(2021,2,3), date_retour: Date.new(2021,5,3), heure_depart: "7:00", heure_retour: "19:10", prix: 201, 
+# voiture_id: 5,  numero_vol: "430AF", client_id: 2)
+# Reservation.create(date_depart: Date.new(2021,5,1), date_retour: Date.new(2021,10,5), heure_depart: "7:00", heure_retour: "19:10", prix: 201, 
+# voiture_id: 6,  numero_vol: "430AF", client_id: 3)
+# Reservation.create(date_depart: Date.new(2021,7,4), date_retour: Date.new(2021,12,4), heure_depart: "7:00", heure_retour: "19:10", prix: 201, 
+# voiture_id: 7,  numero_vol: "430AF", client_id: 4)

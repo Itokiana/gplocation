@@ -78,3 +78,7 @@ gem 'dotenv-rails'
 # grm pour api google
 gem 'google-api-client'
 gem 'omniauth-google-oauth2'
+gem 'devise'
+gem 'omniauth'
+gem 'signet'
+gem 'rest-client' 

@@ -200,14 +200,14 @@ export class Accueil extends Component {
                                                                     ):null}
                                                                     <td>Options</td>
                                                                     <td>{this.state.reservations[reservation][res][0].prix}€</td>
-                                                                    <td>100€</td>
+                                                                    <td>{this.state.reservations[reservation][res][0].acompte}€</td>
                                                                     <td>{this.state.reservations[reservation][res][2].nom}</td>
                                                                     <td>{this.state.reservations[reservation][res][0].numero_vol}</td>
                                                                     <td>Actions</td>
                                                                     </tr>
                                                             </>    
                                                             :(
-                                                                this.state.statusDepart ===false && this.state.statusRetour && new Date(this.state.reservations[reservation][res][0].date_retour) >= new Date()?
+                                                                this.state.statusDepart ===false && this.state.statusRetour && new Date(this.state.reservations[reservation][res][0].date_retour) >= Date.now()?
                                                                 (
                                                                     <>
                                                                     <tr>
@@ -239,7 +239,7 @@ export class Accueil extends Component {
                                                                     ):null}
                                                                     <td>Options</td>
                                                                     <td>{this.state.reservations[reservation][res][0].prix}€</td>
-                                                                    <td>100€</td>
+                                                                    <td>{this.state.reservations[reservation][res][0].acompte}€</td>
                                                                     <td>{this.state.reservations[reservation][res][2].nom}</td>
                                                                     <td>{this.state.reservations[reservation][res][0].numero_vol}</td>
                                                                     <td>Actions</td>
@@ -266,7 +266,7 @@ export class Accueil extends Component {
                                                                     ):null}
                                                                     <td>Options</td>
                                                                     <td>{this.state.reservations[reservation][res][0].prix}€</td>
-                                                                    <td>100€</td>
+                                                                    <td>{this.state.reservations[reservation][res][0].acompte}€</td>
                                                                     <td>{this.state.reservations[reservation][res][2].nom}</td>
                                                                     <td>{this.state.reservations[reservation][res][0].numero_vol}</td>
                                                                     <td>Actions</td>
