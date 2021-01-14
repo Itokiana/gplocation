@@ -52,16 +52,8 @@ function Reserver(propos) {
     const [etat, setEtat] = useState(1);
     const [voiture, setVoiture] = React.useState([]);
     const [client, setClient] = React.useState([]);
-    const [account,setAccount] = React.useState();
-    function getAccount  () {
-		axios.get('/paimentpartiels/1').then(response => {
-            if (response.status===200){
-				setAccount(response.data.montant)
-			}
-        })
-    };
+
     useEffect(()=>{
-        getAccount();
         setVoiture({loading: true});
         const apiVoiture = (`http://localhost:4000/voitures/${propos.match.params.id}`)
         fetch(apiVoiture)
@@ -69,7 +61,7 @@ function Reserver(propos) {
           .then((data) => {
             setVoiture({voiture: data});
         });
-    });  
+    },[]);  
       
     return (
         <div>
@@ -96,7 +88,7 @@ function Reserver(propos) {
                                                 <li className="prise"><span className="carburant"></span>Carburant : Plein à rendre plein</li>
                                             </ul>
                                             <div id="prix_produit">
-                                                <p className="montant-acompte-selection">dont {account} € d'acompte</p>
+                                                <p className="montant-acompte-selection">dont {sessionStorage.getItem("acompte")} € d'acompte</p>
                                                 <p className="confirm-tarifs">{propos.match.params.prix} €</p>
                                                 </div>
                                             </div>

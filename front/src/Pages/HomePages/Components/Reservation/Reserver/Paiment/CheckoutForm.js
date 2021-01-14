@@ -14,6 +14,7 @@ class CheckoutForm extends React.Component {
     console.log(this.props)
   }
 
+
   handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -61,6 +62,7 @@ export default function InjectedCheckoutForm(props) {
 }
 async function stripeTokenHandler(token) {
   let data=JSON.parse(sessionStorage.getItem("data"))
+  let acompte = sessionStorage.getItem("acompte")
     const paymentData = {stripeToken: token.id,description: data.client.client.id};
 
     const response = await axios.post('/charges',paymentData)
@@ -72,17 +74,22 @@ async function stripeTokenHandler(token) {
         numero_vol=JSON.parse(sessionStorage.getItem("numero_vol"))
       }
       let values = {
-        date_depart: data.data.date_depart,
-        date_retour: data.data.date_retour,
-        heure_depart:data.data.heure_depart,
-        heure_retour:data.data.heure_retour,
+        date_depart: sessionStorage.getItem("date_depart"),
+        date_retour: sessionStorage.getItem("date_retour"),
+        heure_depart:JSON.parse(sessionStorage.getItem("heure_depart")),
+        heure_retour:JSON.parse(sessionStorage.getItem("heure_retour")),
         prix:data.data.prix,
         voiture_id:data.data.id,
         client_id:data.client.client.id,
-        numero_vol:numero_vol.numero_vol
+        numero_vol:numero_vol.numero_vol,
+        acompte:acompte
       }
       sessionStorage.setItem("data",'')
       sessionStorage.setItem("numero_vol",'')
+      sessionStorage.setItem("date_depart",'')
+      sessionStorage.setItem("date_retour",'')
+      sessionStorage.setItem("heure_depart",'')
+      sessionStorage.setItem("heure_retour",'')
       await axios.post('/reservations',values).then(result => {
         if(result.status===201){
           history.push('/')

@@ -43,6 +43,7 @@ class Reservation extends Component {
         sessionStorage.setItem("heure_retour",JSON.stringify(this.props.date_reservation.heureRetour))
         sessionStorage.setItem("lieu_depart",JSON.stringify(this.props.date_reservation.lieuDepart))
         sessionStorage.setItem("lieu_retour",JSON.stringify(this.props.date_reservation.lieuRetour))
+        sessionStorage.setItem("acompte",this.state.account)
         return (
            
             <div>   

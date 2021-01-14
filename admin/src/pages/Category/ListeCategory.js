@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios'
 import { Formik, Field, Form} from 'formik';
 
-
+let i = 0;
 export default class ListeCategory extends Component {
     constructor(props) {
       super(props);
@@ -86,14 +86,14 @@ export default class ListeCategory extends Component {
 
                         <tbody>
                         {categories && categories.map((category) => {
+                          
                             return (
                               
                              
-                            <tr class="even pointer">
-                                <td class=""><img src="images/Spark.jpg" alt="image"/> </td>
+                            <tr class="even pointer" key={i++}>
+                                <td class=""><img src="images/Spark.jpg" alt="vehicule"/> </td>
                                 <td class=" ">{category.ref} <i class="success fa fa-long-arrow-up"></i></td>
                                 <td class=" ">{category.name}</td>
-                                {/* <td class=" "><input type="text" value={this.state.value} onChange={this.handleChange}/></td> */}
                                 <td >
                                   <div className=" d-flex p-0 justify-content-center align-items-center" style={{width:"150px"}}>
                                   
@@ -115,15 +115,15 @@ export default class ListeCategory extends Component {
                                 </td>
                                 <td > 
                                     <NavLink to={`/categories/${category.id}`}>
-                                    <a class="btn btn-app">
+                                    <p class="btn btn-app">
                                       <i class="fa fa-edit"></i> Edit
-                                    </a>
+                                    </p>
                                     </NavLink>
                                 </td>
                             
                                
                                 <td class=" last">
-                                    <a href="#">{category.id}</a>
+                                   <p>{category.id}</p>
                                 </td>
                             </tr>
                                   
