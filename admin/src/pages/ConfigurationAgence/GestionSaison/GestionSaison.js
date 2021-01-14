@@ -118,7 +118,7 @@ class GestionSaison extends Component {
                         <div class="d-flex align-items-start m-2">
                             <div className="bg-green-500 rounded-md w-5 h-5 m-2"></div>
                             <div>
-                                <h2>Eurreur</h2>
+                                <h2>Erreurs</h2>
                                 <span>les deux periode est confondue </span>
                             </div>
                             
