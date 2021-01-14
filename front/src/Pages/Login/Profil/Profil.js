@@ -1,14 +1,30 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 import './Profil.css';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+
+import ErrorLogin from '../ErrorLogin';
+import axios from 'axios'
+
+const ClientSession = Yup.object().shape({
+	old_password: Yup.string()
+        .required('le mot de passe ne doit pas laisser à vide'),
+	password_digest: Yup.string()
+		.required('le mot de passe ne doit pas laisser à vide')
+});
+function comparaison (a,b){
+    if (a===b){
+        return true
+    }else{
+        return false
+    }
+}
+
 class Profil extends Component {
 
+   
 
     render() {
-        let propos = this.props;
-        if(this.props.client){
-            
-        }
         return (
             <div>
 
@@ -22,22 +38,34 @@ class Profil extends Component {
                                     <div className="login">
                                     <div className="transaction text-justify">
                                         <div className="contentTitle">
-                                        <h2>Mes coordonnées</h2>
+                                        <h2>Mes coordonnées </h2>
                                         </div>
-                                        
-                                            <form id="contactForm" className="contactForm" noValidate className="s-form wow zoomInUp" data-wow-delay="0.5s">
-                                                <div className="paddingp">
-                                                    <b>Nom :</b>
-                                                    <input type="text" className="cacheform" id="nom" name="nom" value={this.props.client && this.props.client.nom} />
-                                                    <b>Prénom :</b>
-                                                    <input type="text" className="cacheform cc_cursor" id="prenom" value={this.props.client && this.props.client.prenom} name="prenom" />
-                                                    <b>Email :</b>
-                                                    <input type="text" className="cacheform hack_email_modifcompte cc_cursor" id="email1" value={this.props.client && this.props.client.email} name="email1" />
-                                                    <b>Téléphone :</b>
-                                                    <input type="text" className="cacheform" id="telfixe" value={this.props.client && this.props.client.telephone} name="telfixe" />
-                                                </div>
-                                            </form>
-                                        
+                                            <Formik
+                                                initialValues={{
+                                                    nom: sessionStorage.getItem('nom'),
+                                                    prenom: sessionStorage.getItem('prenom'),
+                                                    email: sessionStorage.getItem('email'),
+                                                    telephone: sessionStorage.getItem('telephone'),
+                                                    
+                                                }}
+                                            >
+                                            {({ errors, touched, handleSubmit }) => (
+                                                <Form className="contactForm" className="s-form wow zoomInUp" onSubmit={handleSubmit}  >
+                                                    <div>
+                                                        <Field disabled type="text" name="nom" />
+                                                    </div>
+                                                    <div>
+                                                        <Field disabled type="text" placeholder="PRENOM*" name="prenom" />
+                                                    </div>
+                                                    <div>
+                                                        <Field disabled type="text"  name="telephone" />
+                                                    </div>
+                                                    <div>
+                                                        <Field disabled type="text"  name="email"/>
+                                                    </div>
+                                                        
+                                                </Form>)}
+										</Formik>
                                         </div>
                                     </div>
                                 </div>
@@ -51,15 +79,42 @@ class Profil extends Component {
                                         <div className="contentTitle">
                                         <h2>Modifier mon mot de passe</h2>
                                         </div>
-                                            <form id="contactForm" className="contactForm" noValidate className="s-form wow zoomInUp" data-wow-delay="0.5s">
-                                                <input type="text" placeholder="Nouveau Mot de passe*" value="" name="user-phone" id="user-phone" />
-                                                <input type="text" placeholder="Confirmation*" value="" name="user-phone" id="user-phone" />
+                                            <Formik
+                                                initialValues={{
+                                                    old_password: '',
+                                                    password_digest: ''
+                                                }}
+                                                validationSchema={ClientSession}
+                                                onSubmit={(values, { resetForm }) => {
+                                                    axios.post('/client_login', values).then(response => {
+                                                        if (response.status === 200) {
+                                                            
+                                                        }
+
+                                                    })
                                                 
-                                                <center><button type="submit" className="btn m-btn" id="valider">Valider<span className="fa fa-angle-right"></span></button></center>
-                                            </form>
+                                                }}
+                                            >
+                                            {({ errors, touched, handleSubmit }) => (
+                                                <Form id="contactForm"noValidate className="s-form wow zoomInUp" onSubmit={handleSubmit} >
+                                                    <div>
+                                                        <Field type="password" placeholder="ANCIEN MOT DE PASSE"  name="old_password"/>
+                                                        <ErrorLogin errors={errors} touched={touched} row="old_password"/>
+                                                    </div>
+                                                    <div>
+                                                        <Field type="password" placeholder="MOT DE PASSE"  name="password_digest" />
+                                                        <ErrorLogin errors={errors} touched={touched} row="password_digest"/>
+                                                    </div>
+                                                    <div className="boutton-login">
+                                                    <button type="submit" className="btn m-btn">Valider<span className="fa fa-angle-right"></span></button><br/><br/>
+                                                    <span ><a href="#" className="oublier">Mot de passe oublié ?</a></span>
+                                                    </div>
+                                                </Form>)}
+                                            </Formik>
                                         </div>
                     
                                     </div>
+                                    
                                     <div className="content">
                                     <div className="transaction text-justify">
                                         <div className="contentTitle">

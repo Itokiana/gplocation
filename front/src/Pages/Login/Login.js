@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import {  Redirect } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
@@ -55,7 +55,6 @@ class Login extends React.Component {
 	render() {
 		const message = this.state.message;
 		const etape = this.state.etape;
-		const panjifa = this.state.client;
 		return (
 
 			<>
@@ -69,7 +68,6 @@ class Login extends React.Component {
 			</div>
 			<section className="b-contacts s-shadow">
 				<div className="container">
-					{/* { message ? (<div>{message}</div>) : null } */}
 					<div className="row">
 						<div><br/>
 							{ message ? (<div className="alert_message">{message}</div>) : null }</div>
@@ -102,11 +100,13 @@ class Login extends React.Component {
 											this.setState({
 												loading: true
 											})
-
-											console.log(response.data.client)
-
-											localStorage.setItem('token', response.data.token)
+											
 											sessionStorage.setItem('id', response.data.client.id)
+											sessionStorage.setItem('nom',response.data.client.nom)
+											sessionStorage.setItem('prenom',response.data.client.prenom)
+											sessionStorage.setItem('telephone',response.data.client.telephone)
+											sessionStorage.setItem('email',response.data.client.email)
+											sessionStorage.setItem('gamers',response.data.client.password_digest)
 											
 										}
 
@@ -186,7 +186,6 @@ class Login extends React.Component {
 														etape: 2
 													})
 
-													// (<Redirect to='/profil'/>)
 												} else if (response.status === 202) {
 													this.setState({
 														message: response.data.message
@@ -194,8 +193,11 @@ class Login extends React.Component {
 												} 
 												console.log(response.data.client)
 
-												localStorage.setItem('token', response.data.token)
 												sessionStorage.setItem('id', response.data.client.id)
+												sessionStorage.setItem('nom',response.data.client.nom)
+												sessionStorage.setItem('prenom',response.data.client.prenom)
+												sessionStorage.setItem('telephone',response.data.client.telephone)
+												sessionStorage.setItem('emailClient',response.data.client.email)
 											})
 										}}
 										>
@@ -254,7 +256,7 @@ class Login extends React.Component {
 							</div>
 						</div>
 					</div>
-					{etape == 2 ? (<Redirect to='/profil'/>) : null}
+					{etape === 2 ? (<Redirect to='/profil' />) : null}
 				</div>
 			</section>			
 
