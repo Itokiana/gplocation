@@ -21,3 +21,7 @@
     font-size: 15px !important;
     box-shadow: none !important;
 }
+.client-info {
+    color: rgb(2, 1, 7);
+    font-size: 27px;
+}
