@@ -14,32 +14,40 @@ export default class ListeCategory extends Component {
     componentDidMount() {
         const { action } = this.props;
         action.getCategory();
-        axios.get('/categories').then(response => {
-          if (response.status === 200) {
-              this.setState({
-                  categ: response.data
-                  
-              })
-              console.log(this.state.categ)
-              
-          }
-          const initvalues = {}
-          const ids = []
-          this.state.categ.map((value)=>{
-            initvalues[`val${value.id}`] = value.stock
-            ids.push(value.id)
-            console.log(value.id)
-            
-          })
-          this.setState({
-            intvalue: initvalues,
-            id: ids
-          })
-        })
-      
-        console.log(this.props)
-       
+        this.getCat()
         
+    }
+    getCat(){
+      axios.get('/categories').then(response => {
+        if (response.status === 200) {
+            this.setState({
+                categ: response.data
+                
+            })
+            console.log(this.state.categ)
+            
+        }
+        const initvalues = {}
+        const ids = []
+        this.state.categ.map((value)=>{
+          initvalues[`val${value.id}`] = value.stock
+          ids.push(value.id)
+          console.log(value.id)
+          
+        })
+        this.setState({
+          intvalue: initvalues,
+          id: ids
+        })
+      })
+      
+    }
+    deletecat(cat) {
+      axios.delete(`/categories/${cat}`).then(response => {
+          if (response.status === 204) {
+              this.getCat();
+          }
+      })
     }
     
   
@@ -85,9 +93,8 @@ export default class ListeCategory extends Component {
                         </thead>
 
                         <tbody>
-                        {categories && categories.map((category) => {
-                            return (
-                              
+                        {categories && categories.map((category, key) => {
+                            return (  
                              
                             <tr class="even pointer">
                                 <td class=""><img src="images/Spark.jpg" alt="image"/> </td>
@@ -123,8 +130,17 @@ export default class ListeCategory extends Component {
                             
                                
                                 <td class=" last">
-                                    <a href="#">{category.id}</a>
+                                    <a href="#">{key+1}</a>
                                 </td>
+                                {/* <td>
+                                  <button
+                                    type="button" onClick={() => this.deletecat(category.id)}
+                                    className="border border-green-500 bg-red-500 text-white rounded-md px-1 py-2 m-1
+                                    transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                                >
+                                  supprimer
+                                  </button>
+                                </td> */}
                             </tr>
                                   
                             )
