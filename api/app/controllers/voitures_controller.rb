@@ -114,7 +114,6 @@ class VoituresController < ApplicationController
         @category = Category.find(voiture_params[:category])
         @paramsmapped = voiture_params
         @paramsmapped[:category] = @category
-        puts @category
         @voiture = Voiture.create!(@paramsmapped)
         json_response(@voiture, :created)
     end

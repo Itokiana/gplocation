@@ -23,14 +23,12 @@ function PaimentEtape1(props) {
     const Paiement = () => {
         setStatus(!status) 
     };
-    useEffect(()=>{
-        axios.get('/paimentpartiels/1').then(response => {
-            if (response.status===200){
-                setMontant(response.data.montant)
-            }
-        })
-    });
+    let acompte = sessionStorage.getItem("acompte")
+
+    
     return (
+        
+        <>
         <div>
             <div className="col-xs-6">
                 <div className="b-contacts__address">
@@ -85,11 +83,11 @@ function PaimentEtape1(props) {
                                         </p>
                                         </label>
                                     </fieldset>
-                                <h3 class="form-connec-h3">Total à payer : acompte de {montant} €</h3>
-                                <p class="paddingp">Puis {parseInt(props.data.prix)-montant} € à régler à la remise des clés par carte bancaire, espèce ou chèque </p>
+                                <h3 class="form-connec-h3">Total à payer : acompte de {acompte} €</h3>
+                                <p class="paddingp">Puis {parseInt(props.data.prix)-acompte} € à régler à la remise des clés par carte bancaire, espèce ou chèque </p>
                                 <h3 class="paiementcarte cc_cursor">Paiement sécurisé par carte bancaire :</h3>
 
-                                <button onClick={Paiement} className="btn btn-success btn-lg btn-block" >Payer {montant} €</button>
+                                <button onClick={Paiement} className="btn btn-success btn-lg btn-block" >Payer {acompte} €</button>
 
                                 {status? (<Checkout data={props} Paiement={Paiement}/>):null}
 
@@ -103,6 +101,7 @@ function PaimentEtape1(props) {
                 </div>
             </div>
         </div>
+    </>
     )
 }
 

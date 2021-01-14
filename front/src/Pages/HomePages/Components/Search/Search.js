@@ -23,11 +23,12 @@ yesterday.setDate(yesterday.getDate() - 1);
 const ReservationSchema = Yup.object().shape({
 	dateDepart: Yup.date()
 		.required('vous devez indiquer votre date de départ')
-		.transform(parseDateString).min(yesterday,"la date de depart doit être supérieur à aujourd'hui"),
-    dateRetour: Yup.date()
+		.transform(parseDateString).min(yesterday,"la date de depart doit être supérieur ou égale à aujourd'hui"),
+	dateRetour: Yup.date()
+	.default(null)
 		.required('vous devez indiquer votre date de retour')
 		.when('dateDepart',(dateDepart,schema) =>{
-			return schema.min(dateDepart)
+			return dateDepart && schema.min(dateDepart,'la date retour doit être supérieur à la date depart')
 		}),
 	heureDepart: Yup.string()
 		.required('information important'),
