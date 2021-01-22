@@ -73,96 +73,95 @@ class Tarif extends Component {
                 console.log("unique", unique)
                 return(
                     <>
-                        <div className=""style= {{background:"DarkSlateGray"}}>
-                        <div className="w-full h-10 bg-blue rounded p-2">
-                            <strong>{category.name}
-                            <span style= {{float:"right"}}> Duree min Bs:{category.duree_min_bs} jours- Dureé min MS: {category.duree_min_ms} jours - Dureé min: {category.duree_min_hs} jours
-                            </span></strong>
-                        </div>
-                        <br/>
-                        <Link to={`/ajouter_un_tarif/${(category.id)}`}
-                        className="border border-green-100 bg-green-500 text-white rounded-md px-3 m-1 py-2 
-                        transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
-                        >
-                        Ajouter Tarif pour {category.name}
-                        </Link> 
-                        {
+                        <div className="p-2 border border-black"style= {{background:"dimGrey"}}>
+                            <div className="m-1 w-full h-10 bg-blue rounded p-2">
+                                <strong>{category.name}
+                                <span style= {{float:"right"}}> Duree min Bs:{category.duree_min_bs} jours- Dureé min MS: {category.duree_min_ms} jours - Dureé min: {category.duree_min_hs} jours
+                                </span></strong>
+                            </div>
+                            <br/>
+                            <Link to={`/ajouter_un_tarif/${(category.id)}`}
+                            className="border border-green-100 bg-green-500 text-white rounded-md px-3 m-1 py-2 
+                            transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
+                            >
+                            Ajouter Tarif pour {category.name}
+                            </Link> 
+                            {
 
-                            unique.map((val1, keyval) => {
-                                const val$keyval = []    
-                                trieCategorie$key.map(val3 => {
-                                    unique.map(val2=> {
-                                        if(val3.datedebutperso===val1 && val3.datefinperso===val2){
-                                            val$keyval.push(val3)
-                                        }
+                                unique.map((val1, keyval) => {
+                                    const val$keyval = []    
+                                    trieCategorie$key.map(val3 => {
+                                        unique.map(val2=> {
+                                            if(val3.datedebutperso===val1 && val3.datefinperso===val2){
+                                                val$keyval.push(val3)
+                                            }
+                                        })
                                     })
-                                })
-                                console.log(`val${keyval}`, val$keyval)
+                                    console.log(`val${keyval}`, val$keyval)
 
-                                if (val$keyval.length === 0){
-                                    return(<>
-                                        <br/>
-                                        </>
-                                    )
-                                }
-                                else{ 
-                                    return(
-                                        <>
-                                                
-                                            <div className="py-4">
-                                                <div className="mt-2">
-                                                    <div>
-                                                        <h3>
-                                                        Du <strong>{moment(val$keyval[0].datedebutperso).format('D MMMM Y')}</strong> 
-                                                        au <strong>{moment(val$keyval[0].datefinperso).format('D MMMM Y') }
-                                                        </strong> 
-                                                        <button className="text-white rounded m-2 bg-red" style= {{float:"right"}} onClick={() => this.deleteDate(val$keyval[0])}>
-                                                        Supprimer
-                                                        </button>
-                                                        </h3>
-                                                        <br/>
-                                                    </div>
-                                                    <table className="table text-white table-striped jambo_table bulk_action border-black">
-                                                        <thead className="bg-white">
-                                                        {val$keyval.map(val => {
-                                                            return(
-                                                                <>
-                                                                    <th>
-                                                                    <span className="text-black">{val.jourdebut} au {val.jourfin} Jour</span>
-                                                                    </th>
-                                                                </>    
-                                                                )
-                                                        })}                    
-                                                        </thead>
-                                                        <tbody className="">
-                                                            <tr>
-                                                            {val$keyval.map(cat=>{
+                                    if (val$keyval.length === 0){
+                                        return(<>
+                                            <br/>
+                                            </>
+                                        )
+                                    }
+                                    else{ 
+                                        return(
+                                            <>
+                                                    
+                                                <div className="py-4">
+                                                    <div className="mt-2">
+                                                        <div>
+                                                            <h3>
+                                                            Du <strong>{moment(val$keyval[0].datedebutperso).format('D MMMM Y')}</strong> 
+                                                            au <strong>{moment(val$keyval[0].datefinperso).format('D MMMM Y') }
+                                                            </strong> 
+                                                            <button className="text-white rounded m-2 bg-red-600 p-1" style= {{float:"right"}} onClick={() => this.deleteDate(val$keyval[0])}>
+                                                            Supprimer
+                                                            </button>
+                                                            </h3>
+                                                            <br/>
+                                                        </div>
+
+                                                        <table className="table text-white table-striped jambo_table bulk_action border-black">
+                                                            <thead className="bg-blue">
+                                                            {val$keyval.map(val => {
                                                                 return(
                                                                     <>
-                                                                    <td className="">
-                                                                        <u>{cat.prix}</u> <br/>€/jours
-                                                                    </td>
-                                                                    </>
-                                                                )
-                                                            })}                                            
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                                        <th>
+                                                                        <span className="text-black">{val.jourdebut} au {val.jourfin} Jour</span>
+                                                                        </th>
+                                                                    </>    
+                                                                    )
+                                                            })}                    
+                                                            </thead>
+                                                            <tbody className="">
+                                                                <tr>
+                                                                {val$keyval.map(cat=>{
+                                                                    return(
+                                                                        <>
+                                                                        <td className="">
+                                                                            <u>{cat.prix}</u> <br/>€/jours
+                                                                        </td>
+                                                                        </>
+                                                                    )
+                                                                })}                                            
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </>
-                                    )
-                                }
-                            })
-                        
-                        }
+                                            </>
+                                        )
+                                    }
+                                })
+                            
+                            }
                         </div>
                         <br/>
-                        <br/>
-                        
+                        <br/>   
                     </>
                 )
-
             })}
         </>
         )

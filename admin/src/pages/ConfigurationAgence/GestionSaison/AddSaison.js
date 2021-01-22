@@ -3,13 +3,37 @@ import axios from '../../../axios'
 import { Formik, Form, Field } from 'formik';
 import moment from 'moment' ;
 import { NavLink } from 'react-router-dom';
+import ErrorField from '../../../components/ErrorField/ErrorField';
+import * as Yup from 'yup';
 
-// import Listesaison from './Listesaison';
+const SaisonSchema = Yup.object().shape({
+	debutsaison: Yup.date()
+		.required('Vous devez entre la date de debut de saison'),
+		// .transform(parseDateString).min(yesterday,"la date de depart doit être supérieur à aujourd'hui"),
+    finsaison: Yup.date()
+		.required('Vous devez entre la date de fin de saison')
+		.when('debutsaison',(debutsaison,schema) =>{
+			return schema.min(debutsaison,'La date fin saison doit être supérieur a la date de debut saison')
+		}),
+});
+//import { parse, isDate } from "date-fns";
+
+// function parseDateString(value, originalValue) {
+//   const parsedDate = isDate(originalValue)
+//     ? originalValue
+//     : parse(originalValue, "yyyy-MM-dd", new Date());
+
+//   return parsedDate;
+// }
+
+// const today = new Date();
+// const yesterday = new Date(today);
+// yesterday.setDate(yesterday.getDate() - 1);
+
 
 class AddSaison extends Component {
     
     state = {
-
         saison : [],
         datesaison : [],
         date: ''
@@ -77,6 +101,7 @@ class AddSaison extends Component {
                                 finsaison:''
                                 
                             }}
+                            validationSchema={SaisonSchema}
                             onSubmit={(data, { resetForm }) => {        
                                 axios.post('/ouvertexceptions', data).then(response => {
                                     if (response.status === 204) {
@@ -96,7 +121,8 @@ class AddSaison extends Component {
                                     }
                             })}
                         }
-                        >
+                        >	
+                            {({ errors, touched }) => (
                             <Form className="flex flex-wrap -mx-3 mb-6">
                                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                         <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" >
@@ -104,6 +130,7 @@ class AddSaison extends Component {
                                         </label>
                                         <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
                                         px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="date" name="debutsaison"/>
+                                        <ErrorField errors={errors} touched={touched} row="debutsaison"/>
                                     </div>
                                     <div className="w-full md:w-1/2 px-3">
                                         <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" htmlFor="grid-last-name">
@@ -111,6 +138,7 @@ class AddSaison extends Component {
                                         </label>
                                         <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
                                     px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date" name="finsaison"/>
+                                        <ErrorField errors={errors} touched={touched} row="finsaison"/>
                                     </div>
 
                                     <div className="d-flex justify-content-end">
@@ -124,9 +152,7 @@ class AddSaison extends Component {
                                         </button>
                                     </div>
                                     
-                            </Form>
-                            
-
+                            </Form>)}
                         </Formik>
                         
                     </div>

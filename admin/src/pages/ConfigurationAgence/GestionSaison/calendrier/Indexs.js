@@ -45,6 +45,7 @@ class Indexs extends React.Component {
                             {weekdays}
                             {weekdays}
                             {weekdays}
+                            {weekdays}
                                 
                             </tr>
                         </thead>

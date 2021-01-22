@@ -1,22 +1,30 @@
-import React, { Component, setStat} from 'react'
+import React, { Component } from 'react'
 import axios from '../../../../../axios'
 import { Formik, Form, Field } from 'formik';
 import './gestionOF.css'
-import moment from 'moment' ;
+import ErrorField from '../../../../../components/ErrorField/ErrorField';
+import * as Yup from 'yup';
 
+const HoraireSchema = Yup.object().shape({
+	heuredebut: Yup.string()
+		.required("Vous devez entre le debut d'heure"),
+		// .transform(parseDateString).min(yesterday,"la date de depart doit être supérieur à aujourd'hui"),
+    heurefin: Yup.string()
+		.required("Vous devez entre le fin d'heure"),
+		// .when('heuredebut',(heuredebut,schema) =>{
+		// 	return schema.min(heuredebut,"La fin d'heure doit être supérieur a la debut d'heure")
+		//}),
+});
 
 class GestionOF extends Component {
     
     state = {
-
         horaire : []
     }
-    
     componentDidMount() {
         this.interval = setInterval(() =>
             this.action.getHoraire()
-            , 1000)
-        
+            , 1000)  
     }
     componentWillUnmount() {
         clearInterval(this.interval);
@@ -60,9 +68,9 @@ class GestionOF extends Component {
                             nomjour: '',
                             heuredebut:'',
                             heurefin:'',
-                            prixsurplus:''
-                            
+                            prixsurplus:'' 
                         }}
+                        validationSchema={HoraireSchema}
                         onSubmit={(values, { resetForm }) => {
                             axios.post('/horaire_jours', values).then(response => {
                                 
@@ -73,6 +81,7 @@ class GestionOF extends Component {
                             resetForm({});
                         }}
                     >
+                        {({ errors, touched}) =>(
                         <Form class="d-flex align-items-start">
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" >
@@ -100,6 +109,7 @@ class GestionOF extends Component {
                                 </label>
                                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3
                             px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="time" name="heuredebut"/>
+                                <ErrorField errors={errors} touched={touched} row='heurdebut'/>
                             </div>
                             <div className="w-full md:w-1/4 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
@@ -107,6 +117,7 @@ class GestionOF extends Component {
                                 </label>
                                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
                             px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="time" name="heurefin"/>
+                                <ErrorField errors={errors} touched={touched} row='heurefin'/>
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
@@ -126,16 +137,13 @@ class GestionOF extends Component {
                                     Ajouter
                                 </button>
                             </div>
-                            
-                        </Form>
+                        </Form>)}
                         
-
                     </Formik>
                     
                 </div>
 
                 {/* Liste des jour par heure */}
-                
                 
                 <div className="py-4">
                     

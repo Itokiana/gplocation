@@ -1,8 +1,5 @@
 import React from 'react'
 import moment from 'moment';
-import axios from '../../../../axios'
-
-
 
 class Days extends React.Component {
     state = {
@@ -10,11 +7,8 @@ class Days extends React.Component {
         datesaison: []
     }
     months  = moment.months();
-    async componentDidMount(){
-        //console.log(this.props.month)
-        await this.setMonth(this.props.month)
-        await this.getDateSaison();
-        // console.log(this.state.dateContext)
+    async componentDidMount(){  
+        await this.setMonth(this.props.month)  
     }
     
     daysInMonths = () => {
@@ -28,166 +22,16 @@ class Days extends React.Component {
     currentDay = () => {
         return this.state.dateContext.format("D");
     }
-    async getDateSaison () {
-        await axios.get(`/date_saisons`).then(response => {
-            if (response.status === 200) {
-                this.setState({
-                    datesaison: response.data,
-                    
-                });
-               //console.log(this.state.datesaison);
-            }
-        });
-    }
     afficheTab = jourMoi => {
-        const date = this.state.datesaison
-        let hash = []
-    
-        date.map((date, key) =>{
-            // if((moment(date.debutsaison).format('Y') && moment(date.finsaison).format('Y')) = mmoment().format('Y')){
-
-            // }
-            let debut = moment(date.debutsaison)
-            let fin = moment(date.finsaison)
-            let saison = date.saison_id
-            //console.log(debut.format('M'))
-            let anneD = parseInt(debut.format('Y'))
-            let moisD = parseInt(debut.format('M'))
-            let jourD = parseInt(debut.format('D'))
-            let anneF = parseInt(fin.format('Y'))
-            let moisF = parseInt(fin.format('M'))
-            let jourF = parseInt(fin.format('D'))
-            if (anneD === anneF){
-                if(moisD === moisF){
-                    if(jourD <= jourF ){
-                        for(let i = jourD; i <= jourF; i++ ){
-                            let saison$i = {}
-                            saison$i["anne"]= anneD
-                            saison$i["mois"]= debut.format('MMMM')
-                            saison$i["jour"] = i
-                            saison$i["saison"] = saison
-                            hash.push(saison$i)
-
-                        }
-                    }
-                    else{
-                        console.log("eureu")
-                    }
-
-                }else if(moisF === moisD+1){
-                    for(let j = jourD; j<= debut.daysInMonth(); j++ ){
-                        let saison$j = {}
-                        saison$j["anne"]= anneD
-                        saison$j["mois"]= debut.format('MMMM')
-                        saison$j["jour"] = j
-                        saison$j["saison"] = saison
-                        hash.push(saison$j)
-                    }
-                    for(let k=1; k<= jourF; k++){
-                        let saison$k = {}
-                        saison$k["anne"]= anneD
-                        saison$k["mois"]= fin.format('MMMM')
-                        saison$k["jour"] = k
-                        saison$k["saison"] = saison
-                        hash.push(saison$k)
-                    }
-
-                }else if(moisF === moisD+2){
-                    for(let jk = jourD; jk<= debut.daysInMonth(); jk++ ){
-                        let saison$jk = {}
-                        saison$jk["anne"]= anneD
-                        saison$jk["mois"]= debut.format('MMMM')
-                        saison$jk["jour"] = jk
-                        saison$jk["saison"] = saison
-                        hash.push(saison$jk)
-                    }
-                    for(let kl=1; kl<= debut.add(1, 'month').daysInMonth(); kl++){
-                        let saison$kl = {}
-                        saison$kl["anne"]= anneD
-                        saison$kl["mois"]= debut.add(1, 'month').format('MMMM')
-                        saison$kl["jour"] = kl
-                        saison$kl["saison"] = saison
-                        hash.push(saison$kl)
-                    }
-                    for(let l=1; l<= jourF; l++){
-                        let saison$l = {}
-                        saison$l["anne"]= anneD
-                        saison$l["mois"]= fin.format('MMMM')
-                        saison$l["jour"] = l
-                        saison$l["saison"] = saison
-                        hash.push(saison$l)
-                    }
-                }
-
-            }else if(anneD<anneF){
-                if(moisD===12){
-                    for(let m = jourD; m<= debut.daysInMonth(); m++){
-                        let saison$m = {}
-                        saison$m["anne"]= anneD
-                        saison$m["mois"]= debut.format('MMMM')
-                        saison$m["jour"] = m
-                        saison$m["saison"] = saison
-                        hash.push(saison$m)
-
-                    }
-                }else if(moisD==11){
-                    for(let n = jourD; n<= debut.daysInMonth(); n++){
-                        let saison$n = {}
-                        saison$n["anne"]= anneD
-                        saison$n["mois"]= debut.format('MMMM')
-                        saison$n["jour"] = n
-                        saison$n["saison"] = saison
-                        hash.push(saison$n)
-
-                    }
-                    for(let o=1; o<= debut.add(1, 'month').daysInMonth(); o++){
-                        let saison$o = {}
-                        saison$o["anne"]= anneD
-                        saison$o["mois"]= debut.add(1, 'month').format('MMMM')
-                        saison$o["jour"] = o
-                        saison$o["saison"] = saison
-                        hash.push(saison$o)
-                    }
-
-                }
-
-            }
-            else{
-                console.log("nonono")
-            }
-            
-        });
-        
-        //console.log(hash)
-        const filtreMois = hash.filter(person => person.mois === this.props.month)
-        //console.log(filtreSaison)
-        const filtreSaison1 = filtreMois.filter(sai => sai.saison === 1)
-        const filtreSaison2 = filtreMois.filter(sai => sai.saison === 2)
-        const filtreSaison3 = filtreMois.filter(sai => sai.saison === 3)
-
-        const tab1 = []
-        const tab2 = []
-        const tab3 = []
-
-        filtreSaison1.map(val=> {tab1.push(val.jour)})
-        filtreSaison2.map(val=> {tab2.push(val.jour)})
-        filtreSaison3.map(val=> {tab3.push(val.jour)})
-        console.log(this.props.month)
-        console.log('saison1', tab1)
-        console.log('saison2', tab2)
-        console.log('saison3', tab3)
-
-        if (tab2.includes(jourMoi) === true && tab3.includes(jourMoi) === true){
+        if (this.props.tableau1.includes(jourMoi) === true && this.props.tableau3.includes(jourMoi) === true){
             return "bg-green rounded"
-        }else if (tab2.includes(jourMoi) === true){
+        }else if (this.props.tableau2.includes(jourMoi) === true){
             return "bg-danger rounded"
-        }else if (tab3.includes(jourMoi) === true ){
+        }else if (this.props.tableau3.includes(jourMoi) === true ){
             return "bg-warning rounded"
         }else{
             return "bg-primary rounded"
         }
-
-
     }
 
     setMonth = month => {
