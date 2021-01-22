@@ -3,7 +3,19 @@ import axios from '../../../../../axios'
 import { Formik, Form, Field } from 'formik';
 import '../GestionOF/gestionOF.css'
 import moment from 'moment' ;
+import ErrorField from '../../../../../components/ErrorField/ErrorField';
+import * as Yup from 'yup';
 
+const FermetureSchema = Yup.object().shape({
+	jourfermedebut: Yup.date()
+		.required('Vous devez entre la date de debut de fermeture exceptionnel'),
+		// .transform(parseDateString).min(yesterday,"la date de depart doit être supérieur à aujourd'hui"),
+    jourfermefin: Yup.date()
+		.required('Vous devez entre la date de fin de fermeture exceptionnel')
+		.when('jourfermedebut',(jourfermedebut,schema) =>{
+			return schema.min(jourfermedebut,'La date fin doit être supérieur a la date de debut de fermeture exceptionnel')
+		}),
+});
 
 class GestionFE extends Component {
     
@@ -57,7 +69,7 @@ class GestionFE extends Component {
                             jourfermefin:''
                             
                         }}
-                        
+                        validationSchema={FermetureSchema}
                         onSubmit={(data, { resetForm })=> {                  
                             axios.post('/fermexceptions', data).then(response => {
                                 if (response.status === 201) {   
@@ -68,13 +80,15 @@ class GestionFE extends Component {
                         }}
                     
                     >
-                        <Form className="d-flex align-items-start">
+                        {({ errors, touched }) => (
+                            <Form className="d-flex align-items-start">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" >
                                     Du :
                                 </label>
                                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
                                 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="date" name="jourfermedebut"/>
+                                <ErrorField errors={errors} touched={touched} row="jourfermedebut"/>
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
@@ -82,6 +96,7 @@ class GestionFE extends Component {
                                 </label>
                                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
                             px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date" name="jourfermefin"/>
+                                <ErrorField errors={errors} touched={touched} row='jourfermefin'/>
                             </div>
 
                             <div className="w-full md:w-1/2 px-3">
@@ -93,18 +108,12 @@ class GestionFE extends Component {
                                 >
                                     Ajouter
                                 </button>
-                            </div>
-                            
-                            
-                        </Form>
-                        
-
+                            </div>  
+                        </Form>)} 
                     </Formik>
-                    
                 </div>
 
                 {/* Liste des jour exceptionel */}
-                
                 
                 <div className="py-4">
                     

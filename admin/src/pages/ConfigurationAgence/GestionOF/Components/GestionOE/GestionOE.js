@@ -2,17 +2,22 @@ import React, { Component, setStat} from 'react'
 import axios from '../../../../../axios'
 import { Formik, Form, Field } from 'formik';
 import moment from 'moment' ;
-
 import '../GestionOF/gestionOF.css'
-// import ListeOE from './ListeOE'
+import ErrorField from '../../../../../components/ErrorField/ErrorField';
+import * as Yup from 'yup';
 
+const OuvertSchema = Yup.object().shape({
+	jourouvertdebut: Yup.date()
+		.required('Vous devez entre la date de debut de ouverture exceptionnel'),
+		// .transform(parseDateString).min(yesterday,"la date de depart doit être supérieur à aujourd'hui"),
+    jourouvertfin: Yup.date()
+		.required('Vous devez entre la date de fin de ouverture exceptionnel')
+		.when('jourouvertdebut',(jourouvertdebut,schema) =>{
+			return schema.min(jourouvertdebut,'La date fin doit être supérieur a la date de debut de ouverture exceptionnel')
+		}),
+});
 
-class GestionOE extends Component {
-    // constuctor(props) {
-    //     super(props)
-    //     this.routeChange = this.routeChange.bind(this);
-    // }
-    
+class GestionOE extends Component { 
     state = {
         date : []
     }
@@ -27,10 +32,6 @@ class GestionOE extends Component {
         this.setState({date: []})
     }
 
-    // routeChange() {
-    //     let path = `/ouverture`;
-    //     this.props.history.push(path);
-    //   }
     action = {
         getOuvert: () => {
             
@@ -60,21 +61,20 @@ class GestionOE extends Component {
         const  { date } = this.state;
         return (
             <>
-                    <div className="page-title">
-                        <div>
-                            <h2>GESTION DES OUVERTURE EXECEPTIONNEL </h2>
-                        </div>
+                <div className="page-title">
+                    <div>
+                        <h2>GESTION DES OUVERTURE EXECEPTIONNEL </h2>
                     </div>
-                    <h3>Ajouter autant de periode ouverture nécessaire </h3>
-                    <br/><br/>
-                    <div className="row">
+                </div>
+                <h3>Ajouter autant de periode ouverture nécessaire </h3>
+                <br/><br/>
+                <div className="row">
                     <Formik
                         initialValues={{
                             jourouvertdebut: '',
-                            jourouvertfin:''
-                            
+                            jourouvertfin:''                           
                         }}
-                        
+                        validationSchema={OuvertSchema}
                         onSubmit={(data, { resetForm }) => {        
                             axios.post('/ouvertexceptions', data).then(response => {
                                 if (response.status === 204) {
@@ -86,9 +86,8 @@ class GestionOE extends Component {
                             })
                             resetForm({}); 
                         }}
-                       
-                    
                     >
+                        {({ errors, touched}) => (
                         <Form className="d-flex align-items-start">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" >
@@ -96,6 +95,7 @@ class GestionOE extends Component {
                                 </label>
                                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 
                                 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="date" name="jourouvertdebut"/>
+                                <ErrorField errors={errors} touched={touched} row='jourouvertdebut'/>
                             </div>
                             <div className="w-full md:w-1/2 px-3">
                                 <label className="block text-white tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
@@ -103,6 +103,7 @@ class GestionOE extends Component {
                                 </label>
                                 <Field className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 
                             px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date" name="jourouvertfin"/>
+                                <ErrorField errors={errors} touched={touched} row='jourouvertfin'/>
                             </div>
 
                             <div className="w-full md:w-1/2 px-3">
@@ -115,9 +116,8 @@ class GestionOE extends Component {
                                     Ajouter
                                 </button>
                             </div>   
-                        </Form>
-                    </Formik>
-                    
+                        </Form>)}
+                    </Formik>   
                 </div>
                 {/* <ListeOE
                     action={{...this.action}}
