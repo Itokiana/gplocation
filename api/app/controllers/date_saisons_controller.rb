@@ -3,7 +3,7 @@ class DateSaisonsController < ApplicationController
 
   # GET /date_saisons
   def index
-    @date_saisons = DateSaison.all
+    @date_saisons = DateSaison.all.order('debutsaison ASC')
 
     render json: @date_saisons
   end

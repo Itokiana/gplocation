@@ -3,7 +3,7 @@ class HoraireJoursController < ApplicationController
 
   # GET /horaire_jours
   def index
-    @horaire_jours = HoraireJour.all
+    @horaire_jours = HoraireJour.all.order('nomjour ASC')
 
     render json: @horaire_jours
   end

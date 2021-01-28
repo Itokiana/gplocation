@@ -13,17 +13,19 @@ class Indexs extends React.Component {
         return this.state.date.format("Y") // annee de la date aujourdhui
 
     }
-
-
+    week(jour){
+        let w=String(jour) 
+        if (w ==="sam." || w ==="dim.") {
+            return "text-danger"
+        } 
+    }
     render() {
-        let weekdays = this.weekdaysShort.map((day) => { 
-                return ( 
-                
-                    <td key={day} className= "week-day"> {day}</td>
+        let weekdays = this.weekdaysShort.map((day) => {
+                let classname = this.week(day)
+                return (
+                    <td className={classname}> {day}</td>
                 )
-
-            }
-             
+        }
         );
         
         return (
@@ -40,12 +42,12 @@ class Indexs extends React.Component {
                                 <td>
                                     Mois\jour
                                 </td>
-                            {weekdays}
-                            {weekdays}
-                            {weekdays}
-                            {weekdays}
-                            {weekdays}
-                            {weekdays}
+                                {weekdays}
+                                {weekdays}
+                                {weekdays}
+                                {weekdays}
+                                {weekdays}
+                                {weekdays}
                                 
                             </tr>
                         </thead>

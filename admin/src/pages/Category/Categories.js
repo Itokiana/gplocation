@@ -26,23 +26,15 @@ class Categories extends Component {
                     console.log(response)
                 }
             })
-        },
-        deleteCategory: (category) => {
-            axios.delete(`/categories/${category.id}`).then(response => {
-                if (response.status === 204) {
-                    this.action.getCategory();
-                }
-            })
         }
     }
-
 
     render() {
         // Récupération de la variable category depuis le state
         const { addNew, categories } = this.state;
         return (
             <div className="p-5">
-                <h1 className="mb-2 text-center">Gestion des catégories</h1>
+                <h1 className="mb-2 text-center text-white">Gestion des catégories</h1>
                 <button
                     className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded"
                     onClick={() => this.action.toggleModal(true)}>Nouvelle catégorie
@@ -82,6 +74,4 @@ class Categories extends Component {
         )
     }
 }
-
-
 export default Categories;

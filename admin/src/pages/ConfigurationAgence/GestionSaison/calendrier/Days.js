@@ -22,8 +22,9 @@ class Days extends React.Component {
     currentDay = () => {
         return this.state.dateContext.format("D");
     }
+
     afficheTab = jourMoi => {
-        if (this.props.tableau1.includes(jourMoi) === true && this.props.tableau3.includes(jourMoi) === true){
+        if (this.props.tableau2.includes(jourMoi) === true && this.props.tableau3.includes(jourMoi) === true){
             return "bg-green rounded"
         }else if (this.props.tableau2.includes(jourMoi) === true){
             return "bg-danger rounded"

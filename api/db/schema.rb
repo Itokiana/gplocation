@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_13_150246) do
+ActiveRecord::Schema.define(version: 2021_01_27_131426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_150246) do
     t.integer "duree_min_bs"
     t.integer "duree_min_ms"
     t.integer "duree_min_hs"
+    t.boolean "enligne"
   end
 
   create_table "clients", force: :cascade do |t|

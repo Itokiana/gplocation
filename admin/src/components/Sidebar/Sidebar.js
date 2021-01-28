@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink,Link } from 'react-router-dom';
 import './Sidebar.styles.scss';
 
 
 export default class Sidebar extends Component {
-
+    
     render() {
         return (
             <div className="sidebar-block" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
@@ -13,9 +13,9 @@ export default class Sidebar extends Component {
                     GPLOCATION
                 </div>
                 <div className="app-menu">
-                    <NavLink to="/dashbord" className="hover:text-white">
+                    <Link onClick={() => window.location.href ="/dashbord"} className="hover:text-white">
                         <div className="menu-item">Tableau de bord</div>
-                    </NavLink>
+                    </Link>
 
                     <NavLink to="/" className="hover:text-white">
                         <div className="menu-item">Réservations</div>
@@ -34,9 +34,12 @@ export default class Sidebar extends Component {
                     {/* <NavLink to="/clientMessage" className="hover:text-white">
                         <div className="menu-item">Message </div>
                     </NavLink> */}
-                    <NavLink to="/planning" className="hover:text-white">
+                     <Link onClick={() => window.location.href ="/planning"} className="hover:text-white">
+                        <div className="menu-item">Planning</div>
+                    </Link>
+                    {/* <NavLink to="/planning" className="hover:text-white">
                         <div className="menu-item">Planning </div>
-                    </NavLink>
+                    </NavLink> */}
                 </div>
             </div>
         )

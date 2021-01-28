@@ -42,10 +42,13 @@ class CategoriesController < ApplicationController
     
     id.each do |value|
       puts value
-      
+      ligne="ligne#{value}"
+      puts "##"*30
+      puts data[ligne]
+      puts "**"*20
       stok="val#{value}"
       puts stok  
-      Category.find(value).update(stock: data[stok])
+      Category.find(value).update(stock: data[stok], enligne: data[ligne])
       head :no_content
     end
   end

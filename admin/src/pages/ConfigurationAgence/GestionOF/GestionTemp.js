@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GestionOF from './Components/GestionOF/GestionOF.js';
-import GeastionOE from './Components/GestionOE/GestionOE.js'
+// import GeastionOE from './Components/GestionOE/GestionOE.js'
 import GestionFE from './Components/GestionFE/GestionFE.js';
 import GestionJF from './Components/GestionJF/GestionJF.js';
 import { NavLink } from 'react-router-dom';
@@ -14,7 +14,7 @@ class GestionTemp extends Component {
             </NavLink>
             <GestionOF />
             
-            <GeastionOE />
+            {/* <GeastionOE /> */}
             
             <GestionFE />
             <GestionJF />

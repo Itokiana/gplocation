@@ -3,10 +3,6 @@ import moment, { weekdaysShort } from 'moment';
 import Days from './Days'
 import axios from '../../../../axios'
 
-// import Calendar from 'react-calendar';
-//import { number } from 'prop-types';
-
-
 class Month extends React.Component {
     
     constructor (propos) {
@@ -42,6 +38,9 @@ class Month extends React.Component {
     }
     currentDate = () => {
         return this.state.dateObj.get("date");
+    }
+    capitalize(s) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
     }
     listeJour = () => {
         const date = this.state.datesaison
@@ -182,7 +181,7 @@ class Month extends React.Component {
             return (
                 <>  
                     <tr key={mon}>
-                        <td> {mon} </td>
+                        <td> {this.capitalize(String(mon))}</td>
                         <Days month ={mon} tableau1 ={tab1} tableau2 ={tab2} tableau3 ={tab3}/>
                     </tr>
                 </>

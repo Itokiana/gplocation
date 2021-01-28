@@ -3,7 +3,7 @@ class FermexceptionsController < ApplicationController
 
   # GET /fermexceptions
   def index
-    @fermexceptions = Fermexception.all
+    @fermexceptions = Fermexception.all.order('jourfermedebut ASC')
 
     render json: @fermexceptions
   end

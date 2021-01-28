@@ -1,50 +1,51 @@
 import React from 'react'
 import axios from '../../axios'
-import { NavLink } from 'react-router-dom'
-import moment from 'moment'
 import './Planning.css'
-import { ScheduleComponent, getWeekNumber, HeaderRowDirective, HeaderRowsDirective, TimelineMonth, ResourcesDirective, ResourceDirective, Inject, ViewsDirective, ViewDirective, Month } from '@syncfusion/ej2-react-schedule';
+import { ScheduleComponent, getWeekNumber, HeaderRowDirective, HeaderRowsDirective, ResourcesDirective, ResourceDirective, TimelineMonth, Inject, ViewsDirective, ViewDirective, Month } from '@syncfusion/ej2-react-schedule';
 import { Internationalization, extend } from '@syncfusion/ej2-base';
 
 class Planning extends React.Component{
-    constructor() {
-        super(...arguments)
-        this.localData = [
-            {
-                Id:1,
-                Subject: "Marco",
-                dale:"sur",
-                StartTime: new Date(2021, 0, 2, 6, 0),
-                EndTime: new Date(2021, 0, 2, 9, 0),
+    // constructor() {
+    //     super(...arguments)
+        // this.localData = [
+        //     {
+        //         Id:1,
+        //         Subject: "Marco",
+        //         dale:"sur",
+        //         StartTime: new Date(2021, 0, 2, 6, 0),
+        //         EndTime: new Date(2021, 0, 2, 9, 0),
+        //         OwnerId:3
                 
-            },
-            {
-                Id:2,
-                Subject: "Donald",
-                StartTime: new Date(2021, 0, 5, 7, 0),
-                EndTime: new Date(2021, 0, 5, 18, 0),
+        //     },
+        //     {
+        //         Id:2,
+        //         Subject: "Donald",
+        //         StartTime: new Date(2021, 0, 5, 7, 0),
+        //         EndTime: new Date(2021, 0, 5, 18, 0),
+        //         OwnerId:2
                 
-            },
-            {
-                Id:3,
-                Subject: "Don",
-                StartTime: new Date(2021, 0, 5, 7, 0),
-                EndTime: new Date(2021, 0, 9, 8, 0),
-                ResourceID:1
-            },
-        ]
-        this.ownerData = [
-            { OwnerText: 'Nancy', Id: 1, OwnerColor: '#ffaa00' },
-            { OwnerText: 'Steven', Id: 2, OwnerColor: '#f8a398' },
-            { OwnerText: 'Michael', Id: 3, OwnerColor: '#7499e1' }
-        ];
-        this.resourceDataSource = [
-            { name: 'Will Smith', id: 1},
-            { name: 'Alice', id: 2, color: '#357cd2' },
-            { name: 'Robson', id: 3, color: '#7fa900'}
-        ];
-        this.instance = new Internationalization()
-    }
+        //     },
+        //     {
+        //         Id:3,
+        //         Subject: "Don",
+        //         StartTime: new Date(2021, 0, 5, 7, 0),
+        //         EndTime: new Date(2021, 0, 9, 8, 0),
+        //         OwnerId:1
+        //     },
+        // ]
+        // this.ownerData = [
+        //     { OwnerText: 'Nancy', Id: 1, OwnerColor: '#ffaa00' },
+        //     { OwnerText: 'Steven', Id: 2, OwnerColor: '#f8a398' },
+        //     { OwnerText: 'Michael', Id: 3, OwnerColor: '#7499e1' }
+        // ];
+        // this.resourceDataSource = [
+        //     { name: 'Will Smith', id: 1},
+        //     { name: 'Alice', id: 2, color: '#357cd2' },
+        //     { name: 'Robson', id: 3, color: '#7fa900'}
+        // ];
+        // this.instance = new Internationalization()
+    // }
+    instance = new Internationalization()
     state = {
         categories: [],
         voiture: [],
@@ -52,15 +53,15 @@ class Planning extends React.Component{
         clients: []
     }
 
-    componentDidMount() {
-        this.getCategories()
-        this.getReservation()
-        this.getVoiture()
-        this.getClient()
+    async componentDidMount() {
+        await this.getCategories()
+        await this.getReservation()
+        await this.getVoiture()
+        await this.getClient()
     }
 
-    getCategories = () => {
-		axios.get(`/categories`).then(response => {
+    async getCategories(){
+		await axios.get(`/categories`).then(response => {
 			if (response.status === 200) {
 				this.setState({
 					categories: response.data
@@ -69,8 +70,8 @@ class Planning extends React.Component{
 			}
 		});
     };
-    getClient = () => {
-		axios.get(`/clients`).then(response => {
+    async getClient(){
+		await axios.get(`/clients`).then(response => {
 			if (response.status === 200) {
 				this.setState({
 					clients: response.data
@@ -79,8 +80,8 @@ class Planning extends React.Component{
 			}
 		});
     };
-    getVoiture = () => {
-        axios.get(`/voitures`).then(response => {
+    async getVoiture(){
+        await axios.get(`/voitures`).then(response => {
 			if (response.status === 200) {
 				this.setState({
 					voiture: response.data
@@ -90,8 +91,8 @@ class Planning extends React.Component{
 		});
 
     }
-    getReservation = () => {
-		axios.get(`reservation/liste`).then(response => {
+    async getReservation(){
+		await axios.get(`reservation/liste`).then(response => {
 			if (response.status === 200) {
 				this.setState({
 					reservation: response.data
@@ -201,23 +202,16 @@ class Planning extends React.Component{
                                     </ResourceDirective>
                                 </ResourcesDirective> */}
                                 <ResourcesDirective>
-                                    <ResourceDirective dataSource={this.stock(value.stock)} field='ResourceID' title='Resource Name' name='Resources' textField='name' idField='id' colorField='color'>
-
-                                    </ResourceDirective>
+                                    <ResourceDirective dataSource={this.stock(value.stock)} allowMultiple={true} field='ResourceID' title='Resource Name' name='Resources' textField='name' idField='id' colorField='color'/>
                                 </ResourcesDirective>
-                                <Inject services={[TimelineMonth,Month]}/>
+                                <Inject services={[Month, TimelineMonth]}/>
                             </ScheduleComponent>
                             <br/><br/>
                         </div>
                     </>
                 )
             })}
-
-                
             </>
-                
-                   
-        
         )
     }
 
