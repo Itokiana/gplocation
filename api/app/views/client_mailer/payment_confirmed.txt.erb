@@ -1,0 +1,11 @@
+Bonjour <%= @client.nom %> <%= @client.prenom %>
+================================================
+* Votre reservation
+	- Départ le: <%= @reservation.date_depart %> <%= @reservation.heure_depart %>
+	- Retour le: <%= @reservation.date_retour %> <%= @reservation.heure_retour %>
+	- Prix: <%= @reservation.prix %>
+	- Numéro de vol: <%= @reservation.numero_vol %>
+	- Acompte: <%= @reservation.acompte %>
+* Voiture
+	- Marque: <%= @voiture.marque %>
+	- Model: <%= @voiture.model %>

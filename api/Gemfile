@@ -82,3 +82,6 @@ gem 'devise'
 gem 'omniauth'
 gem 'signet'
 gem 'rest-client' 
+
+# test mailer
+gem "letter_opener", :group => :development

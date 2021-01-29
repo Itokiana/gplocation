@@ -1,0 +1,22 @@
+<div>
+	<p>Bonjour <%= @client.nom %> <%= @client.prenom %></p>
+	<div>
+			<h2>Votre reservation</h2>
+			<p>
+				<ul>
+					<li>Départ le: <%= @reservation.date_depart %> <%= @reservation.heure_depart %></li>
+					<li>Retour le: <%= @reservation.date_retour %> <%= @reservation.heure_retour %></li>
+					<li>Prix: <%= @reservation.prix %> €</li>
+					<li>Numéro de vol: <%= @reservation.numero_vol %></li>
+					<li>Acompte: <%= @reservation.acompte %> €</li>
+				</ul>
+			</p>
+			<h2>Voiture</h2>
+			<p>
+				<ul>
+					<li>Marque: <%= @voiture.marque %></li>
+					<li>Model: <%= @voiture.model %></li>
+				</ul>
+			</p>
+	</div>
+</div>
