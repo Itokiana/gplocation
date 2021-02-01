@@ -7,21 +7,20 @@ let i = 0;
 export default class ListeCategory extends Component {
   constructor(props) {
     super(props);
-    this.state = {categ: '',intvalue:null, id:[]};
-    
+    this.state = {categ: '',intvalue:null, id:[]}; 
   }
 
-  componentWillUnmount() {
-      clearInterval(this.interval);
-  }
+  // componentWillUnmount() {
+  //     clearInterval(this.interval);
+  // }
 
   componentDidMount() {
       const { action } = this.props;
-      // action.getCategory();
+      action.getCategory();
       this.getCat()
-      this.interval = setInterval(() =>
-        action.getCategory()
-      , 1000) 
+      // this.interval = setInterval(() =>
+      //   action.getCategory()
+      // , 1000) 
   }
 
   getCat(){
@@ -51,7 +50,8 @@ export default class ListeCategory extends Component {
   deletecat(cat) {
     axios.delete(`/categories/${cat}`).then(response => {
       if (response.status === 204) {
-          this.getCat();
+        const { action } = this.props;
+        action.getCategory();
       }
     })
   }
@@ -102,10 +102,8 @@ export default class ListeCategory extends Component {
                                     <td className="text-center">{category.ref} <i class="success fa fa-long-arrow-up"></i></td>
                                     <td className="text-center">{category.name}</td>
                                     <td >
-                                      <div className=" d-flex p-0 justify-content-center align-items-center" style={{width:"150px"}}>
-                                        <Field className=" block bg-gray-200 text-gray-700 border border-red-500 rounded py-2
-                        px-1 leading-tight focus:outline-none focus:bg-white" style={{width:"50px"}} type="number"  name= {[`val${category.id}`]}/> 
-                                      </div>
+                                        <Field className="bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-1" 
+                                        style={{width:"50px"}} type="number"  name= {[`val${category.id}`]}/> 
                                     </td>
                                     <td>
                                       <span><Field className="w-50" type="checkbox"  id={category.id} name={[`ligne${category.id}`]} /></span>
