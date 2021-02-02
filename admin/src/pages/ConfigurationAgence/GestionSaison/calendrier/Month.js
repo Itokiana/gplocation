@@ -1,5 +1,5 @@
 import React from 'react';
-import moment, { weekdaysShort } from 'moment';
+import moment from 'moment';
 import Days from './Days'
 import axios from '../../../../axios'
 
@@ -130,7 +130,7 @@ class Month extends React.Component {
                             hash.push(saison$m)
 
                         }
-                    }else if(moisD==11){
+                    }else if(moisD===1){
                         for(let n = jourD; n<= debut.daysInMonth(); n++){
                             let saison$n = {}
                             saison$n["anne"]= anneD

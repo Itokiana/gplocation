@@ -29,7 +29,7 @@ export default class TarifDeBase extends Component {
         
     }
     async ajoutNewPeriod (){
-        await axios.patch(`/base_tarifs/${this.props.ids}`).then(response => {
+        await axios.put(`/base_tarifs/${this.props.ids}`).then(response => {
             if(response.status===201){
                 this.setState({
                     nombreLigne: [],
