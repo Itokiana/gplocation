@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Caracteristique from '././Caracteristique/Caracteristique';
 import DureeLocation from '././DureeLocation/DureeLocation';
 import TarifDeBase from './TarifDeBase/TarifDeBase'
-import Options from './Options/Options';
 import { NavLink } from 'react-router-dom';
 
 

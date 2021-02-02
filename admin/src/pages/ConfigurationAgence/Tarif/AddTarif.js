@@ -69,7 +69,7 @@ class AddTarif extends Component {
                                 <>
                                     <div className="m-1">
                                         <fieldset>
-                                            <img src={`http://localhost:4000/${voiture.image.url}`} /><br/>
+                                            // <img src={`http://localhost:4000/${voiture.image.url}`} /><br/>
                                         </fieldset>
                                         <p>{voiture.model}</p>
                                     </div>

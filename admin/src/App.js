@@ -22,7 +22,6 @@ import Editer from './pages/Category/Editer/Editer';
 import Dashbord from './pages/Dashbord/Dashbord';
 import Jours from './pages/ConfigurationAgence/Tarif/Jours/Jours';
 import GestionTemp from './pages/ConfigurationAgence/GestionOF/GestionTemp'
-import axios from './axios';
 import Reservation from './pages/Reservation/Reservation';
 import AddTarif from './pages/ConfigurationAgence/Tarif/AddTarif';
 import TarifDeBase from './pages/ConfigurationAgence/Tarif/TrifDeBase';

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import EditOption from './EditOption';
 
 
@@ -50,7 +50,7 @@ export default class ListeOptions extends Component {
                                                 <td className="border px-4 py-2">
                                                     <label onClick={() => (this.changerEtape(2), this.setState({ id: option.id }))} >
                                                         <span className="text-blue-500 cursor-pointer">Editer</span> &nbsp;
-                                            </label>
+                                                    </label>
                                                     <span className="text-red-500 cursor-pointer" onClick={() => action.deleteOption(option)}>X</span>
                                                 </td>
                                             </tr>
