@@ -1,2 +1,0 @@
-class Jourferier < ApplicationRecord
-end

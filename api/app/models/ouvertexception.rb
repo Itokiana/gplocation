@@ -1,2 +1,0 @@
-class Ouvertexception < ApplicationRecord
-end

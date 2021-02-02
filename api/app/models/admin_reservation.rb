@@ -1,2 +1,0 @@
-class AdminReservation < ApplicationRecord
-end

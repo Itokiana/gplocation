@@ -1,2 +1,0 @@
-class Paimentpartiel < ApplicationRecord
-end
