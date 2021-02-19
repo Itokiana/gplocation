@@ -16,7 +16,7 @@ class HomePage extends React.Component {
 				<Slider />
 				<Search />
 				<World />
-				<HomeAuto />
+				<HomeAuto/>
 			</>
 		)
 	}

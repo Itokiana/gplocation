@@ -25,7 +25,7 @@ const VoitureSchema = Yup.object().shape({
     portes: Yup.string()
         .required('Le nombre de portes ne doit pas être vide'),
     category: Yup.string()
-        .min(1,'Vous devez selectionner une categorie')
+        .required('Vous devez selectionner une categorie').nullable()
 });
 
 class AddVoiture extends Component {
@@ -33,7 +33,7 @@ class AddVoiture extends Component {
         categories:''
     }
     componentDidMount() {
-        axios.get('/categories').then(response => {
+        axios.get('/categorie/voitures').then(response => {
             if (response.status === 200) {
                 this.setState({
                     categories: response.data
@@ -66,7 +66,7 @@ class AddVoiture extends Component {
     render() {
         return (
             <>
-            {this.state.categories !== ''? (
+            {this.state.categories.length !== 0 ? (
                 <div>
                 <Formik
                     initialValues={{
@@ -108,6 +108,7 @@ class AddVoiture extends Component {
                         <Form
                             autoComplete="off">
                             <div>
+
                                 <div className="mb-2 mr-4">
                                     <label className="block text-gray-700 font-bold mb-1 md:mb-0">
                                         Image
@@ -252,7 +253,7 @@ class AddVoiture extends Component {
                                             </>
                                         ))}
                                     </Field>
-                                    
+                                    <ErrorField errors={errors} touched={touched} row="category" />
                                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                         <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -268,7 +269,7 @@ class AddVoiture extends Component {
                     )}
                 </Formik>
             </div >
-            ):null}
+            ):<h1>Ajouter Categorie</h1>}
             
             </>
         )

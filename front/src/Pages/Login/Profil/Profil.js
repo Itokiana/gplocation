@@ -124,11 +124,7 @@ class Profil extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-                              
-                            
-                           
-                              
+                                </div>                    
                         </div>
                     </div>
                 </section>

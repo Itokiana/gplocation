@@ -7,24 +7,36 @@ let i = 0;
 export default class ListeCategory extends Component {
   constructor(props) {
     super(props);
-    this.state = {categ: '',intvalue:null, id:[]}; 
+    this.state = {categ: '',intvalue:null, id:[], imagevoiture: []}; 
   }
 
   // componentWillUnmount() {
   //     clearInterval(this.interval);
   // }
 
-  componentDidMount() {
+  async componentDidMount() {
       const { action } = this.props;
       action.getCategory();
-      this.getCat()
+      await this.getCat();
+      await this.getImageVoiture()
       // this.interval = setInterval(() =>
       //   action.getCategory()
       // , 1000) 
-  }
 
-  getCat(){
-    axios.get('/categories').then(response => {
+  }
+  async getImageVoiture(){
+    await axios.get(`/categorieVehicule`).then(response => {
+      if (response.status === 200) {
+        this.setState({
+          imagevoiture: response.data
+        })
+        console.log(this.state.imagevoiture)
+      }
+    }) 
+  };
+
+  async getCat(){
+    await axios.get('/categories').then(response => {
       if (response.status === 200) {
         this.setState({
             categ: response.data
@@ -38,7 +50,7 @@ export default class ListeCategory extends Component {
         initvalues[`val${value.id}`] = value.stock
         initvalues[`ligne${value.id}`] = value.enligne
         ids.push(value.id)
-        console.log(value.id)
+        
       })
       this.setState({
         intvalue: initvalues,
@@ -59,7 +71,6 @@ export default class ListeCategory extends Component {
   render() {
     const { categories, action } = this.props;
     const stocId= this.state.id
-    console.log(this.state.intvalue)
 
     return (
       <>
@@ -71,7 +82,7 @@ export default class ListeCategory extends Component {
               axios.post('/categorie/stock', {
                   value, stocId
               })
-              console.log(value) 
+             
               setSubmitting(false);  
             }} 
           >
@@ -98,7 +109,7 @@ export default class ListeCategory extends Component {
                               {categories && categories.map((category, key) => {
                                 return (  
                                   <tr class="even pointer" key={i++}>
-                                    <td class=""><img src="images/Spark.jpg" alt="vehicule"/> </td>
+                                    <td className="text-center"><img src={`http://localhost:4000/${this.state.imagevoiture[key].image.url}`} alt ={this.state.imagevoiture[key].marque}/></td>
                                     <td className="text-center">{category.ref} <i class="success fa fa-long-arrow-up"></i></td>
                                     <td className="text-center">{category.name}</td>
                                     <td >
