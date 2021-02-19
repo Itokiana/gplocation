@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import ReactGA from 'react-ga'
 
 import Header from './Pages/Header/Header.js';
 import HomePages from './Pages/HomePages/HomePage.js';
@@ -19,17 +20,25 @@ import axios from './axios';
 import Footer from './Pages/Footer/Footer.js';
 
 //import './App.scss';
-// import React, { Component } from 'react'
+//import React, { Component } from 'react'
 
 export default class App extends Component {
-  state = [
-    
-  ];
-  // initializeAnalytics(){
-  //   ReactGa.initialize('G-2N9KD7XPZD')
-  //   ReactGa.pageview(window.location.pathname + window.location.search)
-  // }
-  
+  constructor() {
+    super();
+    this.state = {
+      someData: null,
+    };
+
+    // Add your tracking ID created from https://analytics.google.com/analytics/web/#home/
+    // ReactGA.initialize('G-9ZVEBWJD7T');
+    // // This just needs to be called once since we have no routes in this case.
+    // ReactGA.pageview(window.location.pathname);
+  }
+
+  initializeAnalytics(){
+    ReactGA.initialize('G-XWNX24WHLD');
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }
   componentDidMount = () => {
     axios.put(`/clients/${sessionStorage.id}`).then(response => {
       if (response.status === 200) {
@@ -45,7 +54,7 @@ export default class App extends Component {
   };
   
   render() {
-    // this.initializeAnalytics()
+    this.initializeAnalytics()
     return (
       
       <BrowserRouter>

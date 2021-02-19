@@ -38,7 +38,7 @@ class World extends React.Component {
 										{voitures.map(voiture =>
 											(<div className="col-sm-4 col-xs-12" key={voiture.id}>
 												<div className="b-world__item wow zoomInUp" data-wow-delay="0.3s">
-													<img className="img-voiture" src={`http://localhost:4000/${voiture.image.url}`} alt={voiture.marque}/>
+													<img className="img-voiture" src={`http://fd0b515.online-server.cloud/${voiture.image.url}`} alt={voiture.marque}/>
 													<div className="b-world__item-val">
 														<span className="b-world__item-val-title">{voiture.marque}</span>
 													</div>

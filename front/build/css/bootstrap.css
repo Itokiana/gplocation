@@ -1417,7 +1417,7 @@ ul,
 ol {
   margin-top: 0;
   margin-bottom: 10px;
-  margin-left: -9px;
+  margin-left: -1px;
 }
 ul ul,
 ol ul,
@@ -2097,7 +2097,7 @@ pre code {
     float: left;
   }
   .col-lg-12 {
-    width: 100%;
+    width: 98%;
   }
   .col-lg-11 {
     width: 91.66666667%;
@@ -3519,7 +3519,7 @@ input[type="button"].btn-block {
   width: 100%;
 }
 .fade {
-  opacity: 0;
+  opacity: 1;
   -webkit-transition: opacity .15s linear;
        -o-transition: opacity .15s linear;
           transition: opacity .15s linear;
@@ -6571,6 +6571,8 @@ button.close {
 }
 .show {
   display: block !important;
+  padding-top: 180px;
+  position: fixed;
 }
 .invisible {
   visibility: hidden;

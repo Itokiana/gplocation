@@ -26,16 +26,16 @@
 
 /* Search */
 .m-home .b-search__main{
-    margin-top: -250px;
-    height:344px;
+    margin-top: -195px;
+    height:423px;
 }
 
-/* .m-home .b-search .container > h1{
+.m-home .b-search .container > h1{
     text-transform: uppercase;
     font: 700 20px 'Open Sans',sans-serif;
     text-align: center;
     margin: 45px 0 40px 0;
-} */
+}
 
 .m-home .b-search__main >h4{
     text-transform: uppercase;

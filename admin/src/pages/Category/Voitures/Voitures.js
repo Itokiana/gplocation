@@ -69,7 +69,7 @@ class Voitures extends Component {
                     <div className="modal-content">
                         <div className="modal-header">
                             <div className="modal-title">
-                                <h2>Insertion d'une nouvelle voiture</h2>
+                                <h2 className="text-black text-center">Insertion d'une nouvelle voiture</h2>
                             </div>
                             <div
                                 onClick={() => this.setState({ addNew: false })}

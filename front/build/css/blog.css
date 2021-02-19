@@ -69,7 +69,7 @@
 
 .b-blog__aside header{
     padding-bottom: 15px;
-    margin: 0 0 40px 0;
+    margin: 55px 0 40px 0;
 }
 
 .b-blog__aside header:after{
@@ -246,7 +246,7 @@
 .b-blog__posts-one-body-head h2{
     font-size:22px;
     text-transform: none;
-    margin: 10px 0 20px 0;
+    margin: 24px 0 20px 0;
 }
 
 .b-blog__posts-one-body-head-notes-note{
@@ -517,7 +517,7 @@
 }
 
 .b-article__main-author p{
-    margin: -4px 0 0 0;
+    margin: 20px 0 0 0;
     font: 300 13px 'Open Sans',sans-serif;
     line-height: 1.9;
 }
