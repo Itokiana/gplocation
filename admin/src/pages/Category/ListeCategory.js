@@ -7,7 +7,7 @@ let i = 0;
 export default class ListeCategory extends Component {
   constructor(props) {
     super(props);
-    this.state = {categ: '',intvalue:null, id:[], imagevoiture: []}; 
+    this.state = {categ: '',intvalue:null, id:[], imagevoiture: null}; 
   }
 
   // componentWillUnmount() {
@@ -30,7 +30,7 @@ export default class ListeCategory extends Component {
         this.setState({
           imagevoiture: response.data
         })
-        console.log(this.state.imagevoiture)
+        // console.log("Mety", this.state.imagevoiture[0].image.url)
       }
     }) 
   };
@@ -71,10 +71,10 @@ export default class ListeCategory extends Component {
   render() {
     const { categories, action } = this.props;
     const stocId= this.state.id
-
+    const images = this.state.imagevoiture
     return (
       <>
-        {this.state.intvalue ?
+        {this.state.intvalue && images ?
           <Formik
             initialValues={this.state.intvalue}
             onSubmit={(value,{setSubmitting})=>{
@@ -108,8 +108,10 @@ export default class ListeCategory extends Component {
                             <tbody>
                               {categories && categories.map((category, key) => {
                                 return (  
-                                  <tr class="even pointer" key={i++}>
-                                    <td className="text-center"><img src={`http://localhost:4000/${this.state.imagevoiture[key].image.url}`} alt ={this.state.imagevoiture[key].marque}/></td>
+                                  <tr class="even pointer">
+                                    {/* <img src={`http://localhost:4000/${voiture.image.url}`} alt ={voiture.marque}/> */}
+                                    {images[key] ? <td className="text-center"><img src={`http://localhost:4000/${images[key].image.url}`} alt ={images[key].marque}/></td> : <td className="text-center">Aucun image</td>}
+                                      
                                     <td className="text-center">{category.ref} <i class="success fa fa-long-arrow-up"></i></td>
                                     <td className="text-center">{category.name}</td>
                                     <td >

@@ -60,8 +60,7 @@ class AddTarif extends Component {
                     <button style= {{float:"left" ,margin:"10px"}} class="text-white bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Retour</button>
                 </NavLink>
                 <center className="text-white">
-                    <h1>Tarif personnaliser pour le categorie {category && category.category }, reference {category && category.ref}</h1>
-                    <br/>
+                    <h1>Tarif personnaliser pour {category && category.name }, reference {category && category.ref}</h1>
                     <br/>
                     <div className="d-flex p-0 justify-content-center align-items-center">
                         {voitures && voitures.map(voiture => {
@@ -69,9 +68,11 @@ class AddTarif extends Component {
                                 <>
                                     <div className="m-1">
                                         <fieldset>
-                                            <img src={`http://localhost:4000/${voiture.image.url}`} /><br/>
+                                            
+                                            <img src={`http://localhost:4000/${voiture.image.url}`} />
                                         </fieldset>
-                                        <p>{voiture.model}</p>
+                                        <p><strong>{voiture.marque}</strong></p>
+                                        <br/>
                                     </div>
                                 </>
                             )

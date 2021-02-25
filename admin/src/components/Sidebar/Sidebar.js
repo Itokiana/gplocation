@@ -34,12 +34,12 @@ export default class Sidebar extends Component {
                     {/* <NavLink to="/clientMessage" className="hover:text-white">
                         <div className="menu-item">Message </div>
                     </NavLink> */}
-                     <Link onClick={() => window.location.href ="/planning"} className="hover:text-white">
+                     {/* <Link onClick={() => window.location.href ="/planning"} className="hover:text-white">
                         <div className="menu-item">Planning</div>
-                    </Link>
-                    {/* <NavLink to="/planning" className="hover:text-white">
+                    </Link> */}
+                    <NavLink to="/planning" className="hover:text-white">
                         <div className="menu-item">Planning </div>
-                    </NavLink> */}
+                    </NavLink>
                 </div>
             </div>
         )
