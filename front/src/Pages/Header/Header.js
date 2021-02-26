@@ -4,12 +4,20 @@ import { Link } from 'react-router-dom';
 import './Style.css';
 
 class Header extends React.Component {
+	constructor(){
+		super();
+		this.state = {
+		 connecter: "Se deconnecter",
+		 nonConnecter:"Espace client" };
+	}
+
 	render() {
+			
 		let log;
 		if(this.props.client){
-			log = (<li><Link to="/" onClick={() => sessionStorage.clear(window.location.reload(<Link to='/'/>)) } >Se deconnecter</Link></li>)
+			log = (<li><Link to="/" onClick={() => sessionStorage.clear(window.location.href='/') } >{this.state.connecter}</Link></li>)
 		}else{
-			log = (<li><Link to="/login">Espace client</Link></li>)
+			log = (<li><Link to="/login">{this.state.nonConnecter}</Link></li>)
 		}
 
 		console.log(this.props.client);
@@ -19,26 +27,33 @@ class Header extends React.Component {
 					<header className="b-topBar">
 						<div className="container wow slideInDown" data-wow-delay="0.7s">
 							<div className="row">
-								<div className="col-md-3 col-xs-6">
-									<div className="b-topBar__addr">
-										<span className="fa fa-phone"></span>
-										06-92-370-380
-									</div>
-								</div>
+								
 								<div className="col-md-3 col-xs-6">
 									<div className="b-topBar__tel">
 										<span className="fa fa-envelope"></span>
 										infos@gplocation.fr
 									</div>
 								</div>
-								<div className="col-md-6 col-xs-6">
-									<nav className="b-topBar__nav">
-										<ul>
+
+								<div className=" col-md-6 col-xs-6">
+								
+									<nav className="  b-topBar__nav">
+										<ul className="col">
 										<li><Link to="/Contact">Contact</Link></li>
 											
 											{log}
 										</ul>
 									</nav>
+									
+								
+								</div>
+								<div className="col-md-3 col-xs-6">
+									<div className="b-topBar__addr perso_contact">
+										<div className="phone_perso">
+											<span className="fa fa-phone"></span>
+											06-92-370-380
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

@@ -1,3 +1,12 @@
 /* .SainteMarie{
     margin-left: 20px;
 } */
+.perso_contact{
+	border: none !important;
+}
+.phone_perso{
+	font-size: 2rem !important;
+}
+.phone_perso .fa-phone{
+	font-size: 2rem !important;
+}

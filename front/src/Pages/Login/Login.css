@@ -56,6 +56,15 @@ border-radius: 5px;
     border: 1px solid #eeeeee;
     border-radius: 30px;
 }
+.Toastify__progress-bar--dark { 
+  background: #228dcb !important;
+}
+.Toastify__toast--dark  {
+  background: #333 !important;
+}
+.icon{
+ margin: 0 10px;
+}
 /* #valider{
   margin-left: 35%;
 } */
