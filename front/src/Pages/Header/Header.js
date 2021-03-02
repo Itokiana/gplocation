@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import image from '../../img/assurance.png';
 import './Style.css';
 
 class Header extends React.Component {
@@ -25,6 +25,10 @@ class Header extends React.Component {
 			<>
 				
 					<header className="b-topBar">
+						<div>
+						<a href='https://www.serenitrip.fr' target="_blank" ><img className='assurance' src={image}/></a> 
+						</div>
+						
 						<div className="container wow slideInDown" data-wow-delay="0.7s">
 							<div className="row">
 								

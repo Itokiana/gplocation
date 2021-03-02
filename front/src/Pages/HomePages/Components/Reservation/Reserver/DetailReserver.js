@@ -173,7 +173,7 @@ function DetailReserver(props) {
                                             </table>
                                             <p>Bris de glace : 200€</p>
                                             <p>&nbsp;</p>
-                                            <p>Le loueur se réserve le droit d'annuler une réservation passée sur le moteur de réservation Rentîles jusqu'à 48 heures après la réservation en cas de non disponibilité du véhicule</p>
+                                            <p>Le loueur se réserve le droit d'annuler une réservation passée sur le moteur de réservation Gplocation jusqu'à 48 heures après la réservation en cas de non disponibilité du véhicule</p>
                                         </div>
                                     </p>
                                 </div>

@@ -12,7 +12,7 @@ import Condition from './Pages/Condition/Condition.js';
 import Reserver from './Pages/HomePages/Components/Reservation/Reserver/Reserver.js';
 import Profil from './Pages/Login/Profil/Profil';
 import NotFound from './Pages/404/NotFound'
-
+import Password from './Pages/Login/Password'
 import Mentions from './Pages/Mentions/Mentions.js';
 import axios from './axios';
 
@@ -58,6 +58,7 @@ export default class App extends Component {
           <Route exact path='/sainte-marie' component={Saint}/>
           <Route exact path='/condition' component={Condition}/>
           <Route exact path='/mentions-legales' component={Mentions}/>
+          <Route exact path='/password' component={Password}/>
           {(this.state.user)?(
               <> 
                <Route exact path='/profil' component={() => <Profil client={this.state.user}/>} />
