@@ -5,6 +5,8 @@ import { ScheduleComponent, getWeekNumber, HeaderRowDirective, HeaderRowsDirecti
 import { Internationalization } from '@syncfusion/ej2-base';
 
 class Planning extends React.Component{
+    // let jj = document.querySelectorAll(".e-tbar-btn-text");
+    // remove(jj)
     // constructor() {
     //     super(...arguments)
         // this.localData = [
@@ -193,15 +195,14 @@ class Planning extends React.Component{
                     <>
                         <div className="text-white">
                             <div className="d-flex align-items-start m-1">
-                                {/* <img src="images/Spark.jpg" alt="image"/> */}
                                 <fieldset>
-                                    {images[key] ? <img src={
+                                    {images[key] ? <img className="images planning" src={
                                         `http://localhost:4000/${images[key].image.url}`
                                         } alt ={images[key].marque}/> : 
-                                        <p>Aucun Voiture</p>}
+                                        <p className='pa textes'>Aucun Voiture</p>}
                                 </fieldset>
                                 
-                                <div className="m-1">
+                                <div className="category">
                                     <h1>Categorie: {value.name} </h1>
                                     <span>Stock : {value.stock ? value.stock : 0} vehicule</span>
                                 </div>
@@ -209,7 +210,7 @@ class Planning extends React.Component{
                             
                             {value.stock ? 
                             <ScheduleComponent width='100%' height='300px' selectedDate={new Date()} eventSettings={{ dataSource: this.data(value) }} group={{ resources: ['Resources'] }}>
-                                <HeaderRowsDirective height='10px'>
+                                <HeaderRowsDirective height='5px'>
                                 {/* <HeaderRowDirective option='Year' template={this.yearTemplate.bind(this)}/>
                                 <HeaderRowDirective option='Month' template={this.monthTemplate.bind(this)}/> */}
                                 <HeaderRowDirective option='Week' template={this.weekTemplate.bind(this)}/>
@@ -217,7 +218,7 @@ class Planning extends React.Component{
                                 </HeaderRowsDirective>
                                 <ViewsDirective>
                                 <ViewDirective option='TimelineMonth'/>
-                                <ViewDirective option='Month'/>
+                                {/* <ViewDirective option='Month'/> */}
                                 </ViewsDirective>
                                 {/* <ResourcesDirective>
                                     <ResourceDirective field='OwnerId' title='Owner' name='Owners' allowMultiple={true} dataSource={this.ownerData} textField='OwnerText' idField='Id' colorField='OwnerColor'>
@@ -226,8 +227,8 @@ class Planning extends React.Component{
                                 <ResourcesDirective>
                                     <ResourceDirective dataSource={this.stock(value.stock)} allowMultiple={true} field='ResourceID' title='Resource Name' name='Resources' textField='name' idField='id' colorField='color'/>
                                 </ResourcesDirective>
-                                <Inject services={[Month, TimelineMonth]}/>
-                            </ScheduleComponent>: <div style={{width:'100%' ,height:'100px'}}> <center>Les stock de vehicule est vide</center></div>}
+                                <Inject services={[TimelineMonth]}/>
+                            </ScheduleComponent>: <div style={{width:'100%' ,height:'100px',color:'red'}}> <center>Les stock de vehicule est vide</center></div>}
                             <br/><br/>
                         </div>
                     </>
