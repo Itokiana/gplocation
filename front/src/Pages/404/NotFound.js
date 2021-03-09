@@ -20,13 +20,13 @@ export class NotFound extends Component {
                 <section className="b-error s-shadow">
                     <div className="container">
                         <h1 className="wow zoomInUp" data-wow-delay="0.7s">Error</h1>
-                        <img className="img-responsive center-block wow zoomInUp" data-wow-delay="0.7s" src="images/backgrounds/404.jpg" alt="404" />
+                        <img className="img-responsive center-block wow zoomInUp" data-wow-delay="0.7s" src="/images/backgrounds/404.jpg" alt="404" />
                         <h2 className="s-lineDownCenter wow zoomInUp" data-wow-delay="0.7s">page not found</h2>
                         <p className="wow zoomInUp" data-wow-delay="0.7s">Le pages que vous voyer n' est pas valide pour le moment valider une autre URL ou clicker içi <a href="/">ACCUEIL</a> .</p>
                         <h3 className="s-title wow zoomInUp" data-wow-delay="0.7s">GP LOCATION VOUS REMERCI</h3>
                        
                     </div>
-                    <img alt="audi" src="images/backgrounds/404Bg.jpg" className="img-responsive center-block b-error-img" />
+                    <img alt="audi" src="/images/backgrounds/404Bg.jpg" className="img-responsive center-block b-error-img" />
                 </section>
             </div>
         )

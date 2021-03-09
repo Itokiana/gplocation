@@ -18,9 +18,9 @@ export class Affirmation extends Component {
 
                 <section className="b-error s-shadow">
                     <div className="container">
-                        <h1 className="wow zoomInUp" data-wow-delay="0.7s"> {localStorage.nom}</h1>
+                        <h1 className="wow zoomInUp" data-wow-delay="0.7s"> {sessionStorage.nom}</h1>
                         <h2 className="s-lineDownCenter wow zoomInUp" data-wow-delay="0.7s">En attente de votre confirmation.</h2>
-                        <p className="wow zoomInUp" data-wow-delay="0.7s">Nous avons envoyer un confirmation dans votre boite email {localStorage.emailClient} veiller confirmer pour finir votre inscription. ou cliquer <a onClick={() => localStorage.clear(window.location.href='/')}>ACCUEIL</a> p.</p>
+                        <p className="wow zoomInUp" data-wow-delay="0.7s">Nous avons envoyer un confirmation dans votre boite email {sessionStorage.emailClient} veiller confirmer pour finir votre inscription. ou cliquer <a onClick={() => localStorage.clear(window.location.href='/')}>ACCUEIL</a> p.</p>
                         <h3 className="s-title wow zoomInUp" data-wow-delay="0.7s">GP LOCATION VOUS REMERCI</h3>
                        
                     </div>

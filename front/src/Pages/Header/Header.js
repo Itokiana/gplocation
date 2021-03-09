@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import image from '../../img/assurance.png';
+import Bandeau from './Bandeau';
 import './Style.css';
 
 class Header extends React.Component {
@@ -10,9 +10,10 @@ class Header extends React.Component {
 		 connecter: "Se deconnecter",
 		 nonConnecter:"Espace client" };
 	}
-
+	
 	render() {
-			
+		
+			  	
 		let log;
 		if(this.props.client){
 			log = (<li><Link to="/" onClick={() => sessionStorage.clear(window.location.href='/') } >{this.state.connecter}</Link></li>)
@@ -24,10 +25,7 @@ class Header extends React.Component {
 		return (
 			<>
 				
-					<header className="b-topBar">
-						<div>
-						<a href='https://www.serenitrip.fr' target="_blank" ><img className='assurance' src={image}/></a> 
-						</div>
+					<header className="b-topBar container-header">
 						
 						<div className="container wow slideInDown" data-wow-delay="0.7s">
 							<div className="row">
@@ -62,6 +60,7 @@ class Header extends React.Component {
 							</div>
 						</div>
 					</header>
+					<Bandeau className='wow slideInDown'></Bandeau>
 					<nav className="b-nav">
 						<div className="container">
 							<div className="row">

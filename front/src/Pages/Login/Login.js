@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {  Redirect } from 'react-router-dom';
+import {  Redirect, Link } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import ErrorLogin from './ErrorLogin';
@@ -147,7 +147,7 @@ class Login extends React.Component {
 										</div>
 										<div className="boutton-login">
 										<button type="submit" className="btn m-btn">Valider<span className="fa fa-angle-right"></span></button><br/><br/>
-										<span ><a href="#" className="oublier">Mot de passe oublié ?</a></span>
+										<span ><a href="http://localhost:3000/find-email" className="oublier">Mot de passe oublié ?</a></span>
 										</div>
 									</Form>)}
 							
@@ -196,8 +196,8 @@ class Login extends React.Component {
 											axios.post('/clients', values).then(response => {
 												if (response.status === 200 && response.data.client.email_confirmed == false ) {
 													resetForm();
-													localStorage.setItem('nom',response.data.client.nom)
-													localStorage.setItem('emailClient',response.data.client.email)
+													sessionStorage.setItem('nom',response.data.client.nom)
+													sessionStorage.setItem('emailClient',response.data.client.email)
 													
 													this.setState({
 														message: response.data.message
