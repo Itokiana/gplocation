@@ -22,15 +22,15 @@ class GestionOE extends Component {
         date : []
     }
     
-    componentDidMount() { 
-        this.interval = setInterval(() =>
-            this.action.getOuvert()
-            , 1000)
-    }
-    refreshPage() {
-        // window.location.reload(false);
-        this.setState({date: []})
-    }
+    // componentDidMount() { 
+    //     this.interval = setInterval(() =>
+    //         this.action.getOuvert()
+    //         , 1000)
+    // }
+    // refreshPage() {
+    //     // window.location.reload(false);
+    //     this.setState({date: []})
+    // }
 
     action = {
         getOuvert: () => {

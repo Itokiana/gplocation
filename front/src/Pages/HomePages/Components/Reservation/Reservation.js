@@ -13,7 +13,8 @@ class Reservation extends Component {
         voiture_id:null,
         prix:null,
         account:null,
-        stock:null
+        // stock:null,
+        accompt:null
     }
 
     changerEtape = (newEtape) => {
@@ -76,12 +77,12 @@ class Reservation extends Component {
                                                     <span className="confirm-tarif ">{
                                                         this.props.prix[this.getKey(voiture,this.props.voitures)]
                                                     }</span>
-                                                    <p className="montant-acompte">dont {this.state.account} € d'acompte</p>
+                                                    <p className="montant-acompte">dont {this.props.accompte[this.getKey(voiture,this.props.voitures)]} € d'acompte</p>
                                                 </div>
                                                 <div className="b-items__cars-one-info">
                                                     <header className="b-items__cars-one-info-header s-lineDownLeft" id="head">
                                                         <h2>{voiture.marque}</h2>
-                                                        <Link to={`/reserver/${voiture.id}/${this.props.prix[this.getKey(voiture,this.props.voitures)]}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
+                                                        <Link to={`/reserver/${voiture.id}/${this.props.prix[this.getKey(voiture,this.props.voitures)]}/${this.props.accompte[this.getKey(voiture,this.props.voitures)]}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
 
                                                     </header>
                                                     <div className="b-blog__posts-one-info">
@@ -176,7 +177,7 @@ class Reservation extends Component {
                             </div>
                             {etape === 3 ? (<Detail />) : null}
                         </section>
-                        { etape === 4 ? (<Reserver />) : null}
+                        { etape === 4 ? (<Reserver  />) : null}
                     </div>)
                 )):null}
                 <br/>

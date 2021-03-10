@@ -52,6 +52,7 @@ function Reserver(propos) {
     const [etat, setEtat] = useState(1);
     const [voiture, setVoiture] = React.useState([]);
     const [client, setClient] = React.useState([]);
+    
 
     useEffect(()=>{
         setVoiture({loading: true});
@@ -92,7 +93,7 @@ function Reserver(propos) {
                                                 <li className="prise"><span className="carburant"></span>Carburant : Plein à rendre plein</li>
                                             </ul>
                                             <div id="prix_produit">
-                                                <p className="montant-acompte-selection">dont {sessionStorage.getItem("acompte")} € d'acompte</p>
+                                                <p className="montant-acompte-selection">dont  {propos.match.params.count} € d'acompte</p>
                                                 <p className="confirm-tarifs">{propos.match.params.prix} €</p>
                                                 </div>
                                             </div>

@@ -15,9 +15,9 @@ export default class Ajoutjour extends Component {
             nombreLigne: [...this.state.nombreLigne,this.state.nombreLigne.pop() + 1],  
         })
     }
-    listeJour =() => {
-       window.location.href ="/ouverture"
-    }
+    // listeJour =() => {
+    //    window.location.href ="/ouverture"
+    // }
     render () {
         const ligne = this.state.nombreLigne
         return(
@@ -40,7 +40,8 @@ export default class Ajoutjour extends Component {
                             value, ligne
                         })
                         console.log(value) 
-                        setSubmitting(false);  
+                        setSubmitting(false);
+                        window.location.href ="/ouverture" 
                     }}
                 
                 >
@@ -100,7 +101,7 @@ export default class Ajoutjour extends Component {
                         </button>
                         
                             <button
-                                type="submit" onClick={this.listeJour}
+                                type="submit"
                                 className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
                                 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
                             >

@@ -18,10 +18,6 @@ class AddTarif extends Component {
         dateTarif: []
 
     };
-    
-    listeTarif =() => {
-        window.location.href ="/tarif"
-     }
 
     componentDidMount() {
         this.getCategories();  
@@ -88,10 +84,14 @@ class AddTarif extends Component {
                             }}
                             onSubmit={(data, {setSubmitting})=>{
                                 setSubmitting(true);
-                                                    
-                                axios.post('/tarif_personalises',{data, tabLigne:this.state.nombreLigne})
-                                console.log(data)
-                                setSubmitting(false)
+                                const t = async () =>{
+                                await axios.post('/tarif_personalises',{data, tabLigne:this.state.nombreLigne})
+                                    console.log(data)
+                                    setSubmitting(false)
+                                    window.location.href ="/tarif"
+                                }         
+                                t()           
+                                
                             }}>
 
                             <Form className="flex flex-wrap -mx-3 mb-6">
@@ -127,7 +127,7 @@ class AddTarif extends Component {
                                     </button>
                                    
                                     <button
-                                        type="submit" onClick={this.listeTarif}
+                                        type="submit" 
                                         className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
                                         transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
                                     >
