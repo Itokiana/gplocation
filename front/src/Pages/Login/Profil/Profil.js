@@ -22,12 +22,11 @@ function comparaison (a,b){
 
 class Profil extends Component {
 
-   
 
     render() {
         return (
             <div>
-
+                
                 <section className="b-contacts s-shadow">
                     <div className="container">
                         

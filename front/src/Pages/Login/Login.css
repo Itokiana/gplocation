@@ -56,6 +56,34 @@ border-radius: 5px;
     border: 1px solid #eeeeee;
     border-radius: 30px;
 }
+.Toastify__progress-bar--dark { 
+  background: #228dcb !important;
+}
+.Toastify__toast--dark  {
+  background: #333 !important;
+}
+.icon{
+ margin: 0 10px;
+}
+.password-forgot{
+  height: auto;
+
+}
+.cont{
+  text-align: center !important;
+ 
+  
+}
+.formulaire{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  padding: 5rem;
+}
+.label_mdp{
+  text-align: left !important;
+}
+.errors_reset{
+  color: red;
+}
 /* #valider{
   margin-left: 35%;
 } */

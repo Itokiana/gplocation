@@ -276,7 +276,7 @@ class Condition extends React.Component {
 						</center>
 					</div>
 					<div className="col-sm-12 col-xs-12">
-						<center><h5 className="wow zoomInUp" data-wow-delay="0.5s" textAlign = 'center'>Le loueur se réserve le droit d'annuler une réservation passée sur le moteur de réservation Rentîles jusqu'à 48 heures après la réservation en cas de non disponibilité du véhicule</h5></center>
+						<center><h5 className="wow zoomInUp" data-wow-delay="0.5s" textAlign = 'center'>Le loueur se réserve le droit d'annuler une réservation passée sur le moteur de réservation Gplocation jusqu'à 48 heures après la réservation en cas de non disponibilité du véhicule</h5></center>
 					</div>
 				</section>
 			

@@ -1,14 +1,15 @@
 
 import React from 'react';
-import {  Redirect } from 'react-router-dom';
+import {  Redirect, Link } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-
 import ErrorLogin from './ErrorLogin';
 import axios from '../../axios'
 import './Login.css';
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {BiMessageSquareError} from 'react-icons/bi';
+import { IconContext } from "react-icons";
 const ClientRegistrationSchema = Yup.object().shape({
     nom: Yup.string()
 		.required('le nom ne doit pas être vide')
@@ -50,19 +51,21 @@ class Login extends React.Component {
 			
 		}
 	}
-
+	message(e){
+		return <IconContext.Provider value={{ size: '50px', style: { verticalAlign: 'middle' }}}> <BiMessageSquareError className="icon"/> {e}</IconContext.Provider>;
+	}
 
 	render() {
 		const message = this.state.message;
 		const etape = this.state.etape;
+		
 		return (
 
 			<>
-
-						
+			
 			<div className="b-breadCumbs s-shadow wow " >
 				<div className="container">
-					<a href="home.html" className="b-breadCumbs__page">Home</a><span className="fa fa-angle-right"></span><a href="contacts.html" className="b-breadCumbs__page m-active">Contact Us</a>
+					<a href="home.html" className="b-breadCumbs__page">Home</a><span className="fa fa-angle-right"></span><a href="/login" className="b-breadCumbs__page m-active">Login</a>
 				</div>
 					
 			</div>
@@ -86,8 +89,15 @@ class Login extends React.Component {
 								validationSchema={ClientSession}
 								onSubmit={(values, { resetForm }) => {
 									axios.post('/client_login', values).then(response => {
-										if (response.status === 200) {
-											
+										if (response.status === 200 && response.data.client.email_confirmed) {
+											sessionStorage.setItem('currentUser', response.data.client)
+											sessionStorage.setItem('id', response.data.client.id)
+											sessionStorage.setItem('nom',response.data.client.nom)
+											sessionStorage.setItem('prenom',response.data.client.prenom)
+											sessionStorage.setItem('telephone',response.data.client.telephone)
+											sessionStorage.setItem('email',response.data.client.email)
+											sessionStorage.setItem('gamers',response.data.client.password_digest)
+
 											this.setState({
 												message: response.data.message
 											})
@@ -101,19 +111,30 @@ class Login extends React.Component {
 												loading: true
 											})
 											
-											sessionStorage.setItem('id', response.data.client.id)
-											sessionStorage.setItem('nom',response.data.client.nom)
-											sessionStorage.setItem('prenom',response.data.client.prenom)
-											sessionStorage.setItem('telephone',response.data.client.telephone)
-											sessionStorage.setItem('email',response.data.client.email)
-											sessionStorage.setItem('gamers',response.data.client.password_digest)
-											
 										}
-
+										else if (response.status === 202) {
+											toast.error(this.message("Mot de passe incorrect"))	
+											this.setState({
+												etape: 4
+											})
+										}
+										else if (response.status === 200 && response.data.client.email_confirmed == false) {
+											toast.error(this.message("Email non confirmer"))
+											toast.error(this.message('verifier votre boite email'),{
+													delay: 2000,
+													position: "bottom-left",
+													autoClose: 4000,
+													
+													});		
+											this.setState({
+												etape: 3
+											})
+										}
 									})
 								
 								}}
 								>
+							
 								{({ errors, touched, handleSubmit }) => (
 									<Form id="contactForm"noValidate className="s-form wow zoomInUp" onSubmit={handleSubmit} >
 										<div>
@@ -126,10 +147,12 @@ class Login extends React.Component {
 										</div>
 										<div className="boutton-login">
 										<button type="submit" className="btn m-btn">Valider<span className="fa fa-angle-right"></span></button><br/><br/>
-										<span ><a href="#" className="oublier">Mot de passe oublié ?</a></span>
+										<span ><a href="http://localhost:3000/find-email" className="oublier">Mot de passe oublié ?</a></span>
 										</div>
 									</Form>)}
+							
 								</Formik>
+
 								</div>
 									
 							</div>
@@ -171,8 +194,11 @@ class Login extends React.Component {
 										onSubmit={(values, { resetForm }) => {
 											console.log("Test");
 											axios.post('/clients', values).then(response => {
-												if (response.status === 200) {
+												if (response.status === 200 && response.data.client.email_confirmed == false ) {
 													resetForm();
+													sessionStorage.setItem('nom',response.data.client.nom)
+													sessionStorage.setItem('emailClient',response.data.client.email)
+													
 													this.setState({
 														message: response.data.message
 													});
@@ -183,21 +209,18 @@ class Login extends React.Component {
 													})
 
 													this.setState({
-														etape: 2
+														etape: 5
 													})
 
 												} else if (response.status === 202) {
 													this.setState({
 														message: response.data.message
 													})
-												} 
+												}
+												 
 												console.log(response.data.client)
 
-												sessionStorage.setItem('id', response.data.client.id)
-												sessionStorage.setItem('nom',response.data.client.nom)
-												sessionStorage.setItem('prenom',response.data.client.prenom)
-												sessionStorage.setItem('telephone',response.data.client.telephone)
-												sessionStorage.setItem('emailClient',response.data.client.email)
+												
 											})
 										}}
 										>
@@ -256,7 +279,32 @@ class Login extends React.Component {
 							</div>
 						</div>
 					</div>
-					{etape === 2 ? (<Redirect to='/profil' />) : null}
+					{etape === 2 ? window.location.href = '/profil' : null}
+					{etape === 5 ? (<Redirect to="/cofirmation_email"/>) : null}
+
+					{etape === 3 ? (<ToastContainer
+									position="bottom-left"
+									autoClose={3000}
+									hideProgressBar={false}
+									newestOnTop={false}
+									closeOnClick
+									rtl={false}
+									pauseOnFocusLoss
+									draggable
+									pauseOnHover
+									/>) : null}
+					{etape === 4 ? (<ToastContainer
+									position="bottom-left"
+									autoClose={3000}
+									hideProgressBar={false}
+									newestOnTop={false}
+									closeOnClick
+									rtl={false}
+									pauseOnFocusLoss
+									draggable
+									pauseOnHover
+									/>) : null}
+						
 				</div>
 			</section>			
 
