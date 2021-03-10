@@ -7,24 +7,36 @@ let i = 0;
 export default class ListeCategory extends Component {
   constructor(props) {
     super(props);
-    this.state = {categ: '',intvalue:null, id:[]}; 
+    this.state = {categ: '',intvalue:null, id:[], imagevoiture: null}; 
   }
 
   // componentWillUnmount() {
   //     clearInterval(this.interval);
   // }
 
-  componentDidMount() {
+  async componentDidMount() {
       const { action } = this.props;
       action.getCategory();
-      this.getCat()
+      await this.getCat();
+      await this.getImageVoiture()
       // this.interval = setInterval(() =>
       //   action.getCategory()
       // , 1000) 
-  }
 
-  getCat(){
-    axios.get('/categories').then(response => {
+  }
+  async getImageVoiture(){
+    await axios.get(`/categorieVehicule`).then(response => {
+      if (response.status === 200) {
+        this.setState({
+          imagevoiture: response.data
+        })
+        // console.log("Mety", this.state.imagevoiture[0].image.url)
+      }
+    }) 
+  };
+
+  async getCat(){
+    await axios.get('/categories').then(response => {
       if (response.status === 200) {
         this.setState({
             categ: response.data
@@ -38,7 +50,7 @@ export default class ListeCategory extends Component {
         initvalues[`val${value.id}`] = value.stock
         initvalues[`ligne${value.id}`] = value.enligne
         ids.push(value.id)
-        console.log(value.id)
+        
       })
       this.setState({
         intvalue: initvalues,
@@ -59,11 +71,10 @@ export default class ListeCategory extends Component {
   render() {
     const { categories, action } = this.props;
     const stocId= this.state.id
-    console.log(this.state.intvalue)
-
+    const images = this.state.imagevoiture
     return (
       <>
-        {this.state.intvalue ?
+        {this.state.intvalue && images ?
           <Formik
             initialValues={this.state.intvalue}
             onSubmit={(value,{setSubmitting})=>{
@@ -71,7 +82,7 @@ export default class ListeCategory extends Component {
               axios.post('/categorie/stock', {
                   value, stocId
               })
-              console.log(value) 
+             
               setSubmitting(false);  
             }} 
           >
@@ -97,8 +108,10 @@ export default class ListeCategory extends Component {
                             <tbody>
                               {categories && categories.map((category, key) => {
                                 return (  
-                                  <tr class="even pointer" key={i++}>
-                                    <td class=""><img src="images/Spark.jpg" alt="vehicule"/> </td>
+                                  <tr class="even pointer">
+                                    {/* <img src={`http://localhost:4000/${voiture.image.url}`} alt ={voiture.marque}/> */}
+                                    {images[key] ? <td className="text-center"><img src={`http://localhost:4000/${images[key].image.url}`} alt ={images[key].marque}/></td> : <td className="text-center">Aucun image</td>}
+                                      
                                     <td className="text-center">{category.ref} <i class="success fa fa-long-arrow-up"></i></td>
                                     <td className="text-center">{category.name}</td>
                                     <td >

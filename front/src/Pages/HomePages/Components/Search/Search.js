@@ -46,6 +46,8 @@ export default class Search extends React.Component {
 		message: '',
 		prix:[],
 		jour:null,
+		stock:[],
+		account: []
 	}
 
 	changerEtape = (newEtape) => {
@@ -87,7 +89,7 @@ export default class Search extends React.Component {
 							
 							let date1 = values.dateDepart;
 							let date2 = values.dateRetour;
-							let jours = this.dateDiff(date1,date2);
+							let jours = this.dateDiff(date1,date2)+1;
 							let data = JSON.stringify(values)
 							this.setState({
 								jour: jours
@@ -98,10 +100,13 @@ export default class Search extends React.Component {
 										voitures:reponse.data.voitures,
 										prix:reponse.data.prix,
 										message:reponse.data.message,
+										account:reponse.data.account,
 										etape: 2,
+										stock:reponse.data.stock,
 										date_reservation: values
 									});
-								} 
+								}
+								console.log(this.state.account) 
 							});
 							
 						}}
@@ -167,8 +172,13 @@ export default class Search extends React.Component {
 						</Formik>
 						
 					</div>
-					{etape === 2 && this.state.message === ''? (<Reservation jour={this.state.jour} date_reservation={this.state.date_reservation} voitures={this.state.voitures} prix={this.state.prix}/>) : null}
-					<div>{ this.state.message!=='' ? (<div className="alert_message"><h4>{this.state.message}</h4></div>) : null }</div>
+					{etape === 2 && this.state.message === ''? (<Reservation stock={this.state.stock} accompte= {this.state.account} jour={this.state.jour} date_reservation={this.state.date_reservation} voitures={this.state.voitures} prix={this.state.prix}/>) : null}
+					<div>{ this.state.message!=='' ?
+							(
+								this.state.message === 'aucun' ?
+								<div className="alert_message"><a> lien </a></div>:
+								<div className="alert_message"><h4>{this.state.message}</h4></div>
+								) : null }</div>
 				</div>	
 
 			</>

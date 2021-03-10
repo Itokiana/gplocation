@@ -18,10 +18,6 @@ class AddTarif extends Component {
         dateTarif: []
 
     };
-    
-    listeTarif =() => {
-        window.location.href ="/tarif"
-     }
 
     componentDidMount() {
         this.getCategories();  
@@ -60,8 +56,7 @@ class AddTarif extends Component {
                     <button style= {{float:"left" ,margin:"10px"}} class="text-white bg-indigo-500 border-0 hover:bg-indigo-600 font-bold py-2 px-4 rounded">Retour</button>
                 </NavLink>
                 <center className="text-white">
-                    <h1>Tarif personnaliser pour le categorie {category && category.category }, reference {category && category.ref}</h1>
-                    <br/>
+                    <h1>Tarif personnaliser pour {category && category.name }, reference {category && category.ref}</h1>
                     <br/>
                     <div className="d-flex p-0 justify-content-center align-items-center">
                         {voitures && voitures.map(voiture => {
@@ -69,9 +64,11 @@ class AddTarif extends Component {
                                 <>
                                     <div className="m-1">
                                         <fieldset>
-                                            // <img src={`http://localhost:4000/${voiture.image.url}`} /><br/>
+                                            
+                                            <img src={`http://localhost:4000/${voiture.image.url}`} />
                                         </fieldset>
-                                        <p>{voiture.model}</p>
+                                        <p><strong>{voiture.marque}</strong></p>
+                                        <br/>
                                     </div>
                                 </>
                             )
@@ -87,10 +84,14 @@ class AddTarif extends Component {
                             }}
                             onSubmit={(data, {setSubmitting})=>{
                                 setSubmitting(true);
-                                                    
-                                axios.post('/tarif_personalises',{data, tabLigne:this.state.nombreLigne})
-                                console.log(data)
-                                setSubmitting(false)
+                                const t = async () =>{
+                                await axios.post('/tarif_personalises',{data, tabLigne:this.state.nombreLigne})
+                                    console.log(data)
+                                    setSubmitting(false)
+                                    window.location.href ="/tarif"
+                                }         
+                                t()           
+                                
                             }}>
 
                             <Form className="flex flex-wrap -mx-3 mb-6">
@@ -126,7 +127,7 @@ class AddTarif extends Component {
                                     </button>
                                    
                                     <button
-                                        type="submit" onClick={this.listeTarif}
+                                        type="submit" 
                                         className="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 
                                         transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline"
                                     >

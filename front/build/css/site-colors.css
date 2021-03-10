@@ -118,13 +118,11 @@ body{
 }
 
 .b-search__main{
-    background-image: url(../images/backgrounds/fondresa_lang2.png);
-    background-position: right;
-    background-repeat: no-repeat;
+    background: #fff;
 }
 
 .b-search__main-title{
-    background: #0011a7;
+    background: #f76d2b;
 }
 
 .b-search__main-title h2{
@@ -140,7 +138,7 @@ body{
 }
 
 .m-active svg g{
-    fill:#0011a7;
+    fill:#f76d2b;
 }
 
 .m-active h5{
@@ -152,7 +150,7 @@ body{
 }
 
 .b-search__main-form-submit a{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-search__main-form-submit button.btn.m-btn{
@@ -161,7 +159,7 @@ body{
 }
 
 .b-search__main-form-submit button.btn.m-btn:hover{
-    background: #0011a7;
+    background: #f76d2b;
     color: #fff;
 }
 
@@ -171,7 +169,7 @@ body{
 }
 
 .b-search__main-form-submit button.btn.m-btn span.fa{
-    background: #0011a7;
+    background: #f76d2b;
     color:#fff;
 }
 
@@ -180,7 +178,7 @@ body{
 }
 
 .ui-slider-handle:after{
-    background:#0011a7;
+    background:#f76d2b;
 }
 
 .b-search__main-form-range span.min,.b-search__main-form-range span.max{
@@ -208,7 +206,7 @@ body{
 
 .b-featured__item-price{
     color:#fff;
-    background: #0011a7;
+    background: #f76d2b;
 }
 
 .b-featured__item h5{
@@ -236,7 +234,7 @@ body{
 
 /*b-welcome*/
 .b-welcome{
-    background-color: #0011a7;
+    background-color: #f76d2b;
 }
 
 .b-welcome:after{
@@ -260,7 +258,7 @@ body{
 }
 
 .b-welcome__services-img:hover{
-    background: #0011a7;
+    background: #f76d2b;
 }
 
 .b-welcome__services-img:hover span.fa,.b-welcome__services-img:hover svg g{
@@ -284,7 +282,7 @@ body{
 }
 
 .b-world__item-val-circles span{
-    background: #0011a7;
+    background: #f76d2b;
 }
 
 .b-world__item-num{
@@ -300,9 +298,9 @@ body{
 }
 
 .b-world__item a:hover{
-    background: #0011a7;
+    background: #f76d2b;
     color:#fff;
-    border-color:#0011a7;
+    border-color:#f76d2b;
 }
 
 .b-world__item a.btn.m-btn:hover span{
@@ -325,7 +323,7 @@ body{
 }
 
 .b-asks .b-asks__first:hover{
-    background:#0011a7;
+    background:#f76d2b;
 }
 
 .b-asks__first-circle span{
@@ -369,11 +367,11 @@ body{
 }
 
 .b-auto__main-toggle:hover{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-auto__main-toggle.active{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-auto__main-nav li a{
@@ -385,11 +383,11 @@ body{
 }
 
 .b-auto__main-nav li:hover a{
-    color:#0011a7
+    color:#f76d2b
 }
 
 .b-auto__main-nav li.active a{
-    color:#0011a7
+    color:#f76d2b
 }
 
 .b-auto__main-item h2{
@@ -398,7 +396,7 @@ body{
 
 .b-auto__main-item-info .m-price{
     color: #fff;
-    background: #0011a7;
+    background: #f76d2b;
 }
 
 .b-auto__main-item-info .m-number{
@@ -408,7 +406,7 @@ body{
 
 /*b-count*/
 .b-count{
-    background-color: #0011a7;
+    background-color: #f76d2b;
     color:#fff;
 }
 
@@ -428,7 +426,7 @@ body{
 }
 
 .b-contact-title h5{
-    background: #0011a7;
+    background: #f76d2b;
 }
 
 .b-contact__form form > div span{
@@ -436,7 +434,7 @@ body{
 }
 
 .b-contact__form button{
-    background: #0011a7;
+    background: #f76d2b;
     color: #fff;
 }
 
@@ -464,7 +462,7 @@ body{
 }
 
 .b-review__main h5 em{
-    color:#0011a7;
+    color:#f76d2b;
 }
 /*b-review*/
 
@@ -488,7 +486,7 @@ body{
 }
 
 .b-info__latest > h3,.b-info__aside-article > h3,.b-info__twitter > h3,.b-info__contacts > p{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-info__aside-article-item h6{
@@ -505,9 +503,9 @@ body{
 }
 
 .b-info__aside > a.btn.m-btn:hover{
-    background: #0011a7;
+    background: #f76d2b;
     color: #fff;
-    border-color:#0011a7;
+    border-color:#f76d2b;
 }
 
 .b-info__aside > a.btn.m-btn:hover span{
@@ -593,7 +591,7 @@ body{
 }
 
 .m-home .b-nav__logo h3 a span{
-    color:#0011a7;
+    color:#228dcb;
 }
 
 .m-home .b-nav__list > #nav > ul > li > a{
@@ -607,7 +605,7 @@ body{
 }
 
 .m-home .b-slider__info .btn.m-btn{
-    background:#0011a7 ;
+    background:#f76d2b ;
     color:#fff
 }
 
@@ -633,7 +631,7 @@ body{
 }
 
 .m-home .b-search__main >h4{
-    color:#0011a7;   
+    color:#f76d2b;   
 }
 /*b-search*/
 
@@ -671,8 +669,8 @@ body{
 }
 
 .m-home .b-world__item-num{
-    background: #0011a7;
-    border-color: #0011a7;
+    background: #f76d2b;
+    border-color: #f76d2b;
     color:#fff;
 }
 
@@ -706,8 +704,8 @@ body{
 }
 
 .m-home .b-count__item-circle:hover{
-    background:#0011a7;
-    border-color:#0011a7;
+    background:#f76d2b;
+    border-color:#f76d2b;
     cursor:pointer;
     color:#fff;
 }
@@ -717,7 +715,7 @@ body{
 }
 
 .m-home .b-count__item h2{
-   color:#0011a7; 
+   color:#f76d2b; 
 }
 
 .m-home .b-count__item h5{
@@ -743,7 +741,7 @@ body{
 }
 
 .m-home .b-homeReviews__main-person-name em{
-    color:#0011a7; 
+    color:#f76d2b; 
 }
 
 .m-home .b-homeReviews .owl-buttons > div{
@@ -771,7 +769,7 @@ body{
 
 /*b-footer*/
 .m-home .b-footer__toTop-inside{
-    background: #0011a7;
+    background: #f76d2b;
     color:#fff;
 }
 
@@ -793,7 +791,7 @@ body{
 }
 
 .b-pageHeader__search{
-    background: #0011a7;
+    background: #f76d2b;
 }
 /*b-pageHeader*/
 
@@ -821,7 +819,7 @@ body{
 }
 
 .b-infoBar__compare-item span.fa{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-infoBar__compare-item span.fa.fa-caret-down{
@@ -834,7 +832,7 @@ body{
 }
 
 .b-infoBar__select-one a.m-active,.b-infoBar__select-one a:hover{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-infoBar__select-one select{
@@ -859,7 +857,7 @@ body{
 }
 
 .b-items__aside-main-body-item > div select +  span.fa{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-items__aside-main-body-item .ui-slider-handle{
@@ -872,7 +870,7 @@ body{
 }
 
 .b-items__aside-main-body-item .ui-widget-header{
-    background: #0011a7;
+    background: #f76d2b;
 }
 
 .b-items__aside-main-body-item .ui-slider-handle:before{
@@ -885,7 +883,7 @@ body{
 }
 
 .b-items__aside-main-footer button.btn.m-btn{
-    background: #0011a7;
+    background: #f76d2b;
     color:#fff;
 }
 
@@ -900,7 +898,7 @@ body{
 }
 
 .b-items__aside-main-footer button.btn.m-btn:hover span{
-    background: #0011a7;
+    background: #f76d2b;
     color:#fff;
 }
 
@@ -933,7 +931,7 @@ body{
 }
 
 .b-items__aside-sell-info a.btn.m-btn:hover span{
-    background: #0011a7;
+    background: #f76d2b;
     color:#fff;
 }
 
@@ -967,7 +965,7 @@ body{
 }
 
 .b-items__cars-one-img-check span{
-    color: #0011a7;
+    color: #f76d2b;
 }
 
 .b-items__cars-one-info-header h2{
@@ -975,7 +973,7 @@ body{
 }
 
 .b-items__cars-one-info-header > span{
-    background: #0011a7;
+    background: #f76d2b;
     color:#fff;
 }
 
@@ -992,9 +990,9 @@ body{
 }
 
 .b-items__cars-one-info a.btn.m-btn:hover{
-    background: #0011a7;
+    background: #f76d2b;
     color:#fff;
-    border-color:#0011a7;
+    border-color:#f76d2b;
 }
 
 .b-items__cars-one-info a.btn.m-btn:hover span{
@@ -1012,11 +1010,11 @@ body{
 }
 
 .b-items__pagination-main > span.m-active a{
-    color:#0011a7;
+    color:#228dcb;
 }
 
 .b-items__pagination-main > span:hover a{
-    color:#0011a7;
+    color:#228dcb;
 }
 
 .m-listingsTwo .b-items__cars-one-info-price h3{
@@ -1024,7 +1022,7 @@ body{
 }
 
 .m-listingsTwo .b-items__cars-one-info-price h4{
-    color:#0011a7;
+    color:#f76d2b;
 }
 /*b-items*/
 /*=======================Listings=======================*/
@@ -1056,7 +1054,7 @@ body{
 }
 
 .b-items__cell-info-price{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-items__cell-info-km{
@@ -1068,9 +1066,9 @@ body{
 }
 
 .b-items__cell-info a.btn.m-btn:hover{
-    background: #0011a7;
+    background: #f76d2b;
     color: #fff;
-    border-color: #0011a7;
+    border-color: #f76d2b;
 }
 
 .b-items__cell-info a.btn.m-btn:hover span.fa{
@@ -1100,9 +1098,9 @@ body{
 }
 
 .btn.m-btn.m-infoBtn:hover{
-    background: #0011a7;
+    background: #f76d2b;
     color:#fff;
-    border-color:#0011a7;
+    border-color:#f76d2b;
 }
 
 .btn.m-btn.m-infoBtn:hover span.fa{
@@ -1122,7 +1120,7 @@ body{
 
 .b-detail__head-price-num{
     color:#fff;
-    background: #0011a7;
+    background: #f76d2b;
 }
 
 .b-detail__head-price p{
@@ -1152,7 +1150,7 @@ body{
 }
 
 .b-detail__main-aside-about-seller{
-    background:#0011a7 ;
+    background:#f76d2b ;
     color:#fff;
 }
 
@@ -1165,11 +1163,11 @@ body{
 }
 
 .b-detail__main-aside-about-form-links a.m-active{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-detail__main-aside-about-form-links a:hover{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-detail__main-aside form input[type='text'],.b-detail__main-aside form input[type='email'],.b-detail__main-aside form input[type='tel'],.b-detail__main-aside select{
@@ -1199,7 +1197,7 @@ select.m-select + span.fa{
 }
 
 .b-detail__main-aside form button.btn.m-btn{
-    background: #0011a7;
+    background: #f76d2b;
     color:#fff;
 }
 
@@ -1214,7 +1212,7 @@ select.m-select + span.fa{
 }
 
 .b-detail__main-aside form button.btn.m-btn:hover span.fa{
-    background: #0011a7;
+    background: #f76d2b;
     color:#fff;
 }
 
@@ -1236,7 +1234,7 @@ select.m-select + span.fa{
 }
 
 .b-detail__main-info-characteristics-one:hover .b-detail__main-info-characteristics-one-top > div{
-    background: #d3cbc7;
+    background: #f76d2b;
 }
 
 .b-detail__main-info-characteristics-one-top > div{
@@ -1249,7 +1247,7 @@ select.m-select + span.fa{
 }
 
 .b-detail__main-info-extra ul li span.fa{
-    color:#0011a7;
+    color:#f76d2b;
 }
 /*b-detail*/
 
@@ -1274,7 +1272,7 @@ select.m-select + span.fa{
 }
 
 .m-compare .b-infoBar h5 span{
-    color:#0011a7;
+    color:#f76d2b;
 }
 /*b-infoBar*/
 
@@ -1288,7 +1286,7 @@ select.m-select + span.fa{
 }
 
 .b-compare .b-compare__images .b-compare__images-item-price{
-    background-color:#0011a7;
+    background-color:#f76d2b;
     color:#fff;
 }
 
@@ -1310,7 +1308,7 @@ select.m-select + span.fa{
 }
 
 .b-compare__block-inside-value ul li span.fa{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-compare__links a.btn.m-btn{
@@ -1318,13 +1316,13 @@ select.m-select + span.fa{
 }
 
 .b-compare__links a.btn.m-btn:hover{
-    background:#0011a7;
+    background:#f76d2b;
     color:#fff;
-    border-color:#0011a7;
+    border-color:#f76d2b;
 }
 
 .b-compare__links a.btn.m-btn span.fa{
-    background:#0011a7 ;
+    background:#f76d2b ;
 }
 
 .b-compare__links a.btn.m-btn:hover span.fa{
@@ -1346,7 +1344,7 @@ select.m-select + span.fa{
 }
 
 .b-blog__aside-search button{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-blog__aside-categories h2{
@@ -1358,8 +1356,8 @@ select.m-select + span.fa{
 }
 
 .b-blog__aside-categories-list li:hover a,.b-blog__aside-categories-list li.m-active a{
-    color:#0011a7;
-    border-color:#0011a7;
+    color:#f76d2b;
+    border-color:#f76d2b;
 }
 
 .b-blog__aside-popular-posts h4 a{
@@ -1371,7 +1369,7 @@ select.m-select + span.fa{
 }
 
 .b-blog__aside-popular-posts-one-date span.fa{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-blog__aside-text p{
@@ -1387,8 +1385,8 @@ select.m-select + span.fa{
 }
 
 .b-blog__aside-reviews-posts-one-info .b-world__item-num{
-    background:#0011a7;
-    border-color: #0011a7 ;
+    background:#f76d2b;
+    border-color: #f76d2b ;
     color:#fff;
 }
 
@@ -1397,7 +1395,7 @@ select.m-select + span.fa{
 }
 
 .b-blog__posts-one-social a:hover{
-    color: #0011a7 ;
+    color: #f76d2b ;
 }
 
 .b-blog__posts-one-body-head h2{
@@ -1417,9 +1415,9 @@ select.m-select + span.fa{
 }
 
 .btn.m-btn.m-readMore:hover{
-    background:#0011a7;
+    background:#f76d2b;
     color:#fff ;
-    border-color:#0011a7;
+    border-color:#f76d2b;
 }
 
 .btn.m-btn.m-readMore:hover span.fa{
@@ -1428,7 +1426,7 @@ select.m-select + span.fa{
 }
 
 .b-blog__posts-one-body-main-link{
-    background:#0011a7 ;
+    background:#f76d2b ;
 }
 
 .b-blog__posts-one-body-main-link a{
@@ -1442,7 +1440,7 @@ select.m-select + span.fa{
 /*=======================Blog=======================*/
 
 .m-blogTwo .b-blog__posts-one-body-head-notes-note span.fa{
-    color:#0011a7;
+    color:#f76d2b;
 }
 
 .b-blog__posts-one-info p{

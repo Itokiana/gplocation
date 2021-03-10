@@ -17,21 +17,34 @@ export default class Partiel extends Component {
         }
     getPaiment(){
         axios.get(`/paimentpartiels`).then(response => {
-            
-            var objValue = response.data[0]
             var value ={}
-            console.log(objValue)
-    
-            value[`description`]= objValue.description
-            value[`typ`]= objValue.typ
-            value[`montant`]= objValue.montant
-            value[`minimal`]= objValue.minimal
+            if (response.data.length ==! 0){
+                var objValue = response.data[0]
+               
+                console.log(objValue)
         
+                value[`description`]= objValue.description
+                value[`typ`]= objValue.typ
+                value[`montant`]= objValue.montant
+                value[`minimal`]= objValue.minimal
+            
 
-            this.setState({
-                inValue: value
-            })
-            console.log(this.state.inValue)       
+                this.setState({
+                    inValue: value
+                })
+                console.log(this.state.inValue) 
+            }else{
+                value[`description`]= ''
+                value[`typ`]= ''
+                value[`montant`]= ''
+                value[`minimal`]= ''
+                this.setState({
+                    inValue: value
+                })
+                console.log("coucou")
+
+            }
+                  
         })
     }
     

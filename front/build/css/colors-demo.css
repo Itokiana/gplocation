@@ -91,8 +91,8 @@ a.btn.m-btn.m-pay:hover,
 .b-compare__links a.btn.m-btn span.fa,
 .b-items__aside-sell-info a.btn.m-btn:hover span.fa
 {
-    background-color:#0011a7;
-    fill: #0011a7;
+    background-color:#228dcb;
+    fill: #228dcb;
 }
 
 /* Color 1*/
@@ -141,8 +141,8 @@ a.btn.m-btn.m-pay:hover,
 .b-items__pagination-main > span.m-active a,
 .b-items__pagination-main > span:hover a
 {
-    color:#0011a7;
-    fill:#0011a7;
+    color:#228dcb;
+    fill:#228dcb;
 }
 
 /* Border Color */
@@ -176,7 +176,7 @@ a.btn.m-btn.m-pay:hover,
 .b-auto__main-nav li:hover:before,
 .b-auto__main-nav li.active:before
 {
-    border-color:#0011a7;
+    border-color:#228dcb;
 }
 
 
@@ -217,7 +217,7 @@ body,
 .b-items__cars-one-info a.btn:hover span,
 .b-items__cell-info a.btn:hover span.fa,
 .btn.m-btn.m-infoBtn:hover span.fa,
-.b-detail__main-aside form input[type='text'],[type="password"],.b-detail__main-aside form input[type='email'],.b-detail__main-aside form input[type='tel'],.b-detail__main-aside select,
+.b-detail__main-aside form input[type='text'],.b-detail__main-aside form input[type='email'],.b-detail__main-aside form input[type='tel'],.b-detail__main-aside select,
 .b-detail__main-aside form button.btn.m-btn:hover,
 .b-detail__main-aside form button.btn.m-btn span.fa,
 .b-brands,

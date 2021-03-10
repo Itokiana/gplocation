@@ -100,9 +100,6 @@ export default class DetailVoiture extends Component {
                                 style={{ flex: 'auto' }}
                                 value={voiture.portes} />
                         </div>
-
-
-
                     </div>
                 </div>
             </>

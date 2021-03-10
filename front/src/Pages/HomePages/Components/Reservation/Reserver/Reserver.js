@@ -52,10 +52,13 @@ function Reserver(propos) {
     const [etat, setEtat] = useState(1);
     const [voiture, setVoiture] = React.useState([]);
     const [client, setClient] = React.useState([]);
+    
 
     useEffect(()=>{
         setVoiture({loading: true});
+        // const apiVoiture = (`http://fd0b515.online-server.cloud/voitures/${propos.match.params.id}`)
         const apiVoiture = (`http://localhost:4000/voitures/${propos.match.params.id}`)
+
         fetch(apiVoiture)
           .then((res) => res.json())
           .then((data) => {
@@ -83,12 +86,14 @@ function Reserver(propos) {
                                             <p className="conf_categ">{(voiture.voiture && voiture.voiture.marque)}</p>
                                            
                                             <img className="img-responsive center-block" src={`http://localhost:4000/${(voiture.voiture && voiture.voiture.image.url)}`} alt="" width="250px" height="220px"/>
+
+                                            {/* <img className="img-responsive center-block" src={`http://fd0b515.online-server.cloud/${(voiture.voiture && voiture.voiture.image.url)}`} alt="" width="250px" height="220px"/> */}
                                             <ul className="listeReserve">
                                                 <li className="prise"><span></span><b>Prise en charge à l'aéroport</b></li>
                                                 <li className="prise"><span className="carburant"></span>Carburant : Plein à rendre plein</li>
                                             </ul>
                                             <div id="prix_produit">
-                                                <p className="montant-acompte-selection">dont {sessionStorage.getItem("acompte")} € d'acompte</p>
+                                                <p className="montant-acompte-selection">dont  {propos.match.params.count} € d'acompte</p>
                                                 <p className="confirm-tarifs">{propos.match.params.prix} €</p>
                                                 </div>
                                             </div>

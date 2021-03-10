@@ -63,8 +63,9 @@
 
 /*More*/
 .b-more{
-    padding: 75px 0;
+    padding: 20px 20px;
     border-bottom:2px solid #eee;
+    font-size: 16px;
 }
 
 .b-more__why h2.s-title,.b-more__info h2.s-title{

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactGA from 'react-ga'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Email_conf from './Pages/Login/Email_confirmation.js'
 import Header from './Pages/Header/Header.js';
@@ -20,17 +21,25 @@ import {PrivateRoute} from './Helpers/PrivateRoute';
 import Footer from './Pages/Footer/Footer.js';
 
 //import './App.scss';
-// import React, { Component } from 'react'
+//import React, { Component } from 'react'
 
 export default class App extends Component {
-  state = [
-    
-  ];
-  // initializeAnalytics(){
-  //   ReactGa.initialize('G-2N9KD7XPZD')
-  //   ReactGa.pageview(window.location.pathname + window.location.search)
-  // }
-  
+  constructor() {
+    super();
+    this.state = {
+      someData: null,
+    };
+
+    // Add your tracking ID created from https://analytics.google.com/analytics/web/#home/
+    // ReactGA.initialize('G-9ZVEBWJD7T');
+    // // This just needs to be called once since we have no routes in this case.
+    // ReactGA.pageview(window.location.pathname);
+  }
+
+  initializeAnalytics(){
+    ReactGA.initialize('G-XWNX24WHLD');
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }
   componentDidMount = () => {
     if(sessionStorage.id){
       axios.put(`/clients/${sessionStorage.id}`).then(response => {
@@ -63,8 +72,9 @@ export default class App extends Component {
             <Route exact path='/sainte-marie' component={Saint}/>
             <Route exact path='/condition' component={Condition}/>
             <Route exact path='/mentions-legales' component={Mentions}/>
+            <Route exact path='/reserver/:id/:prix/:count' component={Reserver}/>
             <PrivateRoute exact path='/profil' component={() => <Profil client={this.state.user}/>} />
-            <Route exact path='/reserver/:id/:prix' component={Reserver}/>
+            
           
             
             <Route component={NotFound}/>
@@ -86,7 +96,7 @@ export default class App extends Component {
             <Route exact path='/sainte-marie' component={Saint}/>
             <Route exact path='/condition' component={Condition}/>
             <Route exact path='/mentions-legales' component={Mentions}/>
-            <PrivateRoute exact path='/reserver/:id/:prix' component={Reserver}/>
+            <Route exact path='/reserver/:id/:prix/:count' component={Reserver}/>
             <Route exact path='/login' component={Login} />
             <Route exact path='/cofirmation_email' component={Email_conf}/>
             <Route exact path='/find-email' component={FindEmail}/>

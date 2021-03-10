@@ -21,7 +21,7 @@ export default class ListeVoiture extends Component {
                 <h2>Liste des voitures</h2>
                 <div className="mt-2">
                     <table className="table-auto">
-                        {console.log(voitures)}
+                        {console.log('vehicule')}
                         <thead>
                             <tr>
                                 <th className="">  </th>
@@ -37,9 +37,12 @@ export default class ListeVoiture extends Component {
                         </thead>
                         <tbody>
                             {voitures && voitures.map(voiture => {
+                                // if (voiture.category_id) {
+                                //     const nomCategorie = 
+                                // }
                                 return (
                                     <tr>
-                                        <td className="border"><img src={`http://fd0b515.online-server.cloud/${voiture.image.url}`} alt ={voiture.marque}/></td>
+                                        <td className="border"><img src={`http://localhost:4000/${voiture.image.url}`} alt ={voiture.marque}/></td>
                                         <td className="border px-4 py-2">{voiture.marque}</td>
                                         <td className="border px-4 py-2">{voiture.model}</td>
                                         <td className="border px-4 py-2">{voiture.places}</td>

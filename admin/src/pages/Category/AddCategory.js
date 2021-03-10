@@ -45,7 +45,7 @@ class AddCategory extends Component {
                                     <div className="mb-2 mr-4">
                                         <label className="block text-gray-700 font-bold mb-1 md:mb-0">
                                             Référence:
-                            </label>
+                                        </label>
                                         <Field
                                             name="ref"
                                             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
@@ -54,8 +54,8 @@ class AddCategory extends Component {
 
                                     <div className="mb-2">
                                         <label className="block text-gray-700 font-bold mb-1 md:mb-0">
-                                            nom de la Catégorie:
-                            </label>
+                                            Nom de la Catégorie:
+                                        </label>
                                         <Field
                                             name="name"
                                             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />

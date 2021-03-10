@@ -83,11 +83,11 @@ function PaimentEtape1(props) {
                                         </p>
                                         </label>
                                     </fieldset>
-                                <h3 class="form-connec-h3">Total à payer : acompte de {acompte} €</h3>
-                                <p class="paddingp">Puis {parseInt(props.data.prix)-acompte} € à régler à la remise des clés par carte bancaire, espèce ou chèque </p>
+                                <h3 class="form-connec-h3">Total à payer : acompte de {props.data.count} €</h3>
+                                <p class="paddingp">Puis {parseInt(props.data.prix)-props.data.count} € à régler à la remise des clés par carte bancaire, espèce ou chèque </p>
                                 <h3 class="paiementcarte cc_cursor">Paiement sécurisé par carte bancaire :</h3>
 
-                                <button onClick={Paiement} className="btn btn-success btn-lg btn-block" >Payer {acompte} €</button>
+                                <button onClick={Paiement} className="btn btn-success btn-lg btn-block" >Payer {props.data.count} €</button>
 
                                 {status? (<Checkout data={props} Paiement={Paiement}/>):null}
 

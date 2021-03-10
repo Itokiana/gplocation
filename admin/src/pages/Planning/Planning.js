@@ -2,9 +2,11 @@ import React from 'react'
 import axios from '../../axios'
 import './Planning.css'
 import { ScheduleComponent, getWeekNumber, HeaderRowDirective, HeaderRowsDirective, ResourcesDirective, ResourceDirective, TimelineMonth, Inject, ViewsDirective, ViewDirective, Month } from '@syncfusion/ej2-react-schedule';
-import { Internationalization, extend } from '@syncfusion/ej2-base';
+import { Internationalization } from '@syncfusion/ej2-base';
 
 class Planning extends React.Component{
+    // let jj = document.querySelectorAll(".e-tbar-btn-text");
+    // remove(jj)
     // constructor() {
     //     super(...arguments)
         // this.localData = [
@@ -47,10 +49,11 @@ class Planning extends React.Component{
     // }
     instance = new Internationalization()
     state = {
-        categories: [],
+        categories: null,
         voiture: [],
         reservation:[],
-        clients: []
+        clients: [],
+        imagevoiture: null
     }
 
     async componentDidMount() {
@@ -58,6 +61,18 @@ class Planning extends React.Component{
         await this.getReservation()
         await this.getVoiture()
         await this.getClient()
+        await this.getImageVoiture()
+    }
+
+    async getImageVoiture(){
+        await axios.get(`/categorieVehicule`).then(response => {
+          if (response.status === 200) {
+            this.setState({
+              imagevoiture: response.data
+            })
+            // console.log("Mety", this.state.imagevoiture[0].image.url)
+          }
+        }) 
     }
 
     async getCategories(){
@@ -66,7 +81,7 @@ class Planning extends React.Component{
 				this.setState({
 					categories: response.data
 				});
-				console.log(this.state.categories);
+				//console.log(this.state.categories);
 			}
 		});
     };
@@ -76,7 +91,7 @@ class Planning extends React.Component{
 				this.setState({
 					clients: response.data
 				});
-				console.log(this.state.clients);
+				//console.log(this.state.clients);
 			}
 		});
     };
@@ -86,7 +101,7 @@ class Planning extends React.Component{
 				this.setState({
 					voiture: response.data
 				});
-				console.log(this.state.voiture);
+				//console.log(this.state.voiture);
 			}
 		});
 
@@ -97,7 +112,7 @@ class Planning extends React.Component{
 				this.setState({
 					reservation: response.data
 				});
-				console.log(this.state.reservation);
+				//console.log(this.state.reservation);
 			}
 		});
     };
@@ -122,11 +137,11 @@ class Planning extends React.Component{
     }
     data(obj) {
 
-        const filtreVoiture =  this.state.voiture.filter(person => person.category_id == obj.id);
+        const filtreVoiture =  this.state.voiture.filter(person => person.category_id === obj.id);
         const tab = []
         //console.log(filtreVoiture)
         filtreVoiture && filtreVoiture.map((voiture, key) => {
-            const filtreResrvation = this.state.reservation.filter(res => res.voiture_id == voiture.id)
+            const filtreResrvation = this.state.reservation.filter(res => res.voiture_id === voiture.id)
             if (filtreResrvation.length === 0){
                 console.log("nodataReservation")
             }
@@ -153,7 +168,7 @@ class Planning extends React.Component{
                 })
             }  
         })
-        console.log(tab)
+        //console.log(tab)
         return tab
     }
 
@@ -161,7 +176,7 @@ class Planning extends React.Component{
         const stockvoitur = []
         for(let i=1; i<= voiture; i++){
             const objet={}
-            objet['name']= `Voiture${i}`
+            objet['name']= `Stock  ${i}`
             objet['id']= i
             objet['color']= `#${i+1}fa900`
             stockvoitur.push(objet)
@@ -170,24 +185,32 @@ class Planning extends React.Component{
     }
     
     render() {
+        const categorye = this.state.categories
+        const images = this.state.imagevoiture 
 
         return (
             <>
-            {this.state.categories.map(value => {
+            {categorye && images ? categorye.map((value, key) => {
                 return (
                     <>
                         <div className="text-white">
                             <div className="d-flex align-items-start m-1">
-                                <img src="images/Spark.jpg" alt="image"/>
+                                <fieldset>
+                                    {images[key] ? <img className="images planning" src={
+                                        `http://localhost:4000/${images[key].image.url}`
+                                        } alt ={images[key].marque}/> : 
+                                        <p className='pa textes'>Aucun Voiture</p>}
+                                </fieldset>
                                 
-                                <div className="m-1">
+                                <div className="category">
                                     <h1>Categorie: {value.name} </h1>
-                                    <span>Stock : {value.stock} vehicule</span>
+                                    <span>Stock : {value.stock ? value.stock : 0} vehicule</span>
                                 </div>
                             </div>
                             
+                            {value.stock ? 
                             <ScheduleComponent width='100%' height='300px' selectedDate={new Date()} eventSettings={{ dataSource: this.data(value) }} group={{ resources: ['Resources'] }}>
-                                <HeaderRowsDirective height='10px'>
+                                <HeaderRowsDirective height='5px'>
                                 {/* <HeaderRowDirective option='Year' template={this.yearTemplate.bind(this)}/>
                                 <HeaderRowDirective option='Month' template={this.monthTemplate.bind(this)}/> */}
                                 <HeaderRowDirective option='Week' template={this.weekTemplate.bind(this)}/>
@@ -195,7 +218,7 @@ class Planning extends React.Component{
                                 </HeaderRowsDirective>
                                 <ViewsDirective>
                                 <ViewDirective option='TimelineMonth'/>
-                                <ViewDirective option='Month'/>
+                                {/* <ViewDirective option='Month'/> */}
                                 </ViewsDirective>
                                 {/* <ResourcesDirective>
                                     <ResourceDirective field='OwnerId' title='Owner' name='Owners' allowMultiple={true} dataSource={this.ownerData} textField='OwnerText' idField='Id' colorField='OwnerColor'>
@@ -204,13 +227,13 @@ class Planning extends React.Component{
                                 <ResourcesDirective>
                                     <ResourceDirective dataSource={this.stock(value.stock)} allowMultiple={true} field='ResourceID' title='Resource Name' name='Resources' textField='name' idField='id' colorField='color'/>
                                 </ResourcesDirective>
-                                <Inject services={[Month, TimelineMonth]}/>
-                            </ScheduleComponent>
+                                <Inject services={[TimelineMonth]}/>
+                            </ScheduleComponent>: <div style={{width:'100%' ,height:'100px',color:'red'}}> <center>Les stock de vehicule est vide</center></div>}
                             <br/><br/>
                         </div>
                     </>
                 )
-            })}
+            }):<h1 className="text-white">Chargement ..........</h1>}
             </>
         )
     }

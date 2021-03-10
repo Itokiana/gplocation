@@ -16,11 +16,9 @@
 
 /*Page Header */
 .b-pageHeader{
-    padding: 50px 0;
-    background: url(../images/backgrounds/img01.jpg) center;
+    padding: 40px 0;
+    background: url(../images/backgrounds/pageHead.jpg) center;
     background-size: cover;
-    height: 20px;
-    padding-top: 10px;
 }
 
 .b-pageHeader h1{
@@ -168,7 +166,7 @@ select.m-select + span.fa{
 
 /* Items */
 .b-items{
-    padding: 72px 0 145px 0;
+    padding: 93px 0 0 0;
 }
 
 .b-items__aside{
@@ -450,11 +448,12 @@ select.m-select + span.fa{
 }
 
 .b-items__cars-one-info a.btn span.fa{
-    width:20px!important;
-    height:20px!important;
-    font-size:13px!important;
+    width: 24px!important;
+    height: 26px!important;
+    font-size: 20px!important;
     padding: 3px!important;
     margin-left: 10px!important;
+
 }
 
 .b-items__pagination{

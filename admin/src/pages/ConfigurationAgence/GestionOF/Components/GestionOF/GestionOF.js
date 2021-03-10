@@ -22,13 +22,14 @@ class GestionOF extends Component {
         horaire : []
     }
     componentDidMount() {
-        this.interval = setInterval(() =>
-            this.action.getHoraire()
-            , 1000)  
+        this.action.getHoraire()
+        // this.interval = setInterval(() =>
+        //     this.action.getHoraire()
+        //     , 5000)  
     }
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
+    // componentWillUnmount() {
+    //     clearInterval(this.interval);
+    // }
     action = {
         getHoraire: () => {
             axios.get(`/horaire_jours`).then(response => {

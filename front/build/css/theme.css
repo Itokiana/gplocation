@@ -62,7 +62,6 @@ body{
 .s-shadow.b-breadCumbs{
     box-shadow: 0px 30px 50px -24px rgba(0,0,0,0.1);
     z-index:1000;
-    
 }
 
 .s-whiteShadow{
@@ -162,14 +161,25 @@ body{
     right:25px!important;
 }
 
-.s-form input[type='text'],[type="password"],.s-form textarea{
+.s-form input[type='text'],.s-form textarea{
     display: block;
     width: 100%;
     margin-bottom: 15px;
     padding: 15px 20px;
     font: 400 10px 'Open Sans',sans-serif;
     border: 1px solid #eeeeee;
-    text-transform: uppercase;
+    text-transform: downcase;
+    font-size: 15px;
+    border-radius: 30px;
+}
+.s-form input[type='password'],.s-form textarea{
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    font-size: 15px;
+    font: 400 15px 'Open Sans',sans-serif;
+    border: 1px solid #eeeeee;
     border-radius: 30px;
 }
 
@@ -178,10 +188,12 @@ body{
     margin-bottom: 20px;
 }
 
-.s-form input[type='text']:focus,[type="password"]:focus,.s-form textarea:focus{
+.s-form input[type='text']:focus,.s-form textarea:focus{
     outline:none;
 }
-
+.s-form input[type='password']:focus,.s-form textarea:focus{
+    outline:none;
+}
 .s-form input::-webkit-input-placeholder{
     color:#999;
 }
@@ -193,7 +205,7 @@ body{
 .s-form button[type='submit']{
     font: 700 12px 'Open Sans',sans-serif;
     padding-left: 20px;
-    margin-top: -37px;
+    margin-top: 25px;
 }
 
 .s-form button[type='submit'] span.fa{

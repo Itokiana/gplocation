@@ -25,13 +25,14 @@ class GestionFE extends Component {
     }
     
     componentDidMount() {
-        this.interval = setInterval(() =>
-            this.action.getFerme()
-            ,1000)
+        this.action.getFerme()
+        // this.interval = setInterval(() =>
+        //     this.action.getFerme()
+        //     ,5000)
     }
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
+    // componentWillUnmount() {
+    //     clearInterval(this.interval);
+    // }
     action = {
         getFerme: () => {
             axios.get(`/fermexceptions`).then(response => {
@@ -55,14 +56,14 @@ class GestionFE extends Component {
     render() {
         return (
             <>
-                    <div className="page-title">
-                        <div>
-                            <h2>GESTION DES FERMETURES EXECEPTIONNEL </h2>
-                        </div>
+                <div className="page-title">
+                    <div>
+                        <h2>GESTION DES FERMETURES EXECEPTIONNEL </h2>
                     </div>
-                    <h3>Ajouter autant de periode fermeture nécessaire </h3>
-                    <br/><br/>
-                    <div className="row">
+                </div>
+                <h3>Ajouter autant de periode fermeture nécessaire </h3>
+                <br/><br/>
+                <div className="row">
                     <Formik
                         initialValues={{
                             jourfermedebut: '',
