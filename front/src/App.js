@@ -19,6 +19,7 @@ import Mentions from './Pages/Mentions/Mentions.js';
 import axios from './axios';
 import {PrivateRoute} from './Helpers/PrivateRoute';
 import Footer from './Pages/Footer/Footer.js';
+// import PaimentStripe from './Pages/HomePages/Components/Reservation/Reserver/Paiment/PaimentStripe'
 
 //import './App.scss';
 //import React, { Component } from 'react'
@@ -73,9 +74,8 @@ export default class App extends Component {
             <Route exact path='/condition' component={Condition}/>
             <Route exact path='/mentions-legales' component={Mentions}/>
             <Route exact path='/reserver/:id/:prix/:count' component={Reserver}/>
+            {/* <Route exact path='/paiment' component={PaimentStripe}/> */}
             <PrivateRoute exact path='/profil' component={() => <Profil client={this.state.user}/>} />
-            
-          
             
             <Route component={NotFound}/>
           {/* <Route exact path='/Signup' component={Signup} /> */}  
