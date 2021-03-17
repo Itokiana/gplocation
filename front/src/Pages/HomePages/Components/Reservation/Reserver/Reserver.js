@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-
+import { Link } from "react-router-dom";
 import PaimentEtape1 from './Paiment/PaimentEtape1';
 import './Reserver.css';
 import DetailReserver from './DetailReserver';
@@ -64,7 +64,7 @@ function Reserver(propos) {
          setEtat(3)
         }
         else {
-        setEtat(1) 
+        setEtat(2) 
 
         }
         console.log(clientss)
@@ -223,7 +223,7 @@ function Reserver(propos) {
                                                         
                                                         <b className="textRempli">Connectez-vous à votre compte et <br/> accédez au paiement de votre réservation.</b>
                                                         <div className="bouttonDej">
-                                                        <button onClick={() => setEtat(1)} className="btn m-btn" style={{background:'#228dcb', color:'white'}}>Nouveau client ?<span className="fa fa-angle-right"></span></button>
+                                                        <Link to="/login" ><button className="btn m-btn" style={{background:'#228dcb', color:'white'}}>Nouveau client ?<span className="fa fa-angle-right"></span></button> </Link>
                                                         </div>
                                                     </p>
                                                     
@@ -280,6 +280,7 @@ function Reserver(propos) {
                             { etat === 3 ? (
                                 <PaimentEtape1 client={client}  data={propos.match.params}/>
                             ) : null } 
+
                         </div>
                     </div>
                 </section>
