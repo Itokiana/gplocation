@@ -90,7 +90,7 @@ class Login extends React.Component {
 								onSubmit={(values, { resetForm }) => {
 									axios.post('/client_login', values).then(response => {
 										if (response.status === 200 && response.data.client.email_confirmed) {
-											sessionStorage.setItem('currentUser', response.data.client)
+											sessionStorage.setItem('client', JSON.stringify(response.data.client))
 											sessionStorage.setItem('id', response.data.client.id)
 											sessionStorage.setItem('nom',response.data.client.nom)
 											sessionStorage.setItem('prenom',response.data.client.prenom)
@@ -227,19 +227,19 @@ class Login extends React.Component {
 										{({ errors, touched, handleSubmit }) => (
 											<Form className="contactForm" className="s-form wow zoomInUp" onSubmit={handleSubmit}  >
 												<div>
-													<Field type="text" placeholder="NOM*" name="nom" />
+													<Field type="text" placeholder="NOM" name="nom" />
 													<ErrorLogin errors={errors} touched={touched} row="nom"/>
 												</div>
 												<div>
-													<Field type="text" placeholder="PRENOM*" name="prenom" />
+													<Field type="text" placeholder="PRENOM" name="prenom" />
 													<ErrorLogin errors={errors} touched={touched} row="prenom"/>
 												</div>
 												<div>
-													<Field type="text" placeholder="TÉLEPHONE*" name="telephone" />
+													<Field type="text" placeholder="TÉLEPHONE" name="telephone" />
 													<ErrorLogin errors={errors} touched={touched} row="telephone"/>
 												</div>
 												<div>
-													<Field type="email" placeholder="EMAIL*" name="email"  className="email_field"/>
+													<Field type="email" placeholder="EMAIL" name="email"  className="email_field"/>
 													<ErrorLogin errors={errors} touched={touched} row="email"/>
 												</div>
 												<div>
