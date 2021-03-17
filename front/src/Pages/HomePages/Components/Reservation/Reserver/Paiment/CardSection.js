@@ -21,7 +21,7 @@ const useOptions = () => {
           fontSize,
           color: "#424770",
           letterSpacing: "0.025em",
-          fontFamily: "Source Code Pro, monospace",
+          // fontFamily: "Source Code Pro, monospace",
           // "::placeholder": {
           //   color: "#aab7c4"
           // }
@@ -47,10 +47,6 @@ function CardSection() {
     Numero de carte
     <CardNumberElement
       options={options}
-      
-      onChange={event => {
-        console.log("CardNumberElement [change]", event);
-      }}
     />
   </label>
   <div className='flex'>
@@ -58,10 +54,6 @@ function CardSection() {
     Expiration date
     <CardExpiryElement
       options={options}
-     
-      onChange={event => {
-        console.log("CardNumberElement [change]", event);
-      }}
     />
   </label>
   
@@ -69,10 +61,6 @@ function CardSection() {
     CVC
     <CardCvcElement
       options={options}
-      
-      onChange={event => {
-        console.log("CardNumberElement [change]", event);
-      }}
     />
   </label>
   </div>

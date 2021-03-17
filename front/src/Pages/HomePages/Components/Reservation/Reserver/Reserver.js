@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-
+import { Link } from "react-router-dom";
 import PaimentEtape1 from './Paiment/PaimentEtape1';
 import './Reserver.css';
 import DetailReserver from './DetailReserver';
@@ -49,12 +49,25 @@ const ClientSession = Yup.object().shape({
 function Reserver(propos) {
 
     const [modalShow, setModalShow] = React.useState(false); 
-    const [etat, setEtat] = useState(1);
+    const [etat, setEtat] = useState();
     const [voiture, setVoiture] = React.useState([]);
     const [client, setClient] = React.useState([]);
     
 
     useEffect(()=>{
+    const clientss = sessionStorage.client
+        if(clientss){
+            setClient({
+                client: JSON.parse(clientss)
+            })
+         console.log(client)
+         setEtat(3)
+        }
+        else {
+        setEtat(2) 
+
+        }
+        console.log(clientss)
         setVoiture({loading: true});
         // const apiVoiture = (`http://fd0b515.online-server.cloud/voitures/${propos.match.params.id}`)
         const apiVoiture = (`http://localhost:4000/voitures/${propos.match.params.id}`)
@@ -210,7 +223,7 @@ function Reserver(propos) {
                                                         
                                                         <b className="textRempli">Connectez-vous à votre compte et <br/> accédez au paiement de votre réservation.</b>
                                                         <div className="bouttonDej">
-                                                        <button onClick={() => setEtat(1)} className="btn m-btn" style={{background:'#228dcb', color:'white'}}>Nouveau client ?<span className="fa fa-angle-right"></span></button>
+                                                        <Link to="/login" ><button className="btn m-btn" style={{background:'#228dcb', color:'white'}}>Nouveau client ?<span className="fa fa-angle-right"></span></button> </Link>
                                                         </div>
                                                     </p>
                                                     
@@ -227,7 +240,8 @@ function Reserver(propos) {
                                                             setClient({
                                                                 client: response.data.client
                                                             })
-                                                            console.log(values);
+
+                                                            console.log(client);
                                                             setEtat(3)
                                                         }
                 
@@ -266,6 +280,7 @@ function Reserver(propos) {
                             { etat === 3 ? (
                                 <PaimentEtape1 client={client}  data={propos.match.params}/>
                             ) : null } 
+
                         </div>
                     </div>
                 </section>

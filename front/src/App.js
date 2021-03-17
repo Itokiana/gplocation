@@ -11,6 +11,8 @@ import Aeroport from './Pages/Aeroport/Aeroport.js';
 import Saint from './Pages/Saint/Saint.js';
 import Condition from './Pages/Condition/Condition.js';
 import Reserver from './Pages/HomePages/Components/Reservation/Reserver/Reserver.js';
+import Felicitation from './Pages/HomePages/Components/Reservation/Felicitation';
+import ErreurReserv from './Pages/HomePages/Components/Reservation/Erreur_res';
 import Profil from './Pages/Login/Profil/Profil';
 import NotFound from './Pages/404/NotFound'
 import Password from './Pages/Login/Password'
@@ -73,8 +75,10 @@ export default class App extends Component {
             <Route exact path='/sainte-marie' component={Saint}/>
             <Route exact path='/condition' component={Condition}/>
             <Route exact path='/mentions-legales' component={Mentions}/>
+            <Route exact path='/felicitation' component={Felicitation}/>
             <Route exact path='/reserver/:id/:prix/:count' component={Reserver}/>
             {/* <Route exact path='/paiment' component={PaimentStripe}/> */}
+            <Route exact path='/error_res' component={ErreurReserv}/>
             <PrivateRoute exact path='/profil' component={() => <Profil client={this.state.user}/>} />
             
             <Route component={NotFound}/>

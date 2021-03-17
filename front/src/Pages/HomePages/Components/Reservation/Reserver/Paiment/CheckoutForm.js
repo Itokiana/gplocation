@@ -29,6 +29,8 @@ class CheckoutForm extends React.Component {
 
     if (result.error) {
       // Show error to your customer.
+      history.push('/error_res')
+      window.location.reload()
       console.log('ato ny',result.error.message);
     } else {
       // Send the token to your server.
@@ -113,7 +115,7 @@ async function stripeTokenHandler(token) {
     sessionStorage.setItem("lieu_retour",'')
     await axios.post('/reservations',values).then(result => {
       if(result.status===201){
-        history.push('/')
+        history.push('/felicitation')
         window.location.reload()
       }
     })
