@@ -90,7 +90,7 @@ class Login extends React.Component {
 								onSubmit={(values, { resetForm }) => {
 									axios.post('/client_login', values).then(response => {
 										if (response.status === 200 && response.data.client.email_confirmed) {
-											sessionStorage.setItem('currentUser', response.data.client)
+											sessionStorage.setItem('client', JSON.stringify(response.data.client))
 											sessionStorage.setItem('id', response.data.client.id)
 											sessionStorage.setItem('nom',response.data.client.nom)
 											sessionStorage.setItem('prenom',response.data.client.prenom)

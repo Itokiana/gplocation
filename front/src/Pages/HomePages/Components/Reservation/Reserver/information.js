@@ -49,25 +49,12 @@ const ClientSession = Yup.object().shape({
 function Reserver(propos) {
 
     const [modalShow, setModalShow] = React.useState(false); 
-    const [etat, setEtat] = useState();
+    const [etat, setEtat] = useState(1);
     const [voiture, setVoiture] = React.useState([]);
     const [client, setClient] = React.useState([]);
     
 
     useEffect(()=>{
-    const clientss = sessionStorage.client
-        if(clientss){
-            setClient({
-                client: JSON.parse(clientss)
-            })
-         console.log(client)
-         setEtat(3)
-        }
-        else {
-        setEtat(1) 
-
-        }
-        console.log(clientss)
         setVoiture({loading: true});
         // const apiVoiture = (`http://fd0b515.online-server.cloud/voitures/${propos.match.params.id}`)
         const apiVoiture = (`http://localhost:4000/voitures/${propos.match.params.id}`)
@@ -79,6 +66,7 @@ function Reserver(propos) {
         });
     },[]);  
       
+    if(sessionStorage.id){
     return (
         <div>
             <div className="b-breadCumbs s-shadow wow " >
@@ -240,8 +228,7 @@ function Reserver(propos) {
                                                             setClient({
                                                                 client: response.data.client
                                                             })
-
-                                                            console.log(client);
+                                                            console.log(values);
                                                             setEtat(3)
                                                         }
                 
@@ -285,6 +272,10 @@ function Reserver(propos) {
                 </section>
         </div>
     )
+}
+else{
+  return(null)
+}
 }
 
 export default Reserver;

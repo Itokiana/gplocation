@@ -24,7 +24,10 @@ function PaimentEtape1(props) {
         setStatus(!status) 
     };
     let acompte = sessionStorage.getItem("acompte")
-
+    useEffect(
+        () =>{
+            console.log(props.client)
+        })
     
     return (
         
