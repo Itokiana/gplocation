@@ -11,6 +11,11 @@ import ErrorField from '../ErrorField';
 import moment from 'moment';
 import 'moment/locale/fr' ;
 import Button from 'react-bootstrap/esm/Button';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {BiMessageSquareError} from 'react-icons/bi';
+import { IconContext } from "react-icons";
+
 moment.locale('fr');
 
 const ClientRegistrationSchema = Yup.object().shape({
@@ -53,6 +58,9 @@ function Reserver(propos) {
     const [voiture, setVoiture] = React.useState([]);
     const [client, setClient] = React.useState([]);
     
+   const message = (e) =>{
+		return <IconContext.Provider value={{ size: '50px', style: { verticalAlign: 'middle' }}}> <BiMessageSquareError className="icon"/> {e}</IconContext.Provider>;
+	}
 
     useEffect(()=>{
     const clientss = sessionStorage.client
@@ -236,7 +244,7 @@ function Reserver(propos) {
                                                 validationSchema={ClientSession}
                                                 onSubmit={(values, { resetForm }) => {
                                                     axios.post('/client_login', values).then(response => {
-                                                        if (response.status === 200) {
+                                                        if (response.status === 200 && response.data.client.email_confirmed) {
                                                         
                                                         sessionStorage.setItem('client', JSON.stringify(response.data.client))
                                                         sessionStorage.setItem('id', response.data.client.id)
@@ -251,6 +259,19 @@ function Reserver(propos) {
 
                                                             console.log(client);
                                                             setEtat(3)
+                                                        }
+                                                        else if (response.status === 202) {
+                                                            toast.error(message(response.data.message))	
+                                                            
+                                                        }
+                                                        else if (response.status === 200 && response.data.client.email_confirmed == false) {
+                                                            toast.error(message("Email non confirmer"))
+                                                            toast.error(message('verifier votre boite email'),{
+                                                                    delay: 2000,
+                                                                    position: "bottom-left",
+                                                                    autoClose: 4000,
+                                                                    
+                                                                    });		
                                                         }
                 
                                                     })
@@ -288,7 +309,17 @@ function Reserver(propos) {
                             { etat === 3 ? (
                                 <PaimentEtape1 client={client}  data={propos.match.params}/>
                             ) : null } 
-
+                            <ToastContainer
+									position="bottom-left"
+									autoClose={3000}
+									hideProgressBar={false}
+									newestOnTop={false}
+									closeOnClick
+									rtl={false}
+									pauseOnFocusLoss
+									draggable
+									pauseOnHover
+									/>
                         </div>
                     </div>
                 </section>

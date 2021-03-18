@@ -70,10 +70,10 @@ class Reservation extends Component {
                                                     <img className="img-responsive" src={`http://localhost:4000/${voiture.image.url}`} alt={voiture.marque}/>
                                                     {/* <img className="img-responsive" src={`http://fd0b515.online-server.cloud/${voiture.image.url}`} alt={voiture.marque}/> */}
                                                     <br />
-                                                    <p className="laststock">{
-                                                        this.props.stock[this.getKey(voiture,this.props.voitures)] === 1 ? "Dernier vehicule en stock" : "Stock restant : " + " " + " " + " " + this.props.stock[this.getKey(voiture,this.props.voitures)]
+                                                    {
+                                                        this.props.stock[this.getKey(voiture,this.props.voitures)] === 1 ? <p className="laststock">Dernier vehicule en stock</p> : <p className='laststock1'>Stock restant : {this.props.stock[this.getKey(voiture,this.props.voitures)]}</p>
                                                         }
-                                                    </p> 
+                                                    
                                                     <span className="confirm-tarif ">{
                                                         this.props.prix[this.getKey(voiture,this.props.voitures)]
                                                     }</span>
