@@ -16,7 +16,7 @@ export default function Felicitation() {
 						detail de votre reservation sous le nom de :
 					</h5>
 					<h2 className= 'name_client'>
-						{sessionStorage.getItem('nom') + sessionStorage.getItem('prenom')}
+						{(sessionStorage.getItem('nom')).toUpperCase() +(" ") + (sessionStorage.getItem('prenom')).toLowerCase()}
 					</h2>
 					<br/>
 					<br/>
