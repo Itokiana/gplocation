@@ -41,9 +41,10 @@ class App extends React.Component {
     tarif: [],
     voiture: []
   }
-
+  
   render() {
     const { isAuthenticated } = this.props;
+    console.log('ALAOLAO',this.props)
     return (
       <Router>
         <>

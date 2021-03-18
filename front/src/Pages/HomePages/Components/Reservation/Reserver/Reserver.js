@@ -237,6 +237,14 @@ function Reserver(propos) {
                                                 onSubmit={(values, { resetForm }) => {
                                                     axios.post('/client_login', values).then(response => {
                                                         if (response.status === 200) {
+                                                        
+                                                        sessionStorage.setItem('client', JSON.stringify(response.data.client))
+                                                        sessionStorage.setItem('id', response.data.client.id)
+                                                        sessionStorage.setItem('nom',response.data.client.nom)
+                                                        sessionStorage.setItem('prenom',response.data.client.prenom)
+                                                        sessionStorage.setItem('telephone',response.data.client.telephone)
+                                                        sessionStorage.setItem('email',response.data.client.email)
+                                                        sessionStorage.setItem('gamers',response.data.client.password_digest)
                                                             setClient({
                                                                 client: response.data.client
                                                             })

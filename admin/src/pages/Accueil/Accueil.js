@@ -139,7 +139,7 @@ export class Accueil extends Component {
                                                         <th>Véhicule</th>
                                                         {this.state.statusDepart ? (<th>départ</th>) : null}
                                                         {this.state.statusRetour ? (<th>Retour</th>):null}
-                                                        <th>Option</th>
+                                                        {/* <th>Option</th> */}
                                                         <th>Total</th>
                                                         <th>Acompte</th>
                                                         <th>Nom</th>
@@ -181,7 +181,9 @@ export class Accueil extends Component {
                                                                 </tr>
                                                                 <tr key={res}>
                                                                     <td>
-                                                                        <img className="img-voiture" src={`http://fd0b515.online-server.cloud/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/>
+                                                                        {/* <img className="img-voiture" src={`http://fd0b515.online-server.cloud/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/> */}
+                                                                        <img className="img-voiture" src={`http://localhost:4000/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/>
+
                                                                         {this.state.reservations[reservation][res][1].marque}
                                                                     </td>
                                                                     {this.state.statusDepart ? (
@@ -220,7 +222,9 @@ export class Accueil extends Component {
                                                                     </tr> 
                                                                     <tr key={res}>
                                                                     <td>
-                                                                        <img className="img-voiture" src={`http://fd0b515.online-server.cloud/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/>
+                                                                        {/* <img className="img-voiture" src={`http://fd0b515.online-server.cloud/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/> */}
+
+                                                                        <img className="img-voiture" src={`http://localhost:4000/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/>
                                                                         {this.state.reservations[reservation][res][1].marque}
                                                                     </td>
                                                                     {this.state.statusDepart ? (
@@ -247,7 +251,7 @@ export class Accueil extends Component {
                                                                     this.state.statusDepart && this.state.statusRetour ?(
                                                                         <tr key={res}>
                                                                     <td>
-                                                                        <img className="img-voiture" src={`http://fd0b515.online-server.cloud/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/>
+                                                                        <img className="img-voiture" src={`http://localhost:4000/${this.state.reservations[reservation][res][1].image.url}`} alt={this.state.reservations[reservation][res][1].marque}/>
                                                                         {this.state.reservations[reservation][res][1].marque}
                                                                     </td>
                                                                     {this.state.statusDepart ? (
@@ -262,7 +266,7 @@ export class Accueil extends Component {
                                                                             <div>{this.state.reservations[reservation][res][0].heure_retour}</div>
                                                                         </td>
                                                                     ):null}
-                                                                    <td>Options</td>
+                                                                    {/* <td>Options</td> */}
                                                                     <td>{this.state.reservations[reservation][res][0].prix}€</td>
                                                                     <td>{this.state.reservations[reservation][res][0].acompte}€</td>
                                                                     <td>{this.state.reservations[reservation][res][2].nom}</td>
