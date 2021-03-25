@@ -196,18 +196,18 @@ export default class ChiffreAffaire extends Component {
           label: 'CA',
           fill: true,
           lineTension: 0.3,
-          backgroundColor: 'rgba(75,192,192,0.4)',
-          borderColor: 'rgba(75,192,192,1)',
+         
+          borderColor: '#4834d4',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(75,192,192,1)',
+          pointBorderColor: '#4834d4',
           pointBackgroundColor: '#fff',
           pointBorderWidth: 3,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
+          pointHoverBackgroundColor: '#4834d4',
+          pointHoverBorderColor: '#4834d4',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
@@ -221,18 +221,20 @@ export default class ChiffreAffaire extends Component {
         <center>
           <h1 className="text-white">CHIFFRE D'AFFAIRE (CA)</h1>
           <br/>
-          <span className=" text-white m-1" onClick={e => {this.onPrev()}}> 
-            <a href="#">&laquo;</a>
-          </span>
-          <span className="text-white m-2" onClick={e => {this.showMonth()}}>
-            <a href="#">{this.capitalize(String(this.month()))}</a>
-          </span>
-          <span className="text-white" onClick={(e)=>this.showYear()} >
-            <a href="#"> {this.years()}</a>
-          </span>
-          <span className=" text-white m-3" onClick={e => {this.onNext()}}>
-            <a href="#">&raquo;</a>
-          </span>
+          <div className="daty row">
+              <span className=" text-white  col-md-4 cont-flesy" onClick={e => {this.onPrev()}}> 
+                <a href="#"><i class="fa fa-angle-left flesy"></i></a>
+              </span>
+              <span className="text-white  col-md-2 volana" onClick={e => {this.showMonth()}}>
+                <a href="#">{this.capitalize(String(this.month()))}</a>
+              </span>
+              <span className="text-white col-md-2 taona " onClick={(e)=>this.showYear()} >
+                <a href="#"> {this.years()}</a>
+              </span>
+              <span className=" text-white  col-md-4 cont-flesy" onClick={e => {this.onNext()}}>
+                <a href="#"><i class="fa fa-angle-right flesy"></i></a>
+              </span>
+          </div>
            {this.state.showYears && (
             <this.yearClick/> 
           )}
@@ -244,8 +246,8 @@ export default class ChiffreAffaire extends Component {
           <h2>Totale Moi  {this.month()}: {this.CA_Moi()}</h2>
           <h2>Totale Anne {this.years()} : {this.CA_Anne()}</h2>
         </div>
-        <div style={{background: "white"}}>
-          <Line data={data} />
+        <div className='diagrame-line' style={{background: "#161b36"}}>
+          <Line data={data} height= "80vh" />
         </div>
       </div>
     );

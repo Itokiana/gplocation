@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "bootstrap": "^4.6.0",
     "formik": "^2.2.5",
+    "react-bootstrap": "^1.5.2",
+    "react-minimal-pie-chart": "^8.2.0",
     "recharts": "^1.8.5"
   }
 }

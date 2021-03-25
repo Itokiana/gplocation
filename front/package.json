@@ -38,6 +38,7 @@
     "react-google-recaptcha": "^2.1.0",
     "react-hook-form": "^6.15.4",
     "react-icons": "^3.11.0",
+    "react-minimal-pie-chart": "^8.2.0",
     "react-pure-loaders": "^3.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
