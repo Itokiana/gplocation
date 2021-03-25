@@ -7,8 +7,8 @@ import ErrorLogin from './ErrorLogin';
 import {BiMessageSquareError,BiInfoCircle} from 'react-icons/bi';
 import { IconContext } from "react-icons";
 import { ToastContainer, toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
-
+import {useParams } from 'react-router-dom';
+import history from '../../History';
 
 
 const validationSchema = Yup.object().shape({
@@ -57,7 +57,8 @@ export default function Password() {
               if (response.status === 200){
                 console.log(response.data.status)
                 toast.info(messagee(response.data.status));
-                
+                history.push('/')
+                window.location.reload()
               }
               values:{}
           }).catch(err => {
