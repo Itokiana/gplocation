@@ -2,7 +2,7 @@ import React from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-
+import history from '../../History';
 import ErrorField from '../ErrorField/ErrorField';
 import axios from '../../axios'
 import './Contact.css';
@@ -66,7 +66,9 @@ class Contact extends React.Component {
 										onSubmit={(values, { resetForm }) => {
 											axios.post('/contacts', values).then(response => {
 												if (response.status === 201) {
-													resetForm();
+													
+													history.push('/login')
+                									window.location.reload()
 												}
 											})
 										}}

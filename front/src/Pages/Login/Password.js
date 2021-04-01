@@ -13,9 +13,7 @@ import history from '../../History';
 
 const validationSchema = Yup.object().shape({
 
-email: Yup.string()
-  .email('Email invalide,merci de vouloire completé')
-  .required('l \' email ne doit pas être vide'),
+
 password_digest: Yup.string()
   .required('le mot de passe ne doit pas être vide')
   .matches(
@@ -46,7 +44,7 @@ export default function Password() {
     const {handleChange, handleSubmit, values, errors, touched} = useFormik({
         initialValues: {
           token: token,
-          email: '',
+          email: `${sessionStorage.getItem('email')}`,
           password_digest: '',
           password: ''
         },
@@ -57,8 +55,10 @@ export default function Password() {
               if (response.status === 200){
                 console.log(response.data.status)
                 toast.info(messagee(response.data.status));
-                history.push('/')
+                sessionStorage.removeItem('email')
+                history.push('/login')
                 window.location.reload()
+
               }
               values:{}
           }).catch(err => {
@@ -101,9 +101,9 @@ export default function Password() {
             name="email"
             type="email"
             onChange={handleChange}
-            value={values.email}
+            value={localStorage.getItem('email')}
             className='email_field champ_email'
-            placeholder='Entrez votre adresse email'
+            disabled
           />
         	<ErrorLogin errors={errors} touched={touched} row="email"/>
           <input

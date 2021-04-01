@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
-
+import {Link} from 'react-router-dom'
+import './headerAeroport.css'
  class HeaderAeroport extends Component {
+
+	direction(){
+		sessionStorage.setItem('lieu_depart_predefinie',"Aéroport Roland-Garros")
+		sessionStorage.setItem('lieu_retour_predefinie',"Aéroport Roland-Garros")
+	}
     render() {
         return (
         <>	
@@ -8,7 +14,7 @@ import React, { Component } from 'react'
 				<div className="container">
 					<h1 className="wow zoomInLeft" data-wow-delay="0.7s" style={{visibility: "visible", animationDelay: "0.7s", animationName: "zoomInLeft"}}>Aéroport de la Réunion Roland-Garros</h1>
 					<div className="b-pageHeader__search wow zoomInRight" data-wow-delay="0.7s" style={{visibility: "visible", animationDelay: "0.7s", animationName: "zoomInRight"}}>
-						<h3>Location de voiture Aéroport de la Réunion</h3>
+						<Link className='aeroporo' to='/' onClick={this.direction}><h3>Location de voiture Aéroport de la Réunion</h3></Link>
 					</div>
 				</div>
 			</section>

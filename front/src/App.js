@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactGA from 'react-ga'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Email_conf from './Pages/Login/Email_confirmation.js'
@@ -19,7 +19,7 @@ import Password from './Pages/Login/Password'
 import FindEmail from './Pages/Login/Find_email'
 import Mentions from './Pages/Mentions/Mentions.js';
 import axios from './axios';
-import {PrivateRoute} from './Helpers/PrivateRoute';
+import { PrivateRoute } from './Helpers/PrivateRoute';
 import Footer from './Pages/Footer/Footer.js';
 // import PaimentStripe from './Pages/HomePages/Components/Reservation/Reserver/Paiment/PaimentStripe'
 
@@ -39,80 +39,79 @@ export default class App extends Component {
     // ReactGA.pageview(window.location.pathname);
   }
 
-  initializeAnalytics(){
+  initializeAnalytics() {
     ReactGA.initialize('G-XWNX24WHLD');
     ReactGA.pageview(window.location.pathname + window.location.search);
   }
   componentDidMount = () => {
-    if(sessionStorage.id){
+    if (sessionStorage.id) {
       axios.put(`/clients/${sessionStorage.id}`).then(response => {
         if (response.status === 200) {
-          
+
           this.setState({
             user: response.data
           })
-  
+
           console.log(response.data)
         }
-        
+
       })
     }
-   
+
   };
-  
+
   render() {
     // this.initializeAnalytics()
-  if(sessionStorage.id)
-  {
-    return (  
-      <Router>
-          <Header client={this.state.user}/> 
+    if (sessionStorage.id) {
+      return (
+        <Router>
+          <Header client={this.state.user} />
           <Switch>
 
-            <Route exact path='/' component={HomePages}/>
+            <Route exact path='/' component={HomePages} />
             <Route exact path='/contact' component={Contact} />
-            <Route exact path='/aeroport' component={Aeroport}/>
-            <Route exact path='/sainte-marie' component={Saint}/>
-            <Route exact path='/condition' component={Condition}/>
-            <Route exact path='/mentions-legales' component={Mentions}/>
-            <Route exact path='/felicitation' component={Felicitation}/>
-            <Route exact path='/reserver/:id/:prix/:count' component={Reserver}/>
+            <Route exact path='/aeroport' component={Aeroport} />
+            <Route exact path='/sainte-marie' component={Saint} />
+            <Route exact path='/condition' component={Condition} />
+            <Route exact path='/mentions-legales' component={Mentions} />
+            <Route exact path='/felicitation' component={Felicitation} />
+            <Route exact path='/reserver/:id/:prix/:count' component={Reserver} />
             {/* <Route exact path='/paiment' component={PaimentStripe}/> */}
-            <Route exact path='/error_res' component={ErreurReserv}/>
-            <PrivateRoute exact path='/profil' component={() => <Profil client={this.state.user}/>} />
-            
-            <Route component={NotFound}/>
-          {/* <Route exact path='/Signup' component={Signup} /> */}  
-          </Switch>
-          <Footer /> 
-    </Router>
-    )
-  }
+            <Route exact path='/error_res' component={ErreurReserv} />
+            <PrivateRoute exact path='/profil' component={() => <Profil client={this.state.user} />} />
 
-  else{
-    return(
-      <Router>
-          <Header /> 
-          <Switch>
-            <Route exact path='/' component={HomePages}/>
-            <Route exact path='/contact' component={Contact} />
-            <Route exact path='/aeroport' component={Aeroport}/>
-            <Route exact path='/sainte-marie' component={Saint}/>
-            <Route exact path='/condition' component={Condition}/>
-            <Route exact path='/mentions-legales' component={Mentions}/>
-            <Route exact path='/reserver/:id/:prix/:count' component={Reserver}/>
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/cofirmation_email' component={Email_conf}/>
-            <Route exact path='/find-email' component={FindEmail}/>
-            <Route exact path='/password/:token'  component={Password}/>
-            <Route component={NotFound}/>
-          {/* <Route exact path='/Signup' component={Signup} /> */}  
+            <Route component={NotFound} />
+            {/* <Route exact path='/Signup' component={Signup} /> */}
           </Switch>
-          <Footer /> 
-    </Router>
-    )
-  }
-    
+          <Footer />
+        </Router>
+      )
+    }
+
+    else {
+      return (
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path='/' component={HomePages} />
+            <Route exact path='/contact' component={Contact} />
+            <Route exact path='/aeroport' component={Aeroport} />
+            <Route exact path='/sainte-marie' component={Saint} />
+            <Route exact path='/condition' component={Condition} />
+            <Route exact path='/mentions-legales' component={Mentions} />
+            <Route exact path='/reserver/:id/:prix/:count' component={Reserver} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/cofirmation_email' component={Email_conf} />
+            <Route exact path='/find-email' component={FindEmail} />
+            <Route exact path='/password/:token' component={Password} />
+            <Route component={NotFound} />
+            {/* <Route exact path='/Signup' component={Signup} /> */}
+          </Switch>
+          <Footer />
+        </Router>
+      )
+    }
+
   }
 }
 

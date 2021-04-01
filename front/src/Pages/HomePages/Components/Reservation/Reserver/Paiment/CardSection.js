@@ -1,9 +1,9 @@
 
 
-import React ,{ useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import {
-  CardElement, 
+  CardElement,
   useStripe,
   useElements,
   CardNumberElement,
@@ -39,34 +39,34 @@ const useOptions = () => {
 
 // import '../../../../../../Style.css'
 function CardSection() {
-  
+
   const options = useOptions();
   return (
     <>
-    <label className='section-Card'>
-    Numero de carte
+      <label className='section-Card'>
+        Numero de carte
     <CardNumberElement
-      options={options}
-    />
-  </label>
-  <div className='flex'>
-  <label className='section-Card'>
-    Expiration date
+          options={options}
+        />
+      </label>
+      <div className='flex'>
+        <label className='section-Card'>
+          Expiration date
     <CardExpiryElement
-      options={options}
-    />
-  </label>
-  
-  <label className='section-Card'>
-    CVC
+            options={options}
+          />
+        </label>
+
+        <label className='section-Card'>
+          CVC
     <CardCvcElement
-      options={options}
-    />
-  </label>
-  </div>
-  
-  </>
-    
+            options={options}
+          />
+        </label>
+      </div>
+
+    </>
+
   );
 };
 export default CardSection;
@@ -82,7 +82,7 @@ export default CardSection;
 //         </label>
 //         <CardElement className="checkout"/>
 //       </div>
-    
+
 //   );
 // };
 // export default CardSection;
