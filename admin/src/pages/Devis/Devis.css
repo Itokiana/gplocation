@@ -1,0 +1,53 @@
+.aloka{
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;}
+
+.no--top{
+    margin-top: 0 !important;
+}
+.container--mini{
+    margin: 4vw 5vw;
+    padding: 1vw 1vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.container-devi2{
+    
+    padding: 2vw 2vw;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;}
+.container-devi3{
+        margin-top:3vw;
+        padding: 1vw 1vw;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;}
+
+
+.container-devi{
+    margin: 5vw 5vw;
+    padding: 2vw 2vw;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;}
+.titre--perso{
+    margin-bottom: 6vw;
+    color:rgb(206, 206, 206);
+}
+.input--perso{
+    border-radius: 5vw;
+    height: 2vw;
+    text-align: center;
+    
+}
+.container--form{
+    width: 50%;
+}
+.nextPrev{
+   font-size:1.5vw;
+    height: 3vw;
+    color:rgb(206, 206, 206);
+}
+.image--perso{
+    background: none;
+}
+.text--perso{
+    font-size: 1.5vw;
+    color: #fff;
+}
+.place--perso{
+    color:rgb(135, 135, 135) !important;
+}
