@@ -3,27 +3,158 @@ import { Link } from 'react-router-dom';
 import Detail from './Detail/Detail';
 import Reserver from './Reserver/Reserver';
 import './Reservation.css';
+// import { Select } from 'antd';
+// import 'antd/dist/antd.css';
 //import axios from 'axios';
+
 
 class Reservation extends Component {
     constructor(props) {
         super(props)
+        const prix = [];
+
+        // this.props.prix && this.props.prix.map((vehicule) => (
+        //     prix.push(vehicule)
+        // ))
         this.state = {
             etape: 1,
+            prixVoiture: this.props.prix,
+            checksiege: '0',
+            checkrehausse: '0',
+            checkcovd: true,
+            gps: true
         }
-        this.props.prix && this.props.prix.map((vehicule, indexprix) => (
-            this.state[`Prix${indexprix}`] = vehicule,
-            this.state[`account${indexprix}`] = this.props.accompte[this.getKey(vehicule, this.props.prix)]
-        ))
 
     }
-    // ajourPrix = (p, i) => {
+    componentDidMount(){
+        this.setState({prixVoiture: this.props.prix})
 
-    //     this.setState({
-    //         Prix$i: 
-    //     })
+    }
 
-    // }
+    componentDidUpdate(previousProps, previousState) {
+        if (previousProps.prix !== this.props.prix) {
+            this.setState({prixVoiture: this.props.prix})
+        }
+    }
+
+    covid(v) {
+
+        this.setState({
+            checkcovd: !this.state.checkcovd
+        });
+        
+        let prix1 = this.state.prixVoiture
+        let prix2 = []
+        prix1.map(valeur => {
+            prix2.push(valeur)
+        })
+        if (this.state.checkcovd === true) {
+            prix2[v] = prix1[v] + 10
+            this.setState({ prixVoiture: prix2 })
+        } else {
+            prix2[v] = prix1[v] - 10
+            this.setState({ prixVoiture: prix2 })
+        }
+
+    }
+    gps(v) {
+        this.setState({
+            gps: !this.state.gps
+        });
+
+        let prix1 = this.state.prixVoiture
+        let prix2 = []
+        prix1.map(valeur => {
+            prix2.push(valeur)
+        })
+        if (this.state.gps === true) {
+            prix2[v] = prix1[v] + 27
+            this.setState({ prixVoiture: prix2 })
+        } else {
+            prix2[v] = prix1[v] - 27
+            this.setState({ prixVoiture: prix2 })
+        }
+
+    }
+
+
+    siege(e, v) {
+        let prixsieg1 = this.state.prixVoiture
+        let prixsieg2 = []
+        prixsieg1.map(valeur => {
+            prixsieg2.push(valeur)
+        })
+        console.log('prix1', prixsieg1)
+        if (this.state.checksiege === '1') {
+            prixsieg2[v] = prixsieg1[v] - 9
+        } else if (this.state.checksiege === '2') {
+            prixsieg2[v] = prixsieg1[v] - 18
+        } else if (this.state.checksiege === '3') {
+            prixsieg2[v] = prixsieg1[v] - 27
+        } else {
+            prixsieg2[v] = prixsieg1[v]
+        }
+
+        let prix1 = prixsieg2
+        let prix2 = []
+        prix1.map(valeur => {
+            prix2.push(valeur)
+        })
+
+        if (e.target.value === '1') {
+            prix2[v] = prix1[v] + 9
+        } else if (e.target.value === '2') {
+            prix2[v] = prix1[v] + 18
+        } else if (e.target.value === '3') {
+            prix2[v] = prix1[v] + 27
+        } else {
+            prix2[v] = prix1[v]
+        }
+        console.log('prix2', prix2)
+        this.setState({
+            prixVoiture: prix2,
+            checksiege: e.target.value
+        })
+    }
+
+    rehausseur(e, v) {
+        let prixreh1 = this.state.prixVoiture
+        let prixreh2 = []
+        prixreh1.map(valeur => {
+            prixreh2.push(valeur)
+        })
+
+        if (this.state.checkrehausse === '1') {
+            prixreh2[v] = prixreh1[v] - 9
+        } else if (this.state.checkrehausse === '2') {
+            prixreh2[v] = prixreh1[v] - 18
+        } else if (this.state.checkrehausse === '3') {
+            prixreh2[v] = prixreh1[v] - 27
+        } else {
+            prixreh2[v] = prixreh1[v]
+        }
+
+        let prix1 = prixreh2
+        let prix2 = []
+
+        prix1.map(valeur => {
+            prix2.push(valeur)
+        })
+
+        if (e.target.value === '1') {
+            prix2[v] = prix1[v] + 9
+        } else if (e.target.value === '2') {
+            prix2[v] = prix1[v] + 18
+        } else if (e.target.value === '3') {
+            prix2[v] = prix1[v] + 27
+        } else {
+            prix2[v] = prix1[v]
+        }
+        this.setState({
+            prixVoiture: prix2,
+            checkrehausse: e.target.value
+        })
+    }
 
     changerEtape = (newEtape) => {
         this.setState({
@@ -31,17 +162,33 @@ class Reservation extends Component {
         });
     }
 
+    getAcompt(prix) {
+
+        if (prix >= 0 && prix <= 150) {
+            return prix
+
+        } else if (prix > 150 && prix < 500) {
+            return 100
+
+        } else if (prix >= 500 && prix <= 999) {
+            return 200
+        } else if (prix > 999 && prix <= 1999) {
+            return 300
+
+        } else {
+            return 400
+        }
+
+    }
+
     getKey(val, map) {
         return Object.keys(map).find(key => map[key] === val);
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
-        console.log('ATTTTTO', this.state)
         const etape = this.state.etape;
+        console.log('props ty', this.state.checkcovd)
+        // console.log('state ty', this.state.prixVoiture)
         sessionStorage.setItem("date_depart", JSON.stringify(this.props.date_reservation.dateDepart))
         sessionStorage.setItem("date_retour", JSON.stringify(this.props.date_reservation.dateRetour))
         sessionStorage.setItem("heure_depart", JSON.stringify(this.props.date_reservation.heureDepart))
@@ -54,11 +201,7 @@ class Reservation extends Component {
             <div>
                 {
                     this.props.voitures && this.props.date_reservation && this.props.prix ? (
-                        this.props.voitures.map((voiture, num) =>{
-                        
-                            let numVoiture = `Prix${num}`
-                            
-                            console.log('qqqq',this.state.numVoiture)
+                        this.props.voitures.map((voiture, num) => {
 
                             return (<div key={voiture.id}>
                                 <section className="b-items s-shadow" id="padingReserver">
@@ -83,16 +226,14 @@ class Reservation extends Component {
                                                             }
 
                                                             <span className="confirm-tarif ">
-                                                                {
-                                                                 this.props.prix[this.getKey(voiture, this.props.voitures)]
-                                                                
-                                                        }</span>
-                                                            <p className="montant-acompte">dont {this.props.accompte[this.getKey(voiture, this.props.voitures)]} € d'acompte</p>
+                                                                {this.state.prixVoiture[num]}
+                                                            </span>
+                                                            <p className="montant-acompte">dont {this.getAcompt(this.state.prixVoiture[num])} € d'acompte</p>
                                                         </div>
                                                         <div className="b-items__cars-one-info">
                                                             <header className="b-items__cars-one-info-header s-lineDownLeft" id="head">
                                                                 <h2>{voiture.marque}</h2>
-                                                                <Link to={`/reserver/${voiture.id}/${this.props.prix[this.getKey(voiture, this.props.voitures)]}/${this.props.accompte[this.getKey(voiture, this.props.voitures)]}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
+                                                                <Link to={`/reserver/${this.props.signe[this.getKey(voiture, this.props.voitures)]}/${voiture.id}/${this.state.prixVoiture[num]}/${this.getAcompt(this.state.prixVoiture[num])}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
 
                                                             </header>
                                                             <div className="b-blog__posts-one-info">
@@ -101,42 +242,44 @@ class Reservation extends Component {
 
                                                                         <h4 className="titre-7">Choisissez vos options :</h4>
                                                                         <div>
-                                                                            <input name="" type="checkbox" defaultValue="" />
+
+                                                                            <input name={voiture.marque} class="ft" type="checkbox" id={voiture.id} onChange={(e) => (this.covid(num))}></input>
                                                                             <span className="Annulation">Annulation Covid (voir détails) : </span><span className="cout">10.00 €</span>
                                                                         </div>
 
                                                                         <div className="contenue-1">
 
-                                                                            <select name="kolo" type="checkbox" tabIndex="-1">
-                                                                                <option value='joala'>0</option>
-                                                                                <option>1</option>
-                                                                                <option>2</option>
-                                                                                <option>3</option>
+                                                                            <select>
+                                                                                <option value="0">0</option>
+                                                                                <option value="1">1</option>
+                                                                                <option value="2">2</option>
+                                                                                <option value="3">3</option>
                                                                             </select>
 
                                                                             <span className="conducteur">Conducteur additionnel  :</span><span className="gratuit">Gratuit</span>
 
                                                                             <div className="ddOutOfVision" id="2-produit_61_msddHolder" >
-                                                                                <select name="" type="checkbox" tabIndex="-1">
-                                                                                    <option>0</option>
-                                                                                    <option>1</option>
-                                                                                    <option>2</option>
-                                                                                    <option>3</option>
+                                                                                <select onClick={e => this.siege(e, num)}>
+                                                                                    <option value="0">0</option>
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
                                                                                 </select>
                                                                                 <span className="Annulation">Siège bébé (de 0 à 3 ans)  : </span>
                                                                                 <span className="cout-1">9.00 €</span>
                                                                             </div>
                                                                             <div className="ddOutOfVision" id="3-produit_61_msddHolder" >
-                                                                                <select name="" type="checkbox" tabIndex="-1">
-                                                                                    <option>0</option>
-                                                                                    <option>1</option>
-                                                                                    <option>2</option>
-                                                                                    <option>3</option>
+                                                                                <select onClick={e => this.rehausseur(e, num)}>
+                                                                                    <option value="0">0</option>
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
                                                                                 </select>
                                                                                 <span className="Annulation"> Réhausseur (à partir de 3 ans) : </span>
                                                                                 <span className="cout-2">9.00 €</span>
                                                                             </div>
-                                                                            <input className="produit_opt optf#REF" id="4-produit_61" name="" type="checkbox" value="" />
+                                                                            <input name={voiture.model} class="ft" type="checkbox" id={voiture.marque} onChange={(e) => (this.gps(num))}></input>
+                                                                            {/* <input className="produit_opt optf#REF" id="4-produit_61" name="" type="checkbox" value="" /> */}
                                                                             <span className="Annulation">GPS : </span>
                                                                             <span className="optionresult">27.00 €</span>
                                                                         </div>
@@ -189,8 +332,9 @@ class Reservation extends Component {
                                     {etape === 3 ? (<Detail />) : null}
                                 </section>
                                 { etape === 4 ? (<Reserver />) : null}
-                                </div>
-                            )}
+                            </div>
+                            )
+                        }
                         )
                     ) : null
                 }

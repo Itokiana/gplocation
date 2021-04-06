@@ -99,7 +99,7 @@ export default class App extends Component {
             <Route exact path='/sainte-marie' component={Saint} />
             <Route exact path='/condition' component={Condition} />
             <Route exact path='/mentions-legales' component={Mentions} />
-            <Route exact path='/reserver/:id/:prix/:count' component={Reserver} />
+            <Route exact path='/reserver/:signe/:id/:prix/:count' component={Reserver} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/cofirmation_email' component={Email_conf} />
             <Route exact path='/find-email' component={FindEmail} />
