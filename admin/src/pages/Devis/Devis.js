@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from "yup";
 import { parse, isDate } from "date-fns";
 import axios from 'axios'
+import { BsInfoSquareFill  } from 'react-icons/bs';
 import './Devis.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -61,152 +62,12 @@ function parseDateString(value, originalValue) {
 
 export default function Devis() {
 
-    const produit = [
-        {
-            "voiture": {
-                "id": 3,
-                "image": {
-                    "url": "/uploads/voiture/3/image.jpg"
-                },
-                "marque": "Toyota",
-                "model": "405",
-                "places": "9",
-                "mode": "Diesel",
-                "climatisation": "Oui",
-                "vitesse": "Automatique",
-                "portes": "4",
-                "category_id": 5,
-                "created_at": "2021-03-01T06:03:23.722Z",
-                "updated_at": "2021-03-09T09:37:51.846Z"
-            },
-            "categorie": {
-                "id": 5,
-                "ref": "R05",
-                "name": "CatE",
-                "created_at": "2021-03-01T05:37:57.729Z",
-                "updated_at": "2021-03-17T13:18:39.251Z",
-                "stock": 4,
-                "duree_min_bs": 2,
-                "duree_min_ms": 2,
-                "duree_min_hs": 2,
-                "enligne": true
-            }
-        },
-        {
-            "voiture": {
-                "id": 2,
-                "image": {
-                    "url": "/uploads/voiture/2/image.jpg"
-                },
-                "marque": "DAf",
-                "model": "4x4",
-                "places": "5",
-                "mode": "Diesel",
-                "climatisation": "Non",
-                "vitesse": "Automatique",
-                "portes": "4",
-                "category_id": 2,
-                "created_at": "2021-03-01T06:02:49.835Z",
-                "updated_at": "2021-03-09T11:01:58.433Z"
-            },
-            "categorie": {
-                "id": 2,
-                "ref": "R02",
-                "name": "CatB",
-                "created_at": "2021-03-01T05:37:57.681Z",
-                "updated_at": "2021-03-08T05:47:29.071Z",
-                "stock": 1,
-                "duree_min_bs": 2,
-                "duree_min_ms": 2,
-                "duree_min_hs": 2,
-                "enligne": true
-            }
-        },
-        {
-            "voiture": {
-                "id": 1,
-                "image": {
-                    "url": "/uploads/voiture/1/image.jpg"
-                },
-                "marque": "mercedece",
-                "model": "renault",
-                "places": "5",
-                "mode": "Essence",
-                "climatisation": "Non",
-                "vitesse": "Automatique",
-                "portes": "4",
-                "category_id": 1,
-                "created_at": "2021-03-01T06:02:08.852Z",
-                "updated_at": "2021-03-09T11:03:20.342Z"
-            },
-            "categorie": {
-                "id": 1,
-                "ref": "R01",
-                "name": "CatA",
-                "created_at": "2021-03-01T05:37:57.561Z",
-                "updated_at": "2021-03-08T05:47:16.805Z",
-                "stock": 2,
-                "duree_min_bs": 2,
-                "duree_min_ms": 2,
-                "duree_min_hs": 2,
-                "enligne": true
-            }
-        },
-        {
-            "voiture": {
-                "id": 4,
-                "image": {
-                    "url": "/uploads/voiture/4/image.jpg"
-                },
-                "marque": "Mazda",
-                "model": "ws",
-                "places": "9",
-                "mode": "Diesel",
-                "climatisation": "Non",
-                "vitesse": "Automatique",
-                "portes": "4",
-                "category_id": 4,
-                "created_at": "2021-03-01T08:45:45.980Z",
-                "updated_at": "2021-03-23T07:08:34.183Z"
-            },
-            "categorie": {
-                "id": 4,
-                "ref": "R04",
-                "name": "CatD",
-                "created_at": "2021-03-01T05:37:57.715Z",
-                "updated_at": "2021-03-08T05:47:42.463Z",
-                "stock": 5,
-                "duree_min_bs": 2,
-                "duree_min_ms": 2,
-                "duree_min_hs": 2,
-                "enligne": true
-            }
-        }
-    ]
     const [limit, setLimit] = useState()
     const [datavoit, setDatavoit] = useState() //donne du voiture
     const [cat, setCat] = useState(0)
-    useEffect( () => {
-          axios.post(
-          '/devis').then(response=>{
-            setDatavoit(response.data.car[cat]);
-            setLimit(response.data.nombre)
-        });  
-        
-      },[cat]);
-
-    const next = ()=>{
-        cat > limit - 2? setCat(0) :  setCat(cat + 1)
-       }
-       const prev = ()=>{
-        cat < 1? setCat(limit - 1) :  setCat(cat - 1)  
-      }
-
     const [checked1, setChecked1] = React.useState();
     const [checked2, setChecked2] = React.useState();
-    const [show, setShow] = React.useState(true)
-    const [voiture, setVoiture] = React.useState(produit[0])
-    const [data, setdata] = React.useState({ message: 'valider' })
+    const [data, setdata] = React.useState({ message: 'Veuillez charger les tarifs pour pouvoir valider le contrat ou la demande de devis', marque: 'aucun' })
     const [jour, setjour] = React.useState()
     const [prix, setprix] = useState()
     const [bebe, setbebe] = useState('0')
@@ -220,6 +81,21 @@ export default function Devis() {
         setChecked2(event.target.checked);
     };
 
+    useEffect(() => {
+        axios.post(
+            '/devis').then(response => {
+                setDatavoit(response.data.car[cat]);
+                setLimit(response.data.nombre)
+            });
+    }, [cat]);
+
+    const next = () => {
+        cat > limit - 2 ? setCat(0) : setCat(cat + 1)
+    }
+
+    const prev = () => {
+        cat < 1 ? setCat(limit - 1) : setCat(cat - 1)
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -227,8 +103,8 @@ export default function Devis() {
             timeDepart: '',
             dateRetour: '',
             timeRetour: '',
-            lieuRetour: '',
-            lieuDepart: '',
+            lieuRetour: 'Aéroport Roland-Garros',
+            lieuDepart: 'Aéroport Roland-Garros',
         },
         validationSchema: devisSchema,
 
@@ -237,11 +113,9 @@ export default function Devis() {
             let date1 = values.dateDepart;
             let date2 = values.dateRetour;
             let data = JSON.stringify(values)
-            let idVoiture = voiture.voiture.id
-            let idCat = voiture.categorie.id
             const jourD = (dateDiff(date1, date2) + 1)
 
-            await axios.get(`/devisvoitures/${data}/${idVoiture}/${idCat}/${jourD}`).then(reponse => {
+            await axios.get(`/devisvoitures/${data}/${datavoit.voiture.id}/${datavoit.categorie.id}/${jourD}`).then(reponse => {
                 if (reponse.status === 200) {
 
                     setdata(reponse.data)
@@ -334,11 +208,8 @@ export default function Devis() {
         }
 
     }
-    if (datavoit){
-        console.log(datavoit)
-       }
-       
-       console.log(limit)
+
+    // console.log('ty le voiture', datavoit)
 
     return (
         <div>
@@ -347,11 +218,10 @@ export default function Devis() {
                 <form id='my-form' onSubmit={formik.handleSubmit}>
                     <div className='row'>
                         <div className='col-md-4  d-flex align-items-center '>
-                            <div className='row col-12 d-flex justify-content-center w-100 h-100 '><img className=' mt-2 w-100 h-100 image--perso' src={ "http://localhost:4000"+(datavoit? datavoit.voiture.image.url : null)} alt='voiture'/></div>
+                            <div className='row col-12 d-flex justify-content-center w-100 h-100 '><img className=' mt-2 w-100 h-100 image--perso' src={"http://localhost:4000" + (datavoit ? datavoit.voiture.image.url : null)} alt='voiture' /></div>
                             <br />
                         </div>
                         <div className='col-md-8 ml-auto container--form'>
-
 
                             <div className='mb-5'>
                                 <div className='row'>
@@ -457,30 +327,36 @@ export default function Devis() {
                                 </div>
 
                             </div>
-
-
                         </div>
                     </div>
                     <div className='row'>
                         <div className=' p-1 col-4 d-flex bd-highlight mt-5 d-flex justify-content-center nextPrev'>
-                        <i onClick={prev} className="fa fa-chevron-left  d-flex align-items-center" aria-hidden="true" ></i>
-                            <span className='mr-5 ml-5'>{ datavoit? datavoit.categorie.name : null}</span>
+                            <i onClick={prev} className="fa fa-chevron-left  d-flex align-items-center" aria-hidden="true" ></i>
+                            <span className='mr-5 ml-5'>{datavoit ? datavoit.categorie.name : null}</span>
                             <i onClick={next} className="fa fa-chevron-right  d-flex align-items-center" aria-hidden="true"></i>
                         </div>
                         <div className='p-1 col-8 d-flex bd-highlight mt-5 d-flex flex-row-reverse nextPrev'>
 
-                            <Button className=' w-25 justify-content-center nextPrev' form="my-form" variant="contained" color="primary" type="submit">
-                                Valider
-                        </Button>
+                            <Button className=' justify-content-center nextPrev' form="my-form" variant="contained" color="primary" type="submit">
+                            Charger les tarifs
+                            </Button>
 
                         </div>
                     </div>
                 </form>
             </div>
             {/* Handle change  */}
-            {data.message === 'DISPONIBLE' ? (
+
+            {data.marque === 'aucun' ? (
+                <div className='container-devi text-white  d-flex align-items-center justify-content-center h6'> <BsInfoSquareFill className='mr-2 text-primary' /> {data.message}</div>) : 
+
+            (data.message === 'DISPONIBLE' ? (
                 <>
-                    <div className='container--mini col-4'> STOCK DISPONIBLE : {data.stockvoiture}</div>
+                    <div className='container-devi d-flex align-items-center'>
+                        STOCK DISPONIBLE : {data.stockvoiture}
+                        <div className='ml-auto bg-success border--perso text-white p-2'>Disponible</div>
+                    </div>
+                    
 
                     <div className='container-devi'>
                         <div className='row'>
@@ -532,9 +408,14 @@ export default function Devis() {
                         </div>
 
                     </div>
-                </>) :
-                <div className='container--mini col-4'> {data.message} </div>
-            }
+                </>) :(<>
+                    <div className='container-devi d-flex align-items-center'>
+                        STOCK DISPONIBLE : 0
+                        <div className='ml-auto bg-danger border--perso text-white p-1'>Non disponible</div>
+                    </div>
+                </>)
+            )}
+
 
 
 

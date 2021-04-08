@@ -56,3 +56,6 @@
     color: rgba(0, 100, 208, 0.768);
 
 }
+.border--perso{
+    border-radius: 50px ;
+}
