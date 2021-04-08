@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from "yup";
 import { parse, isDate } from "date-fns";
@@ -183,6 +183,25 @@ export default function Devis() {
             }
         }
     ]
+    const [limit, setLimit] = useState()
+    const [datavoit, setDatavoit] = useState() //donne du voiture
+    const [cat, setCat] = useState(0)
+    useEffect( () => {
+          axios.post(
+          '/devis').then(response=>{
+            setDatavoit(response.data.car[cat]);
+            setLimit(response.data.nombre)
+        });  
+        
+      },[cat]);
+
+    const next = ()=>{
+        cat > limit - 2? setCat(0) :  setCat(cat + 1)
+       }
+       const prev = ()=>{
+        cat < 1? setCat(limit - 1) :  setCat(cat - 1)  
+      }
+
     const [checked1, setChecked1] = React.useState();
     const [checked2, setChecked2] = React.useState();
     const [show, setShow] = React.useState(true)
@@ -315,6 +334,11 @@ export default function Devis() {
         }
 
     }
+    if (datavoit){
+        console.log(datavoit)
+       }
+       
+       console.log(limit)
 
     return (
         <div>
@@ -323,7 +347,7 @@ export default function Devis() {
                 <form id='my-form' onSubmit={formik.handleSubmit}>
                     <div className='row'>
                         <div className='col-md-4  d-flex align-items-center '>
-                            <div className='row col-12 d-flex justify-content-center w-100 h-100 '><img className=' mt-2 w-100 h-100 image--perso' src='https://imgur.com/fXq0EOL.png' alt='voiture' /></div>
+                            <div className='row col-12 d-flex justify-content-center w-100 h-100 '><img className=' mt-2 w-100 h-100 image--perso' src={ "http://localhost:4000"+(datavoit? datavoit.voiture.image.url : null)} alt='voiture'/></div>
                             <br />
                         </div>
                         <div className='col-md-8 ml-auto container--form'>
@@ -439,9 +463,9 @@ export default function Devis() {
                     </div>
                     <div className='row'>
                         <div className=' p-1 col-4 d-flex bd-highlight mt-5 d-flex justify-content-center nextPrev'>
-                            <i class="fa fa-chevron-left  d-flex align-items-center" aria-hidden="true"></i>
-                            <span className='mr-5 ml-5'>CATEGORIE A</span>
-                            <i class="fa fa-chevron-right  d-flex align-items-center" aria-hidden="true"></i>
+                        <i onClick={prev} className="fa fa-chevron-left  d-flex align-items-center" aria-hidden="true" ></i>
+                            <span className='mr-5 ml-5'>{ datavoit? datavoit.categorie.name : null}</span>
+                            <i onClick={next} className="fa fa-chevron-right  d-flex align-items-center" aria-hidden="true"></i>
                         </div>
                         <div className='p-1 col-8 d-flex bd-highlight mt-5 d-flex flex-row-reverse nextPrev'>
 

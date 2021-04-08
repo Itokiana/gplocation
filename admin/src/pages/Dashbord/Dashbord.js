@@ -3,8 +3,15 @@ import './Dashdord.css';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 //import axios from 'axios'
 import ChiffreAffaire from './ChiffreAffaire';
-
-
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 const Onglet = (props)=>
 {
   return(
@@ -20,11 +27,15 @@ const Onglet = (props)=>
 }
 
 export default function Dashbord() {
+  const classes = useStyles();
   const now = 60;
 
   return (
     <div>
      <ChiffreAffaire/>
+     <div className='row onglet pr-5 mt-5  d-flex align-items-center'> <Button href="/devis" className="m-2 ml-auto"variant="outlined" color="secondary">
+     crée un contrat de location
+      </Button></div>
      <div className='row m-10  d-flex justify-content-center align-items-center'><h1 className='ganal'>présentation de google analytics</h1> </div>
      <div className='row'>
        <Onglet nom='visiteur' chiffre='1000' evolution='60%'/>

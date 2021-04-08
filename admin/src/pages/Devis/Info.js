@@ -125,7 +125,7 @@ export default function Info() {
 
                     <div className='row'>
                         <FormControl className={classes.formControl}>
-                            <InputLabel className='place--perso' htmlFor="">NOM</InputLabel>
+                            <InputLabel className='place--perso' htmlFor="">Nom</InputLabel>
                             <BootstrapInput id="" />
                         </FormControl>
                     </div>
