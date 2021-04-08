@@ -5,7 +5,7 @@ import './App.scss';
 
 import Navbar from './components/Navbar/Navbar';
 import Sidebar from './components/Sidebar/Sidebar'
-
+import Devis from './pages/Devis/Devis'
 import Voitures from './pages/Category/Voitures/Voitures';
 import Accueil from './pages/Accueil/Accueil';
 import Categories from './pages/Category/Categories';
@@ -30,6 +30,14 @@ import TarifList from './pages/ConfigurationAgence/Tarif/TarifList';
 import Indexs  from './pages/ConfigurationAgence/GestionSaison/calendrier/Indexs';
 import Partiel from './pages/ConfigurationAgence/Paiment/Partiel';
 import Ajoutjour from './pages/ConfigurationAgence/GestionOF/Components/GestionJF/AjoutJour';
+// import { loadCldr} from '@syncfusion/ej2-base';
+
+// loadCldr(
+// require('cldr-data/supplemental/numberingSystems.json'),
+// require('cldr-data/main/fr-CH/ca-gregorian.json'),
+// require('cldr-data/main/fr-CH/numbers.json'),
+// require('cldr-data/main/fr-CH/timeZoneNames.json')
+// );
 
 
 // import Table from './pages/Tableau/Table';
@@ -44,7 +52,7 @@ class App extends React.Component {
   
   render() {
     const { isAuthenticated } = this.props;
-    console.log('ALAOLAO',this.props)
+   
     return (
       <Router>
         <>
@@ -59,6 +67,7 @@ class App extends React.Component {
                     <Route exact path="/categories" component={Categories} />
 
                     <Route exact path="/" component={Accueil} />
+                    <Route exact path="/devis" component={Devis} />
                     <Route exact path="/voitures" component={Voitures} />
                     {/* <Route exact path="/parcourir" component={Parcourir} /> */}
                     <Route exact path="/editer" component={Editer} />

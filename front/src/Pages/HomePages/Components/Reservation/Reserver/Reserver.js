@@ -86,8 +86,10 @@ function Reserver(propos) {
             setVoiture({voiture: data});
         });
     },[]);  
+    // console.log('oeoeoeoe',propos.match.params)
       
     return (
+        
         <div>
             <div className="b-breadCumbs s-shadow wow " >
                     <div className="container">

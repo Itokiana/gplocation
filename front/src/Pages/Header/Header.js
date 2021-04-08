@@ -60,7 +60,7 @@ class Header extends React.Component {
 							</div>
 						</div>
 					</header>
-					<Bandeau className='wow slideInDown'></Bandeau>
+					<Bandeau className=''></Bandeau>
 					<nav className="b-nav">
 						<div className="container">
 							<div className="row">

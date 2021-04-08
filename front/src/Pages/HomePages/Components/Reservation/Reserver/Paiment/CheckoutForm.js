@@ -102,6 +102,7 @@ async function stripeTokenHandler(token) {
       client_id:data.client.client.id,
       numero_vol:numero_vol.numero_vol,
       acompte:data.data.count,
+      signe:data.data.signe,
       lieu_depart: sessionStorage.getItem("lieu_depart"),
       lieu_retour: sessionStorage.getItem("lieu_retour")
     }

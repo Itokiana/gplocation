@@ -17,6 +17,7 @@
     "bootstrap-daterangepicker": "^3.1.0",
     "chart.js": "^2.9.4",
     "ciqu-react-calendar": "^1.0.2",
+    "cldr-data": "^36.0.0",
     "css-loader": "^5.0.0",
     "dayjs": "^1.9.4",
     "formik": "^2.2.0",
@@ -67,5 +68,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "systemjs-plugin-json": "^0.3.0"
   }
 }

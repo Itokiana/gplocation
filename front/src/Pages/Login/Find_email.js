@@ -41,7 +41,7 @@ export default function FindEmail() {
                 console.log(response.data.status)
                 toast.info(messagee(response.data.status));
                 setTimeout(() => { history.back(); }, 5000);
-                
+                localStorage.setItem('email', response.data.email)
               }
               values:{}
           }).catch(err => {
