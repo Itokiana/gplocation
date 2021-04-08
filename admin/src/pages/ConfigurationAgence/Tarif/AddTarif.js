@@ -2,9 +2,6 @@ import React, { Component, setSate } from 'react'
 import { Formik, Form, Field } from 'formik';
 import UnPrix from './UnPrix';
 import axios from '../../../axios';
-import moment from 'moment';
-
-
 import { NavLink } from 'react-router-dom';
 
 
