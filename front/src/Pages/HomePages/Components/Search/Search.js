@@ -27,6 +27,7 @@ const ReservationSchema = Yup.object().shape({
 	dateRetour: Yup.date()
 		.default(null)
 		.required('vous devez indiquer votre date de retour')
+		.nullable()
 		.when('dateDepart', (dateDepart, schema) => {
 			return dateDepart && schema.min(dateDepart, 'la date retour doit être supérieur à la date depart')
 		}),
@@ -87,8 +88,8 @@ export default class Search extends React.Component {
 								dateRetour: '',
 								heureDepart: '',
 								heureRetour: '',
-								lieuDepart: '',
-								lieuRetour: ''
+								lieuDepart: `${sessionStorage.getItem('lieu_retour_predefinie')}`,
+								lieuRetour: `${sessionStorage.getItem('lieu_retour_predefinie')}`
 							}}
 							validationSchema={ReservationSchema}
 							onSubmit={(values, { resetForm }) => {
@@ -112,8 +113,9 @@ export default class Search extends React.Component {
 											signe: reponse.data.signe
 										});
 									}
-									console.log('lololo',this.state.signe)
+									
 								});
+								console.log('lololo',data)
 
 							}}
 						>
@@ -130,7 +132,7 @@ export default class Search extends React.Component {
                                 px-3 mb-3 leading-tight focus:outline-none focus:bg-white">
 														<option value="gplocation">------</option>
 														<option value="Aéroport Roland-Garros">Aéroport Roland-Garros</option>
-														<option value="Sainte-Marie">Sainte-Marie</option>
+														<option value="Sainte-Marie" selected >Sainte-Marie</option>
 
 													</Field>
 													<ErrorField errors={errors} touched={touched} row="lieuDepart" />

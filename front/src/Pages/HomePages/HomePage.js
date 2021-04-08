@@ -1,25 +1,21 @@
-import React from 'react';
-
-
-
+import React from 'react'
+import {useParams} from 'react-router-dom'
 import Slider from './Components/Slider/Slider.js';
 import Search from './Components/Search/Search.js';
 import World from './Components/World/World.js'
 import HomeAuto from './Components/HomeAuto/HomeAuto.js';
 
-class HomePage extends React.Component {
 
-	render() {
-
-		return (
-			<>
+export function HomePage() {
+	
+	return (
+		<div>
 				<Slider />
 				<Search />
 				<World />
 				<HomeAuto/>
-			</>
-		)
-	}
+		</div>
+	)
 }
 
 

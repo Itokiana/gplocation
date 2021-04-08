@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-
+import {Link} from 'react-router-dom'
  class Pheader extends Component {
+    direction(){
+		sessionStorage.setItem('lieu_depart_predefinie',"Sainte-Marie")
+		sessionStorage.setItem('lieu_retour_predefinie',"Sainte-Marie")
+	}
     render() {
         return (
             <div>
@@ -8,7 +12,7 @@ import React, { Component } from 'react'
                     <div className="container">
                         <h1 className="wow zoomInLeft" data-wow-delay="0.7s" style={{visibility: "visible", animationDelay: "0.7s", animationName: "zoomInLeft"}}>Sainte-Marie</h1>
                         <div className="b-pageHeader__search wow zoomInRight" data-wow-delay="0.7s" style={{visibility: "visible", animationDelay: "0.7s", animationName: "zoomInRight"}}>
-                            <h3>Location de voiture à Sainte-Marie</h3>
+                        <Link className='aeroporo' to='/' onClick={this.direction}><h3>Location de voiture à Sainte-Marie</h3></Link>
                         </div>
                     </div>
                 </section>

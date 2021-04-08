@@ -86,7 +86,7 @@ function Reserver(propos) {
             setVoiture({voiture: data});
         });
     },[]);  
-    console.log('oeoeoeoe',propos.match.params)
+    // console.log('oeoeoeoe',propos.match.params)
       
     return (
         
