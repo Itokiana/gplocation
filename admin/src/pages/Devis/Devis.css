@@ -51,3 +51,8 @@
 .place--perso{
     color:rgb(135, 135, 135) !important;
 }
+.fa-chevron-left:hover ,.fa-chevron-right:hover{
+    text-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    color: rgba(0, 100, 208, 0.768);
+
+}

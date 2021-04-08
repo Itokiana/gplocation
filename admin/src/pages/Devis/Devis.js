@@ -1,6 +1,7 @@
-import React , { useState } from 'react'
+import React , { useState, useEffect } from 'react'
 import {useFormik} from 'formik'
 import './Devis.css'
+import axios from '../../axios'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -13,22 +14,48 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+    
 export default function Devis() {
-  const [checked, setChecked] = React.useState(true);
-
+    const [limit, setLimit] = useState()
+    const [datavoit, setDatavoit] = useState() //donne du voiture
+    const [cat, setCat] = useState(0)
+    useEffect( () => {
+          axios.post(
+          '/devis').then(response=>{
+            setDatavoit(response.data.car[cat]);
+            setLimit(response.data.nombre)
+        });  
+        
+      },[cat]);
+    setInterval(() => {
+        setLimit(limit)
+    }, 200);
+  const [checked, setChecked] = useState(true);
+ 
+  const next = ()=>{
+   cat > limit - 2? setCat(0) :  setCat(cat + 1)
+  }
+  const prev = ()=>{
+   cat < 1? setCat(limit - 1) :  setCat(cat - 1)  
+ }
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
    const classes = useStyles();
    const formik = useFormik({})
-	
+   
+   if (datavoit){
+    console.log(datavoit)
+   }
+   
+   console.log(limit)
     return (
         <div>
-          <div className='container-devi p-5'>
+          <div className='container-devi p-5 '>
               <div className='row '> <h1 className="col-12 titre--perso  d-flex justify-content-center"> CREATION D'UN CONTRAT</h1> </div>
               <div className='row'>
                   <div className='col-md-4  d-flex align-items-center '>
-                       <div className='row col-12 d-flex justify-content-center w-100 h-100 '><img className=' mt-2 w-100 h-100 image--perso' src='https://imgur.com/fXq0EOL.png' alt='voiture'/></div> 
+                       <div className='row col-12 d-flex justify-content-center w-100 h-100 '><img className=' mt-2 w-100 h-100 image--perso' src={ "http://localhost:4000"+(datavoit? datavoit.voiture.image.url : null)} alt='voiture'/></div> 
                         <br/>
                    </div>
                   <div className='col-md-8 ml-auto container--form'>
@@ -36,14 +63,14 @@ export default function Devis() {
 
                             <div className='mb-5'>
                                 <div className='row'>
-                                        <label className='col-3 ml-auto' htmlFor='dateDepart'>date de depart</label> 
+                                        <label className='col-4 ml-auto' htmlFor='dateDepart'>date de depart</label> 
                                         <label className='col-4 ml-auto' htmlFor='lieuDepart'>Lieu de depart</label>
                                         <label className='col-3 ml-auto' htmlFor='timeDepart'>heure de depart</label>
 
                                 </div>
                                 <div className='row'>
-                                        <input className='col-3 ml-auto input--perso' type="date" name="dateDepart" id="dateDepart"/>
-                                        <select className='col-5 ml-auto input--perso' type="text" name="lieuDepart" id="lieuDepart">
+                                        <input className='col-4 ml-auto input--perso' type="date" name="dateDepart" id="dateDepart"/>
+                                        <select className='col-4 ml-auto input--perso' type="text" name="lieuDepart" id="lieuDepart">
                                             <option value= 'Aéroport Roland-Garros'> Aéroport Roland-Garros </option>
                                             <option value= 'Sainte-Marie'> Sainte-Marie</option>
                                         </select>
@@ -54,14 +81,14 @@ export default function Devis() {
 
                             <div>
                             <div className='row'>
-                                        <label className='col-3 ml-auto' htmlFor='dateDepart'>date de depart</label> 
+                                        <label className='col-4 ml-auto' htmlFor='dateDepart'>date de depart</label> 
                                         <label className='col-4 ml-auto' htmlFor='lieuDepart'>Lieu de depart</label>
                                         <label className='col-3 ml-auto' htmlFor='timeDepart'>heure de depart</label>
 
                                 </div>
                                 <div className='row'>
-                                        <input className='col-3 ml-auto input--perso' type="date" name="dateDepart" id="dateDepart"/>
-                                        <select className='col-5 ml-auto input--perso' type="text" name="lieuDepart" id="lieuDepart">
+                                        <input className='col-4 ml-auto input--perso' type="date" name="dateDepart" id="dateDepart"/>
+                                        <select className='col-4 ml-auto input--perso' type="text" name="lieuDepart" id="lieuDepart">
                                             <option value= 'Aéroport Roland-Garros'> Aéroport Roland-Garros </option>
                                             <option value= 'Sainte-Marie'> Sainte-Marie</option>
                                         </select>
@@ -74,12 +101,11 @@ export default function Devis() {
                        </form>
                   </div>
               </div>
-
-             <div className='row'>
-                    <div className= ' p-1 col-4 d-flex bd-highlight mt-5 d-flex justify-content-center nextPrev'>
-                        <i class="fa fa-chevron-left  d-flex align-items-center" aria-hidden="true"></i>
-                            <span className='mr-5 ml-5'>CATEGORIE A</span>
-                            <i class="fa fa-chevron-right  d-flex align-items-center" aria-hidden="true"></i>
+             <div className='row mt-5'>
+                    <div className= ' p-1 col-4 d-flex bd-highlight mt-5 d-flex justify-content-center nextPrev '>
+                        <i onClick={prev} className="fa fa-chevron-left  d-flex align-items-center" aria-hidden="true" ></i>
+                            <span className='mr-5 ml-5'>{ datavoit? datavoit.categorie.name : null}</span>
+                            <i onClick={next} className="fa fa-chevron-right  d-flex align-items-center" aria-hidden="true"></i>
                     </div>  
                     <div className='p-1 col-8 d-flex bd-highlight mt-5 d-flex flex-row-reverse nextPrev'>
                        
