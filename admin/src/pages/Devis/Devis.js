@@ -218,14 +218,14 @@ export default function Devis() {
                 <form id='my-form' onSubmit={formik.handleSubmit}>
                     <div className='row'>
                         <div className='col-md-4  d-flex align-items-center '>
-                            <div className='row col-12 d-flex justify-content-center w-100 h-100 '><img className=' mt-2 w-100 h-100 image--perso' src={"http://localhost:4000" + (datavoit ? datavoit.voiture.image.url : null)} alt='voiture' /></div>
+                            <div className='row col-12 d-flex justify-content-center w-100 h-100 '><img className=' mt-2  image--perso' src={ "http://localhost:4000"+(datavoit? datavoit.voiture.image.url : null)} alt='voiture'/></div>
                             <br />
                         </div>
                         <div className='col-md-8 ml-auto container--form'>
 
                             <div className='mb-5'>
                                 <div className='row'>
-                                    <label className='col-3 ml-auto' htmlFor='dateDepart'>Date de depart</label>
+                                    <label className='col-4 ml-auto' htmlFor='dateDepart'>Date de depart</label>
                                     <label className='col-4 ml-auto' htmlFor='lieuDepart'>Lieu de depart</label>
                                     <label className='col-3 ml-auto' htmlFor='timeDepart'>Heure de depart</label>
 
@@ -233,7 +233,7 @@ export default function Devis() {
                                 <div className='row'>
 
                                     <input
-                                        className='col-3 ml-auto input--perso'
+                                        className='col-4 ml-auto input--perso'
                                         type="date"
                                         name="dateDepart"
                                         id="dateDepart"
@@ -242,7 +242,7 @@ export default function Devis() {
                                     />
 
                                     <select
-                                        className='col-5 ml-auto input--perso'
+                                        className='col-4 ml-auto input--perso'
                                         type="text"
                                         name="lieuDepart"
                                         id="lieuDepart"
@@ -262,15 +262,15 @@ export default function Devis() {
                                     />
 
                                 </div>
-                                <div className='row'>
+                                <div className='row ml-auto text-center'>
                                     {formik.errors.dateDepart && formik.touched.dateDepart && (
-                                        <p className='col-3 text-danger'>{formik.errors.dateDepart}</p>
+                                        <p className='col-4 text-danger '>{formik.errors.dateDepart}</p>
                                     )}
                                     {formik.errors.lieuDepart && formik.touched.lieuDepart && (
                                         <p className='col-5 text-danger'>{formik.errors.lieuDepart}</p>
                                     )}
                                     {formik.errors.timeDepart && formik.touched.timeDepart && (
-                                        <p className='col-3 ml-3 text-danger'>{formik.errors.timeDepart}</p>
+                                        <p className='col-3 position-relative ml-auto text-danger'>{formik.errors.timeDepart}</p>
                                     )}
 
                                 </div>
@@ -278,14 +278,14 @@ export default function Devis() {
 
                             <div>
                                 <div className='row'>
-                                    <label className='col-3 ml-auto' htmlFor='dateDepart'>Date de retour</label>
+                                    <label className='col-4 ml-auto' htmlFor='dateDepart'>Date de retour</label>
                                     <label className='col-4 ml-auto' htmlFor='lieuDepart'>Lieu de retour</label>
                                     <label className='col-3 ml-auto' htmlFor='timeDepart'>Heure de retour</label>
 
                                 </div>
                                 <div className='row'>
                                     <input
-                                        className='col-3 ml-auto input--perso'
+                                        className='col-4 ml-auto input--perso'
                                         type="date"
                                         name="dateRetour"
                                         id="dateRetour"
@@ -293,7 +293,7 @@ export default function Devis() {
                                         value={formik.values.dateRetour}
                                     />
                                     <select
-                                        className='col-5 ml-auto input--perso'
+                                        className='col-4 ml-auto input--perso'
                                         type="text"
                                         name="lieuRetour"
                                         id="lieuRetour"
@@ -313,15 +313,15 @@ export default function Devis() {
                                     />
 
                                 </div>
-                                <div className='row'>
+                                <div className='row ml-auto text-center'>
                                     {formik.errors.dateRetour && formik.touched.dateRetour && (
-                                        <p className='col-3 text-danger input--perso'>{formik.errors.dateRetour}</p>
+                                        <p className='col-4 text-danger'>{formik.errors.dateRetour}</p>
                                     )}
                                     {formik.errors.lieuRetour && formik.touched.lieuRetour && (
-                                        <p className='col-5 text-danger input--perso'>{formik.errors.lieuRetour}</p>
+                                        <p className='col-5 text-danger' >{formik.errors.lieuRetour}</p>
                                     )}
                                     {formik.errors.timeRetour && formik.touched.timeRetour && (
-                                        <p className='col-3 ml-3 text-danger input--perso'>{formik.errors.timeRetour}</p>
+                                        <p className='col-3 position-relative ml-auto text-danger'>{formik.errors.timeRetour}</p>
                                     )}
 
                                 </div>

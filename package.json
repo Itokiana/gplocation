@@ -1,9 +1,12 @@
 {
   "dependencies": {
+    "animate.css": "^4.1.1",
     "bootstrap": "^4.6.0",
     "formik": "^2.2.5",
+    "react-animated-css": "^1.2.1",
     "react-bootstrap": "^1.5.2",
     "react-minimal-pie-chart": "^8.2.0",
-    "recharts": "^1.8.5"
+    "recharts": "^1.8.5",
+    "wowjs": "^1.1.3"
   }
 }

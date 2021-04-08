@@ -43,6 +43,9 @@
 }
 .image--perso{
     background: none;
+    width: 225px;
+    height: 170px;
+    transition: width 2s, height 4s;
 }
 .text--perso{
     font-size: 1.5vw;
@@ -58,4 +61,13 @@
 }
 .border--perso{
     border-radius: 50px ;
+}
+.button--perso{
+    width: 50vw !important;
+    height: 5vw !important;
+    font-size: 2vw  !important;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.info--perso{
+    font-size : 1.5vw !important;
 }
