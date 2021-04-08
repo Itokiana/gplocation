@@ -59,10 +59,11 @@ export default function Info() {
     };
     return (
         <div>
-            <div className='row ml-auto'>
-                <div className='container-devi ml-auto  p-5'>
+            <div className='row d-flex justify-content-center'>
+           
+                <div className='container-devi p-5 col-4'>
                     <div className=' row'>
-                        <div className='col-12 '> <h1 className="col-12 titre--perso  d-flex justify-content-center"> INFO SUR LE CONTRAT</h1>
+                        <div className='col-12 '> <h1 className="col-12 info--perso  text-center d-flex justify-content-center"> INFORMATION SUR LE CONTRAT</h1>
                         </div>
                     </div >
 
@@ -117,9 +118,9 @@ export default function Info() {
                 </div>
 
 
-                <div className='container-devi mr-auto p-5'>
-                    <div className=' row'>
-                        <div className='col-12 '> <h1 className="col-12 titre--perso  d-flex justify-content-center"> INFO SUR LE CLIENT</h1>
+                <div className='container-devi p-5 col-4  '>
+                    <div className=' row mb-5'>
+                        <div className='col-12 '> <h1 className="col-12 info--perso text-center d-flex justify-content-center"> INFORMATION SUR LE CLIENT</h1>
                         </div>
                     </div >
 
@@ -147,15 +148,18 @@ export default function Info() {
                             <BootstrapInput id="" />
                         </FormControl>
                     </div>
-                    <div className='mt-5 row mr-auto'>
+                   
+               
+
+        </div>
+            </div>
+            <div className='mb-5 row d-flex justify-content-center'>
                         <FormControl className={classes.formControl}>
-                            <Button className=' mr-auto' variant="contained" color="primary">
+                            <Button className=' mr-auto button--perso' variant="contained" color="primary">
                                 Cree le contrat
                             </Button>
                         </FormControl>
                     </div>
-                </div>
-            </div>
         </div>
     )
 }
