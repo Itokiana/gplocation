@@ -27,9 +27,7 @@ export default function Devis() {
         });  
         
       },[cat]);
-    setInterval(() => {
-        setLimit(limit)
-    }, 200);
+    
   const [checked, setChecked] = useState(true);
  
   const next = ()=>{
@@ -101,7 +99,7 @@ export default function Devis() {
                        </form>
                   </div>
               </div>
-             <div className='row mt-5'>
+             <div className='row mt-5 position-relative'>
                     <div className= ' p-1 col-4 d-flex bd-highlight mt-5 d-flex justify-content-center nextPrev '>
                         <i onClick={prev} className="fa fa-chevron-left  d-flex align-items-center" aria-hidden="true" ></i>
                             <span className='mr-5 ml-5'>{ datavoit? datavoit.categorie.name : null}</span>
