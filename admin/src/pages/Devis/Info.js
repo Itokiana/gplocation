@@ -61,7 +61,7 @@ export default function Info() {
         <div>
             <div className='row d-flex justify-content-center'>
            
-                <div className='container-devi p-5 col-4'>
+                <div className='container-devi p-5 col-md-4'>
                     <div className=' row'>
                         <div className='col-12 '> <h1 className="col-12 info--perso  text-center d-flex justify-content-center"> INFORMATION SUR LE CONTRAT</h1>
                         </div>
@@ -118,7 +118,7 @@ export default function Info() {
                 </div>
 
 
-                <div className='container-devi p-5 col-4  '>
+                <div className='container-devi p-5 col-md-4  '>
                     <div className=' row mb-5'>
                         <div className='col-12 '> <h1 className="col-12 info--perso text-center d-flex justify-content-center"> INFORMATION SUR LE CLIENT</h1>
                         </div>
