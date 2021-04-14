@@ -148,18 +148,18 @@ export default function Info() {
                             <BootstrapInput id="" />
                         </FormControl>
                     </div>
-                   
-               
 
-        </div>
+
+
+                </div>
             </div>
             <div className='mb-5 row d-flex justify-content-center'>
-                        <FormControl className={classes.formControl}>
-                            <Button className=' mr-auto button--perso' variant="contained" color="primary">
-                                Cree le contrat
+                <FormControl className={classes.formControl}>
+                    <Button className=' mr-auto button--perso' variant="contained" color="primary">
+                        Cree le contrat
                             </Button>
-                        </FormControl>
-                    </div>
+                </FormControl>
+            </div>
         </div>
     )
 }

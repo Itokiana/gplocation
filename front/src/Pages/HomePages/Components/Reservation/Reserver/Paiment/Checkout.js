@@ -15,10 +15,11 @@ function Checkout(props) {
             <div className="card">
                 <Elements stripe={stripePromise}>
                     {
-                        props.data.length !== 0 ? (
+                        props.data !== true ? (
                             <>
                                 <CheckoutForm count={props.data} />
-                                <button className="bt-annuler" onClick={props.Paiement}>Annuler</button>
+                                <br/>
+                                <a className=" text-muted h6 annuler--perso " ><ins>Annulation-retour a la boutique</ins></a>
                             </>
                         ) : (
                             <></>

@@ -12,7 +12,7 @@ class UserProfil extends Component {
     render() {
         const { show } = this.state;
         const { user } = this.props;
-        console.log(user)
+        console.log('ito ', user)
         return (
             <div className="user-profil flex flex items-center justify-center">
                 <div
