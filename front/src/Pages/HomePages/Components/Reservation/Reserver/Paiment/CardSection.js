@@ -17,8 +17,11 @@ const useOptions = () => {
   const options = useMemo(
     () => ({
       style: {
+        width: '50',
         base: {
+          
           fontSize,
+          fontWeight: '50',
           color: "#424770",
           letterSpacing: "0.025em",
           // fontFamily: "Source Code Pro, monospace",
@@ -43,26 +46,33 @@ function CardSection() {
   const options = useOptions();
   return (
     <>
-      <label className='section-Card'>
-        Numero de carte
+      <label className='section-Card text-left'>
+        <span className='h5 card--perso'>Numero de carte</span>
     <CardNumberElement
           options={options}
         />
       </label>
-      <div className='flex'>
-        <label className='section-Card'>
-          Expiration date
-    <CardExpiryElement
-            options={options}
+      <hr/>
+      <div className=' row'>
+        <div className='col-md-12'>
+          <label className='section-Card text-left'>
+          <span className='h5 card--perso'> Expiration date</span>
+         
+           <CardExpiryElement
+             options={options}
           />
-        </label>
+          </label>
+        </div>
+        <div className='col-md-12'>
+          
 
-        <label className='section-Card'>
-          CVC
-    <CardCvcElement
-            options={options}
-          />
-        </label>
+            <label className='section-Card text-left'>
+            <CardCvcElement
+                options={options}
+              />
+          </label>
+        </div>
+       
       </div>
 
     </>

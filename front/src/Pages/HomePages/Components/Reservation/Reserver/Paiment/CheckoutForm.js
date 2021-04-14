@@ -4,6 +4,7 @@ import {ElementsConsumer, CardElement, CardNumberElement} from '@stripe/react-st
 import CardSection from './CardSection';
 import axios   from '../../../../../../axios';
 import history from '../../../../../../History'
+import './paycss.css'
 
 class CheckoutForm extends React.Component {
 
@@ -44,24 +45,27 @@ class CheckoutForm extends React.Component {
     
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className='m-5'>
-          <p className='text-left'>
-            &nbsp; &nbsp;Identifiant commerçant &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;075206491500024
-          </p>
-          <p className='text-left'>
-            &nbsp; &nbsp;Référence de la transaction &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;210936
-          </p>
+        <div className=''>
+          <div className='row text-muted h6 '>
+           <span className='col-md-6 text-left h-5'>Identifiant commerçant :</span>
+          
+           <span className='col-md-6 text-right h-5 ml-auto'> 075206491500024</span>
+          </div>
+          <div className='row text-muted h6 '>
+           <span className='col-md-6 text-left h-5'>Référence de la transaction  :</span>
+          
+           <span className='col-md-6 text-right h-5 ml-auto'>210936</span>
+          </div>
         </div>
         <br/>
-        <h2>Payer</h2>
-        <h1 className='accompt-payer'>{this.props.do},00 €</h1>
+        <h1 className='separator accompt-payer vola'>{this.props.do},00 €</h1>
         <br/>
         <br/>
         {/* {this.props.} */}
         <CardSection />
         <br/>
-        <button disabled={!this.props.stripe} className="payer">
-          Valider
+        <button disabled={!this.props.stripe} className="btn m-btn bt-pay h1">
+          Valider <span className="fa fa-angle-right fa--perso "></span>
         </button>
       </form>
     );
@@ -69,11 +73,11 @@ class CheckoutForm extends React.Component {
 }
 
 export default function InjectedCheckoutForm(props) {
-  console.log(props)
+  console.log('chexkform',props)
   return (
     <ElementsConsumer>
       {({stripe, elements}) => (
-        <CheckoutForm  do= {props.count.data.count} stripe={stripe} elements={elements} />
+        <CheckoutForm  do= {100} stripe={stripe} elements={elements} />
       )}
     </ElementsConsumer>
   );

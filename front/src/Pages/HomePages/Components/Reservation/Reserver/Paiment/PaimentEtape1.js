@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import Checkout from './Checkout';
 import { Formik, Form, Field } from 'formik';
 import ErrorField from '../../ErrorField';
+import { Link, Redirect } from 'react-router-dom'
 
 // import axios from 'axios';
 
@@ -104,7 +105,12 @@ function PaimentEtape1(props) {
                                 </button>
 
                                 {status ? (
-                                    <Checkout data={props} Paiement={Paiement} />
+                                    <Redirect to={{
+                                        pathname: '/paiment',
+                                        state: { id: props }
+                                    }}
+                            />
+                                    // <Checkout data={props} Paiement={Paiement} />
                                 ) : null
                                 }
 
