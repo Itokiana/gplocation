@@ -16,11 +16,11 @@ class UserProfil extends Component {
         return (
             <div className="user-profil flex flex items-center justify-center">
                 <div
-                    onClick={() => this.setState({ show: !show})}
+                    onClick={() => this.setState({ show: !show })}
                     className="cursor-pointer flex flex items-center justify-center">
-                    { user.username } &nbsp;
-                    { show ? (<FaChevronUp />) : (<FaChevronDown />)}
-                    
+                    {user.username} &nbsp;
+                    {show ? (<FaChevronUp />) : (<FaChevronDown />)}
+
                 </div>
                 <div className={`user-action ${this.state.show ? 'show' : ''}`}>
                     <div

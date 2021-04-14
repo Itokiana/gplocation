@@ -79,14 +79,14 @@ class AddTarif extends Component {
                                 dateFinPerso: '',
 
                             }}
-                            onSubmit={(data, { setSubmitting }) => {
-                                setSubmitting(true);
+                            onSubmit={(data) => {
+                            
                                 const t = async () => {
                                     await axios.post('/tarif_personalises', { data, tabLigne: this.state.nombreLigne })
                                     console.log(data)
-                                    setSubmitting(false)
                                     window.location.href = "/tarif"
                                 }
+                                t()
                                 
 
                             }}>

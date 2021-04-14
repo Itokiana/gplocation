@@ -96,7 +96,7 @@ export default class ListeCategory extends Component {
                         <table class="table table-striped jambo_table bulk_action">
                           <thead className="text-center">
                             <tr class="headings">
-                              <th class="column-title">Marque</th>
+                              {/* <th class="column-title">Marque</th> */}
                               <th class="column-title">Image</th>
                               <th class="column-title">ref </th>
                               <th class="column-title">Titre du produit </th>
@@ -110,7 +110,7 @@ export default class ListeCategory extends Component {
                             {categories && categories.map((category, key) => {
                               return (
                                 <tr class="even pointer">
-                                  {images[key] ? <td className="text-center">{images[key].marque}</td> : <td className="text-center">Aucun marque</td>}
+                                  {/* {images[key] ? <td className="text-center">{images[key].marque}</td> : <td className="text-center">Aucun marque</td>} */}
                                   {/* <img src={`http://localhost:4000/${voiture.image.url}`} alt ={voiture.marque}/> */}
                                   {images[key] ? <td className="text-center"><img src={`http://localhost:4000/${images[key].image.url}`} alt={images[key].marque} /></td> : <td className="text-center">Aucun image</td>}
 

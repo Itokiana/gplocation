@@ -72,6 +72,7 @@ export default function Devis() {
     const [prix, setprix] = useState()
     const [bebe, setbebe] = useState('0')
     const [rehausse, setrehausse] = useState('0')
+    const [datedevis, setdatedevis] = useState()
 
     const checkChange1 = (event) => {
         setChecked1(event.target.checked);
@@ -121,6 +122,8 @@ export default function Devis() {
                     setdata(reponse.data)
                     setprix(reponse.data.prix)
                     setjour(jourD)
+                    setdatedevis(values)
+
                 }
 
             });
@@ -209,7 +212,9 @@ export default function Devis() {
 
     }
 
-    // console.log('ty le voiture', datavoit)
+    const reservation = {}
+    reservation['datedevis'] = datedevis
+    reservation['voiture'] = datavoit ? datavoit.voiture.id : null
 
     return (
         <div>
@@ -357,7 +362,6 @@ export default function Devis() {
                         <div className='ml-auto bg-success border--perso text-white p-2'>Disponible</div>
                     </div>
                     
-
                     <div className='container-devi'>
                         <div className='row'>
                             <div className='container-devi2 col-4 mr-auto d-flex justify-content-center text--perso '> {jour} jour(s)</div>
@@ -416,10 +420,7 @@ export default function Devis() {
                 </>)
             )}
 
-
-
-
-            <Info></Info>
+            <Info reservation={reservation}></Info>
         </div>
     )
 }
