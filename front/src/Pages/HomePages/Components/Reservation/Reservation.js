@@ -187,7 +187,7 @@ class Reservation extends Component {
 
     render() {
         const etape = this.state.etape;
-        console.log('props ty', this.state.checkcovd)
+        // console.log('props ty', this.state.checkcovd)
         // console.log('state ty', this.state.prixVoiture)
         sessionStorage.setItem("date_depart", JSON.stringify(this.props.date_reservation.dateDepart))
         sessionStorage.setItem("date_retour", JSON.stringify(this.props.date_reservation.dateRetour))

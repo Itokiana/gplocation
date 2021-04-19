@@ -73,6 +73,8 @@ export default function Devis() {
     const [bebe, setbebe] = useState('0')
     const [rehausse, setrehausse] = useState('0')
     const [datedevis, setdatedevis] = useState()
+    const [signe, setsigne] = useState()
+    const [valide, setvalide] = useState(false)
 
     const checkChange1 = (event) => {
         setChecked1(event.target.checked);
@@ -110,7 +112,7 @@ export default function Devis() {
         validationSchema: devisSchema,
 
         onSubmit: async (values) => {
-
+            setvalide(true)
             let date1 = values.dateDepart;
             let date2 = values.dateRetour;
             let data = JSON.stringify(values)
@@ -118,11 +120,12 @@ export default function Devis() {
 
             await axios.get(`/devisvoitures/${data}/${datavoit.voiture.id}/${datavoit.categorie.id}/${jourD}`).then(reponse => {
                 if (reponse.status === 200) {
-
+                    console.log('SIGNE',  reponse.data.signe)
                     setdata(reponse.data)
                     setprix(reponse.data.prix)
                     setjour(jourD)
                     setdatedevis(values)
+                    setsigne(reponse.data.signe)
 
                 }
 
@@ -215,6 +218,8 @@ export default function Devis() {
     const reservation = {}
     reservation['datedevis'] = datedevis
     reservation['voiture'] = datavoit ? datavoit.voiture.id : null
+    reservation['signe'] = signe
+
 
     return (
         <div>
@@ -420,7 +425,7 @@ export default function Devis() {
                 </>)
             )}
 
-            <Info reservation={reservation}></Info>
+            <Info reservation={reservation} valide={valide}></Info>
         </div>
     )
 }

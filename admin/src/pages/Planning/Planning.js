@@ -83,8 +83,13 @@ class Planning extends React.Component {
                 });
                 //console.log(this.state.reservation);
             }
+
         });
     };
+    // getColore(){
+    //     this.state.reservation.map
+    // }
+
     getYearDetails(value) {
         return 'Year: ' + this.instance.formatDate(value.date, { skeleton: 'y' });
     }
@@ -150,7 +155,7 @@ class Planning extends React.Component {
             const objet = {}
             objet['name'] = `Stock  ${i}`
             objet['id'] = i
-            objet['color'] = `#1fa900`
+            objet['color'] = `#9f5f00`
             stockvoitur.push(objet)
         }
         return stockvoitur

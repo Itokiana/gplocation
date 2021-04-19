@@ -58,7 +58,7 @@ function PaimentEtape1(props) {
                                                     </button>
                                                             <ErrorField errors={errors} touched={touched} row="numero_vol" />
                                                         </p><br />
-                                                        <p>{messageNumeroVol}</p>
+                                                        <p> {messageNumeroVol}</p>
                                                     </label>
                                                 </div>
                                             </div>

@@ -58,7 +58,7 @@ class CheckoutForm extends React.Component {
           </div>
         </div>
         <br/>
-        <h1 className='separator accompt-payer vola'>{this.props.do},00 €</h1>
+        <h1 className='separator accompt-payer vola'>{this.props.prix},00 €</h1>
         <br/>
         <br/>
         {/* {this.props.} */}
@@ -77,7 +77,7 @@ export default function InjectedCheckoutForm(props) {
   return (
     <ElementsConsumer>
       {({stripe, elements}) => (
-        <CheckoutForm  do= {100} stripe={stripe} elements={elements} />
+        <CheckoutForm  prix= {props.count.data.count} stripe={stripe} elements={elements} />
       )}
     </ElementsConsumer>
   );

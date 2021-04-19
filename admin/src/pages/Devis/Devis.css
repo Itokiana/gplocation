@@ -71,3 +71,10 @@
 .info--perso{
     font-size : 1.5vw !important;
 }
+.quitter {
+    color: red;
+    position: absolute;
+    top: 0;
+    right: 25px
+
+}
