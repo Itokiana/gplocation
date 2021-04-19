@@ -71,3 +71,19 @@
 .info--perso{
     font-size : 1.5vw !important;
 }
+.head--perso{
+    background:#001d3d;
+    color: #999;
+    height: 50px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.titre--perso2{
+    font-size: 1vw !important;
+}
+.mod--perso{
+    height: 600px;
+}
+.border--perso2{
+    border-left: 1px solid rgb(213, 208, 208);
+    
+}
