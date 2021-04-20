@@ -1,5 +1,6 @@
 import React from 'react'
 import './Devis.css'
+import {Link} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -158,7 +159,7 @@ export default function Info2() {
 
                     <div className='row '>
                                 <div className='col-2 ml-auto'>
-                                        <button className='btn btn-primary'>Visualiser</button>
+                                   <Link to='/devis/1/visuel'><button className='btn btn-primary'>Visualiser</button></Link>     
                                 </div>
                     </div>
                 </fieldset>
