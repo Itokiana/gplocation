@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { TiDeleteOutline } from 'react-icons/ti';
 import { useFormik } from 'formik'
+import { Redirect } from 'react-router-dom'
 import { set, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -77,6 +78,7 @@ export default function Info(props) {
     const [affiche, setAffiche] = useState(false)
     const [existclient, setExistclient] = useState(null)
     const [idclient_back, setidclientback] = useState(null)
+    const [info_devis, setinfodevi] = useState(false)
     
     useEffect(() => {
         axios.get('/clients').then(res => {
@@ -125,7 +127,8 @@ export default function Info(props) {
             forfait: '',
             accompte: '',
             status: '',
-            vol: ''
+            vol: '',
+            validation :''
         },
 
         // validationSchema: schema,
@@ -150,9 +153,6 @@ export default function Info(props) {
                         value['prenom'] = values.prenom
                         value['telephone'] = values.telephone
                         value['email'] = values.email
-
-
-                        
                         
                         await axios.post('/info',value).then(reponse => {
                             if (reponse.status === 200){
@@ -180,15 +180,15 @@ export default function Info(props) {
                     numero_vol:values.vol,
                     acompte:values.accompte,
                     signe:signe,
-                    status:values.statu
+                    status:values.statu,
+                    valide:values.validation
 
                   }
                 // console.log('value_back',value_back)
                 await axios.post('/reservations',value_back).then(result => {
                     if(result.status===201){
-                        console.log('ok')
-                    //   history.push('/felicitation')
-                    //   window.location.reload()
+                        console.log('result',result.data.id)
+                        setinfodevi(result.data.id)
                     }
                   })
 
@@ -213,7 +213,7 @@ export default function Info(props) {
             <form onSubmit={formik.handleSubmit}>
                 <div className='row d-flex justify-content-center'>
                     {affiche === true ? (
-                        <div className='container-devi p-5 col-4'>
+                        <div  className='resultDevis container-devi p-5 col-4'>
                             <TiDeleteOutline className='quitter h1' onClick={annuler_list} />
                             <p>Suggestion client</p>
                             <ul className="h1 text-white">
@@ -268,6 +268,13 @@ export default function Info(props) {
                                     <BootstrapInput id="" onChange={formik.handleChange} value={formik.values.vol} name="vol" />
                                 </FormControl>
                                 {/* <p className='text-danger ml-5'>{errors.vol?.message}</p> */}
+                            </div>
+                            <div className='row'>
+                                <FormControl className={classes.formControl}>
+                                    <InputLabel className='place--perso' htmlFor="">Validation</InputLabel>
+                                    <BootstrapInput onChange={formik.handleChange} value={formik.values.validation} type="number" name='validation' />
+                                </FormControl>
+
                             </div>
 
                         </div>
@@ -325,8 +332,11 @@ export default function Info(props) {
                     </FormControl>
                 </div>
             </form>
+            {info_devis ? <Redirect to={{pathname: `/devis/${info_devis}`}}/> : null}
+                        
 
         </div>
+        
     )
 
 }
