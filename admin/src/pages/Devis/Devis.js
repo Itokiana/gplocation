@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import * as Yup from "yup";
 import { parse, isDate } from "date-fns";
 import axios from 'axios'
-import { BsInfoSquareFill  } from 'react-icons/bs';
+import { BsInfoSquareFill } from 'react-icons/bs';
 import './Devis.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -120,7 +120,7 @@ export default function Devis() {
 
             await axios.get(`/devisvoitures/${data}/${datavoit.voiture.id}/${datavoit.categorie.id}/${jourD}`).then(reponse => {
                 if (reponse.status === 200) {
-                    console.log('SIGNE',  reponse.data.signe)
+                    console.log('SIGNE', reponse.data.signe)
                     setdata(reponse.data)
                     setprix(reponse.data.prix)
                     setjour(jourD)
@@ -228,7 +228,9 @@ export default function Devis() {
                 <form id='my-form' onSubmit={formik.handleSubmit}>
                     <div className='row'>
                         <div className='col-md-4  d-flex align-items-center '>
-                            <div className='row col-12 d-flex justify-content-center w-100 h-100 '><img className=' mt-2  image--perso' src={ "http://localhost:4000"+(datavoit? datavoit.voiture.image.url : null)} alt='voiture'/></div>
+                            <div className='row col-12 d-flex justify-content-center w-100 h-100 '>
+                                <img className=' mt-2  image--perso' src={"http://localhost:4000" + (datavoit ? datavoit.voiture.image.url : null)} alt='voiture' />
+                            </div>
                             <br />
                         </div>
                         <div className='col-md-8 ml-auto container--form'>
@@ -348,7 +350,7 @@ export default function Devis() {
                         <div className='p-1 col-8 d-flex bd-highlight mt-5 d-flex flex-row-reverse nextPrev'>
 
                             <Button className=' justify-content-center nextPrev' form="my-form" variant="contained" color="primary" type="submit">
-                            Charger les tarifs
+                                Charger les tarifs
                             </Button>
 
                         </div>
@@ -358,72 +360,72 @@ export default function Devis() {
             {/* Handle change  */}
 
             {data.marque === 'aucun' ? (
-                <div className='container-devi text-white  d-flex align-items-center justify-content-center h6'> <BsInfoSquareFill className='mr-2 text-primary' /> {data.message}</div>) : 
+                <div className='container-devi text-white  d-flex align-items-center justify-content-center h6'> <BsInfoSquareFill className='mr-2 text-primary' /> {data.message}</div>) :
 
-            (data.message === 'DISPONIBLE' ? (
-                <>
-                    <div className='container-devi d-flex align-items-center'>
-                        STOCK DISPONIBLE : {data.stockvoiture}
-                        <div className='ml-auto bg-success border--perso text-white p-2'>Disponible</div>
-                    </div>
-                    
-                    <div className='container-devi'>
-                        <div className='row'>
-                            <div className='container-devi2 col-4 mr-auto d-flex justify-content-center text--perso '> {jour} jour(s)</div>
-                            <div className='container-devi2 col-4 mr-auto d-flex justify-content-center text--perso'> Forfait location</div>
-                            <div className='container-devi2 col-4 mr-auto d-flex justify-content-center text--perso text-success'> {prix} €</div>
-                        </div>
-                        <div className='row'>
-                            <label for='conducteur' className='container-devi3  col-8 mr-auto d-flex justify-content-center '>Conducteur additionnel</label>
-                            <select id='conducteur' name='conducteur' className=' aloka container-devi3  col-1 mr-auto h-25 d-flex justify-content-center'>
-                                <option value='0'>0</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                            </select>
-                            <label className='container-devi3  col-2  d-flex justify-content-center text-success '>gratuit</label>
-                        </div>
-                        <div className='row'>
-                            <label for='baby' className='container-devi3  col-8 mr-auto d-flex justify-content-center '>Siège bébé (de 0 à 3 ans)  </label>
-                            <select id='baby' onClick={siegebebe} name='baby' className=' aloka container-devi3  col-1 mr-auto h-25 d-flex justify-content-center'>
-                                <option value='0'>0</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                            </select>
-                            <label className='container-devi3  col-2  d-flex justify-content-center text-success '>9 €</label>
-                        </div>
-                        <div className='row'>
-                            <label for='autre' className='container-devi3  col-8 mr-auto d-flex justify-content-center '>Réhausseur (à partir de 3 ans)</label>
-                            <select id='autre' onClick={rehausseur} name='autre' className=' aloka container-devi3  col-1 mr-auto h-25 d-flex justify-content-center'>
-                                <option value='0'>0</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                            </select>
-                            <label className='container-devi3  col-2  d-flex justify-content-center text-success '>9 €</label>
-                        </div>
-                        <div className='row'>
-                            <label for='gps' className='container-devi3  col-8 mr-auto d-flex justify-content-center '>GPS</label>
-                            <Checkbox onChange={checkChange2} onClick={gps} name='gps' className=' col-1 mt-4 mr-auto d-flex justify-content-center align-items-center ' color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                            <label className='container-devi3  col-2  d-flex justify-content-center text-success '>27 €</label>
-                        </div>
-                        <div className='row'>
-                            <label for='gps' className='container-devi3  col-8 mr-auto d-flex justify-content-center '>Annulation  covid</label>
-                            <Checkbox onChange={checkChange1} onClick={covid} name='gps' className=' col-1 mt-4 mr-auto d-flex justify-content-center align-items-center ' color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                            <label className='container-devi3  col-2  d-flex justify-content-center text-success '>10 €</label>
+                (data.message === 'DISPONIBLE' ? (
+                    <>
+                        <div className='container-devi d-flex align-items-center'>
+                            STOCK DISPONIBLE : {data.stockvoiture}
+                            <div className='ml-auto bg-success border--perso text-white p-2'>Disponible</div>
                         </div>
 
-                    </div>
-                </>) :(<>
-                    <div className='container-devi d-flex align-items-center'>
-                        STOCK DISPONIBLE : 0
+                        <div className='container-devi'>
+                            <div className='row'>
+                                <div className='container-devi2 col-4 mr-auto d-flex justify-content-center text--perso '> {jour} jour(s)</div>
+                                <div className='container-devi2 col-4 mr-auto d-flex justify-content-center text--perso'> Forfait location</div>
+                                <div className='container-devi2 col-4 mr-auto d-flex justify-content-center text--perso text-success'> {prix} €</div>
+                            </div>
+                            <div className='row'>
+                                <label for='conducteur' className='container-devi3  col-8 mr-auto d-flex justify-content-center '>Conducteur additionnel</label>
+                                <select id='conducteur' name='conducteur' className=' aloka container-devi3  col-1 mr-auto h-25 d-flex justify-content-center'>
+                                    <option value='0'>0</option>
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                </select>
+                                <label className='container-devi3  col-2  d-flex justify-content-center text-success '>gratuit</label>
+                            </div>
+                            <div className='row'>
+                                <label for='baby' className='container-devi3  col-8 mr-auto d-flex justify-content-center '>Siège bébé (de 0 à 3 ans)  </label>
+                                <select id='baby' onClick={siegebebe} name='baby' className=' aloka container-devi3  col-1 mr-auto h-25 d-flex justify-content-center'>
+                                    <option value='0'>0</option>
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                </select>
+                                <label className='container-devi3  col-2  d-flex justify-content-center text-success '>9 €</label>
+                            </div>
+                            <div className='row'>
+                                <label for='autre' className='container-devi3  col-8 mr-auto d-flex justify-content-center '>Réhausseur (à partir de 3 ans)</label>
+                                <select id='autre' onClick={rehausseur} name='autre' className=' aloka container-devi3  col-1 mr-auto h-25 d-flex justify-content-center'>
+                                    <option value='0'>0</option>
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                </select>
+                                <label className='container-devi3  col-2  d-flex justify-content-center text-success '>9 €</label>
+                            </div>
+                            <div className='row'>
+                                <label for='gps' className='container-devi3  col-8 mr-auto d-flex justify-content-center '>GPS</label>
+                                <Checkbox onChange={checkChange2} onClick={gps} name='gps' className=' col-1 mt-4 mr-auto d-flex justify-content-center align-items-center ' color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }}
+                                />
+                                <label className='container-devi3  col-2  d-flex justify-content-center text-success '>27 €</label>
+                            </div>
+                            <div className='row'>
+                                <label for='gps' className='container-devi3  col-8 mr-auto d-flex justify-content-center '>Annulation  covid</label>
+                                <Checkbox onChange={checkChange1} onClick={covid} name='gps' className=' col-1 mt-4 mr-auto d-flex justify-content-center align-items-center ' color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }}
+                                />
+                                <label className='container-devi3  col-2  d-flex justify-content-center text-success '>10 €</label>
+                            </div>
+
+                        </div>
+                    </>) : (<>
+                        <div className='container-devi d-flex align-items-center'>
+                            STOCK DISPONIBLE : 0
                         <div className='ml-auto bg-danger border--perso text-white p-1'>Non disponible</div>
-                    </div>
-                </>)
-            )}
+                        </div>
+                    </>)
+                )}
 
             <Info reservation={reservation} valide={valide}></Info>
         </div>

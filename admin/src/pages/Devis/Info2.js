@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Devis.css'
 import moment from 'moment';
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -70,7 +71,7 @@ export default function Info2(props) {
             console.log('rep.data', rep.data)
         })
         window.location.reload()
-        
+
     }
 
     const dataInfo = (option, info) => {
@@ -175,9 +176,7 @@ export default function Info2(props) {
 
 
                         <div className='row '>
-                            <div className='col-2 ml-auto'>
-                                <button className='btn btn-primary' >Visualiser</button>
-                            </div>  
+
                             {
                                 res.envoi ? null :
                                     <div className='col-2 ml-auto'>
@@ -185,6 +184,15 @@ export default function Info2(props) {
                                     </div>
                             }
 
+                        </div>
+                        <div className='row '>
+                            <div className='col-2 ml-auto'>
+                                <Link onClick={() => window.location.href = `/devis/${res.id}/visuel`} >
+                                    <button className='btn btn-primary'>
+                                        Visualiser
+                                    </button>
+                                </Link>
+                            </div>
                         </div>
                     </fieldset>
                 </div>

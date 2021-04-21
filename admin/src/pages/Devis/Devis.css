@@ -45,7 +45,10 @@
     background: none;
     width: 225px;
     height: 170px;
-    transition: width 2s, height 4s;
+    transition: 2s;
+}
+.image--perso2{
+    background: none;
 }
 .text--perso{
     font-size: 1.5vw;
@@ -97,5 +100,47 @@
 .resultDevis{
     overflow-y: scroll;
     max-height: 500px;
+}
+.paper--perso{
+    width: 595px;
+    height: 842px;
+    background-color: white;
+    overflow: hidden;
+}
+.lohany{
+    height:100px !important;
+    padding: 2rem;
+    background-color: #C4C4C4;
+}
+.tongony{
+    height:100px !important;
+    padding: 1rem;
+    background-color: #C4C4C4;
+}
+.list--head{
+    font-size: 0.7vw;
+    color: #333;
+}
+.paper--text{
+    color:#A39C9C;
+    font-family: 'Roboto', sans-serif !important;
+}
+.tongony--titra{
+    color:#228DCB;
+    font-family: 'Roboto', sans-serif !important;
+
+}
+.text--foot{
+    color: #333;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 1.3vw;
+
+}
+.lien{
+    text-decoration:underline ;
+}
+.lien:hover{
+    
+    color:#228DCB;
 
 }
