@@ -42,7 +42,7 @@ export default class ListeVoiture extends Component {
                                 // }
                                 return (
                                     <tr>
-                                        <td className="border"><img src={`http://localhost:4000/${voiture.image.url}`} alt ={voiture.marque}/></td>
+                                        <td className="border"><img src={`http://fd0b515.online-server.cloud/${voiture.image.url}`} alt ={voiture.marque}/></td>
                                         <td className="border px-4 py-2">{voiture.marque}</td>
                                         <td className="border px-4 py-2">{voiture.model}</td>
                                         <td className="border px-4 py-2">{voiture.places}</td>

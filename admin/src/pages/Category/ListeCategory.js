@@ -110,9 +110,8 @@ export default class ListeCategory extends Component {
                             {categories && categories.map((category, key) => {
                               return (
                                 <tr class="even pointer">
-                                  {/* {images[key] ? <td className="text-center">{images[key].marque}</td> : <td className="text-center">Aucun marque</td>} */}
-                                  {/* <img src={`http://localhost:4000/${voiture.image.url}`} alt ={voiture.marque}/> */}
-                                  {images[key] ? <td className="text-center"><img src={`http://localhost:4000/${images[key].image.url}`} alt={images[key].marque} /></td> : <td className="text-center">Aucun image</td>}
+                                
+                                  {images[key] ? <td className="text-center"><img src={`http://fd0b515.online-server.cloud/${images[key].image.url}`} alt={images[key].marque} /></td> : <td className="text-center">Aucun image</td>}
 
                                   <td className="text-center">{category.ref} <i class="success fa fa-long-arrow-up"></i></td>
                                   <td className="text-center">{category.name}</td>
