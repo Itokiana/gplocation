@@ -28,3 +28,10 @@ padding: 0 40px;
 .CustomButton{
     padding: 10px 10px;
 }
+.detailscroll{
+    width: 883px !important;
+    max-height: 550px !important;
+    overflow-y: scroll ;
+    overflow-x: hidden ;
+
+}

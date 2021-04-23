@@ -229,7 +229,8 @@ class Reservation extends Component {
             <div>
                 {
                     this.props.voitures && this.props.date_reservation && this.state.items && this.props.prix ? (
-                        this.props.voitures.map((voiture, num) => {
+                        <>
+                        {this.props.voitures.map((voiture, num) => {
                             console.log('uuu',this.state.items)
                             return (<div key={voiture.id}>
                                 <section className="b-items s-shadow" id="padingReserver">
@@ -357,14 +358,9 @@ class Reservation extends Component {
                                                                     Conditions générales de location<span className="fa fa-angle-right" id="bgDetail"></span>
 
                                                                 </button> */}
-                                                                <button type="submit" onClick={this.test} className="btn m-btn" id="buttonDetail ">Détails<span className="fa fa-angle-right" id="bgDetail"></span></button>
+                                                                <button type="submit" onClick={this.test} className="btn m-btn" style={{ background: 'gray', color: 'white'}} id="buttonDetail ">Détails<span className="fa fa-angle-right" id="bgDetail"></span></button>
                                     
-                                                                {this.state.items.map(j => {
-                                                                <Detail
-                                                                    show={j.showModal}
-                                                                    onHide={this.handleModalHide}
-                                                                /> 
-                                                                })}
+                                                               
                                                             </div>
                                                         </div>
                                                     </div>
@@ -379,8 +375,19 @@ class Reservation extends Component {
                             </div>
                             )
                         }
-                        )
-                    ) : null
+                        
+                        )}
+                        {this.state.items.map(j => {
+                            return(
+                                <Detail
+                                show={j.showModal}
+                                onHide={this.handleModalHide}
+                            /> 
+
+                            )
+                            
+                            })}
+                    </>) : null
                 }
                 <br />
                 <div></div>
