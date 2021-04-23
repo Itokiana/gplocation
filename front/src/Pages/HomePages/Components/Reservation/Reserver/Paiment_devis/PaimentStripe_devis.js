@@ -8,16 +8,13 @@ export default function Stripe(props) {
     useEffect(async () => {
 
         await axios.get(`/reservations/${props.match.params.id}`).then(response => {
-            //   console.log('props list info',response.data)
             setdata(response.data)
         });
     }, []);
-    console.log('devi', data)
 
     return (
         <div>
-            <h1>Paiment devis</h1>
-            <Checkout data={data}/>
+            {data ? <Checkout data={data} prix={props.match.params.prix} /> : <h1>Chargement.....</h1>}
         </div>
     )
 }

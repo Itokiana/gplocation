@@ -7,8 +7,11 @@ import "../Paiment/paiment.css"
 const Public_key = 'pk_test_51IU6LfBAIuRK3Pz6LNTzYccwAacnuwexctezJt0fQhZSeSwBkzdn99U5i5T9ftJbqrYKohZpq5bmMvBhmZAcQZuB00MfQjbUnU'
 const stripePromise = loadStripe(Public_key);
 
+
 function Checkout(props) {
-    
+    console.log('voici', props)
+    sessionStorage.setItem("data", JSON.stringify(props.data))
+    sessionStorage.setItem("prixacompte", props.prix)
     return (
         <div className="example">
             <div className="card">
@@ -16,8 +19,8 @@ function Checkout(props) {
                     {
                         props.data !== true ? (
                             <>
-                                <CheckoutForm count={props.data} />
-                                <br/>
+                                <CheckoutForm count={props.data} prix={props.prix} />
+                                <br />
                                 <a className=" text-muted h6 annuler--perso " ><ins>Annulation-retour a la boutique</ins></a>
                             </>
                         ) : (

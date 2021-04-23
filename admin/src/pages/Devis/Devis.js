@@ -427,7 +427,7 @@ export default function Devis() {
                     </>)
                 )}
 
-            <Info reservation={reservation} valide={valide}></Info>
+            <Info reservation={reservation} valide={valide} prix = {prix}></Info>
         </div>
     )
 }

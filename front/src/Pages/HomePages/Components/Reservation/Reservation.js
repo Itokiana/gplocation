@@ -22,18 +22,27 @@ class Reservation extends Component {
             checksiege: '0',
             checkrehausse: '0',
             checkcovd: true,
-            gps: true
+            gps: true,
+            modalShow: false,
+            items: null
         }
 
     }
-    componentDidMount(){
-        this.setState({prixVoiture: this.props.prix})
-
+    componentDidMount() {
+        
+        let it = [];
+        this.props.voitures.map((v) => {
+            let i = {}
+            i['id'] = v.id
+            i['showModal'] = false
+            it.push(i)
+        })
+        this.setState({ prixVoiture: this.props.prix,items: it})
     }
 
     componentDidUpdate(previousProps, previousState) {
         if (previousProps.prix !== this.props.prix) {
-            this.setState({prixVoiture: this.props.prix})
+            this.setState({ prixVoiture: this.props.prix })
         }
     }
 
@@ -42,7 +51,7 @@ class Reservation extends Component {
         this.setState({
             checkcovd: !this.state.checkcovd
         });
-        
+
         let prix1 = this.state.prixVoiture
         let prix2 = []
         prix1.map(valeur => {
@@ -183,7 +192,22 @@ class Reservation extends Component {
 
     getKey(val, map) {
         return Object.keys(map).find(key => map[key] === val);
+
     }
+    handleModalHide = () => {
+        let items  = this.state.items
+            items[0].showModal = false
+            this.setState({items: items})
+        
+      }
+   
+      test = () => {
+            let items  = this.state.items
+            items[0].showModal = true
+            this.setState({items: items})
+            // console.log(this.state)
+      }
+   
 
     render() {
         const etape = this.state.etape;
@@ -195,21 +219,25 @@ class Reservation extends Component {
         sessionStorage.setItem("heure_retour", JSON.stringify(this.props.date_reservation.heureRetour))
         sessionStorage.setItem("lieu_depart", JSON.stringify(this.props.date_reservation.lieuDepart))
         sessionStorage.setItem("lieu_retour", JSON.stringify(this.props.date_reservation.lieuRetour))
-
+        // console.log(this.props.voitures)
+        
+        console.log('1',this.state.items)
+        // // items[0].showModal = true
+        // console.log('2',items)
         return (
 
             <div>
                 {
-                    this.props.voitures && this.props.date_reservation && this.props.prix ? (
+                    this.props.voitures && this.props.date_reservation && this.state.items && this.props.prix ? (
                         this.props.voitures.map((voiture, num) => {
-
+                            console.log('uuu',this.state.items)
                             return (<div key={voiture.id}>
                                 <section className="b-items s-shadow" id="padingReserver">
                                     <div className="container">
                                         <div className="row"><div><span className="spinner"></span></div>
                                             <div className="col-lg-12 col-sm-12 col-xs-12">
                                                 <ul className="carac-prod">
-                                                   <li className="imagePading"><span className="imagePading"><img src="media/blog/1.png" alt="nissan" /></span>Essence</li>
+                                                    <li className="imagePading"><span className="imagePading"><img src="media/blog/1.png" alt="nissan" /></span>Essence</li>
                                                     <li className="imagePading"><span className="imagePading"><img src="media/blog/2.jpg" alt="nissan" /></span>{voiture.vitesse}</li>
                                                     <li className="imagePading"><span className="imagePading"><img src="media/blog/3.jpg" alt="nissan" /></span>Climatisation: {voiture.climatisation}</li>
                                                     <li className="imagePading"><span className="imagePading"><img src="media/blog/4.jpg" alt="nissan" /></span>{voiture.places} places</li>
@@ -233,7 +261,14 @@ class Reservation extends Component {
                                                         <div className="b-items__cars-one-info">
                                                             <header className="b-items__cars-one-info-header s-lineDownLeft" id="head">
                                                                 <h2>{voiture.marque}</h2>
-                                                                <Link to={`/reserver/${this.props.signe[this.getKey(voiture, this.props.voitures)]}/${voiture.id}/${this.state.prixVoiture[num]}/${this.getAcompt(this.state.prixVoiture[num])}`} type="submit" className="btn m-btn" id="bouttonReserve">Réserver<span className="fa fa-angle-right" id="bgColor"></span></Link>
+                                                                <Link
+                                                                    to={`/reserver/${this.props.signe[this.getKey(voiture, this.props.voitures)]}/${voiture.id}/${this.state.prixVoiture[num]}/${this.getAcompt(this.state.prixVoiture[num])}`}
+                                                                    type="submit"
+                                                                    className="btn m-btn"
+                                                                    id="bouttonReserve"
+                                                                >
+                                                                    Réserver<span className="fa fa-angle-right" id="bgColor"></span>
+                                                                </Link>
 
                                                             </header>
                                                             <div className="b-blog__posts-one-info">
@@ -318,8 +353,18 @@ class Reservation extends Component {
                                                             </div>
 
                                                             <div className="b-items__cars-one-info-details">
-                                                                <button type="submit" onClick={() => this.changerEtape(3)} className="btn m-btn" id="buttonDetail">Détails<span className="fa fa-angle-right" id="bgDetail"></span></button>
+                                                                {/* <button onClick={() => setModalShow(true)} className="btn m-btn" style={{ background: 'gray', color: 'white' }}>
+                                                                    Conditions générales de location<span className="fa fa-angle-right" id="bgDetail"></span>
 
+                                                                </button> */}
+                                                                <button type="submit" onClick={this.test} className="btn m-btn" id="buttonDetail ">Détails<span className="fa fa-angle-right" id="bgDetail"></span></button>
+                                    
+                                                                {this.state.items.map(j => {
+                                                                <Detail
+                                                                    show={j.showModal}
+                                                                    onHide={this.handleModalHide}
+                                                                /> 
+                                                                })}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -329,9 +374,8 @@ class Reservation extends Component {
 
                                         </div>
                                     </div>
-                                    {etape === 3 ? (<Detail />) : null}
+                                    {/* {etape === 3 ? (<Detail />) : null} */}
                                 </section>
-                                {/* { etape === 4 ? (<Reserver />) : null} */}
                             </div>
                             )
                         }

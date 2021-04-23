@@ -1,7 +1,8 @@
 import React from 'react'
 import axios from '../../axios'
 import './Planning.css'
-import { 
+import moment from 'moment'
+import {
     ScheduleComponent,
     getWeekNumber,
     HeaderRowDirective,
@@ -11,11 +12,12 @@ import {
     TimelineMonth,
     Inject,
     ViewsDirective,
-    ViewDirective } from '@syncfusion/ej2-react-schedule';
+    ViewDirective
+} from '@syncfusion/ej2-react-schedule';
 import { Internationalization } from '@syncfusion/ej2-base';
 
 class Planning extends React.Component {
-    
+
     instance = new Internationalization()
     state = {
         categories: null,
@@ -116,12 +118,12 @@ class Planning extends React.Component {
         // console.log(`voiture${obj.id}`, filtreVoiture)
         filtreVoiture && filtreVoiture.map(voiture => {
             const filtreResrvation = this.state.reservation.filter(res => res.voiture_id === voiture.id)
-            console.log(`voiture${obj.id}`, filtreResrvation)        
+            // console.log(`voiture${obj.id}`, filtreResrvation)
             if (filtreResrvation.length === 0) {
                 console.log("nodataReservation")
             }
             else {
-                filtreResrvation.map((resrvCat,key) => {
+                filtreResrvation.map((resrvCat, key) => {
                     const Client = this.state.clients.filter(client => client.id === resrvCat.client_id)
                     // console.log("Reservation", resrvCat)
                     // console.log("client", Client)
@@ -131,14 +133,14 @@ class Planning extends React.Component {
                     else {
                         const res$key = {}
                         res$key["Id"] = key + 1
-                        res$key["Subject"] = `${Client[0].nom} ${Client[0].prenom}`
+                        res$key["Subject"] = `${Client[0].nom} ${Client[0].prenom}. \n \n \n Le \n ${moment(resrvCat.date_depart).format('ll')}  \n \n \n au ${moment(resrvCat.date_retour).format('ll')}`
                         res$key["StartTime"] = new Date(`${resrvCat.date_depart} ${resrvCat.heure_depart}`)
                         res$key["EndTime"] = new Date(`${resrvCat.date_retour} ${resrvCat.heure_retour}`)
                         res$key["ResourceID"] = resrvCat.signe
                         res$key["Description"] = `Tel:\xa0${Client[0].telephone} \n EMail:\xa0${Client[0].email} \n 
                                                 Lieu\xa0de\xa0Depart:\xa0${resrvCat.lieu_depart} \n Lieu\xa0d'Arrive:\xa0${resrvCat.lieu_retour}`
                         // res$key["Location"] = `${resrvCat.lieu_depart} au  ${resrvCat.lieu_retour}`   
-                        
+
                         tab.push(res$key)
 
                     }
@@ -149,16 +151,47 @@ class Planning extends React.Component {
         return tab
     }
 
-    stock(voiture) {
+    stock(voiture, val) {
         const stockvoitur = []
+        const filtrevoitur = this.state.voiture.filter(voit => voit.category_id === val.id)[0]
+        const filtrereserv = this.state.reservation.filter(res => res.voiture_id === filtrevoitur.id)
         for (let i = 1; i <= voiture; i++) {
             const objet = {}
+            let test = ''
+            filtrereserv.map(v => {
+                if (i === v.signe) {
+                    switch (v.status) {
+                        case 'Devis':
+                            test = '#ff00ff'
+                            break;
+                        case 'Paye':
+                            test = '#008000'
+                            break;
+                        case 'Devis/paiment total':
+                            test = '#3daf04'
+                            break;
+                        case 'Devis/paiment partiel':
+                            test = '#b3b300'
+                            break;
+                        case 'Paiment partiel':
+                            test = '#ace600'
+                            break;
+                        default:
+                            test = 'blue'
+                    }
+
+                }
+            })
             objet['name'] = `Stock  ${i}`
             objet['id'] = i
-            objet['color'] = `#9f5f00`
+            objet['color'] = test
+            // objet['voi'] = test
             stockvoitur.push(objet)
+
         }
+        console.log(`cat${voiture}`, stockvoitur)
         return stockvoitur
+
     }
 
     render() {
@@ -167,6 +200,56 @@ class Planning extends React.Component {
 
         return (
             <>
+            <br/>
+                <div className="d-flex flex-row text-white mr-5">
+                    <div className="d-flex flex-row ml-auto">
+                        <div className="boxdevis mr-1">
+
+                        </div>
+                        <div>
+                            <p>: Devis</p>
+
+                        </div>
+                    </div>
+                    <div className="d-flex flex-row ml-auto">
+                        <div className="boxdevispartiel mr-1">
+
+                        </div>
+                        <div>
+                            <p>: Devis/paiment partiel</p>
+
+                        </div>
+                    </div>
+                    <div className="d-flex flex-row ml-auto">
+                        <div className="boxdevistotal mr-1">
+
+                        </div>
+                        <div>
+                            <p>: Devis/paiment total</p>
+
+                        </div>
+                    </div>
+                    <div className="d-flex flex-row ml-auto">
+                        <div className="boxpaye mr-1">
+
+                        </div>
+                        <div>
+                            <p>: Payer</p>
+
+                        </div>
+                    </div>
+                    <div className="d-flex flex-row ml-auto">
+                        <div className="boxpartiel mr-1">
+
+                        </div>
+                        <div>
+                            <p>: Paiement partiel</p>
+
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <br/>
                 {categorye && images ? categorye.map((value, key) => {
                     return (
                         <>
@@ -186,28 +269,27 @@ class Planning extends React.Component {
                                 </div>
 
                                 {value.stock ?
-                                // <ScheduleComponent cssClass='dynamic-resource' ref={schedule => this.scheduleObj = schedule} width='100%' height='650px' selectedDate={new Date(2018, 3, 1)} group={{ resources: ['Calendars'] }}
-                                // eventSettings={{ dataSource: this.generateCalendarData() }} >
-                                    <ScheduleComponent cssClass='dynamic-resource' width='100%' height='300px' selectedDate={new Date()} eventSettings={{ dataSource: this.data(value) }} group={{ resources: ['Resources'] }}>
+
+                                    <ScheduleComponent width='100%' height='300px' selectedDate={new Date()} eventSettings={{ dataSource: this.data(value) }} group={{ resources: ['Resources'] }}>
                                         <HeaderRowsDirective height='5px'>
-                                            {/* <HeaderRowDirective option='Year' template={this.yearTemplate.bind(this)}/>
-                                <HeaderRowDirective option='Month' template={this.monthTemplate.bind(this)}/> */}
                                             <HeaderRowDirective option='Week' template={this.weekTemplate.bind(this)} />
                                             <HeaderRowDirective option='Date' />
                                         </HeaderRowsDirective>
                                         <ViewsDirective>
                                             <ViewDirective option='TimelineMonth' />
-                                            {/* <ViewDirective option='Month'/> */}
                                         </ViewsDirective>
-                                        {/* <ResourcesDirective>
-                                    <ResourceDirective field='OwnerId' title='Owner' name='Owners' allowMultiple={true} dataSource={this.ownerData} textField='OwnerText' idField='Id' colorField='OwnerColor'>
-                                    </ResourceDirective>
-                                </ResourcesDirective> */}
+
                                         <ResourcesDirective>
-                                            <ResourceDirective dataSource={this.stock(value.stock)} allowMultiple={true} field='ResourceID' title='Resource Name' name='Resources' textField='name' idField='id' colorField='color' />
+                                            <ResourceDirective dataSource={this.stock(value.stock, value)} allowMultiple={true} field='ResourceID' title='Resource Name' name='Resources' textField='name' idField='id' colorField='color' />
                                         </ResourcesDirective>
                                         <Inject services={[TimelineMonth]} />
-                                    </ScheduleComponent> : <div style={{ width: '100%', height: '100px', color: 'red' }}> <center>Les stock de vehicule est vide</center></div>}
+                                    </ScheduleComponent>
+                                    :
+                                    <div style={{ width: '100%', height: '100px', color: 'red' }}>
+                                        <center>Les stock de vehicule est vide</center>
+                                    </div>
+                                }
+
                                 <br /><br />
                             </div>
                         </>

@@ -78,7 +78,7 @@ export default class App extends Component {
             <Route exact path='/felicitation' component={Felicitation} />
             <Route exact path='/reserver/:signe/:id/:prix/:count' component={Reserver} />
             <Route exact path='/paiment' component={PaimentStripe}/>
-            <Route exact path='/paiment_devis/:id' component={PaimentStripe_devis}/>
+            <Route exact path='/paiment_devis/:id/:prix' component={PaimentStripe_devis}/>
             <Route exact path='/error_res' component={ErreurReserv} />
             <PrivateRoute exact path='/profil' component={() => <Profil client={this.state.user} />} />
 
@@ -104,7 +104,8 @@ export default class App extends Component {
             <Route exact path='/reserver/:signe/:id/:prix/:count' component={Reserver} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/paiment' component={PaimentStripe}/>
-            <Route exact path='/paiment_devis/:id' component={PaimentStripe_devis}/>
+            <Route exact path='/felicitation' component={Felicitation} />
+            <Route exact path='/paiment_devis/:id/:prix' component={PaimentStripe_devis}/>
             <Route exact path='/cofirmation_email' component={Email_conf} />
             <Route exact path='/find-email' component={FindEmail} />
             <Route exact path='/password/:token' component={Password} />

@@ -25,3 +25,26 @@ img {
   width: 100%;
 
 }
+/* .e-schedule .e-timeline-view .e-appointment, .e-schedule .e-timeline-month-view .e-appointment{
+  height: 10px;
+} */
+.boxdevis {
+  width: 50px;
+  background-color: #ff00ff;
+}
+.boxdevispartiel {
+  width: 50px;
+  background-color: #b3b300;
+}
+.boxdevistotal {
+  width: 50px;
+  background-color: #3daf04;
+}
+.boxpaye {
+  width: 50px;
+  background-color: #008000;
+}
+.boxpartiel {
+  width: 50px;
+  background-color: #ace600;
+}

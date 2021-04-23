@@ -178,7 +178,7 @@ export default function Info2(props) {
                         <div className='row '>
 
                             {
-                                res.envoi ? null :
+                                res.si_envoi === true ? null :
                                     <div className='col-2 ml-auto'>
                                         <button className='btn btn-primary' onClick={() => { getdate() }}>Envoyer par Email</button>
                                     </div>

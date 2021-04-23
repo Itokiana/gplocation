@@ -9,7 +9,7 @@ const stripePromise = loadStripe(Public_key);
 
 function Checkout(props) {
     sessionStorage.setItem("data", JSON.stringify(props.data))
-    console.log('Ato @ Check', props)
+    console.log('Ato @ Check', props.data)
     return (
         <div className="example">
             <div className="card">
@@ -18,7 +18,7 @@ function Checkout(props) {
                         props.data !== true ? (
                             <>
                                 <CheckoutForm count={props.data} />
-                                <br/>
+                                <br />
                                 <a className=" text-muted h6 annuler--perso " ><ins>Annulation-retour a la boutique</ins></a>
                             </>
                         ) : (

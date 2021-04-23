@@ -71,7 +71,7 @@ const schema = yup.object().shape({
 
 export default function Info(props) {
     const classes = useStyles();
-    const [status, setStatus] = useState('');
+    const [forfaitPerso, setforfaitperso] = useState(null);
     const [client, setClient] = useState()
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
@@ -79,7 +79,7 @@ export default function Info(props) {
     const [existclient, setExistclient] = useState(null)
     const [idclient_back, setidclientback] = useState(null)
     const [info_devis, setinfodevi] = useState(false)
-    
+
     useEffect(() => {
         axios.get('/clients').then(res => {
             // setClient(res.data)
@@ -102,13 +102,11 @@ export default function Info(props) {
     }
 
     const change_valeur_entre = e => {
-        // console.log('change',e.target.value)
-        setSearchTerm(e.target.value);
-        // setnomclient(e.target.value)
-        // console.log(affiche)
+        setSearchTerm(e.target.value);  
     };
-    const change_select = (event) => {
-        setStatus(event.target.value);
+    const change_forfait = (event) => {
+        // console.log(event.target.value)
+        setforfaitperso(event.target.value);
 
     };
     const select_client_exist = (idC) => {
@@ -128,12 +126,12 @@ export default function Info(props) {
             accompte: '',
             status: '',
             vol: '',
-            validation :''
+            validation: ''
         },
 
         // validationSchema: schema,
 
-        onSubmit: async (values, {resetForm}) => {
+        onSubmit: async (values, { resetForm }) => {
             if (props.valide === true) {
                 let date_devis = props.reservation.datedevis
                 let id_voiture = props.reservation.voiture
@@ -153,51 +151,51 @@ export default function Info(props) {
                         value['prenom'] = values.prenom
                         value['telephone'] = values.telephone
                         value['email'] = values.email
-                        
-                        await axios.post('/info',value).then(reponse => {
-                            if (reponse.status === 200){
+
+                        await axios.post('/info', value).then(reponse => {
+                            if (reponse.status === 200) {
                                 // console.log('idClientGet',reponse.data.id.id)
-                               
+
                             }
                             varId = reponse.data.id.id
                         })
-                        
+
                         return varId
                     }
-                    
+
                 }
 
                 let value_back = {
                     date_depart: date_devis.dateDepart,
                     date_retour: date_devis.dateRetour,
-                    heure_depart:date_devis.timeDepart,
+                    heure_depart: date_devis.timeDepart,
                     heure_retour: date_devis.timeRetour,
                     lieu_depart: date_devis.lieuDepart,
                     lieu_retour: date_devis.lieuRetour,
-                    voiture_id:id_voiture,
+                    voiture_id: id_voiture,
                     prix: values.forfait,
                     client_id: await clientId(),
-                    numero_vol:values.vol,
-                    acompte:values.accompte,
-                    signe:signe,
-                    status:values.statu,
-                    valide:values.validation
+                    numero_vol: values.vol,
+                    acompte: values.accompte,
+                    signe: signe,
+                    status: values.statu,
+                    valide: values.validation
 
-                  }
+                }
                 // console.log('value_back',value_back)
-                await axios.post('/reservations',value_back).then(result => {
-                    if(result.status===201){
-                        console.log('result',result.data.id)
+                await axios.post('/reservations', value_back).then(result => {
+                    if (result.status === 201) {
+                        console.log('result', result.data.id)
                         setinfodevi(result.data.id)
                     }
-                  })
+                })
 
             }
 
             setExistclient(null)
             resetForm()
-            
-            
+
+
         }
     })
 
@@ -207,19 +205,32 @@ export default function Info(props) {
         formik.values.telephone = existclient.telephone
         formik.values.email = existclient.email
     }
-    
+
     return (
         <div>
+            {forfaitPerso && props.prix ? 
+            <div className='container-devi d-flex align-items-center'>
+                <p className=' p-2 border--perso text-center  h5'>Prix original:</p>
+                <div className='bg-red w-25 p-2 border--perso text-center text-white mr-5 h4'><strike>{props.prix}</strike> €</div>
+                <p className=' p-2 text-center h5'>Forfait:</p>
+                <div className='bg-warning w-25 border--perso p-2 mr-0 text-center text-dark h4'>{forfaitPerso} €</div>
+                
+                
+            </div>: null}
             <form onSubmit={formik.handleSubmit}>
                 <div className='row d-flex justify-content-center'>
+
                     {affiche === true ? (
-                        <div  className='resultDevis container-devi p-5 col-4'>
-                            <TiDeleteOutline className='quitter h1' onClick={annuler_list} />
-                            <p>Suggestion client</p>
-                            <ul className="h1 text-white">
+                        <div className='resultDevis container-devi p-3 col-4'>
+                            <div>
+                                <TiDeleteOutline className='quitter h3 mb-0' onClick={annuler_list} />
+                                <p className='text-center h3'>Suggestion client</p>
+                            </div>
+
+                            <ul className="text-center text-white">
 
                                 {searchResults && searchResults.map((name) => {
-                                    return <li onClick={() => select_client_exist(name)}>{name.nom}</li>
+                                    return <li className="" onClick={() => select_client_exist(name)}><div className="mt-4">{name.nom} <br /> {name.email}</div></li>
                                 })}
                             </ul>
 
@@ -249,7 +260,7 @@ export default function Info(props) {
 
                             </div>
                             <div className='row'>
-                                <FormControl className={classes.formControl}>
+                                <FormControl className={classes.formControl} onChange={change_forfait}>
                                     <InputLabel className='place--perso' htmlFor="">Forfait loc personaliser</InputLabel>
                                     <BootstrapInput onChange={formik.handleChange} value={formik.values.forfait} type="number" name="forfait" />
                                 </FormControl>
@@ -332,11 +343,11 @@ export default function Info(props) {
                     </FormControl>
                 </div>
             </form>
-            {info_devis ? <Redirect to={{pathname: `/devis/${info_devis}`}}/> : null}
-                        
+            {info_devis ? <Redirect to={{ pathname: `/devis/${info_devis}` }} /> : null}
+
 
         </div>
-        
+
     )
 
 }

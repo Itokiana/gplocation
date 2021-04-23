@@ -19,7 +19,7 @@ const useOptions = () => {
       style: {
         width: '50',
         base: {
-          
+
           fontSize,
           fontWeight: '50',
           color: "#424770",
@@ -48,31 +48,31 @@ function CardSection() {
     <>
       <label className='section-Card text-left'>
         <span className='h5 card--perso'>Numero de carte</span>
-    <CardNumberElement
+        <CardNumberElement
           options={options}
         />
       </label>
-      <hr/>
+      <hr />
       <div className=' row'>
         <div className='col-md-12'>
           <label className='section-Card text-left'>
-          <span className='h5 card--perso'> Expiration date</span>
-         
-           <CardExpiryElement
-             options={options}
-          />
+            <span className='h5 card--perso'> Expiration date</span>
+
+            <CardExpiryElement
+              options={options}
+            />
           </label>
         </div>
         <div className='col-md-12'>
-          
 
-            <label className='section-Card text-left'>
+
+          <label className='section-Card text-left'>
             <CardCvcElement
-                options={options}
-              />
+              options={options}
+            />
           </label>
         </div>
-       
+
       </div>
 
     </>
@@ -80,19 +80,3 @@ function CardSection() {
   );
 };
 export default CardSection;
-
-// import React from 'react';
-// import {CardElement} from '@stripe/react-stripe-js';
-// import '../../../../../../Style.css'
-// function CardSection() {
-//   return (
-//       <div>
-//         <label>
-//         Card details
-//         </label>
-//         <CardElement className="checkout"/>
-//       </div>
-
-//   );
-// };
-// export default CardSection;
