@@ -10,6 +10,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {BiMessageSquareError} from 'react-icons/bi';
 import { IconContext } from "react-icons";
+
+
 const ClientRegistrationSchema = Yup.object().shape({
     nom: Yup.string()
 		.required('le nom ne doit pas être vide')
@@ -192,6 +194,7 @@ class Login extends React.Component {
 										}}
 										validationSchema={ClientRegistrationSchema}
 										onSubmit={(values, { resetForm }) => {
+
 											console.log("Test");
 											axios.post('/clients', values).then(response => {
 												if (response.status === 200 && response.data.client.email_confirmed == false ) {
