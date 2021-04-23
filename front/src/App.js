@@ -26,6 +26,9 @@ import PaimentStripe_devis from './Pages/HomePages/Components/Reservation/Reserv
 
 //import './App.scss';
 //import React, { Component } from 'react'
+const TRACKING_ID = "UA-195259390-1"; // YOUR_OWN_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
+
 
 export default class App extends Component {
   constructor() {
@@ -40,11 +43,9 @@ export default class App extends Component {
     // ReactGA.pageview(window.location.pathname);
   }
 
-  initializeAnalytics() {
-    ReactGA.initialize('G-XWNX24WHLD');
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }
+  
   componentDidMount = () => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     if (sessionStorage.id) {
       axios.put(`/clients/${sessionStorage.id}`).then(response => {
         if (response.status === 200) {

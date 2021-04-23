@@ -9,6 +9,9 @@
     padding: 1vw 1vw;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+.main-container{
+    overflow: hidden;
+}
 .container-devi2{
     
     padding: 2vw 2vw;

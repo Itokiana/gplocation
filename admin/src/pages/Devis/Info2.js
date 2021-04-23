@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Devis.css'
 import moment from 'moment';
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -45,6 +45,7 @@ function Contain(props) {
 
 
 export default function Info2(props) {
+    const { id } = useParams();
     const classes = useStyles();
     const [date_envoyer, setdatenvoyer] = useState(null)
     const [client, setClient] = useState(props.client.client)
@@ -62,13 +63,8 @@ export default function Info2(props) {
         });
     };
     const getdate = async () => {
-        let value = {}
-        let date = moment();
-        value['id'] = res.id
-        value['envoi'] = date
-        value['si_envoi'] = true
-        await axios.post(`/updatereservation`, value).then(rep => {
-            console.log('rep.data', rep.data)
+        await axios.post(`/sendevis/${id}`).then(rep => {
+            alert(rep.data.message)
         })
         window.location.reload()
 
@@ -175,17 +171,18 @@ export default function Info2(props) {
                         </div>
 
 
+                      
                         <div className='row '>
+                            <div className='col-6 mr-auto '>
 
                             {
-                                res.envoi ? null :
-                                    <div className='col-2 ml-auto'>
-                                        <button className='btn btn-primary' onClick={() => { getdate() }}>Envoyer par Email</button>
+                                res.si_envoi === true ? null :
+                                    <div className='col-6 mr-auto'>
+                                        <button className='btn btn-success' onClick={() => { getdate() }}>Envoyer par Email</button>
                                     </div>
                             }
 
-                        </div>
-                        <div className='row '>
+                            </div>
                             <div className='col-2 ml-auto'>
                                 <Link onClick={() => window.location.href = `/devis/${res.id}/visuel`} >
                                     <button className='btn btn-primary'>
@@ -193,6 +190,7 @@ export default function Info2(props) {
                                     </button>
                                 </Link>
                             </div>
+                           
                         </div>
                     </fieldset>
                 </div>
