@@ -30,7 +30,8 @@ class Login extends Component {
                     {({ errors, touched }) => (
                         <Form
                             autoComplete="off">
-                            <h1>Connectez-vous</h1>
+                            <h1 className="text-center pb-5">Connectez-vous</h1>
+                            
                             <div>
                                 <div className="mb-2">
                                     <label className="block font-bold mb-1 md:mb-0">
@@ -49,13 +50,13 @@ class Login extends Component {
                                     <Field
                                         name="password"
                                         type="password"
-                                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
+                                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-dark-700 leading-tight focus:outline-none focus:bg-gray focus:border-purple-500" />
                                     <ErrorField errors={errors} touched={touched} row="password" />
                                 </div>
                             </div>
                             <hr className="my-4" />
-                            <div className="flex justify-end">
-                                <button type="submit" className="text-white px-4 py-2 bg-blue-500 hover:bg-blue-400">Se Connecter</button>
+                            <div className="flex justify-center mt-5">
+                                <button type="submit" className="text-white px-4 py-2  rounded  border-2 border-gray-200 bg-blue-500 hover:bg-blue-400">Se Connecter</button>
                             </div>
                         </Form>
                     )}

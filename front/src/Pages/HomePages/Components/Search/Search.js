@@ -93,7 +93,7 @@ export default class Search extends React.Component {
 							}}
 							validationSchema={ReservationSchema}
 							onSubmit={(values, { resetForm }) => {
-								console.log('les value',values)
+								
 								let date1 = values.dateDepart;
 								let date2 = values.dateRetour;
 								let jours = this.dateDiff(date1, date2) + 1;
@@ -115,8 +115,7 @@ export default class Search extends React.Component {
 									}
 									
 								});
-								// console.log('lololo',data)
-
+								
 							}}
 						>
 							{({ errors, touched }) => (

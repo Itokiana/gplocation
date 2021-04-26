@@ -267,7 +267,7 @@ class Login extends React.Component {
 										<h1 className="title-1">Protection des données</h1>
 									</div>
 										<p className="text-1">
-											Les informations recueillies font l'objet d'un traitemant informatique pour permettre à GP Location d'exécuter 
+											Les informations recueillies font l'objet d'un traitement informatique pour permettre à GP Location d'exécuter 
 											la réservation à distance. Si vous ne remplissez pas les champs obligatoires nous ne serons pas en mesure de vous fournir 
 											votre bon de réservation.
 											Conformément à la loi "informatique et libertés" du 6 janvier 1978, vous bénéficiez d'un droit d'accès et 

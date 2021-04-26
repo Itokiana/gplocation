@@ -171,7 +171,7 @@ export default function Devis() {
 
         if (rehausse === '1') {
             prixreh = prix - 9
-        } else if (bebe === '2') {
+        } else if (rehausse === '2') {
             prixreh = prix - 18
         } else if (rehausse === '3') {
             prixreh = prix - 27

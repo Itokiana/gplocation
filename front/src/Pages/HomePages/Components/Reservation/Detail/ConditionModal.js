@@ -38,8 +38,8 @@ function ConditionModal(props) {
                             <p><strong>Que reste-il à ma charge en cas de sinistre ?</strong></p>
                             <p>Deux cas se présentent :</p>
                             <ul>
-                                <li>Soit vous n’êtes pas responsable du sinistre dès lors que les assureurs auront pu attribuer la totalité de la responsabilité du sinistre à un tiers identifié, au quel cas, vous ne devez rien et cette franchise n’est pas appliquée.</li>
-                                <li>Soit vous êtes responsable du sinistre dès lors que celui-ci est couvert par l’assurance, au quel cas vous ne devez que la Franchise (indemnité correspondant à votre contribution au malus de l’assurance) et ce, à concurrence des montants précisés aux conditions particulières du présent contrat de location.</li>
+                                <li>Soit vous n’êtes pas responsable du sinistre dès lors que les assureurs auront pu attribuer la totalité de la responsabilité du sinistre à un tiers identifié, auquel cas, vous ne devez rien et cette franchise n’est pas appliquée.</li>
+                                <li>Soit vous êtes responsable du sinistre dès lors que celui-ci est couvert par l’assurance, auquel cas vous ne devez que la Franchise (indemnité correspondant à votre contribution au malus de l’assurance) et ce, à concurrence des montants précisés aux conditions particulières du présent contrat de location.</li>
                             </ul>
                             <h3 className="titreModal">2. QUE DOIS-JE FAIRE EN CAS DE PANNE, D’ACCIDENT, VOL, DESTRUCTION DE VEHICULE ?</h3>
                             <p>En cas de panne, d’accident, de vol ou de destruction de véhicule, appelez 24 heures sur 24, 7 jours sur 7, au 0692 370 380.<br /> Tout accident doit être déclaré à GP Location dans les 48 heures. Vous bénéficiez ainsi d’un dépannage et remorquage 24h/24 et 7j/7 (exclue panne d’essence, panne de batterie, panne due a la mauvaise utilisation du locataire ).</p>

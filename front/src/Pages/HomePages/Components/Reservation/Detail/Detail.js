@@ -53,7 +53,7 @@ function Detail(props) {
             <h2 className="tire-assurance">Prise en charges</h2>
             <p> <span className="text-bold">A l'aéroport Roland Garros :</span>   Votre loueur vous prend en charge personnellement à l'aéroport. Ceci vous évitera d'attendre au comptoir de l'aéroport après de nombreuses heures de vols et de payer la taxe d'aéroport.</p>
             <p> <span className="text-bold">Sainte-Marie : </span>   Votre loueur vous prend en charge personnellement à l'aéroport. Ceci vous évitera d'attendre au comptoir de l'aéroport après de nombreuses heures de vols et de payer la taxe d'aéroport.</p>
-            <p><span className="option-covid">Option annulation covid :</span>  En cas d'annulation, l'acompte sera remboursable par le loueur s'il est prévenu jusqu'à 6 heures avant le départ  quelque soit la raison sans justificatif à présenter.   Si elle est payante, cette option ne sera par contre pas remboursée.</p>
+            <p><span className="option-covid">Option annulation covid :</span>  En cas d'annulation, l'acompte sera remboursable par le loueur s'il est prévenu jusqu'à 6 heures avant le départ  quel que soit la raison sans justificatif à présenter.   Si elle est payante, cette option ne sera par contre pas remboursée.</p>
             <div >
               <h1 >Protection des données</h1>
             </div>

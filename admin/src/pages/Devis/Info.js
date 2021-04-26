@@ -60,9 +60,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const schema = yup.object().shape({
-    email: yup.string().email("Please enter valid email").required('Champ obligatoire'),
+    email: yup.string().email("Veuillez saisir une adresse e-mail valide").required('Champ obligatoire'),
     forfait: yup.string().required('Champ obligatoire'),
-    value: yup.string().required('Champ obligatoire'),
+    validation: yup.string().required('Champ obligatoire'),
     accompte: yup.string().required('Champ obligatoire'),
     prenom: yup.string().required('Champ obligatoire'),
     nom: yup.string().required('Champ obligatoire'),
@@ -102,7 +102,7 @@ export default function Info(props) {
     }
 
     const change_valeur_entre = e => {
-        setSearchTerm(e.target.value);  
+        setSearchTerm(e.target.value);
     };
     const change_forfait = (event) => {
         // console.log(event.target.value)
@@ -129,7 +129,7 @@ export default function Info(props) {
             validation: ''
         },
 
-        // validationSchema: schema,
+        validationSchema: schema,
 
         onSubmit: async (values, { resetForm }) => {
             if (props.valide === true) {
@@ -208,15 +208,15 @@ export default function Info(props) {
 
     return (
         <div>
-            {forfaitPerso && props.prix ? 
-            <div className='container-devi d-flex align-items-center'>
-                <p className=' p-2 border--perso text-center  h5'>Prix original:</p>
-                <div className='bg-red w-25 p-2 border--perso text-center text-white mr-5 h4'><strike>{props.prix}</strike> €</div>
-                <p className=' p-2 text-center h5'>Forfait:</p>
-                <div className='bg-warning w-25 border--perso p-2 mr-0 text-center text-dark h4'>{forfaitPerso} €</div>
-                
-                
-            </div>: null}
+            {forfaitPerso && props.prix ?
+                <div className='container-devi d-flex align-items-center'>
+                    <p className=' p-2 border--perso text-center  h5'>Prix original:</p>
+                    <div className='bg-red w-25 p-2 border--perso text-center text-white mr-5 h4'><strike>{props.prix}</strike> €</div>
+                    <p className=' p-2 text-center h5'>Forfait:</p>
+                    <div className='bg-warning w-25 border--perso p-2 mr-0 text-center text-dark h4'>{forfaitPerso} €</div>
+
+
+                </div> : null}
             <form onSubmit={formik.handleSubmit}>
                 <div className='row d-flex justify-content-center'>
 
@@ -264,6 +264,9 @@ export default function Info(props) {
                                     <InputLabel className='place--perso' htmlFor="">Forfait loc personaliser</InputLabel>
                                     <BootstrapInput onChange={formik.handleChange} value={formik.values.forfait} type="number" name="forfait" />
                                 </FormControl>
+                                {formik.errors.forfait && formik.touched.forfait && (
+                                <p className='text-danger '>{formik.errors.forfait}</p>
+                            )}
 
                             </div>
                             <div className='row'>
@@ -271,6 +274,9 @@ export default function Info(props) {
                                     <InputLabel className='place--perso' htmlFor="">Acompte</InputLabel>
                                     <BootstrapInput onChange={formik.handleChange} value={formik.values.accompte} type="number" name='accompte' />
                                 </FormControl>
+                                {formik.errors.accompte && formik.touched.accompte && (
+                                <p className='text-danger '>{formik.errors.accompte}</p>
+                            )}
 
                             </div>
                             <div className='row'>
@@ -278,13 +284,18 @@ export default function Info(props) {
                                     <InputLabel className='place--perso' htmlFor="">Num de vol info supp  </InputLabel>
                                     <BootstrapInput id="" onChange={formik.handleChange} value={formik.values.vol} name="vol" />
                                 </FormControl>
-                                {/* <p className='text-danger ml-5'>{errors.vol?.message}</p> */}
+                                {formik.errors.vol && formik.touched.vol && (
+                                <p className='text-danger '>{formik.errors.vol}</p>
+                            )}
                             </div>
                             <div className='row'>
                                 <FormControl className={classes.formControl}>
                                     <InputLabel className='place--perso' htmlFor="">Validation</InputLabel>
                                     <BootstrapInput onChange={formik.handleChange} value={formik.values.validation} type="number" name='validation' />
                                 </FormControl>
+                                {formik.errors.validation && formik.touched.validation && (
+                                <p className='text-danger '>{formik.errors.validation}</p>
+                            )}
 
                             </div>
 
@@ -305,6 +316,9 @@ export default function Info(props) {
                                 <InputLabel className='place--perso' htmlFor="">Nom</InputLabel>
                                 <BootstrapInput id="" name="nom" onChange={formik.handleChange} value={formik.values.nom} />
                             </FormControl>
+                            {formik.errors.nom && formik.touched.nom && (
+                                <p className='text-danger '>{formik.errors.nom}</p>
+                            )}
 
                         </div>
 
@@ -313,6 +327,9 @@ export default function Info(props) {
                                 <InputLabel className='place--perso' htmlFor="">Prenom</InputLabel>
                                 <BootstrapInput id="" name="prenom" onChange={formik.handleChange} value={formik.values.prenom} />
                             </FormControl>
+                            {formik.errors.prenom && formik.touched.prenom && (
+                                <p className='text-danger '>{formik.errors.prenom}</p>
+                            )}
 
                         </div>
                         <div className='row'>
@@ -320,6 +337,9 @@ export default function Info(props) {
                                 <InputLabel className='place--perso' htmlFor="">Telephone  </InputLabel>
                                 <BootstrapInput name="telephone" onChange={formik.handleChange} value={formik.values.telephone} />
                             </FormControl>
+                            {formik.errors.telephone && formik.touched.telephone && (
+                                <p className='text-danger '>{formik.errors.telephone}</p>
+                            )}
 
                         </div>
                         <div className='row'>
@@ -327,6 +347,9 @@ export default function Info(props) {
                                 <InputLabel className='place--perso' htmlFor="">Email</InputLabel>
                                 <BootstrapInput id="" name="email" onChange={formik.handleChange} value={formik.values.email} />
                             </FormControl>
+                            {formik.errors.email && formik.touched.email && (
+                                <p className='text-danger '>{formik.errors.email}</p>
+                            )}
 
                         </div>
 
