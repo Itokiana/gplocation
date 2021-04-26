@@ -87,7 +87,7 @@ async function stripeTokenHandler(token) {
   let data=JSON.parse(sessionStorage.getItem("data"))
   // let acompte = sessionStorage.getItem("acompte")
   const paymentData = {stripeToken: token.id,description: data.client.client.id, accompte: data.data.count };
-  let totalprix = (data.data.prix === parseFloat(data.reservation.prix) ? 'Devis/paiment total' : 'Devis/paiment partiel')
+  let totalprix = (data.data.prix === parseFloat(data.data.count) ? 'Devis/paiment total' : 'Devis/paiment partiel')
 
   const response = await axios.post('/charges',paymentData)
   if (response.data===true){
@@ -108,6 +108,7 @@ async function stripeTokenHandler(token) {
       numero_vol:numero_vol.numero_vol,
       acompte:data.data.count,
       signe:data.data.signe,
+      status:totalprix,
       lieu_depart: sessionStorage.getItem("lieu_depart"),
       lieu_retour: sessionStorage.getItem("lieu_retour")
     }

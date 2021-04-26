@@ -243,8 +243,8 @@ export default class ChiffreAffaire extends Component {
         </center>
         <br/>
         <div className="m-3 d-flex justify-content-between">
-          <h2>Totale Moi  {this.month()}: {this.CA_Moi()}</h2>
-          <h2>Totale Anne {this.years()} : {this.CA_Anne()}</h2>
+          <h2>Totale Mois&nbsp; {this.month()}:&nbsp;  {this.CA_Moi()}</h2>
+          <h2>Totale année {this.years()} : {this.CA_Anne()}</h2>
         </div>
         <div className='diagrame-line' style={{background: "#161b36"}}>
           <Line data={data} height= "80vh" />
