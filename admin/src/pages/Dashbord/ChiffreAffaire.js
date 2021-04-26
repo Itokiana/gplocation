@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import {Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import axios from 'axios'
 import moment from 'moment'
 
 export default class ChiffreAffaire extends Component {
- 
-  state ={
+
+  state = {
     dateMonment: moment(),
-    reservation:[],
+    reservation: [],
     showMonth: false,
     showYears: false,
-    allmonths :moment.months()
+    allmonths: moment.months()
   }
   constructor(props) {
     super(props)
   }
-  months  = moment.months();
+  months = moment.months();
   daysInMonths = () => {
     return this.state.dateMonment.daysInMonth(); // nombre de jour dans un moi
   }
@@ -28,13 +28,13 @@ export default class ChiffreAffaire extends Component {
     return this.state.dateMonment.format("Y");
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.getResvation()
   }
 
-  getResvation(){
-    axios.get('/reservation/liste').then(res =>{
-      if(res.status===200){
+  getResvation() {
+    axios.get('/reservation/liste').then(res => {
+      if (res.status === 200) {
         this.setState({
           reservation: res.data
         })
@@ -59,15 +59,15 @@ export default class ChiffreAffaire extends Component {
     });
   };
 
-  showMonth = (e, month) => {   
-    this.setState({  
-       showMonth: !this.state.showMonth   
+  showMonth = (e, month) => {
+    this.setState({
+      showMonth: !this.state.showMonth
     });
   };
 
   showYear = (e) => {
     this.setState({
-        showYears: !this.state.showYears
+      showYears: !this.state.showYears
     });
   };
 
@@ -86,20 +86,20 @@ export default class ChiffreAffaire extends Component {
     });
     let rows = [];
     let cells = [];
-    months.forEach((row, i) => { 
+    months.forEach((row, i) => {
       if (i % 6 !== 0 || i == 0) { // except zero index 
-          cells.push(row); 
-      } else { 
-          rows.push(cells); 
-          cells = [];
-          cells.push(row); 
+        cells.push(row);
+      } else {
+        rows.push(cells);
+        cells = [];
+        cells.push(row);
       }
     });
     rows.push(cells); // add last row
     let monthlist = rows.map((d, i) => {
       return <tr>{d}</tr>;
     });
-    
+
     return (
       <table className="table w-25 text-white border">
         <tbody>{monthlist}</tbody>
@@ -149,9 +149,9 @@ export default class ChiffreAffaire extends Component {
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
 
-  CA_Anne(){
+  CA_Anne() {
     const trieAnne = this.state.reservation
-    .filter(anne => moment(anne.update_at).format("Y") ==  this.state.dateMonment.format("Y"))
+      .filter(anne => moment(anne.update_at).format("Y") == this.state.dateMonment.format("Y"))
     let totalprixanne = 0
     trieAnne.map(anne => {
       totalprixanne = totalprixanne + anne.prix
@@ -159,9 +159,9 @@ export default class ChiffreAffaire extends Component {
     return totalprixanne
   }
 
-  CA_Moi(){
+  CA_Moi() {
     const trieMois = this.state.reservation
-    .filter(unmois => moment(unmois.update_at).format("MMMM Y") === this.state.dateMonment.format("MMMM Y"))
+      .filter(unmois => moment(unmois.update_at).format("MMMM Y") === this.state.dateMonment.format("MMMM Y"))
     let totalprixmoi = 0
     trieMois.map(moi => {
       totalprixmoi = totalprixmoi + moi.prix
@@ -169,16 +169,16 @@ export default class ChiffreAffaire extends Component {
     return totalprixmoi
   }
 
-  datas(){
+  datas() {
     let reservation = this.state.reservation
     let datemoment = this.state.dateMonment
     const filtreMois = reservation.filter(unmois => moment(unmois.update_at).format("MMMM Y") === datemoment.format("MMMM Y"))
     const objetData = {}
-    for(let i=1; i <= this.daysInMonths() ; i++){
+    for (let i = 1; i <= this.daysInMonths(); i++) {
       let prix$i = 0
       filtreMois.map(res => {
         let jour = parseInt(moment(res.updated_at).format("D"))
-        if (jour === i){
+        if (jour === i) {
           prix$i = prix$i + res.prix
         }
       })
@@ -196,7 +196,7 @@ export default class ChiffreAffaire extends Component {
           label: 'CA',
           fill: true,
           lineTension: 0.3,
-         
+
           borderColor: '#4834d4',
           borderCapStyle: 'butt',
           borderDash: [],
@@ -220,34 +220,34 @@ export default class ChiffreAffaire extends Component {
       <div className="m-2">
         <center>
           <h1 className="text-white">CHIFFRE D'AFFAIRE (CA)</h1>
-          <br/>
+          <br />
           <div className="daty row">
-              <span className=" text-white  col-md-4 cont-flesy" onClick={e => {this.onPrev()}}> 
-                <a href="#"><i class="fa fa-angle-left flesy"></i></a>
-              </span>
-              <span className="text-white  col-md-2 volana" onClick={e => {this.showMonth()}}>
-                <a href="#">{this.capitalize(String(this.month()))}</a>
-              </span>
-              <span className="text-white col-md-2 taona " onClick={(e)=>this.showYear()} >
-                <a href="#"> {this.years()}</a>
-              </span>
-              <span className=" text-white  col-md-4 cont-flesy" onClick={e => {this.onNext()}}>
-                <a href="#"><i class="fa fa-angle-right flesy"></i></a>
-              </span>
+            <span className=" text-white  col-md-4 cont-flesy" onClick={e => { this.onPrev() }}>
+              <a href="#"><i class="fa fa-angle-left flesy"></i></a>
+            </span>
+            <span className="text-white  col-md-2 volana" onClick={e => { this.showMonth() }}>
+              <a href="#">{this.capitalize(String(this.month()))}</a>
+            </span>
+            <span className="text-white col-md-2 taona " onClick={(e) => this.showYear()} >
+              <a href="#"> {this.years()}</a>
+            </span>
+            <span className=" text-white  col-md-4 cont-flesy" onClick={e => { this.onNext() }}>
+              <a href="#"><i class="fa fa-angle-right flesy"></i></a>
+            </span>
           </div>
-           {this.state.showYears && (
-            <this.yearClick/> 
+          {this.state.showYears && (
+            <this.yearClick />
           )}
-          {this.state.showMonth &&  
-          < this.MonthList data = {moment.months()} />}
+          {this.state.showMonth &&
+            < this.MonthList data={moment.months()} />}
         </center>
-        <br/>
+        <br />
         <div className="m-3 d-flex justify-content-between">
           <h2>Totale Moi  {this.month()}: {this.CA_Moi()}</h2>
           <h2>Totale Anne {this.years()} : {this.CA_Anne()}</h2>
         </div>
-        <div className='diagrame-line' style={{background: "#161b36"}}>
-          <Line data={data} height= "80vh" />
+        <div className='diagrame-line' style={{ background: "#161b36" }}>
+          <Line data={data} height="80vh" />
         </div>
       </div>
     );
