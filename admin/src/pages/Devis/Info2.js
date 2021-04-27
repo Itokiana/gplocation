@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './Devis.css'
 import moment from 'moment';
 import { Link, useParams } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
+// import InputLabel from '@material-ui/core/InputLabel';
+// import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import { date } from 'yup';
+// import NativeSelect from '@material-ui/core/NativeSelect';
+// import { date } from 'yup';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({

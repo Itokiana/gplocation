@@ -77,8 +77,7 @@ function Reserver(propos) {
         }
         // console.log(clientss)
         setVoiture({ loading: true });
-        // const apiVoiture = (`http://fd0b515.online-server.cloud/voitures/${propos.match.params.id}`)
-        const apiVoiture = (`http://localhost:4000/voitures/${propos.match.params.id}`)
+        const apiVoiture = (`http://fd0b515.online-server.cloud/voitures/${propos.match.params.id}`)
 
         fetch(apiVoiture)
             .then((res) => res.json())
@@ -108,9 +107,8 @@ function Reserver(propos) {
                                         <div className="b-contacts__address-hours">
                                             <p className="conf_categ">{(voiture.voiture && voiture.voiture.marque)}</p>
 
-                                            <img className="img-responsive center-block" src={`http://localhost:4000/${(voiture.voiture && voiture.voiture.image.url)}`} alt="" width="250px" height="220px" />
 
-                                            {/* <img className="img-responsive center-block" src={`http://fd0b515.online-server.cloud/${(voiture.voiture && voiture.voiture.image.url)}`} alt="" width="250px" height="220px"/> */}
+                                            <img className="img-responsive center-block" src={`http://fd0b515.online-server.cloud/${(voiture.voiture && voiture.voiture.image.url)}`} alt="" width="250px" height="220px"/>
                                             <ul className="listeReserve">
                                                 <li className="prise"><span></span><b>Prise en charge à l'aéroport</b></li>
                                                 <li className="prise"><span className="carburant"></span>Carburant : Plein à rendre plein</li>

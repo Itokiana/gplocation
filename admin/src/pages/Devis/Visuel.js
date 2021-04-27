@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { BrowserRouter as Route } from 'react-router-dom';
+// import { Link } from 'react-router-dom'
+// import { BrowserRouter as Route } from 'react-router-dom';
 import moment from 'moment'
 import axios from 'axios'
 import './Devis.css'
@@ -86,7 +86,7 @@ export default function Visuel(props) {
                             </div>
                             <div className='col-6 ml-auto mt-3 mb-3 text-center '>
                                 <img
-                                    className='image--perso' src={"http://localhost:4000" + (data.voiture.image.url)} alt='voiture'
+                                    className='image--perso' src={"http://fd0b515.online-server.cloud" + (data.voiture.image.url)} alt='voiture'
                                 />
                                 {/* <img className='image--perso' src='https://imgur.com/fXq0EOL.png' /> */}
                             </div>
@@ -170,29 +170,19 @@ export default function Visuel(props) {
 
                                 <div className='d-flex align-items-center justify-content-center'>
                                     <lu className=' list-unstyled list--body text-center'>
-                                        {/* <Route path='/' component={() => {
-                                            window.location.href = `http://localhost:3001${data.reservation.acompte}`;
-                                            return null;
-                                        }} ><li className='lien'>  Regler un acompte de {data.reservation.acompte} € </li>
-                                        </Route> */}
+                                       
 
-                                        <a href={"http://localhost:3001/paiment_devis/" + data.reservation.id + "/" + data.reservation.acompte} target="/blank">
+                                        <a href={"http://gp-location.sayna.io/paiment_devis/" + data.reservation.id + "/" + data.reservation.acompte} target="/blank">
                                             <li className='lien'>
                                                 Regler un acompte de {data.reservation.acompte} € 
                                             </li>
                                         </a>
-                                        <a href={"http://localhost:3001/paiment_devis/" + data.reservation.id + "/" + data.reservation.prix} target="/blank">
+                                        <a href={"http://gp-location.sayna.io/paiment_devis/" + data.reservation.id + "/" + data.reservation.prix} target="/blank">
                                             <li className='lien'>
                                                 Regler un prix total de {data.reservation.prix} €
                                             </li>
                                         </a>
 
-                                        {/* <Link onClick={() => window.location.href = `http://localhost:3001${data.reservation.acompte}`} >
-                                            <li className='lien'>  Regler un acompte de {data.reservation.acompte} € </li>
-                                        </Link>
-                                        <Link onClick={() => window.location.href = `http://localhost:3001${data.reservation.prix}`} >
-                                            <li className='lien'>  Regler un prix total de {data.reservation.prix} € </li>
-                                        </Link> */}
 
 
                                     </lu>

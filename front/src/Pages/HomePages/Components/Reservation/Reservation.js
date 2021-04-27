@@ -264,8 +264,7 @@ class Reservation extends Component {
                                                     <div className="b-items__cars">
                                                         <div className="b-items__cars-one wow zoomInUp" data-wow-delay="0.5s">
                                                             <div className="b-items__cars-one-img">
-                                                                <img className="img-responsive" src={`http://localhost:4000/${voiture.image.url}`} alt={voiture.marque} />
-                                                                {/* <img className="img-responsive" src={`http://fd0b515.online-server.cloud/${voiture.image.url}`} alt={voiture.marque}/> */}
+                                                                <img className="img-responsive" src={`http://fd0b515.online-server.cloud/${voiture.image.url}`} alt={voiture.marque}/>
                                                                 <br />
                                                                 {
                                                                     this.props.stock[this.getKey(voiture, this.props.voitures)] === 1 ? <p className="laststock">Dernier vehicule en stock</p> : <p className='laststock1'>Stock restant : {this.props.stock[this.getKey(voiture, this.props.voitures)]}</p>

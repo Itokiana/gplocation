@@ -43,6 +43,7 @@ export const userLoginAttempt = ({ username, password }) => {
                 const redirect_if = ['/login', '/'];
                 if (redirect_if.includes(history.location.pathname)) {
                     history.push('/');
+                    window.location.reload()
                 }
             } else {
                 const message = 'Utilisateur ou mot de passe incorrect';

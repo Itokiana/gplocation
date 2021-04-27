@@ -91,9 +91,8 @@ export default function CorrectDevis (props) {
         <legend className='d-flex align-items-center justify-content-center head--perso text-center w-50 rounded'>Information sur la Reservation</legend>
 
         <div className='d-flex justify-content-center mb-5 mt-5'>
-          {/* <img className=' mt-2  image--perso' src={"http://localhost:4000" + (datavoit ? datavoit.voiture.image.url : null)} alt='voiture' /> */}
           <img
-            className='w-50 h-auto image--perso' src={"http://localhost:4000" + (reservation ? reservation.voiture.image.url : null)} alt='voiture'
+            className='w-50 h-auto image--perso' src={"http://fd0b515.online-server.cloud" + (reservation ? reservation.voiture.image.url : null)} alt='voiture'
           />
         </div>
 

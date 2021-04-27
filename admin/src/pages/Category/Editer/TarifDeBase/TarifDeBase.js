@@ -42,7 +42,7 @@ export default class TarifDeBase extends Component {
         })
     }
     async gettarifdebase () {
-       await axios.get(`/base_tarifs/${this.props.ids}`).then(response => {
+       await axios.get(`/base/tarif/${this.props.ids}`).then(response => {
            this.setState({
                size: response.data.tarif_par_categorie.length
            })
