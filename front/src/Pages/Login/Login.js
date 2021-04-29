@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {BiMessageSquareError} from 'react-icons/bi';
 import { IconContext } from "react-icons";
-
+import ReactGA from 'react-ga'
 
 const ClientRegistrationSchema = Yup.object().shape({
     nom: Yup.string()
@@ -90,8 +90,16 @@ class Login extends React.Component {
 								}}
 								validationSchema={ClientSession}
 								onSubmit={(values, { resetForm }) => {
+									
+
 									axios.post('/client_login', values).then(response => {
 										if (response.status === 200 && response.data.client.email_confirmed) {
+
+											ReactGA.event({
+												category: "Sign In",
+												action: "Utilisateur connecter",
+											  }); 
+
 											sessionStorage.setItem('client', JSON.stringify(response.data.client))
 											sessionStorage.setItem('id', response.data.client.id)
 											sessionStorage.setItem('nom',response.data.client.nom)
@@ -194,7 +202,7 @@ class Login extends React.Component {
 										}}
 										validationSchema={ClientRegistrationSchema}
 										onSubmit={(values, { resetForm }) => {
-
+											
 											console.log("Test");
 											axios.post('/clients', values).then(response => {
 												if (response.status === 200 && response.data.client.email_confirmed == false ) {
