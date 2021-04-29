@@ -27,17 +27,18 @@ class CheckoutForm extends React.Component {
 
     const card = elements.getElement(CardNumberElement);
     const result = await stripe.createToken(card);
-
+    
     if (result.error) {
       // Show error to your customer.
       history.push('/error_res')
       window.location.reload()
-      console.log('ato ny',result.error.message);
+      // console.log('ato ny',result.error.message);
     } else {
       // Send the token to your server.
       // This function does not exist yet; we will define it in the next step.
-      console.log(result.token)
+      // console.log(result)
       stripeTokenHandler(result.token);
+      // console.log('typ', pay)
     }
   };
 
@@ -108,6 +109,7 @@ async function stripeTokenHandler(token) {
       numero_vol:numero_vol.numero_vol,
       acompte:data.data.count,
       signe:data.data.signe,
+      status:totalprix,
       lieu_depart: sessionStorage.getItem("lieu_depart"),
       lieu_retour: sessionStorage.getItem("lieu_retour")
     }

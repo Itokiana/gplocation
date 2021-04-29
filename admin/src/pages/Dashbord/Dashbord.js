@@ -1,10 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import './Dashdord.css';
-import ProgressBar from 'react-bootstrap/ProgressBar'
 import axios from 'axios'
 import ChiffreAffaire from './ChiffreAffaire';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const selectStyle = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 function format(time) {
   // Hours, minutes and seconds
@@ -44,27 +59,64 @@ const Onglet = (props) => {
 
 
 export default function Dashbord() {
+
+  const selects = selectStyle();
   const classes = useStyles();
   const now = 60;
   const [data, setData] = useState()
+  const [state, setState] = useState({
+    name: '7daysAgo'
+  });
+
+  const handleChange = (event) => {
+    setData(null)
+    let objet = { name: event.target.value }
+    setState({
+      name: event.target.value
+    });
+    axios.post('/analitique', objet).then(response => {
+      setData(response.data)
+    })
+  };
 
   useEffect(() => {
-    axios.post('/analitique').then(response => {
+    axios.post('/analitique', state).then(response => {
       setData(response.data)
     })
 
     data ? console.log(data.data) : console.log('not yet');
   }, [])
+
   return (
     <div>
       <ChiffreAffaire />
       <div className='row onglet pr-5 mt-5  d-flex align-items-center'> <Button href="/devis" className="m-2 ml-auto" variant="outlined" color="secondary">
         Crée un contrat de location
       </Button></div>
+      <div className='row mt-10  d-flex justify-content-center align-items-center'><h1 className='ganal'>présentation de google analytics</h1> </div>
+      <div className='row mb-10  d-flex justify-content-center align-items-center'>
 
+        <FormControl className={selects.formControl}>
+          <NativeSelect
+
+            value={state.name}
+            name="name"
+            onChange={handleChange}
+          >
+            <option value={'7daysAgo'}>Les 7 derniers jours </option>
+            <option value={'today'}>aujourd'hui</option>
+            <option value={'Yesterday'}>Hier </option>
+
+            <option value={'9daysAgo'}>Les 9 derniers jours </option>
+            <option value={'30daysAgo'}>Les 30 derniers jours </option>
+          </NativeSelect>
+          <FormHelperText>Plage de date</FormHelperText>
+        </FormControl>
+
+      </div>
       {data ?
         <>
-          <div className='row m-10  d-flex justify-content-center align-items-center'><h1 className='ganal'>Présentation de google analytics</h1> </div>
+
           <div className='row'>
             <Onglet nom='session' chiffre={data.data[4].value} evolution={parseInt(data.data[1].value) + '%'} />
             <Onglet nom='page visiter' chiffre={data.data[6].value} evolution='10%' />
@@ -74,7 +126,7 @@ export default function Dashbord() {
             <Onglet nom='taux de rebond' chiffre={parseInt(data.data[5].value) + '%'} evolution='--' />
           </div>
         </>
-        : null
+        : <div className='row m-5  d-flex justify-content-center align-items-center'>    <CircularProgress /> </div>
       }
 
 

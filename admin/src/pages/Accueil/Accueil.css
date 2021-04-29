@@ -52,6 +52,8 @@
 }
 .listeBtn{
     display: flex;
+    margin-bottom: 40px;
+    margin-top: 10px;
 }
 .nbr-depart{
     padding: 21px 0 0 11px;
@@ -79,8 +81,9 @@
 }
 .table-accueil{
    
-    overflow-x:auto;
+    /* overflow-x:auto; */
     width: 100%;
+    border: solid 1px rgb(26, 25, 25);
 }
 .th-accueil{
     color:rgb(30, 30, 116)!important;
@@ -108,5 +111,10 @@
 }
 .triage {
     margin-top: 17px;
-    margin-left: 200px;
+    margin-left: 50px;
+}
+#bouton {
+    padding: 0 10px !important;
+    margin-left: 450px;
+    margin-top: 20px; 
 }

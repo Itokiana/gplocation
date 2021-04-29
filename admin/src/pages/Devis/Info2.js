@@ -54,6 +54,7 @@ export default function Info2(props) {
         age: '',
         name: 'hai',
     });
+    const cond = (res.status === 'Devis' || res.status === 'Devis/paiment partiel' || res.status === 'Devis/paiment total')
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -87,10 +88,10 @@ export default function Info2(props) {
         dataInfo('Pays', ''),
     ]
     const ligne2 = [
-        dataInfo('Valide Pendant', res.valide),
+        cond ? dataInfo('Valide Pendant', res.valide):dataInfo(null,null),
         dataInfo('Date de creation', moment(res.created_at).format('LLL')),
-        dataInfo('Date d’envoie du devis', res.envoi ? moment(res.envoi).format('LLL') : "Devi n'est pas envoyer"),
-        dataInfo('Fin de validiter', moment(res.created_at).add(res.valide, 'd').format('LLL')),
+        cond ? dataInfo('Date d’envoie du devis', res.envoi ? moment(res.envoi).format('LLL') : "Devi n'est pas envoyer"):dataInfo(null,null),
+        cond ? dataInfo('Fin de validiter', moment(res.created_at).add(res.valide, 'd').format('LLL')):dataInfo(null,null),
         dataInfo('Acompte', res.acompte),
         dataInfo('Total', res.prix),
     ]
@@ -143,21 +144,25 @@ export default function Info2(props) {
                                         value={res.status}
                                         onChange={handleChange}
                                         label="Age"
-                                        inputProps={{
-                                            name: 'age',
-                                            id: 'outlined-age-native-simple',
-                                        }}
+                                    // inputProps={{
+                                    //     name: 'age',
+                                    //     id: 'outlined-age-native-simple',
+                                    // }}
                                     >
-                                        <option value={10}>Devis</option>
-                                        <option value={20}>Twenty</option>
-                                        <option value={30}>Thirty</option>
+                                        <option className='bg-dark' value='ddd' />
+                                        <option className='' value='Paye'>Paye</option>
+                                        <option className='' value='Paiment partiel'>Paiment Partiel</option>
+                                        <option className='' value='Devis/paiment total'>Devis/paiment total</option>
+                                        <option className='' value='Devis'>Devis</option>
                                     </Select>
                                 </FormControl>
+
                             </div>
 
+                            {cond ?
                             <div className='col-2 ml-auto '>
-                                <p className=' text-success'> Exiprer dans {res.valide} jr </p>
-                            </div>
+                            <p className=' text-success'> Exiprer dans {res.valide} jr </p>
+                        </div>: null}
 
                         </div>
 
@@ -171,27 +176,30 @@ export default function Info2(props) {
                         </div>
 
 
-                      
-                        <div className='row '>
-                            <div className='col-6 mr-auto '>
+                        {
+                            cond ?
 
-                            {
-                                res.si_envoi === true ? null :
-                                    <div className='col-6 mr-auto'>
-                                        <button className='btn btn-success' onClick={() => { getdate() }}>Envoyer par Email</button>
+                                <div className='row '>
+                                    <div className='col-6 mr-auto '>
+
+                                        {
+                                            res.si_envoi === true ? null :
+                                                <div className='col-6 mr-auto'>
+                                                    <button className='btn btn-success' onClick={() => { getdate() }}>Envoyer par Email</button>
+                                                </div>
+                                        }
+
                                     </div>
-                            }
-
-                            </div>
-                            <div className='col-2 ml-auto'>
-                                <Link onClick={() => window.location.href = `/devis/${res.id}/visuel`} >
-                                    <button className='btn btn-primary'>
-                                        Visualiser
+                                    <div className='col-2 ml-auto'>
+                                        <Link onClick={() => window.location.href = `/devis/${res.id}/visuel`} >
+                                            <button className='btn btn-primary'>
+                                                Visualiser
                                     </button>
-                                </Link>
-                            </div>
-                           
-                        </div>
+                                        </Link>
+                                    </div>
+
+                                </div> : null}
+
                     </fieldset>
                 </div>
             </div>
