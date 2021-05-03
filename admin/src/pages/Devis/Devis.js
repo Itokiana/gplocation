@@ -120,7 +120,7 @@ export default function Devis() {
 
             await axios.get(`/devisvoitures/${data}/${datavoit.voiture.id}/${datavoit.categorie.id}/${jourD}`).then(reponse => {
                 if (reponse.status === 200) {
-                    console.log('SIGNE', reponse.data.signe)
+                    
                     setdata(reponse.data)
                     setprix(reponse.data.prix)
                     setjour(jourD)

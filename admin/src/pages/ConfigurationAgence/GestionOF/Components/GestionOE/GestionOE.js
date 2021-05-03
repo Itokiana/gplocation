@@ -40,7 +40,7 @@ class GestionOE extends Component {
                     this.setState({
                         date: response.data
                     });
-                    console.log(this.state.date);
+                   
                 }
             })
                 

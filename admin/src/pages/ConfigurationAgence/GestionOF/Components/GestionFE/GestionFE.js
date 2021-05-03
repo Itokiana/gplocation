@@ -40,7 +40,7 @@ class GestionFE extends Component {
                     this.setState({
                         dateF: response.data
                     });
-                    console.log(this.state.dateF);
+                    
                 }
             });
         },

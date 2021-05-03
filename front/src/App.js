@@ -54,7 +54,7 @@ export default class App extends Component {
             user: response.data
           })
 
-          console.log(response.data)
+         
         }
 
       })

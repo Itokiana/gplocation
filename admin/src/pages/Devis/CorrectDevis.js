@@ -64,9 +64,9 @@ export default function CorrectDevis (props) {
   const [reservation, setReservation] = useState()
 
   useEffect(async () => {
-    // console.log('salut')
+    
     await axios.get(`/reservations/${props.match.params.id}`).then(response => {
-      console.log('props list info',response.data)
+      
       setReservation(response.data)
     });
   }, []);
@@ -84,7 +84,7 @@ export default function CorrectDevis (props) {
   ]
 
   const classes = useStyles();
-  console.log('correction', reservation)
+  
   return (
     <div>
       <fieldset className='container-devi text-light rounded'>

@@ -35,7 +35,7 @@ class AddTarif extends Component {
                 this.setState({
                     categories: response.data
                 });
-                console.log(this.state.categories);
+                
             }
         });
     };
@@ -83,7 +83,7 @@ class AddTarif extends Component {
                             
                                 const t = async () => {
                                     await axios.post('/tarif_personalises', { data, tabLigne: this.state.nombreLigne })
-                                    console.log(data)
+                                    
                                     window.location.href = "/tarif"
                                 }
                                 t()

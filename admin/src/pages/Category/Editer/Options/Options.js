@@ -27,7 +27,7 @@ class Options extends Component {
                     })
                 }
             })
-            console.log("params")
+            
         },
         deleteOption: (option) => {
             const params = this.props.ids

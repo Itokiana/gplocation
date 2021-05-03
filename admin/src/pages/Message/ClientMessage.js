@@ -22,7 +22,7 @@ class ClientMessage extends Component {
       .then(res => {
         const contacts = res.data;
         this.setState({ contacts });
-        console.log(res);
+        
       })
   }
 

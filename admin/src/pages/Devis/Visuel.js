@@ -19,12 +19,12 @@ export default function Visuel(props) {
     useEffect(async () => {
 
         await axios.get(`/reservations/${props.match.params.id}`).then(response => {
-            // console.log('props list info', response.data)
+            
             setdata(response.data)
         });
     }, []);
 
-    console.log('visuel', data)
+    
 
     return (
         <div>
@@ -156,7 +156,13 @@ export default function Visuel(props) {
                                 <div className='text--foot'>Montant en TTC :</div>
                             </div>
                             <div className='mr-auto col-6 d-flex align-items-center justify-content-center'>
-                                <div className='text--foot'>{data.reservation.prix} € </div>
+                                <div className='text--foot'>{data.reservation.prix} €</div>
+                            </div>
+                            <div className='mr-auto col-6 d-flex align-items-center justify-content-center'>
+                                <div className='text--foot'>Acompte:</div>
+                            </div>
+                            <div className='mr-auto col-6 d-flex align-items-center justify-content-center'>
+                                <div className='text--foot'>{data.reservation.acompte} €</div>
                             </div>
                         </div>
 

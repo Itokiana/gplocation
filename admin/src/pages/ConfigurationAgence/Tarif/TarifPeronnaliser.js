@@ -20,7 +20,7 @@ export class TarifPeronnaliser extends Component {
                 this.setState({
                   category: response.data
               });
-              console.log(response);
+              
             }
           });
     }

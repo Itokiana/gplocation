@@ -21,7 +21,7 @@ export default class Partiel extends Component {
             if (response.data.length ==! 0){
                 var objValue = response.data[0]
                
-                console.log(objValue)
+                
         
                 value[`description`]= objValue.description
                 value[`typ`]= objValue.typ
@@ -32,7 +32,7 @@ export default class Partiel extends Component {
                 this.setState({
                     inValue: value
                 })
-                console.log(this.state.inValue) 
+               
             }else{
                 value[`description`]= ''
                 value[`typ`]= ''
@@ -41,7 +41,7 @@ export default class Partiel extends Component {
                 this.setState({
                     inValue: value
                 })
-                console.log("coucou")
+               
 
             }
                   
@@ -64,7 +64,7 @@ export default class Partiel extends Component {
                     onSubmit={(value,{setSubmitting})=>{
                         setSubmitting(true)                    
                         axios.post(`/paimentpartiels` ,value)
-                        console.log(value)
+                       
                         this.getPaiment()
                         setSubmitting(false) 
                     }}

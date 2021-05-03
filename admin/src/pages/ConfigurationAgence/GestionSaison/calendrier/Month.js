@@ -13,10 +13,10 @@ class Month extends React.Component {
         }
     }
     async componentDidMount(){
-        //console.log(this.props.month)
+        
         //await this.setMonth(this.props.month)
         await this.getDateSaison();
-        // console.log(this.state.dateContext)
+        
     }
     async getDateSaison () {
         await axios.get(`/date_saisons`).then(response => {
@@ -25,7 +25,7 @@ class Month extends React.Component {
                     datesaison: response.data,
                     
                 });
-               //console.log(this.state.datesaison);
+               
             }
         });
     }
@@ -50,7 +50,7 @@ class Month extends React.Component {
                 let debut = moment(date.debutsaison)
                 let fin = moment(date.finsaison)
                 let saison = date.saison_id
-                //console.log(debut.format('M'))
+                
                 let anneD = parseInt(debut.format('Y'))
                 let moisD = parseInt(debut.format('M'))
                 let jourD = parseInt(debut.format('D'))
@@ -166,7 +166,7 @@ class Month extends React.Component {
     render() {
         let months = this.months.map((mon) => {
             const filtreMois = this.listeJour().filter(unmois => unmois.mois === mon)
-            //console.log(filtreSaison)
+            
             const filtreSaison1 = filtreMois.filter(sai => sai.saison === 1)
             const filtreSaison2 = filtreMois.filter(sai => sai.saison === 2)
             const filtreSaison3 = filtreMois.filter(sai => sai.saison === 3)

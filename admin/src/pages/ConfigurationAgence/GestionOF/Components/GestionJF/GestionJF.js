@@ -27,7 +27,7 @@ class GestionJF extends Component {
                 this.setState({
                     objetData: res.data
                 })
-                console.log(this.state.objetData)
+               
             }
             const anne = []
             const id = []
@@ -41,7 +41,7 @@ class GestionJF extends Component {
                 id.push(val.id)
             })
             const unique = anne.filter((v, i, a) => a.indexOf(v) === i);
-            //console.log("uni", unique)
+            
             const tab =[]
             unique.map((val, key) => {
                 const obj = []
@@ -52,7 +52,7 @@ class GestionJF extends Component {
                 })
                 tab.push(obj)
             })
-            console.log("unique", tab)
+            
             this.setState({
                 anneUnique: tab,
                 initVal: inValue,
@@ -69,7 +69,7 @@ class GestionJF extends Component {
     } 
     render() {
         //let obj=Object.assign( {}, this.state.initValue1,this.state.initValue2)
-        //console.log(this.state.objetData.pop())
+        
         const ligne = this.state.ligne
         return (
             <>

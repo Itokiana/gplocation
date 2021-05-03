@@ -26,7 +26,7 @@ class GestionSaison extends Component {
                     saison: response.data
 
                 })
-                console.log(response.data)
+                
             }
         })
     }

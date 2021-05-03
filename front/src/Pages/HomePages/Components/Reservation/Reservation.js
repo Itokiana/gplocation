@@ -248,7 +248,7 @@ class Reservation extends Component {
                     this.props.voitures && this.props.date_reservation && this.state.items && this.props.prix ? (
                         <>
                             {this.props.voitures.map((voiture, num) => {
-                                // console.log('uuu', this.state.items)
+                                
                                 return (<div key={voiture.id}>
                                     <section className="b-items s-shadow" id="padingReserver">
                                         <div className="container">

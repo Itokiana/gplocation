@@ -39,7 +39,7 @@ export default class Ajoutjour extends Component {
                         axios.post('/jourferiers', {
                             value, ligne
                         })
-                        console.log(value) 
+                       
                         setSubmitting(false);
                         window.location.href ="/ouverture" 
                     }}

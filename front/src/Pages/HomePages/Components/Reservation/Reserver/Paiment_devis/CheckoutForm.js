@@ -32,11 +32,11 @@ class CheckoutForm extends React.Component {
       this.setState({
         erreur: true
       })
-      // console.log('ato ny',result.error.message);
+      
     } else {
       // Send the token to your server.
       // This function does not exist yet; we will define it in the next step.
-      // console.log(result.token)
+      
       stripeTokenHandler(result.token);
     }
   };

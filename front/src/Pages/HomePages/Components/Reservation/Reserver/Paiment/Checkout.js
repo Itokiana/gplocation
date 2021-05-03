@@ -9,7 +9,7 @@ const stripePromise = loadStripe(Public_key);
 
 function Checkout(props) {
     sessionStorage.setItem("data", JSON.stringify(props.data))
-    console.log('Ato @ Check', props.data)
+    
     return (
         <div className="example">
             <div className="card">

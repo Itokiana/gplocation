@@ -10,7 +10,7 @@ export class TarifList extends Component {
  
     componentDidMount(props) {
         this.apiCategories();
-        console.log(this.props)
+       
 	}
    
     apiCategories = () => {
@@ -25,7 +25,7 @@ export class TarifList extends Component {
                 this.setState({
                     voiture: response.data.voitures
 				})
-				console.log(response.data)
+				
             }
             
         })
@@ -34,7 +34,7 @@ export class TarifList extends Component {
     
     
     render(props) {
-        console.log(this.state.voiture)
+        
         const voiture = this.state.voiture
         return (
             <div>

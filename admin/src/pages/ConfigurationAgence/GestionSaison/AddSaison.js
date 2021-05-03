@@ -56,7 +56,7 @@ class AddSaison extends Component {
                     this.setState({
                         saison: response.data
                     });
-                    console.log(this.state.saison);
+                    
                 }
             });
         },
@@ -67,7 +67,7 @@ class AddSaison extends Component {
                         datesaison: response.data,
                         
                     });
-                   // console.log(datesaison);
+                   
                 }
             });
         },

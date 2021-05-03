@@ -23,7 +23,7 @@ class Categories extends Component {
                     this.setState({
                         categories: response.data
                     })
-                    console.log(response)
+                    
                 }
             })
         }

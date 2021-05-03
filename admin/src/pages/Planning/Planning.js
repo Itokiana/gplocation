@@ -41,7 +41,7 @@ class Planning extends React.Component {
                 this.setState({
                     imagevoiture: response.data
                 })
-                // console.log("Mety", this.state.imagevoiture[0].image.url)
+                
             }
         })
     }
@@ -52,7 +52,7 @@ class Planning extends React.Component {
                 this.setState({
                     categories: response.data
                 });
-                //console.log(this.state.categories);
+                
             }
         });
     };
@@ -62,7 +62,7 @@ class Planning extends React.Component {
                 this.setState({
                     clients: response.data
                 });
-                //console.log(this.state.clients);
+                
             }
         });
     };
@@ -72,7 +72,7 @@ class Planning extends React.Component {
                 this.setState({
                     voiture: response.data
                 });
-                //console.log(this.state.voiture);
+                
             }
         });
 
@@ -83,14 +83,12 @@ class Planning extends React.Component {
                 this.setState({
                     reservation: response.data
                 });
-                //console.log(this.state.reservation);
+                
             }
 
         });
     };
-    // getColore(){
-    //     this.state.reservation.map
-    // }
+    
 
     getYearDetails(value) {
         return 'Year: ' + this.instance.formatDate(value.date, { skeleton: 'y' });
@@ -115,18 +113,17 @@ class Planning extends React.Component {
 
         const filtreVoiture = this.state.voiture.filter(person => person.category_id === obj.id);
         const tab = []
-        // console.log(`voiture${obj.id}`, filtreVoiture)
+        
         filtreVoiture && filtreVoiture.map(voiture => {
             const filtreResrvation = this.state.reservation.filter(res => res.voiture_id === voiture.id)
-            // console.log(`voiture${obj.id}`, filtreResrvation)
+            
             if (filtreResrvation.length === 0) {
                 console.log("nodataReservation")
             }
             else {
                 filtreResrvation.map((resrvCat, key) => {
                     const Client = this.state.clients.filter(client => client.id === resrvCat.client_id)
-                    // console.log("Reservation", resrvCat)
-                    // console.log("client", Client)
+                    
                     if (Client.length === 0) {
                         console.log("nodataClient")
                     }
@@ -147,7 +144,7 @@ class Planning extends React.Component {
                 })
             }
         })
-        // console.log(`ity ${obj.id}`, tab)
+        
         return tab
     }
 
@@ -189,7 +186,7 @@ class Planning extends React.Component {
             stockvoitur.push(objet)
 
         }
-        console.log(`cat${voiture}`, stockvoitur)
+        
         return stockvoitur
 
     }

@@ -12,14 +12,10 @@ function OptionReserver(props) {
         const value = event.target.value
         setprix(value)
         
-        console.log(value)
-        // if (value === 'un'){
-        //     setOptionPrix(OptionPrix+20)
-        // }
+       
     }
     
     
-    // console.log('Ty le izy',OptionPrix)
     
     return (
         <>  

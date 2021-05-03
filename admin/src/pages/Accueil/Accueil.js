@@ -61,7 +61,7 @@ export class Accueil extends Component {
         })
     }
     render() {
-        console.log(this.state)
+        
         return (
             <div>
                 <div className="right_col" role="main">
@@ -121,7 +121,7 @@ export class Accueil extends Component {
                                                         }}
 
                                                         onSubmit={(values, { resetForm }) => {
-                                                            console.log(values)
+                                                            
                                                             axios.get(`/reservations/recherche/${values.dateDepart}/${values.dateRetour}`).then(response => {
                                                                 if (response.status === 200) {
                                                                     this.setState({

@@ -84,11 +84,11 @@ export default function Info(props) {
         axios.get('/clients').then(res => {
             // setClient(res.data)
             if (res.status === 200) {
-                // console.log('client', res.data)
+                
                 setClient(res.data)
             }
         });
-        // console.log('Client',client)
+        
         const results = client ? client.filter(person =>
             person.nom.toLowerCase().search(searchTerm.toLowerCase()) !== -1
             // person.nom.toLowerCase().includes(searchTerm)
@@ -105,7 +105,7 @@ export default function Info(props) {
         setSearchTerm(e.target.value);
     };
     const change_forfait = (event) => {
-        // console.log(event.target.value)
+        
         setforfaitperso(event.target.value);
 
     };
@@ -136,9 +136,7 @@ export default function Info(props) {
                 let date_devis = props.reservation.datedevis
                 let id_voiture = props.reservation.voiture
                 let signe = props.reservation.signe
-                console.log('data', date_devis)
-                // console.log('datedevis', date_devis)
-                // console.log('idvoitur', id_voiture)
+            
 
                 const clientId = async () => {
                     if (existclient) {
@@ -154,7 +152,7 @@ export default function Info(props) {
 
                         await axios.post('/info', value).then(reponse => {
                             if (reponse.status === 200) {
-                                // console.log('idClientGet',reponse.data.id.id)
+                               
 
                             }
                             varId = reponse.data.id.id
@@ -182,10 +180,10 @@ export default function Info(props) {
                     valide: values.validation
 
                 }
-                // console.log('value_back',value_back)
+                
                 await axios.post('/reservations', value_back).then(result => {
                     if (result.status === 201) {
-                        console.log('result', result.data.id)
+                        
                         setinfodevi(result.data.id)
                     }
                 })
@@ -252,7 +250,7 @@ export default function Info(props) {
                                     >
                                         <option aria-label="None" className='bg-dark' value="" />
                                         <option className='bg-dark' value='Paye'>Paye</option>
-                                        <option className='bg-dark' value='Paiment partiel'>Paiment Partiel</option>
+                                        <option className='bg-dark' value='Paiment partiel'>Paiment partiel</option>
                                         <option className='bg-dark' value='Devis'>Devis</option>
                                     </NativeSelect>
                                 </FormControl>

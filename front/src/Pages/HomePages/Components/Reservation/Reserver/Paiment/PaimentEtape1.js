@@ -23,9 +23,7 @@ function PaimentEtape1(props) {
     const Paiement = () => {
         setStatus(!status)
     };
-    // let acompte = sessionStorage.getItem("acompte")
-
-    // console.log('ty eeeeeeee', props)
+    
     return (
 
         <>

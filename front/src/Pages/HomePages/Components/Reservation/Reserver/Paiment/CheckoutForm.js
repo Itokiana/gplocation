@@ -9,7 +9,7 @@ import './paycss.css'
 class CheckoutForm extends React.Component {
 
   componentDidMount(){
-    console.log("VAOAVAO",this.props)
+    
   }
 
   handleSubmit = async (event) => {
@@ -32,13 +32,13 @@ class CheckoutForm extends React.Component {
       // Show error to your customer.
       history.push('/error_res')
       window.location.reload()
-      // console.log('ato ny',result.error.message);
+      
     } else {
       // Send the token to your server.
       // This function does not exist yet; we will define it in the next step.
-      // console.log(result)
+      
       stripeTokenHandler(result.token);
-      // console.log('typ', pay)
+      
     }
   };
 
@@ -74,7 +74,7 @@ class CheckoutForm extends React.Component {
 }
 
 export default function InjectedCheckoutForm(props) {
-  console.log('chexkform',props)
+ 
   return (
     <ElementsConsumer>
       {({stripe, elements}) => (
@@ -88,7 +88,7 @@ async function stripeTokenHandler(token) {
   let data=JSON.parse(sessionStorage.getItem("data"))
   // let acompte = sessionStorage.getItem("acompte")
   const paymentData = {stripeToken: token.id,description: data.client.client.id, accompte: data.data.count };
-  let totalprix = (data.data.prix === parseFloat(data.reservation.prix) ? 'Devis/paiment total' : 'Devis/paiment partiel')
+  let totalprix = (data.data.prix === parseFloat(data.data.count) ? 'Paye' : 'Paiment partiel')
 
   const response = await axios.post('/charges',paymentData)
   if (response.data===true){

@@ -68,14 +68,14 @@ function Reserver(propos) {
             setClient({
                 client: JSON.parse(clientss)
             })
-            // console.log(client)
+           
             setEtat(3)
         }
         else {
             setEtat(2)
 
         }
-        // console.log(clientss)
+       
         setVoiture({ loading: true });
         const apiVoiture = (`http://fd0b515.online-server.cloud/voitures/${propos.match.params.id}`)
 
@@ -85,7 +85,7 @@ function Reserver(propos) {
                 setVoiture({ voiture: data });
             });
     }, []);
-    //  console.log('oeoeoeoe',propos.match.params)
+   
 
     return (
 
@@ -176,7 +176,7 @@ function Reserver(propos) {
                                                             setEtat(3)
 
                                                         } else if (response.status === 202) {
-                                                            console.log(response);
+                                                            
                                                         }
                                                     })
                                                     resetForm({})
@@ -258,7 +258,7 @@ function Reserver(propos) {
                                                                 client: response.data.client
                                                             })
 
-                                                            console.log(client);
+                                                            
                                                             setEtat(3)
                                                         }
                                                         else if (response.status === 202) {

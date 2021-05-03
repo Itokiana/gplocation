@@ -76,11 +76,11 @@ export default function Info2(props) {
     }
 
     const ligne1 = [
-        dataInfo('Penom', client.prenom),
+        dataInfo('Prénom', client.prenom),
         dataInfo('Nom', client.nom),
-        dataInfo('Telephone', client.telephone),
+        dataInfo('Téléphone', client.telephone),
         dataInfo('Email', client.email),
-        dataInfo('Adresse sur plac', ''),
+        dataInfo('Adresse sur place', ''),
         dataInfo('Adresse',),
         dataInfo('Adresse suite', ''),
         dataInfo('Ville', ''),
@@ -89,14 +89,14 @@ export default function Info2(props) {
     ]
     const ligne2 = [
         cond ? dataInfo('Valide Pendant', res.valide):dataInfo(null,null),
-        dataInfo('Date de creation', moment(res.created_at).format('LLL')),
-        cond ? dataInfo('Date d’envoie du devis', res.envoi ? moment(res.envoi).format('LLL') : "Devi n'est pas envoyer"):dataInfo(null,null),
-        cond ? dataInfo('Fin de validiter', moment(res.created_at).add(res.valide, 'd').format('LLL')):dataInfo(null,null),
+        dataInfo('Date de création', moment(res.created_at).format('LLL')),
+        cond ? dataInfo('Date d’envoie du devis', res.envoi ? moment(res.envoi).format('LLL') : "Devis n'est pas envoyer"):dataInfo(null,null),
+        cond ? dataInfo('Fin de validité', moment(res.created_at).add(res.valide, 'd').format('LLL')):dataInfo(null,null),
         dataInfo('Acompte', res.acompte),
         dataInfo('Total', res.prix),
     ]
 
-    console.log('info2', props)
+   
 
     return (
         <div>
@@ -135,7 +135,7 @@ export default function Info2(props) {
             <div className='row mb-5 d-flex align-items-center justify-content-center '>
                 <div className=' col-12'>
                     <fieldset className=' container-devi text-light rounded'>
-                        <legend className='d-flex align-items-center justify-content-center head--perso pl-5 pr-5 text-center w-50 rounded titre--perso2'>Information sur le client</legend>
+                        <legend className='d-flex align-items-center justify-content-center head--perso pl-5 pr-5 text-center w-50 rounded titre--perso2'>Information sur le contrat</legend>
                         <div className='row d-flex align-items-center'>
                             <div className='col-4'>
                                 <FormControl variant="outlined" className={classes.formControl}>

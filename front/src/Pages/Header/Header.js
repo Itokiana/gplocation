@@ -21,7 +21,7 @@ class Header extends React.Component {
 			log = (<li><Link to="/login">{this.state.nonConnecter}</Link></li>)
 		}
 
-		console.log(this.props.client);
+		
 		return (
 			<>
 				

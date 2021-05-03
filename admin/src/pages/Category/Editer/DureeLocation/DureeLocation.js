@@ -23,7 +23,7 @@ export default class DureeLocation extends Component {
         await axios.get(`/categories/dureemin/${this.props.ids.id}`).then(response => {
             var objValue = response.data
             var value ={}
-            console.log(objValue)
+            
     
             value[`BS_Min`]= objValue.duree_min_bs
             value[`MS_Min`]= objValue.duree_min_ms
@@ -37,7 +37,7 @@ export default class DureeLocation extends Component {
                 inValue: value
             })       
         }) 
-        console.log(this.props.ids)
+       
     }
     
     render() {

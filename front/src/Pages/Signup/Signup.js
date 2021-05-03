@@ -44,7 +44,7 @@ const ClientSchema = Yup.object().shape({
                                 if (response.status === 200) {
                                     resetForm();
                                 }
-                                console.log(values);
+                                
                             })
                         }}
 

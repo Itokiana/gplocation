@@ -29,7 +29,7 @@ class World extends React.Component {
 					voitures: response.data
 
 				})
-				console.log(response.data)
+				
 			}
 		})
 	}

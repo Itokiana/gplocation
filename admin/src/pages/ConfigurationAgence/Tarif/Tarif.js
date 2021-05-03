@@ -28,7 +28,7 @@ class Tarif extends Component {
                 this.setState({
                     tarifperso: response.data
                 });
-                console.log(this.state.tarifperso);
+                
             }
         });
     }
@@ -47,7 +47,7 @@ class Tarif extends Component {
 					categories: response.data
 
 				})
-				console.log(response.data)
+				
 			}
 		})
     }
@@ -57,7 +57,7 @@ class Tarif extends Component {
             {
             this.state.categories.map((category, key) => {
                 const trieCategorie$key = this.state.tarifperso.filter(cat => cat.category_id == category.id);
-                console.log("categorie",trieCategorie$key)
+                
                 const trieDate$key = []
                 trieCategorie$key.map((date,keyDate) => {
                     // const tab$keyDate = {}
@@ -67,10 +67,10 @@ class Tarif extends Component {
                     trieDate$key.push(date.datefinperso)
 
                 })
-                console.log("tab", trieDate$key)
+                
                 const unique = trieDate$key.filter((v, i, a) => a.indexOf(v) === i);
 
-                console.log("unique", unique)
+                
                 return(
                     <>
                         <div className="p-2 border border-black"style= {{background:"dimGrey"}}>
@@ -97,7 +97,7 @@ class Tarif extends Component {
                                             }
                                         })
                                     })
-                                    console.log(`val${keyval}`, val$keyval)
+                                   
 
                                     if (val$keyval.length === 0){
                                         return(<>

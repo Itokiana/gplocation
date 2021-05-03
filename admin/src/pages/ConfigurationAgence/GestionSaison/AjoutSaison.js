@@ -36,7 +36,7 @@ class AjoutJour extends Component {
                             
                         resetForm(false)
                         // })
-                        console.log("ddddddd")
+                       
                     }}
                 >
                     {({ errors, touched}) => (

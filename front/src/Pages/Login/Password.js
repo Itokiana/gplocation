@@ -50,10 +50,10 @@ export default function Password() {
         },
         validationSchema,
         onSubmit: values => {
-          console.log(values)
+          
           axios.post('/password/reset', values).then(response =>{
               if (response.status === 200){
-                console.log(response.data.status)
+                
                 toast.info(messagee(response.data.status));
                 sessionStorage.removeItem('email')
                 history.push('/login')
@@ -63,11 +63,11 @@ export default function Password() {
               values:{}
           }).catch(err => {
             if (err.response.status === 404) {
-                console.log(err.response.data.error)
+               
                 toast.error(message(err.response.data.error));
               }
             else{
-                console.log(err.response.data.error)
+               
                 toast.error(message(err.response.data.error));
             }
           });

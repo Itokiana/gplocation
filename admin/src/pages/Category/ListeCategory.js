@@ -30,7 +30,7 @@ export default class ListeCategory extends Component {
         this.setState({
           imagevoiture: response.data
         })
-        console.log("Mety", this.state.imagevoiture)
+        
       }
     })
   };
@@ -42,7 +42,7 @@ export default class ListeCategory extends Component {
           categ: response.data
 
         })
-        console.log(this.state.categ)
+        
       }
       const initvalues = {}
       const ids = []

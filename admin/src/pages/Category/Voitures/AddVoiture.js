@@ -61,7 +61,7 @@ class AddVoiture extends Component {
             image: event.target.files[0],
             loaded: 0,
         })
-        console.log(event.target.files[0])
+        
     }
     render() {
         return (
@@ -82,7 +82,7 @@ class AddVoiture extends Component {
                     }}
                     validationSchema={VoitureSchema}
                     onSubmit={(values, { resetForm }) => {
-                        // console.log(this.state.image)
+                        
                         const formData = new FormData();
                         formData.append('image', this.state.image)
                         formData.append('marque', values.marque)

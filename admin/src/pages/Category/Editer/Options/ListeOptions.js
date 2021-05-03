@@ -24,7 +24,7 @@ export default class ListeOptions extends Component {
         const etape = this.state.etape;
         const id = this.props.ids.id;
         const { options, action } = this.props;
-        console.log(options)
+       
 
         return (
             <div className="py-4">

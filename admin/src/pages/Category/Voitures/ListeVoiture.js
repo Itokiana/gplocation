@@ -14,14 +14,14 @@ export default class ListeVoiture extends Component {
 
     render() {
         const { voitures, categories, action } = this.props;
-        console.log(categories)
+        
 
         return (
             <div className="py-4 text-white">
                 <h2>Liste des voitures</h2>
                 <div className="mt-2">
                     <table className="table-auto">
-                        {console.log('vehicule')}
+                        
                         <thead>
                             <tr>
                                 <th className="">  </th>

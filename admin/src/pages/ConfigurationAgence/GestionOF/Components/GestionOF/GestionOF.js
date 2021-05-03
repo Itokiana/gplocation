@@ -37,7 +37,7 @@ class GestionOF extends Component {
                     this.setState({
                         horaire: response.data
                     });
-                    console.log(this.state.horaire);
+                    
                 }
             });
         },

@@ -9,7 +9,7 @@ const stripePromise = loadStripe(Public_key);
 
 
 function Checkout(props) {
-    console.log('voici', props)
+   
     sessionStorage.setItem("data", JSON.stringify(props.data))
     sessionStorage.setItem("prixacompte", props.prix)
     return (

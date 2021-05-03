@@ -19,12 +19,12 @@ class TrifDeBase extends Component {
 					saison: response.data
 
 				})
-				console.log(response.data)
+				
 			}
 		})
     }
     render() {
-        console.log("salut")
+        
         return (
             <>
 
