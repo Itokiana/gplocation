@@ -8,16 +8,27 @@ export default class ListeUtilisateur extends Component {
             , 1000)
         
     }
+    // async getClietReservation() {
+    //     await axios.post(`/reseverliste`).then(response => {
+    //         if (response.status === 200) {
+    //             this.setState({
+    //                 clients: response.data
+    //             });
+                
+    //         }
+    //     });
+    // };
     componentWillUnmount() {
         clearInterval(this.interval);
     }
 
     render() {
         const { utilisateurs, action } = this.props;
+        console.log('utilisateurs')
         return (
             <div className="py-4">
-                <h2>Liste des utilisateurs</h2>
-                <div className="mt-2">
+                <h2 className='text-center'>Liste des utilisateurs</h2>
+                <div className="mt-3">
                     <table className="table-auto">
                         <thead>
                             <tr>

@@ -4,7 +4,9 @@ import store from './store';
 import { userLogoutAttempt } from './redux/Auth/auth.action';
 
 
-axios.defaults.baseURL = 'http://fd0b515.online-server.cloud';
+// axios.defaults.baseURL = 'http://fd0b515.online-server.cloud';
+axios.defaults.baseURL = 'http://localhost:4000';
+
 
 /**
  * Injecting token to axios instance

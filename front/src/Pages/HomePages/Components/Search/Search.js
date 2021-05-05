@@ -196,7 +196,7 @@ export default class Search extends React.Component {
 					<div>{this.state.message !== '' ?
 						(
 							this.state.message === 'aucun' ?
-								<div className="alert_message">Click ici pour voir plus de voiture<a href='https://www.rentiles.fr/?listing=1&fond=contenu&id_contenu=465&date_d=11/02/2021&heure_d=10:00&date_f=21/02/2021&heure_f=10:00&affiliate=1476&nocache=1612962739'> lien </a></div> :
+								<div class="alert alert-danger h2 text-center" role="alert"><a href='https://www.rentiles.fr/?listing=1&fond=contenu&id_contenu=465&date_d=11/02/2021&heure_d=10:00&date_f=21/02/2021&heure_f=10:00&affiliate=1476&nocache=1612962739'>Clic ici pour voir plus de voitures </a></div> :
 								<div className="alert_message"><h4>{this.state.message}</h4></div>
 						) : null}</div>
 				</div>

@@ -93,7 +93,7 @@ export default function Dashbord() {
       <div className='row onglet pr-5 mt-5  d-flex align-items-center'> <Button href="/devis" className="m-2 ml-auto" variant="outlined" color="secondary">
         Crée un contrat de location
       </Button></div>
-      <div className='row mt-10  d-flex justify-content-center align-items-center'><h1 className='ganal'>présentation de google analytics</h1> </div>
+      <div className='row mt-10  d-flex justify-content-center align-items-center'><h1 className='ganal'>Présentation de google analytique</h1> </div>
       <div className='row mb-10  d-flex justify-content-center align-items-center'>
 
         <FormControl className={selects.formControl}>
@@ -102,15 +102,16 @@ export default function Dashbord() {
             value={state.name}
             name="name"
             onChange={handleChange}
+            
           >
             <option value={'7daysAgo'}>Les 7 derniers jours </option>
-            <option value={'today'}>aujourd'hui</option>
+            <option value={'today'}>Aujourd'hui</option>
             <option value={'Yesterday'}>Hier </option>
 
             <option value={'9daysAgo'}>Les 9 derniers jours </option>
             <option value={'30daysAgo'}>Les 30 derniers jours </option>
           </NativeSelect>
-          <FormHelperText>Plage de date</FormHelperText>
+          <FormHelperText className='text-white'>Choisir les jours</FormHelperText>
         </FormControl>
 
       </div>

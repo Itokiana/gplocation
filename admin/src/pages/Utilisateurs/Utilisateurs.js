@@ -8,11 +8,11 @@ class Utilisateurs extends Component {
         utilisateurs: []
     }
 
-   action = {
+    action = {
         getUtilisateur: () => {
-            
+
             axios.get('/admin_users').then(response => {
-                 if (response.status === 200) {
+                if (response.status === 200) {
                     this.setState({
                         utilisateurs: response.data
                     })
@@ -31,17 +31,21 @@ class Utilisateurs extends Component {
 
     render() {
         // Récupération de la variable voiture depuis le state
-        const  { utilisateurs } = this.state;
+        const { utilisateurs } = this.state;
         return (
-            <div className="p-5">
-                <h1>Gestion des utilisateurs</h1>
+            <div className="d-flex justify-content-center">
+                <div className="p-5">
+                    <h1 className='text-center text-white h1'>Gestion des utilisateurs</h1>
 
-                <ListeUtilisateur
-                    action={{...this.action}}
-                    utilisateurs={utilisateurs}/>
-                <AddUtilisateur
-                    action={{...this.action}}/>
+                    <ListeUtilisateur
+                        action={{ ...this.action }}
+                        utilisateurs={utilisateurs} />
+                    <AddUtilisateur
+                        action={{ ...this.action }} />
+                </div>
+
             </div>
+
         )
     }
 }
