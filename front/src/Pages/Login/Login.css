@@ -84,6 +84,10 @@ border-radius: 5px;
 .errors_reset{
   color: red;
 }
+.message--alert{
+ display: flex;
+ text-align: center
+}
 /* #valider{
   margin-left: 35%;
 } */

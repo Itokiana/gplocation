@@ -18,7 +18,7 @@ class AddUtilisateur extends Component {
     render() {
         return (
         <div>
-            <h2>Insertion d'un nouvel utilisateur</h2>
+            <h2 className='text-center mb-3' >Insertion d'un nouvel utilisateur</h2>
             <Formik
             initialValues={{
                 username: '',
@@ -40,7 +40,7 @@ class AddUtilisateur extends Component {
                 <Form
                     autoComplete="off">
                     <div className="mb-2">
-                        <label className="block text-gray-700 font-bold mb-1 md:mb-0">
+                        <label className="block text-gray-700 font-bold mb-2 md:mb-0">
                             Identifiant
                         </label>
                         <Field
@@ -50,8 +50,8 @@ class AddUtilisateur extends Component {
                         <ErrorField errors={errors} touched={touched} row="username"/>
                     </div>
                     
-                    <div className="mb-2">
-                        <label className="block text-gray-700 font-bold mb-1 md:mb-0">
+                    <div className="mt-3">
+                        <label className="block text-gray-700 font-bold mb-2 md:mb-0">
                             Email
                         </label>
                         <Field
@@ -60,8 +60,8 @@ class AddUtilisateur extends Component {
                         <ErrorField errors={errors} touched={touched} row="email"/>
                     </div>
 
-                    <div className="mb-2">
-                        <label className="block text-gray-700 font-bold mb-1 md:mb-0">
+                    <div className="mt-3">
+                        <label className="block text-gray-700 font-bold mb-2 md:mb-0">
                             Mot de passe
                         </label>
                         <Field
