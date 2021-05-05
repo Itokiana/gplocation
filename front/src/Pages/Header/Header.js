@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Bandeau from './Bandeau';
+import Menu from './Menu'
 import './Style.css';
 
 class Header extends React.Component {
@@ -26,10 +27,15 @@ class Header extends React.Component {
 			<>
 				
 					<header className="b-topBar container-header">
-						
+					
 						<div className="container wow slideInDown" data-wow-delay="0.7s">
-							<div className="row">
-								
+							<div className="row d-flex align-items-center mt-5">
+							{
+								sessionStorage.getItem('id')?	<div className=" menu--header col-md-1 col-xs-1 text-right">
+									   <Menu/>
+									</div>: null
+							}	
+							
 								<div className="col-md-3 col-xs-6">
 									<div className="b-topBar__tel">
 										<span className="fa fa-envelope"></span>
@@ -37,7 +43,7 @@ class Header extends React.Component {
 									</div>
 								</div>
 
-								<div className=" col-md-6 col-xs-6">
+								<div className=" col-md-5 col-xs-5">
 								
 									<nav className="  b-topBar__nav">
 										<ul className="col">
@@ -57,6 +63,12 @@ class Header extends React.Component {
 										</div>
 									</div>
 								</div>
+
+								
+								
+								
+							
+							
 							</div>
 						</div>
 					</header>

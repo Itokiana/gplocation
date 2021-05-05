@@ -16,9 +16,7 @@ const validationSchema = Yup.object().shape({
 
 password_digest: Yup.string()
   .required('le mot de passe ne doit pas être vide')
-  .matches(
-    /^.{8,}$/,
-    "mot de passe trop court, entrer min 8 caractere"),
+  .min(8, 'le mot de passe contenir au moins huit caractère'),
 password: Yup.string()
   .required('le mot de passe doit être confirmer')
   .oneOf(

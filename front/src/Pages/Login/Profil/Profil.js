@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import './Profil.css';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {BiMessageSquareError} from 'react-icons/bi';
+import { IconContext } from "react-icons";
 import ErrorLogin from '../ErrorLogin';
 import axios from 'axios'
 
@@ -11,6 +14,7 @@ const ClientSession = Yup.object().shape({
         .required('le mot de passe ne doit pas laisser à vide'),
 	password_digest: Yup.string()
 		.required('le mot de passe ne doit pas laisser à vide')
+
 });
 function comparaison (a,b){
     if (a===b){
@@ -19,13 +23,16 @@ function comparaison (a,b){
         return false
     }
 }
-
+ function message(e){
+    return  <IconContext.Provider className='' value={{ size: '50px', style: { verticalAlign: 'middle' }}}> <div className="row message--alert"> <BiMessageSquareError className="icon col-2"/> <span className="icon col-3"> {e} </span></div> </IconContext.Provider>;
+}
 class Profil extends Component {
 
 
     render() {
         return (
             <div>
+               
                 
                 <section className="b-contacts s-shadow">
                     <div className="container">
@@ -80,14 +87,28 @@ class Profil extends Component {
                                         </div>
                                             <Formik
                                                 initialValues={{
+                                                    id: sessionStorage.getItem('id'),
                                                     old_password: '',
                                                     password_digest: ''
                                                 }}
                                                 validationSchema={ClientSession}
                                                 onSubmit={(values, { resetForm }) => {
-                                                    axios.post('/client_login', values).then(response => {
+                                                    
+                                                    axios.post('/password/change', values).then(response => {
+                                                        
                                                         if (response.status === 200) {
+                                                            if (response.data.status){
+                                                                toast.info(message(response.data.message));
+
+                                                            }
+                                                            else{
+                                                                toast.error(message(response.data.message));
+                                                            }
                                                             
+
+                                                        }
+                                                        else{
+                                                            toast.error(message('il y a une erreur'));
                                                         }
 
                                                     })
@@ -106,7 +127,7 @@ class Profil extends Component {
                                                     </div>
                                                     <div className="boutton-login">
                                                     <button type="submit" className="btn m-btn">Valider<span className="fa fa-angle-right"></span></button><br/><br/>
-                                                    <span ><a href="#" className="oublier">Mot de passe oublié ?</a></span>
+                                                    
                                                     </div>
                                                 </Form>)}
                                             </Formik>
@@ -123,7 +144,18 @@ class Profil extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                </div>                    
+                                </div>   
+                                <ToastContainer
+									position="bottom-left"
+									autoClose={3000}
+									hideProgressBar={false}
+									newestOnTop={false}
+									closeOnClick
+									rtl={false}
+									pauseOnFocusLoss
+									draggable
+									pauseOnHover
+									/>               
                         </div>
                     </div>
                 </section>

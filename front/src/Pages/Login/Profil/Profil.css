@@ -25,3 +25,7 @@
     color: rgb(2, 1, 7);
     font-size: 27px;
 }
+.message--alert{
+    display: flex;
+    text-align: center
+   }
