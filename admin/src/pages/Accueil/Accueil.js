@@ -159,7 +159,7 @@ export class Accueil extends Component {
                                                                 {/* {this.state.statusDepart ? (<th>départ</th>) : null}
                                                                 {this.state.statusRetour ? (<th>Retour</th>) : null} */}
                                                                 {/* <th>Option</th> */}
-                                                                <th>départ</th>
+                                                                <th>Départ</th>
                                                                 <th>Retour</th>
                                                                 <th>Total</th>
                                                                 <th>Acompte</th>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 
 export default class ListeUtilisateur extends Component {
     componentDidMount() {
@@ -8,23 +9,23 @@ export default class ListeUtilisateur extends Component {
             , 1000)
         
     }
-    // async getClietReservation() {
-    //     await axios.post(`/reseverliste`).then(response => {
-    //         if (response.status === 200) {
-    //             this.setState({
-    //                 clients: response.data
-    //             });
+    async getClietReservation() {
+        await axios.post(`/reseverliste`).then(response => {
+            if (response.status === 200) {
+                this.setState({
+                    clients: response.data
+                });
                 
-    //         }
-    //     });
-    // };
+            }
+        });
+    };
     componentWillUnmount() {
         clearInterval(this.interval);
     }
 
     render() {
         const { utilisateurs, action } = this.props;
-        console.log('utilisateurs')
+        
         return (
             <div className="py-4">
                 <h2 className='text-center'>Liste des utilisateurs</h2>

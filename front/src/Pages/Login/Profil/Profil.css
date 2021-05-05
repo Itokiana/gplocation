@@ -28,3 +28,7 @@
 input {
     color: black !important
 }
+.message--alert{
+    display: flex;
+    text-align: center
+   }
