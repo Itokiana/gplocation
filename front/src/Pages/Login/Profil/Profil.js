@@ -183,7 +183,7 @@ class Profil extends Component {
                                                                 <tr>
                                                                     <th scope="row">C00{liste.id}</th>
                                                                     <td>{moment(liste.created_at).format('LL')}</td>
-                                                                    <td>{liste.acompte}€</td>L
+                                                                    <td>{liste.acompte}€</td>
                                                                     <td>{liste.status}</td>
                                                                 </tr>)
                                                         })}

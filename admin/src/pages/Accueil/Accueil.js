@@ -61,7 +61,7 @@ export class Accueil extends Component {
         })
     }
     render() {
-        
+
         return (
             <div>
                 <div className="right_col" role="main">
@@ -121,7 +121,7 @@ export class Accueil extends Component {
                                                         }}
 
                                                         onSubmit={(values, { resetForm }) => {
-                                                            
+
                                                             axios.get(`/reservations/recherche/${values.dateDepart}/${values.dateRetour}`).then(response => {
                                                                 if (response.status === 200) {
                                                                     this.setState({
@@ -190,8 +190,9 @@ export class Accueil extends Component {
 
                                                                     {Object.keys(this.state.reservations[reservation]).map(res => (
                                                                         <>
-                                                                            {this.state.statusDepart && this.state.statusRetour === false && new Date(this.state.reservations[reservation][res][0].date_depart) >= new Date() ?
+                                                                            {this.state.statusDepart && this.state.statusRetour === false && moment(this.state.reservations[reservation][res][0].date_depart) >= moment() ?
                                                                                 <>
+                                                                                    <p>nono</p>
                                                                                     <tr>
                                                                                         <td colSpan="9">
                                                                                             <div className="date">
