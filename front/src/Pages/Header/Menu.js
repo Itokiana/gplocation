@@ -49,13 +49,14 @@ export default function LongMenu() {
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
-            width: '20ch',
+            width: '10ch'
+          
           },
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={redirect}>
-            {option}
+          <MenuItem key={option}  selected={option === 'Pyxis'} onClick={redirect}>
+            <strong>{option}</strong>
           </MenuItem>
         ))}
       </Menu>

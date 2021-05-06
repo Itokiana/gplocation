@@ -159,7 +159,7 @@ class Login extends React.Component {
 										</div>
 										<div className="boutton-login">
 										<button type="submit" className="btn m-btn">Valider<span className="fa fa-angle-right"></span></button><br/><br/>
-										<span ><a href="http://gp-location.sayna.io/find-email" className="oublier">Mot de passe oublié ?</a></span>
+										<span ><a href="/find-email" className="oublier">Mot de passe oublié ?</a></span>
 										</div>
 									</Form>)}
 							
