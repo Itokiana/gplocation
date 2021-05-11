@@ -19,7 +19,7 @@ function Checkout(props) {
                             <>
                                 <CheckoutForm count={props.data} />
                                 <br />
-                                <a className=" text-muted h6 annuler--perso " ><ins>Annulation-retour a la boutique</ins></a>
+                                <a className=" text-muted h6 annuler--perso " href="/" ><ins>Annulation-retour a la boutique</ins></a>
                             </>
                         ) : (
                             <></>

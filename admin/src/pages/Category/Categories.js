@@ -34,7 +34,7 @@ class Categories extends Component {
         const { addNew, categories } = this.state;
         return (
             <div className="p-5">
-                <h1 className="mb-2 text-center text-white">Gestion des catégories</h1>
+                <h1 className="mb-5 text-center h1 text-white">Gestion des catégories</h1>
                 <button
                     className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded"
                     onClick={() => this.action.toggleModal(true)}>Nouvelle catégorie

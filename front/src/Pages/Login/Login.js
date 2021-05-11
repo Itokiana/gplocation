@@ -28,8 +28,10 @@ const ClientRegistrationSchema = Yup.object().shape({
 		.matches(/([0-9])/, 'Le numero de telephone ne doit contenir que des chiffres'),
 	email: Yup.string()
 		.email('Email invalide,merci de vouloire completé')
-		.required('l \' email ne doit pas être vide')
-
+		.required('l \' email ne doit pas être vide'),
+  password_digest: Yup.string()
+		.required('le mot de passe ne doit pas laisser à vide')
+		.min(8, 'le mot de passe contenir au moins huit caractère')
 			
 });
 
@@ -54,7 +56,7 @@ class Login extends React.Component {
 		}
 	}
 	message(e){
-		return <IconContext.Provider value={{ size: '50px', style: { verticalAlign: 'middle' }}}> <BiMessageSquareError className="icon"/> {e}</IconContext.Provider>;
+		return  <IconContext.Provider className='' value={{ size: '50px', style: { verticalAlign: 'middle' }}}> <div className="row message--alert"> <BiMessageSquareError className="icon col-2"/> <span className="icon col-3"> {e} </span></div> </IconContext.Provider>;
 	}
 
 	render() {
@@ -157,7 +159,7 @@ class Login extends React.Component {
 										</div>
 										<div className="boutton-login">
 										<button type="submit" className="btn m-btn">Valider<span className="fa fa-angle-right"></span></button><br/><br/>
-										<span ><a href="http://gp-location.sayna.io/find-email" className="oublier">Mot de passe oublié ?</a></span>
+										<span ><a href="/find-email" className="oublier">Mot de passe oublié ?</a></span>
 										</div>
 									</Form>)}
 							
@@ -228,10 +230,18 @@ class Login extends React.Component {
 														message: response.data.message
 													})
 												}
+												
 												 
 												
 
 												
+											}).catch(err => {
+												// what now?
+												this.setState({
+													etape: 3
+												})
+												console.log(err);
+												toast.error(this.message("L'email ou le téléphone existe déjà"))
 											})
 										}}
 										>
@@ -255,11 +265,9 @@ class Login extends React.Component {
 												</div>
 												<div>
 													<Field type="password" placeholder="MOT DE PASSE*" name="password_digest" />
-													
+													<ErrorLogin errors={errors} touched={touched} row="password_digest"/>
 												</div>
 
-												
-												<p>* Champs obligatoires</p>
 												<div className="boutton-login">
 													<button type="submit" className="btn m-btn">
 														Valider

@@ -5,6 +5,10 @@ import * as Yup from 'yup';
 import history from '../../History';
 import ErrorField from '../ErrorField/ErrorField';
 import axios from '../../axios'
+import 'react-toastify/dist/ReactToastify.css';
+import {BiMessageSquareError} from 'react-icons/bi';
+import { IconContext } from "react-icons";
+import { ToastContainer, toast } from 'react-toastify';
 import './Contact.css';
 import '../ErrorField/ErrorField.css';
 
@@ -28,6 +32,9 @@ const ContactSchema = Yup.object().shape({
 	
 });
 
+function message(e){
+    return  <IconContext.Provider className='' value={{ size: '50px', style: { verticalAlign: 'middle' }}}> <div className="row message--alert"> <BiMessageSquareError className="icon col-2"/> <span className="icon col-3"> {e} </span></div> </IconContext.Provider>;
+}
 
 class Contact extends React.Component {
 	render() {
@@ -66,9 +73,13 @@ class Contact extends React.Component {
 										onSubmit={(values, { resetForm }) => {
 											axios.post('/contacts', values).then(response => {
 												if (response.status === 201) {
-													
-													history.push('/login')
+													toast.info(message('message envoyer'));
+													history.push('/')
                 									window.location.reload()
+													
+												}
+												else{
+													toast.error(message('il y a une erreur message non envoyer '));
 												}
 											})
 										}}
@@ -98,7 +109,7 @@ class Contact extends React.Component {
 												
 											</div>
 											
-											<p className="p">* Champs obligatoires</p>
+											
 											<fieldset><ReCAPTCHA sitekey="6LdXP9cZAAAAAOjXVT_t6gXbM8gNuQXyvK9qPhr2" /></fieldset>
 
 											<button type="submit" className="btn m-btn" id="button">VALIDER    <span className="fa fa-angle-right"></span></button>
@@ -191,6 +202,17 @@ class Contact extends React.Component {
 							</div>
 						</div>
 					</div>
+					<ToastContainer
+									position="bottom-left"
+									autoClose={3000}
+									hideProgressBar={false}
+									newestOnTop={false}
+									closeOnClick
+									rtl={false}
+									pauseOnFocusLoss
+									draggable
+									pauseOnHover
+									/>         
 				</div>
 				
 					

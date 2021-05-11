@@ -10,11 +10,11 @@ class OffreAeroport extends Component {
 						<div className="row">
 							<div className="col-sm-4 col-xs-12">
 								<div className="b-world__item wow zoomInUp" data-wow-delay="0.3s">
-									<img className="img-responsive"  src="media/370x200/C1.jpg" alt="mazda" />
+									<img className="img-responsive"  src="media/370x200/Clio IV.png" alt="mazda" />
 									<div className="b-world__item-val">
-										<span className="b-world__item-val-title">CITROËN </span>
+										<span className="b-world__item-val-title">RENAULT </span>
 									</div>
-									<h2>C1 ou Toyota Aygo</h2>
+									<h2>Clio IV</h2>
 									<p>
 										<ul>
 											<li>4 places</li>
@@ -27,11 +27,11 @@ class OffreAeroport extends Component {
 							</div>
 							<div className="col-sm-4 col-xs-12">
 								<div className="b-world__item wow zoomInLeft" data-wow-delay="0.3s">
-									<img className="img-responsive" src="media/370x200/car2.jpg" alt="wolks" />
+									<img className="img-responsive" src="media/370x200/Duster.png" alt="wolks" />
 									<div className="b-world__item-val">
-										<span className="b-world__item-val-title">RENAULT</span>
+										<span className="b-world__item-val-title">DACIA</span>
 									</div>
-									<h2>Dacia Duster Diesel Automatique</h2>
+									<h2>Duster Diesel</h2>
 									<p>
 										<ul>
 											<li>5 places</li>
@@ -44,11 +44,11 @@ class OffreAeroport extends Component {
 							</div>
 							<div className="col-sm-4 col-xs-12">
 								<div className="b-world__item wow zoomInRight" data-wow-delay="0.3s">
-									<img className="img-responsive"  src="media/370x200/car3.jpg" alt="chevrolet" />
+									<img className="img-responsive"  src="media/370x200/Dacia Logan.png" alt="chevrolet" />
 									<div className="b-world__item-val">
-										<span className="b-world__item-val-title">CHEVROLET</span>
+										<span className="b-world__item-val-title">DACIA</span>
 									</div>
-									<h2>Dacia Logan Diesel</h2>
+									<h2>Logan</h2>
 									<p>
 										<ul>
 											<li>5 places</li>

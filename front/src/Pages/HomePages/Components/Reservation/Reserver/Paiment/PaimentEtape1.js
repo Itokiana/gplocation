@@ -7,16 +7,26 @@ import Checkout from './Checkout';
 import { Formik, Form, Field } from 'formik';
 import ErrorField from '../../ErrorField';
 import { Link, Redirect } from 'react-router-dom'
-
+import Checkbox from '@material-ui/core/Checkbox';
 // import axios from 'axios';
 
 
 function PaimentEtape1(props) {
     const [status, setStatus] = useState(false);
+    const [checked1, setChecked1] = React.useState(false);
+    const [checked2, setChecked2] = React.useState(false);
+
+    const handleChange1 = (event) => {
+      setChecked1(event.target.checked);
+    };
+    const handleChange2 = (event) => {
+        setChecked2(event.target.checked);
+      };
     //const [montant,setMontant] = useState();
     const [messageNumeroVol, setMessageNumeroVol] = useState('');
     const [modalShow, setModalShow] = React.useState(false);
     const NumeroVolValidation = Yup.object().shape({
+    
         numero_vol: Yup.string()
             .required('le numero de vol ne doit pas être vide')
     });
@@ -38,7 +48,7 @@ function PaimentEtape1(props) {
                                     onSubmit={(values, { resetForm }) => {
                                         sessionStorage.setItem("numero_vol", JSON.stringify(values))
                                         resetForm()
-                                        setMessageNumeroVol(`votre numero de vol à été bien enregistrer : ${values.numero_vol}`)
+                                        setMessageNumeroVol(`Votre numero de vol à été bien enregistrer : ${values.numero_vol}`)
                                     }}
                                 >
                                     {({ errors, touched, handleSubmit }) => (
@@ -71,13 +81,23 @@ function PaimentEtape1(props) {
                                 <fieldset id="fd_confirm">
                                     <label htmlFor="certifpermis">
                                         <p>
-                                            <input type="checkbox" id="certifpermis" checked="checked" name="certifpermis" />
+                                        <Checkbox
+                                                    checked={checked1}
+                                                    onChange={handleChange1}
+                                                    color="primary"
+                                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                                />
                                             Je certifie avoir 21 ans et deux ans de permis*
                                     </p>
                                     </label>
                                     <label htmlFor="conditions">
                                         <p>
-                                            <input type="checkbox" id="conditions" checked="checked" name="conditions" />
+                                        <Checkbox
+                                                    checked={checked2}
+                                                    onChange={handleChange2}
+                                                    color="primary"
+                                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                                />
                                         J'ai lu les conditions générales de location, et j'y adhère sans réserve.*
                                         <Button onClick={() => setModalShow(true)} className="titre-15">
                                                 lire
@@ -95,7 +115,7 @@ function PaimentEtape1(props) {
                                     Puis {parseInt(props.data.prix) - props.data.count} € à régler à la remise des clés par carte bancaire, espèce ou chèque
                             </p>
                                 <h3 class="paiementcarte cc_cursor">Paiement sécurisé par carte bancaire :</h3>
-                                <button onClick={Paiement} className="btn btn-success btn-lg btn-block p-1" >
+                                <button onClick={Paiement} disabled={!checked1 || !checked2} className="btn btn-success btn-lg btn-block p-1" >
                                     <i class="fa fa-credit-card fa-5x" aria-hidden="true"></i>
                                     <i class="fa fa-cc-mastercard fa-5x" aria-hidden="true"></i>
                                     <i class="fa fa-cc-visa fa-5x" aria-hidden="true"></i>

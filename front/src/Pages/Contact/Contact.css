@@ -28,3 +28,7 @@
   text-transform: downcase;
   border-radius: 35px;
 }
+.message--alert{
+  display: flex;
+  text-align: center
+ }

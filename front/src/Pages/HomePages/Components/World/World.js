@@ -72,19 +72,12 @@ class World extends React.Component {
 			return (
 
 				<ul class="pagination" style={{backgroundColor: "rgb(120, 120, 120)", margin: "5px"}}>
-					<li style={{margin: "10px", fontSize: "20px", color:'white'}} class="page-items" key={number} id={number}
+					<li style={{margin: "10px", cursor: 'pointer',fontSize: "20px", color:'white'}} class="page-items" key={number} id={number}
 						onClick={this.handleClick}>
 						{number}
 					</li>
 				</ul>
-				// <div style={{ margin: "5px", border: "2px", color: "white", background: "blue" }} key={number} id={number}
-				// 	onClick={this.handleClick}>
-				// 	{number}
-				// </div>
-				// <div key={number} id={number}
-				// 	onClick={this.handleClick}>
-				// 	{number}
-				// </div>
+				
 			);
 		});
 

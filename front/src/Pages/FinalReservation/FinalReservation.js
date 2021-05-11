@@ -50,7 +50,7 @@ class FinalReservation extends React.Component {
 
                                             <div className="boutton-FinalReservation">
                                                 <button type="submit" className="btn m-btn">Valider<span className="fa fa-angle-right"></span></button><br /><br />
-                                                <span ><a href="#" className="oublier">Mot de passe oublié ?</a></span>
+                                               <span ><a href="/find-email" className="oublier">Mot de passe oublié ?</a></span>
                                             </div>
                                         </form>
                                     </div>

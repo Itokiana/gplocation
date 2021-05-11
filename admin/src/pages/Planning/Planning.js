@@ -267,7 +267,7 @@ class Planning extends React.Component {
 
                                 {value.stock ?
 
-                                    <ScheduleComponent width='100%' height='300px' selectedDate={new Date()} eventSettings={{ dataSource: this.data(value) }} group={{ resources: ['Resources'] }}>
+                                    <ScheduleComponent width='100%' height='350px' selectedDate={new Date()} eventSettings={{ dataSource: this.data(value) }} group={{ resources: ['Resources'] }}>
                                         <HeaderRowsDirective height='5px'>
                                             <HeaderRowDirective option='Week' template={this.weekTemplate.bind(this)} />
                                             <HeaderRowDirective option='Date' />

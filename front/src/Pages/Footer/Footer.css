@@ -2,6 +2,10 @@
 	text-decoration: none;
 	color: white;
 }
+.text--sisiny{
+	text-decoration: none;
+	color: white;
+}
 
 .text:hover{
 	color: gray;
