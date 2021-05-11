@@ -283,14 +283,14 @@ function Reserver(propos) {
                                                 {({ errors, touched, handleSubmit }) => (
                                                     <Form id="contactForm" className="contactForm s-form wow zoomInUp" noValidate onSubmit={handleSubmit}>
                                                         <div>
-                                                            <Field type="text" placeholder="Email*" name="email" />
+                                                            <Field type="text" placeholder="Email" name="email" />
                                                             <ErrorField errors={errors} touched={touched} row="email" />
                                                         </div>
                                                         <div>
-                                                            <Field type="password" placeholder="Mot de passe*" name="password_digest" />
+                                                            <Field type="password" placeholder="Mot de passe" name="password_digest" />
                                                             <ErrorField errors={errors} touched={touched} row="password_digest" />
                                                         </div>
-                                                        <a href="*">Mot de passe oublier</a>
+                                                        <span ><a href="/find-email" >Mot de passe oublié ?</a></span>
                                                         <center><button type="submit" className="btn m-btn" id="valider">Valider et payer<span className="fa fa-angle-right"></span></button></center>
                                                     </Form>)}
                                             </Formik>

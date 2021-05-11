@@ -16,7 +16,7 @@ class Footer extends React.Component {
 											<h3>Les avantages</h3>
 											<div className="b-info__aside-article-item">
 												
-												<ul className="text">
+												<ul className="text--sisiny">
 													<li>Prise en charge à l'aéroport ou au port avec votre véhicule</li>
 													<li>Kilométrage illimité, assurances incluses</li>
 													<li>Assistance 7j/7, 24h/24</li>
@@ -42,8 +42,9 @@ class Footer extends React.Component {
 										<div className="b-info__contacts-item">
 				 				           <a href="/condition" className="text">Conditions générales de location</a>
 										</div>
-										<div className="b-info__contacts-item">											
-				 				           <a href="/login" className="text">Espace client</a>
+										<div className="b-info__contacts-item">		
+										   {sessionStorage.getItem('id')? <a href="/profil" className="text">Espace client</a>:<a href="/login" className="text">Espace client</a> }									
+				 				           
 										</div>
 									</address>
 								</div>

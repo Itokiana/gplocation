@@ -190,7 +190,7 @@ export class Accueil extends Component {
 
                                                                     {Object.keys(this.state.reservations[reservation]).map(res => (
                                                                         <>
-                                                                            {this.state.statusDepart && this.state.statusRetour === false && moment(this.state.reservations[reservation][res][0].date_depart) >= moment() ?
+                                                                            {this.state.statusDepart && this.state.statusRetour === false && moment(this.state.reservations[reservation][res][0].date_depart).format() >= moment() ?
                                                                                 <>
                                                                                     <p>nono</p>
                                                                                     <tr>
