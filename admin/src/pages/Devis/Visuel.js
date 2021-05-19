@@ -47,7 +47,7 @@ export default function Visuel(props) {
                             <div className='ml-auto col-4 d-flex align-items-center justify-content-center'>
                                 <lu className=' list-unstyled list--head  '>
                                     <li className=''>Date de creation : {moment(data.reservation.created_at).format('LL')}</li>
-                                    <li className=''>Fin de valiudidte : {moment(data.reservation.created_at).add(data.reservation.valide, 'd').format('LL')}</li>
+                                    <li className=''>Fin de validite : {moment(data.reservation.created_at).add(data.reservation.valide, 'd').format('LL')}</li>
                                     <li className=''>Commande ref: R00{data.reservation.id}</li>
                                 </lu>
                             </div>

@@ -61,6 +61,7 @@ export class Accueil extends Component {
         })
     }
     render() {
+        console.log(moment().format('YYYY-MM-DD'))
 
         return (
             <div>
@@ -190,9 +191,11 @@ export class Accueil extends Component {
 
                                                                     {Object.keys(this.state.reservations[reservation]).map(res => (
                                                                         <>
-                                                                            {this.state.statusDepart && this.state.statusRetour === false && moment(this.state.reservations[reservation][res][0].date_depart).format() >= moment() ?
+                                                                            {
+                                                                            // this.state.statusDepart && this.state.statusRetour ===false  && new Date(this.state.reservations[reservation][res][0].date_depart) >= Date.now() ?
+                                                                            this.state.statusDepart && this.state.statusRetour === false && moment(this.state.reservations[reservation][res][0].date_depart).format('YYYY-MM-DD') >= moment().format('YYYY-MM-DD') ?
                                                                                 <>
-                                                                                    <p>nono</p>
+                                                                                   
                                                                                     <tr>
                                                                                         <td colSpan="9">
                                                                                             <div className="date">
